@@ -7,14 +7,6 @@
             </div>
             <vx-card no-shadow>
                 <div id="printMe">
-                    <div class="vx-row">
-                        <div class="vx-col md:w-1/2 w-full">
-                            <h3>Working</h3>
-                        </div>
-                        <div class="vx-col md:w-1/2 w-full">
-                            <h3>Working fine</h3>
-                        </div>
-                    </div>
                     <table>
                         <tr>
                             <td>អ្នកផ្គត់ផ្គង់</td>

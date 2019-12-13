@@ -30,6 +30,7 @@ class PurchaseController extends Controller
         ]);
         $store = new Purchase();
         $store->supplier_id = $input['supplier']['id'];
+        $store->user_id = $input['user_id'];
         $store->location = $input['location'];
         $store->date = $input['purchase_date'];
         $store->purchase_status = $input['purchase_status'];
@@ -47,10 +48,12 @@ class PurchaseController extends Controller
                 'location' => $input['location'],
                 'date' => $input['purchase_date'],
                 'qty' => $item['qty'],
+                'remain_qty' => $item['qty'],
                 'purchase' => $item['purchase_price'],
                 'sale' => $item['sale_price'],
                 'amount' => $item['amount'],
                 'purchase_status' => $input['purchase_status'],
+                'inventory_type' => $item['inventory_type'],
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ]);
@@ -92,6 +95,7 @@ class PurchaseController extends Controller
         ]);
         $update = Purchase::findOrFail($id);
         $update->supplier_id = $input['supplier']['id'];
+        $update->user_id = $input['user_id'];
         $update->location = $input['location'];
         $update->date = $input['purchase_date'];
         $update->purchase_status = $input['purchase_status'];
@@ -110,9 +114,11 @@ class PurchaseController extends Controller
                 'location' => $input['location'],
                 'date' => $input['purchase_date'],
                 'qty' => $item['qty'],
+                'remain_qty' => $item['qty'],
                 'purchase' => $item['purchase_price'],
                 'sale' => $item['sale_price'],
                 'amount' => $item['amount'],
+                'inventory_type' => $item['inventory_type'],
                 'purchase_status' => $input['purchase_status'],
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()

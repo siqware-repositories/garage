@@ -45,6 +45,33 @@ const router = new Router({
                     }
                 },
                 {
+                    path: '/sale',
+                    name: 'sale',
+                    component: () => import('./views/sale/Sale'),
+                    meta: {
+                        pageTitle: 'លក់ចេញ',
+                        rule: 'editor'
+                    }
+                },
+                {
+                    path: '/employee',
+                    name: 'employee',
+                    component: () => import('./views/employee/Employee'),
+                    meta: {
+                        pageTitle: 'បុគ្គលិក',
+                        rule: 'editor'
+                    }
+                },
+                {
+                    path: '/user',
+                    name: 'user',
+                    component: () => import('./views/user/User'),
+                    meta: {
+                        pageTitle: 'អ្នកប្រើប្រាស់',
+                        rule: 'editor'
+                    }
+                },
+                {
                     path: '/page2',
                     name: 'page-2',
                     component: () => import('./views/Page2.vue'),

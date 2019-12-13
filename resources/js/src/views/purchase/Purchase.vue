@@ -58,6 +58,7 @@
             <vs-tab label="Pending">
                 <div class="flex btn-group">
                     <vs-button v-if="selected_pending.length===1&&selected_pending[0].due_balance>0" @click="$refs.addPaymentPending.show(selected_pending[0])" type="relief" icon-pack="feather" icon="icon-dollar-sign">Add Payment</vs-button>
+                    <vs-button v-if="selected_pending.length===1" @click="$refs.showPurchase.show(selected_pending[0])" type="relief" icon-pack="feather" icon="icon-eye">បង្ហាញ</vs-button>
                     <vs-button v-if="selected_pending.length===1" @click="$refs.editPurchase.show(selected_pending[0])" color="warning" type="relief" icon-pack="feather" icon="icon-edit">កែប្រែ</vs-button>
                     <vs-button v-if="selected_pending.length" @click="destroyPurchase" color="danger" type="relief" icon-pack="feather" icon="icon-trash-2">លុប</vs-button>
                 </div>

@@ -26,6 +26,9 @@ import category from './modules/category'
 import brand from './modules/brand'
 import supplier from './modules/supplier'
 import purchase from './modules/purchase'
+import invoice from './modules/invoice'
+import customer from './modules/customer'
+import employee from './modules/employee'
 export default new Vuex.Store({
     getters,
     mutations,
@@ -40,5 +43,8 @@ export default new Vuex.Store({
         brand,
         supplier,
         purchase,
+        invoice,
+        customer,
+        employee,
     }
 })
