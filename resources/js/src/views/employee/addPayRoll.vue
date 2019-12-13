@@ -11,7 +11,7 @@
                         <label>កាលបរិច្ឋេទ</label>
                         <flat-pickr v-validate="'required'" name="dob" class="w-full" v-model="data.date" placeholder="ជ្រើសរើស"/>
                         <span class="text-danger text-sm"
-                              v-show="errors.has('date')">{{ errors.first('date') }}</span>
+                              v-show="errors.has('dob')">{{ errors.first('dob') }}</span>
                     </div>
                     <div class="vx-col md:w-3/4 w-full">
                         <label>សំគាល់</label>
@@ -37,7 +37,9 @@
                                 <td class="pl-3">{{item.id.name}}</td>
                                 <td class="pl-3">{{item.id.contact}}</td>
                                 <td class="pl-3">
-                                    <vs-input-number color="warning" v-model="item.salary"/>
+                                    <vs-input-number v-validate="'required'" :min="0" :name="`${index}-salary`" color="warning" v-model="item.salary"/>
+                                    <span class="text-danger text-sm"
+                                          v-show="errors.has(`${index}-salary`)">{{ errors.first(`${index}-salary`) }}</span>
                                 </td>
                             </tr>
                             </tbody>
@@ -61,10 +63,9 @@
                 <vs-divider/>
                 <!-- Save & Reset Button -->
                 <div class="flex justify-end btn-group">
-                    <vs-button @click="storeEmployee" icon="icon-save" icon-pack="feather" type="relief">រក្សាទុក</vs-button>
+                    <vs-button @click="confirmStore" icon="icon-save" icon-pack="feather" type="relief">រក្សាទុក</vs-button>
                 </div>
             </vx-card>
-            {{data.items}}
         </modal>
     </div>
 </template>
@@ -94,8 +95,16 @@
             }
         },
         methods: {
+            confirmStore() {
+                this.$vs.dialog({
+                    type: 'confirm',
+                    color: 'success',
+                    title: `ផ្ទៀងផ្ទាត់`,
+                    text: 'ចុចពាក្យ Accept ដើម្បីរក្សាទុក!',
+                    accept: this.storePayroll
+                });
+            },
             show(data) {
-                console.log(data);
                 let self = this;
                 self.$modal.show('add-payroll');
                 self.data.items = [];
@@ -104,12 +113,12 @@
                 })
             },
             //store
-            storeEmployee() {
+            storePayroll() {
                 let self = this;
                 this.$validator.validateAll().then(result => {
                     if (result) {
                         self.$vs.loading();
-                        self.$store.dispatch('storeEmployee', self.data).then(function (data) {
+                        self.$store.dispatch('storePayroll', self.data).then(function (data) {
                             if (data) {
                                 self.$vs.notify({
                                     time: 4000,
@@ -120,7 +129,8 @@
                                     icon: 'icon-check',
                                     position: 'top-center'
                                 });
-                                self.resetField();
+                                self.$emit('finished');
+                                self.$modal.hide('add-payroll');
                             } else {
                                 self.$vs.notify({
                                     title: 'ប្រតិបត្តិការបរាជ័យ',

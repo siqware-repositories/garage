@@ -29,6 +29,7 @@ import purchase from './modules/purchase'
 import invoice from './modules/invoice'
 import customer from './modules/customer'
 import employee from './modules/employee'
+import payroll from './modules/payroll'
 export default new Vuex.Store({
     getters,
     mutations,
@@ -46,5 +47,6 @@ export default new Vuex.Store({
         invoice,
         customer,
         employee,
+        payroll,
     }
 })

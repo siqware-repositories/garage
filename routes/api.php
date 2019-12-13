@@ -30,6 +30,7 @@ Route::resource('/customer','CustomerController');
 Route::resource('/invoice','InvoiceController');
 Route::resource('/employee','EmployeeController');
 Route::resource('/auth','AuthController');
+Route::resource('/payroll','PayRollController');
 Route::post('/auth-change-password/{id}','AuthController@change_password')->name('auth.change.password');
 Route::post('/auth-register','AuthController@register')->name('auth.register');
 Route::post('/auth-login','AuthController@login')->name('auth.login');

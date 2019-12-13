@@ -10,7 +10,7 @@
             <vs-button v-if="selected.length===1" @click="$refs.changePassword.show(selected[0])" color="dark" type="relief" icon-pack="feather" icon="icon-edit">
                 ប្តូរលេខសម្ងាត់
             </vs-button>
-            <vs-button v-if="selected.length" @click="destroyUser" color="danger" type="relief" icon-pack="feather" icon="icon-trash">
+            <vs-button v-if="selected.length" @click="confirmDelete" color="danger" type="relief" icon-pack="feather" icon="icon-trash">
                 លុប
             </vs-button>
         </div>
@@ -95,6 +95,15 @@
             await this.fetchUser();
         },
         methods: {
+            confirmDelete() {
+                this.$vs.dialog({
+                    type: 'confirm',
+                    color: 'danger',
+                    title: `ផ្ទៀងផ្ទាត់`,
+                    text: 'ចុចពាក្យ Accept ដើម្បីលុប!',
+                    accept: this.destroyUser
+                });
+            },
             //fetch employee
             async fetchUser(){
                 await this.$store.dispatch('fetchUser');
