@@ -54,7 +54,7 @@ class InvoiceController extends Controller
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ]);
-            if ($input['invoice_status']=='received'){
+            if ($input['invoice_status']=='received' && $item['inventory_type']!=='service'){
                 DB::table('purchase_details')->where('id',$item['id']['id'])->decrement('remain_qty',$item['qty']);
             }
         }

@@ -60,6 +60,15 @@ Vue.use(VModal);
 //print
 import VueHtml2Canvas from 'vue-html2canvas';
 Vue.use(VueHtml2Canvas);
+//date range
+import DateRangePicker from 'vue-mj-daterangepicker'
+import 'vue-mj-daterangepicker/dist/vue-mj-daterangepicker.css'
+Vue.use(DateRangePicker);
+//money format
+Vue.prototype.$formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+});
 Vue.config.productionTip = false;
 new Vue({
     router,

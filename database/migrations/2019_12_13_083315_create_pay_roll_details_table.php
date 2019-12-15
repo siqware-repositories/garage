@@ -15,10 +15,11 @@ class CreatePayRollDetailsTable extends Migration
     {
         Schema::create('pay_roll_details', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('pay_roll_id');
+            $table->bigInteger('pay_roll_id')->unsigned();
             $table->bigInteger('employee_id');
             $table->date('date');
             $table->float('salary');
+            $table->foreign('pay_roll_id')->references('id')->on('pay_rolls')->onDelete('cascade');
             $table->timestamps();
         });
     }

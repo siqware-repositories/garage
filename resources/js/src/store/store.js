@@ -30,6 +30,15 @@ import invoice from './modules/invoice'
 import customer from './modules/customer'
 import employee from './modules/employee'
 import payroll from './modules/payroll'
+import income_type from './modules/income_type'
+import expense_type from './modules/expense_type'
+import income from './modules/income'
+import expense from './modules/expense'
+/*stock*/
+import report_stock from './modules/report/stock'
+import report_best_seller from './modules/report/best_seller'
+import report_close_service from './modules/report/close_service'
+import report_close_payroll from './modules/report/close_payroll'
 export default new Vuex.Store({
     getters,
     mutations,
@@ -48,5 +57,14 @@ export default new Vuex.Store({
         customer,
         employee,
         payroll,
+        income_type,
+        expense_type,
+        income,
+        expense,
+        /*stock*/
+        report_stock,
+        report_best_seller,
+        report_close_service,
+        report_close_payroll,
     }
 })

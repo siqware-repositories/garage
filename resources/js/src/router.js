@@ -72,6 +72,123 @@ const router = new Router({
                     }
                 },
                 {
+                    path: '/income',
+                    name: 'income',
+                    component: () => import('./views/income/Income'),
+                    meta: {
+                        pageTitle: 'ចំណូល',
+                        rule: 'editor'
+                    }
+                },
+                {
+                    path: '/expense',
+                    name: 'expense',
+                    component: () => import('./views/expense/Expense'),
+                    meta: {
+                        pageTitle: 'ចំណាយ',
+                        rule: 'editor'
+                    }
+                },
+                {
+                    path: '/report/stock',
+                    name: 'report-stock',
+                    component: () => import('./views/report/stock/Stock'),
+                    meta: {
+                        pageTitle: 'របាយការណ៍ស្តុក',
+                        rule: 'editor'
+                    }
+                },
+                {
+                    path: '/report/purchase',
+                    name: 'report-purchase',
+                    component: () => import('./views/report/purchase/Purchase'),
+                    meta: {
+                        pageTitle: 'របាយការណ៍ទិញ',
+                        rule: 'editor'
+                    }
+                },
+                {
+                    path: '/report/sale',
+                    name: 'report-sale',
+                    component: () => import('./views/report/sale/Sale'),
+                    meta: {
+                        pageTitle: 'របាយការណ៍លក់',
+                        rule: 'editor'
+                    }
+                },
+                {
+                    path: '/report/profit-lost',
+                    name: 'report-profit-lost',
+                    component: () => import('./views/report/profit-lost/ProfitLost'),
+                    meta: {
+                        pageTitle: 'របាយការណ៍ ចំណេញ~ខាត នៃការលក់',
+                        rule: 'editor'
+                    }
+                },
+                {
+                    path: '/report/income',
+                    name: 'report-income',
+                    component: () => import('./views/report/income/Income'),
+                    meta: {
+                        pageTitle: 'របាយការណ៍ ចំណូល',
+                        rule: 'editor'
+                    }
+                },
+                {
+                    path: '/report/expense',
+                    name: 'report-expense',
+                    component: () => import('./views/report/expense/Expense'),
+                    meta: {
+                        pageTitle: 'របាយការណ៍ ចំណាយ',
+                        rule: 'editor'
+                    }
+                },
+                {
+                    path: '/report/best-seller',
+                    name: 'report-best-seller',
+                    component: () => import('./views/report/best-seller/BestSeller'),
+                    meta: {
+                        pageTitle: 'របាយការណ៍ ទំនិញលក់ដាច់ជាងគេ',
+                        rule: 'editor'
+                    }
+                },
+                {
+                    path: '/report/close-sell',
+                    name: 'report-close-sell',
+                    component: () => import('./views/report/close-sell/CloseSell'),
+                    meta: {
+                        pageTitle: 'របាយការណ៍ បិទបញ្ជីលក់',
+                        rule: 'editor'
+                    }
+                },
+                {
+                    path: '/report/close-service',
+                    name: 'report-close-service',
+                    component: () => import('./views/report/close-service/CloseService'),
+                    meta: {
+                        pageTitle: 'របាយការណ៍ បិទបញ្ជីថ្លៃឈ្នួល',
+                        rule: 'editor'
+                    }
+                },
+                {
+                    path: '/report/close-income',
+                    name: 'report-close-income',
+                    component: () => import('./views/report/close-income/CloseIncome'),
+                    meta: {
+                        pageTitle: 'របាយការណ៍ បិទបញ្ជីចំណូល',
+                        rule: 'editor'
+                    }
+                },
+                {
+                    path: '/report/close-list',
+                    name: 'report-close-list',
+                    component: () => import('./views/report/close-list/CloseList'),
+                    meta: {
+                        pageTitle: 'របាយការណ៍ បិទបញ្ជីសរុប',
+                        rule: 'editor'
+                    }
+                },
+                {
                     path: '/page2',
                     name: 'page-2',
                     component: () => import('./views/Page2.vue'),

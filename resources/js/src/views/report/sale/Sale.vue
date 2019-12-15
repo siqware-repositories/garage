@@ -1,0 +1,256 @@
+<template>
+    <vx-card no-shadow>
+        <div class="vx-row">
+            <div class="vx-col w-full">
+                <vs-input
+                        icon-pack="feather"
+                        icon="icon-calendar"
+                        placeholder="ជ្រើសរើស"
+                        v-model="date_range"
+                        class="is-label-placeholder w-full mb-base"
+                        @click="$modal.show('show-date-range')" />
+                <modal height="auto" :scrollable="true" :pivotY="0.2" :clickToClose="false" name="show-date-range">
+                    <div class="flex justify-end">
+                        <i @click="$modal.hide('show-date-range')" class="vs-icon vs-popup--close material-icons text-warning" style="background: rgb(255, 255, 255);">close</i>
+                    </div>
+                    <vx-card no-shadow>
+                        <date-range-picker
+                                :theme="{primary: '#28C76F',secondary: '#2D3E50',ternary: '#93A0BD',border: '#e6e6e6',light: '#ffffff',dark: '#000000',hovers: {day: '#CCC',range: '#e6e6e6'}}"
+                                @update="dateRange"/>
+                    </vx-card>
+                </modal>
+            </div>
+        </div>
+        <div class="vx-row">
+            <div class="vx-col md:w-1/3 w-full">
+                <statistics-card-line
+                        hideChart
+                        icon="DollarSignIcon"
+                        icon-right
+                        :statistic="$formatter.format(total_invoice-total_due_balance)"
+                        statisticTitle="លក់"/>
+            </div>
+            <div class="vx-col md:w-1/3 w-full">
+                <statistics-card-line
+                        hideChart
+                        icon="DollarSignIcon"
+                        icon-right
+                        :statistic="$formatter.format(total_due_balance)"
+                        statisticTitle="ជំពាក់"/>
+            </div>
+            <div class="vx-col md:w-1/3 w-full">
+                <statistics-card-line
+                        hideChart
+                        icon="DollarSignIcon"
+                        icon-right
+                        :statistic="$formatter.format(total_invoice)"
+                        statisticTitle="លក់សរុប"/>
+            </div>
+            <div class="vx-col md:w-1/3 w-full mt-base">
+                <statistics-card-line
+                        hideChart
+                        icon="DollarSignIcon"
+                        icon-right
+                        :statistic="$formatter.format(total_invoice-total_invoice_with_purchase)"
+                        statisticTitle="ចំណេញពីលក់+ប្រាក់ជំពាក់"/>
+            </div>
+            <div class="vx-col md:w-1/3 w-full mt-base">
+                <statistics-card-line
+                        hideChart
+                        icon="DollarSignIcon"
+                        icon-right
+                        :statistic="$formatter.format((total_invoice-total_invoice_with_purchase)-total_due_balance)"
+                        statisticTitle="ចំណេញពីលក់-ប្រាក់ជំពាក់"/>
+            </div>
+            <div class="vx-col w-full">
+                <vs-collapse type="margin">
+                    <vs-collapse-item>
+                        <div slot="header">
+                            បង្ហាញវិក័យបត្រជំពាក់
+                        </div>
+                        <vs-list>
+                            <vs-list-item :key="index" v-for="(item,index) in due_sale_invoice"
+                                          :title="`ID: ${item.id} ពិពណ៌នា៖ ${item.description} អតិថិជន៖ ${item.customer.name} ជំពាក់៖ ${$formatter.format(item.due_balance)}`"/>
+                        </vs-list>
+                    </vs-collapse-item>
+                </vs-collapse>
+            </div>
+        </div>
+        <div class="flex btn-group">
+            <vs-button v-if="selected.length===1" @click="$refs.showInvoice.show(selected[0])" type="relief" icon-pack="feather" icon="icon-eye">បង្ហាញ</vs-button>
+        </div>
+        <show-invoice ref="showInvoice"></show-invoice>
+        <vs-table multiple v-model="selected" pagination max-items="10" search :data="filtered_range_date">
+            <template slot="thead">
+                <vs-th sort-key="id">ល.រ</vs-th>
+                <vs-th sort-key="description">Description</vs-th>
+                <vs-th >Customer</vs-th>
+                <vs-th sort-key="qty">QTY</vs-th>
+                <vs-th sort-key="balance">Balance</vs-th>
+                <vs-th sort-key="amount">Amount</vs-th>
+                <vs-th sort-key="due_balance">Due Balance</vs-th>
+                <vs-th sort-key="date">Date</vs-th>
+            </template>
+            <template slot-scope="{data}">
+                <vs-tr :data="tr" :key="indextr" v-for="(tr, indextr) in data" :class="tr.due_balance>=1?'text-danger':''">
+                    <vs-td :data="tr.id">
+                        {{ tr.id }}
+                    </vs-td>
+                    <vs-td :data="tr.description">
+                        {{ tr.description }}
+                    </vs-td>
+                    <vs-td :data="tr.customer.name">
+                        {{ tr.customer.name }}
+                    </vs-td>
+                    <vs-td :data="tr.qty">
+                        {{ tr.qty }}
+                    </vs-td>
+                    <vs-td :data="tr.balance">
+                        {{$formatter.format(tr.balance)}}
+                    </vs-td>
+                    <vs-td :data="tr.amount">
+                        {{$formatter.format(tr.amount)}}
+                    </vs-td>
+                    <vs-td :data="tr.due_balance">
+                        {{$formatter.format(tr.due_balance)}}
+                    </vs-td>
+                    <vs-td :data="tr.date">
+                        {{ tr.date }}
+                    </vs-td>
+                </vs-tr>
+            </template>
+        </vs-table>
+    </vx-card>
+</template>
+
+<script>
+    import ShowPurchase from "../../purchase/showPurchase";
+    let moment = require('moment-mini');
+    import StatisticsCardLine from '@/components/statistics-cards/StatisticsCardLine.vue'
+    import MoneyFormat from 'vue-money-format'
+    import ShowInvoice from "../../sale/showInvoice";
+    export default {
+        name: "ReportSale",
+        components: {
+            ShowInvoice,
+            ShowPurchase,
+            'money-format': MoneyFormat,
+            StatisticsCardLine,
+        },
+        data() {
+            return {
+                date_range:`${moment().startOf('month').format('YYYY-MM-DD')} ~ ${moment().endOf('month').format('YYYY-MM-DD')}`,
+                date_picker:{
+                  start:moment().startOf('month').format('YYYY-MM-DD'),
+                  end:moment().endOf('month').format('YYYY-MM-DD'),
+                },
+                selected: [],
+                users: [
+                    {
+                        "id": 1,
+                        "name": "Leanne Graham",
+                        "username": "Bret",
+                        "email": "Sincere@april.biz",
+                        "website": "hildegard.org",
+                    },
+                    {
+                        "id": 2,
+                        "name": "Ervin Howell",
+                        "username": "Antonette",
+                        "email": "Shanna@melissa.tv",
+                        "website": "anastasia.net",
+                    }
+                ]
+            }
+        },
+        computed: {
+            all_invoices(){
+                return this.$store.getters.all_invoice
+            },
+            all_invoice_received(){
+                let self =  this;
+                return self.all_invoices.filter(function (x) {
+                    return x.invoice_status === 'received'
+                })
+            },
+            //filter range date
+            filtered_range_date(){
+                let self = this;
+                return self.all_invoice_received.filter(function (x) {
+                    let start = new Date(self.date_picker.start);
+                    let end = new Date(self.date_picker.end);
+                    let date = new Date(x.date);
+                    return date>=start && date<=end;
+                })
+            },
+            //total due balance
+            total_due_balance(){
+                let self = this;
+                return self.filtered_range_date.reduce(function (total,item) {
+                    return total+parseFloat(item.due_balance)
+                },0)
+            },
+            total_invoice(){
+                let self = this;
+                let total = 0;
+                self.filtered_range_date.forEach(function (item,index) {
+                    item.invoice_detail.forEach(function (el,index) {
+                        if (el.inventory_type !=='purchase_only') {
+                            total += parseFloat(el.amount)
+                        }
+                    })
+                });
+                return total;
+            },
+            total_invoice_with_purchase(){
+                let self = this;
+                let total = 0;
+                self.filtered_range_date.forEach(function (item,index) {
+                    item.invoice_detail.forEach(function (el,index) {
+                        if (el.inventory_type !=='purchase_only') {
+                            total += parseFloat(el.purchase*el.qty)
+                        }
+                    })
+                });
+                return total;
+            },
+            due_sale_invoice(){
+                let self = this;
+                return self.filtered_range_date.filter(function (x) {
+                    return parseFloat(x.due_balance)>=1
+                })
+            }
+        },
+        methods: {
+            //fetch purchase
+            async fetchInvoice(){
+                await this.$store.dispatch('fetchInvoice')
+            },
+            //date range
+            dateRange(value) {
+                this.date_range = `${moment(value.from).format('YYYY-MM-DD')} ~ ${moment(value.to).format('YYYY-MM-DD')}`;
+                this.$modal.hide('show-date-range');
+                this.date_picker.start = moment(value.from).format('YYYY-MM-DD');
+                this.date_picker.end = moment(value.to).format('YYYY-MM-DD');
+            },
+        },
+        async created() {
+            await this.fetchInvoice();
+        }
+    }
+</script>
+
+<style scoped>
+    table.expense, td.expense, th.expense {
+        border: 1px solid black;
+    }
+
+    table.expense {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th.expense {
+        text-align: left;
+    }
+</style>
