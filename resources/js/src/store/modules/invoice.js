@@ -30,7 +30,8 @@ const actions = {
     },
     async storeInvoice({commit},data){
         try {
-            await axios.post(route('invoice.store'),data);
+            const res = await axios.post(route('invoice.store'),data);
+            commit('STORE_INVOICE',res.data);
             return true
         }catch (e) {
             return false
@@ -63,7 +64,8 @@ const actions = {
     },
     async updateInvoice({commit},data){
         try {
-            await axios.put(route('invoice.update',data.id),data);
+            const res = await axios.put(route('invoice.update',data.id),data);
+            commit('UPDATE_INVOICE',res.data);
             return true
         }catch (e) {
             return false
@@ -84,6 +86,12 @@ const mutations = {
         return state.invoice = state.invoice.filter(function (invoice,index) {
             return invoice.id !== id
         })
+    },
+    UPDATE_INVOICE:function (state,data) {
+        let index = state.invoice.findIndex(function (x) {
+            return parseInt(x.id) === parseInt(data.id)
+        });
+        state.invoice.splice(index,1,data);
     }
 };
 export default {

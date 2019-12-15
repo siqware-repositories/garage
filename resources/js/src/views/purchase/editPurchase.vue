@@ -212,10 +212,6 @@
             let y = this.total;
         },
         methods: {
-            //fetch purchase
-            async fetchPurchase(){
-                await this.$store.dispatch('fetchPurchase')
-            },
             searchSupplier(option, label, search) {
                 return (
                     String(label).toLowerCase().indexOf(search.toLowerCase()) > -1 ||
@@ -284,7 +280,6 @@
                                     position: 'top-center'
                                 });
                                 self.$emit('finished');
-                                self.fetchPurchase();
                             } else {
                                 self.$vs.notify({
                                     title: 'ប្រតិបត្តិការបរាជ័យ',

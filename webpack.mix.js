@@ -1,8 +1,12 @@
 const mix = require('laravel-mix');
 let tailwindcss = require('tailwindcss');
 require('dotenv').config();
-
-
+const webpack = require('webpack');
+mix.webpackConfig({
+    plugins: [
+        new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
+    ]
+});
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -13,7 +17,6 @@ require('dotenv').config();
  | file for the application as well as bundling up all the JS files.
  |
  */
-
 mix.js('resources/js/app.js', 'public/js')
     .webpackConfig({
         resolve: {
@@ -22,7 +25,7 @@ mix.js('resources/js/app.js', 'public/js')
                 '@assets': path.resolve(__dirname, 'resources/assets'),
                 '@sass': path.resolve(__dirname, 'resources/sass')
             }
-        }
+        },
     })
     .sass('resources/sass/app.scss', 'public/css').options({
         postCss:[require('autoprefixer'), require('postcss-rtl')]

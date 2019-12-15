@@ -35,7 +35,7 @@
 </template>
 
 <script>
-    let moment = require('moment-mini');
+
     import StatisticsCardLine from '@/components/statistics-cards/StatisticsCardLine.vue'
     export default {
         name: "CloseIncome",
@@ -44,10 +44,10 @@
         },
         data() {
             return {
-                date_range:`${moment().startOf('month').format('YYYY-MM-DD')} ~ ${moment().endOf('month').format('YYYY-MM-DD')}`,
+                date_range:`${this.$moment().startOf('month').format('YYYY-MM-DD')} ~ ${this.$moment().endOf('month').format('YYYY-MM-DD')}`,
                 date_picker:{
-                  start:moment().startOf('month').format('YYYY-MM-DD'),
-                  end:moment().endOf('month').format('YYYY-MM-DD'),
+                  start:this.$moment().startOf('month').format('YYYY-MM-DD'),
+                  end:this.$moment().endOf('month').format('YYYY-MM-DD'),
                 },
                 selected: []
             }

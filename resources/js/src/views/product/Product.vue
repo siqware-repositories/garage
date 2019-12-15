@@ -2,7 +2,7 @@
     <vx-card no-shadow>
         <div class="flex btn-group">
             <vs-button @click="$refs.addProduct.show()" type="relief" icon-pack="feather" icon="icon-plus-square">បន្ថែម</vs-button>
-            <vs-button v-if="selected.length===1" @click="$refs.editProduct.show();$refs.editProduct.editProduct(selected[0])" color="warning" type="relief" icon-pack="feather" icon="icon-edit">កែប្រែ</vs-button>
+            <vs-button v-if="selected.length===1" @click="$refs.editProduct.show(selected[0])" color="warning" type="relief" icon-pack="feather" icon="icon-edit">កែប្រែ</vs-button>
             <vs-button v-if="selected.length" @click="destroyProduct" color="danger" type="relief" icon-pack="feather" icon="icon-trash-2">លុប</vs-button>
         </div>
         <vs-table multiple v-model="selected" pagination max-items="10" search :data="all_product">

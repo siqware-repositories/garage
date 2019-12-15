@@ -62,11 +62,16 @@ class PurchaseController extends Controller
                 'default_purchase'=>$item['purchase_price']
             ]);
         }
-        return $store;
+        return Purchase::with('purchase_detail')
+            ->with('supplier')
+            ->where('status',true)
+            ->where('id',$store->id)->first();
     }
     //destroy
     public function destroy($id){
-        Purchase::findOrFail($id)->delete();
+        $toggle = Purchase::findOrFail($id);
+        $toggle->status = false;
+        $toggle->save();
     }
     //payment
     public function payment(Request $request,$id){
@@ -128,5 +133,9 @@ class PurchaseController extends Controller
                 'default_purchase'=>$item['purchase_price']
             ]);
         }
+        return Purchase::with('purchase_detail')
+            ->with('supplier')
+            ->where('status',true)
+            ->where('id',$update->id)->first();
     }
 }

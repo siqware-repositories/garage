@@ -198,10 +198,6 @@
             let y = this.total;
         },
         methods: {
-            //fetch invoice
-            async fetchPurchase(){
-                await this.$store.dispatch('fetchPurchase')
-            },
             searchCustomer(option, label, search) {
                 return (
                     String(label).toLowerCase().indexOf(search.toLowerCase()) > -1 ||
@@ -263,7 +259,6 @@
                                     position: 'top-center'
                                 });
                                 self.resetField();
-                                self.fetchPurchase();
                             } else {
                                 self.$vs.notify({
                                     title: 'ប្រតិបត្តិការបរាជ័យ',
@@ -289,16 +284,18 @@
                 });
             },
             resetField() {
-                this.product = {
-                    name: '',
-                    description: '',
-                    unit: 'ដំុ',
-                    category: 'គ្រឿងក្រោម',
-                    brand: 'AKA',
-                    inventory_type: 'inventory_part',
-                    invoice: 1,
-                    sale: 1,
-                    image: 'placeholder/placeholder.png',
+                this.invoice = {
+                    customer:null,
+                    user_id:this.$store.state.AppActiveUser.uid,
+                    invoice_date:null,
+                    invoice_status:'pending',
+                    description:'',
+                    total_balance:null,
+                    balance:null,
+                    due_balance:0,
+                    amount:0,
+                    qty:0,
+                    items:[{id:'',name:null,description:null,qty:1,sale_price:1,amount:1,inventory_type: '',remain_qty:''}]
                 };
             },
             //image upload

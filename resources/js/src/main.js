@@ -69,6 +69,9 @@ Vue.prototype.$formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
 });
+//moment
+import moment from 'moment';
+Vue.prototype.$moment = moment;
 Vue.config.productionTip = false;
 new Vue({
     router,

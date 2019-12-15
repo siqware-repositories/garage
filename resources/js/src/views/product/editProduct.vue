@@ -34,16 +34,9 @@
                         <div class="vx-col md:w-1/2 w-full">
                             <label>Unit</label>
                             <vx-input-group>
-                                <vs-select
-                                        class="w-full"
-                                        v-model="product.unit"
-                                        name="unit" v-validate="'required'"
-                                >
-                                    <vs-select-item :key="index" :value="item.name" :text="item.name"
-                                                    v-for="item,index in units"/>
-                                </vs-select>
+                                <v-select name="unit" v-validate="'required'" :clearable="false" label="name" v-model="product.unit" :options="all_units"/>
                                 <template slot="append">
-                                    <div class="append-text btn-addon">
+                                    <div class="append-text btn-addon" @click="$refs.addUnit.show()">
                                         <vs-button class="rounded-none" type="filled" icon-pack="feather"
                                                    icon="icon-plus"></vs-button>
                                     </div>
@@ -55,16 +48,9 @@
                         <div class="vx-col md:w-1/2 w-full">
                             <label>ប្រភេទ</label>
                             <vx-input-group>
-                                <vs-select
-                                        class="w-full"
-                                        v-model="product.category"
-                                        name="category" v-validate="'required'"
-                                >
-                                    <vs-select-item :key="index" :value="item.name" :text="item.name"
-                                                    v-for="item,index in categories"/>
-                                </vs-select>
+                                <v-select name="category" v-validate="'required'" :clearable="false" label="name" v-model="product.category" :options="all_categories"/>
                                 <template slot="append">
-                                    <div class="append-text btn-addon">
+                                    <div class="append-text btn-addon" @click="$refs.addCategory.show()">
                                         <vs-button class="rounded-none" type="filled" icon-pack="feather"
                                                    icon="icon-plus"></vs-button>
                                     </div>
@@ -78,16 +64,9 @@
                         <div class="vx-col md:w-1/2 w-full">
                             <label>Model</label>
                             <vx-input-group>
-                                <vs-select
-                                        class="w-full"
-                                        v-model="product.brand"
-                                        name="brand" v-validate="'required'"
-                                >
-                                    <vs-select-item :key="index" :value="item.name" :text="item.name"
-                                                    v-for="item,index in brands"/>
-                                </vs-select>
+                                <v-select name="brand" v-validate="'required'" :clearable="false" label="name" v-model="product.brand" :options="all_brands"/>
                                 <template slot="append">
-                                    <div class="append-text btn-addon">
+                                    <div class="append-text btn-addon" @click="$refs.addBrand.show()">
                                         <vs-button class="rounded-none" type="filled" icon-pack="feather"
                                                    icon="icon-plus"></vs-button>
                                     </div>
@@ -97,15 +76,8 @@
                                   v-show="errors.has('brand')">{{ errors.first('brand') }}</span>
                         </div>
                         <div class="vx-col md:w-1/2 w-full">
-                            <vs-select
-                                    label="Inventory Type"
-                                    class="w-full"
-                                    v-model="product.inventory_type"
-                                    name="inventory_type" v-validate="'required'"
-                            >
-                                <vs-select-item :key="index" :value="item.name" :text="item.name"
-                                                v-for="item,index in inventory_type"/>
-                            </vs-select>
+                            <label>Inventory Type</label>
+                            <v-select name="inventory_type" v-validate="'required'" v-model="product.inventory_type" :options="['inventory_part','service','sale_only','purchase_only']"/>
                             <span class="text-danger text-sm"
                                   v-show="errors.has('inventory_type')">{{ errors.first('inventory_type') }}</span>
                         </div>
@@ -127,24 +99,30 @@
                 <vs-button @click="updateProduct" icon="icon-save" icon-pack="feather" type="relief">រក្សាទុក</vs-button>
             </div>
         </vx-card>
+        <add-unit ref="addUnit"></add-unit>
+        <add-category ref="addCategory"></add-category>
+        <add-brand ref="addBrand"></add-brand>
     </modal>
 </template>
 
 <script>
     import vue2Dropzone from 'vue2-dropzone'
     import 'vue2-dropzone/dist/vue2Dropzone.min.css'
-
+    import vSelect from 'vue-select'
+    import AddUnit from "./addUnit";
+    import AddCategory from "./addCategory";
+    import AddBrand from "./addBrand";
     export default {
         name: "editProduct",
-        components: {vueDropzone: vue2Dropzone},
+        components: {AddBrand, AddCategory, AddUnit, vueDropzone: vue2Dropzone,'v-select': vSelect},
         data() {
             return {
                 product: {
                     name: '',
                     description: '',
-                    unit: 'ដំុ',
-                    category: 'គ្រឿងក្រោម',
-                    brand: 'AKA',
+                    unit: {name:'ដំុ'},
+                    category: {name:'RX300'},
+                    brand: {name:'Toyota'},
                     inventory_type: 'inventory_part',
                     default_purchase: 1,
                     default_sale: 1,
@@ -165,18 +143,34 @@
                 }
             }
         },
+        computed:{
+            all_units(){
+                return this.$store.getters.all_unit
+            },
+            all_categories(){
+                return this.$store.getters.all_category
+            },
+            all_brands(){
+                return this.$store.getters.all_brand
+            }
+        },
         methods: {
-            show() {
+            show(data) {
                 this.$modal.show('edit');
+                this.product.id =  data.id;
+                this.product.name =  data.name;
+                this.product.description =  data.description;
+                this.product.unit =  {name:data.unit};
+                this.product.category =  {name:data.category};
+                this.product.brand =  {name:data.brand};
+                this.product.inventory_type =  data.inventory_type;
+                this.product.default_purchase =  data.default_purchase;
+                this.product.default_sale =  data.default_sale;
+                this.product.image =  data.image;
             },
             //edit thumb
             editThumb(){
                 this.$refs.image.manuallyAddFile({size:123}, this.product.image);
-            },
-            //edit product
-            editProduct(data){
-                this.product = data;
-                console.log(data)
             },
             //store
             updateProduct() {
@@ -195,6 +189,7 @@
                                     icon: 'icon-check',
                                     position: 'top-center'
                                 });
+                                self.$emit('finished');
                             } else {
                                 self.$vs.notify({
                                     title: 'ប្រតិបត្តិការបរាជ័យ',

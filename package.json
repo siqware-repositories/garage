@@ -88,7 +88,7 @@
     "dependencies": {
         "@xkeshi/vue-barcode": "^1.0.0",
         "html2canvas": "^1.0.0-rc.5",
-        "moment-mini": "^2.22.1",
+        "moment": "^2.24.0",
         "print-js": "^1.0.63",
         "tinymce": "^5.1.2",
         "vue-html2canvas": "0.0.4",

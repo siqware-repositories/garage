@@ -1,9 +1,9 @@
 {
-    "/js/app.js": "/js/app.js",
-    "/css/app.css": "/css/app.css",
-    "/css/main.css": "/css/main.css",
-    "/css/vuesax.css": "/css/vuesax.css",
-    "/css/iconfont.css": "/css/iconfont.css",
-    "/css/material-icons/material-icons.css": "/css/material-icons/material-icons.css",
-    "/css/prism-tomorrow.css": "/css/prism-tomorrow.css"
+    "/js/app.js": "/js/app.js?id=88a93a1bc862ae1b1ec6",
+    "/css/app.css": "/css/app.css?id=abcf7168ee2e6e8cb83e",
+    "/css/main.css": "/css/main.css?id=43ef052466e70fe0dec7",
+    "/css/vuesax.css": "/css/vuesax.css?id=a95681e95b969218ee14",
+    "/css/iconfont.css": "/css/iconfont.css?id=667273af1a014bd141bd",
+    "/css/material-icons/material-icons.css": "/css/material-icons/material-icons.css?id=6b78e76e7f2f5210131a",
+    "/css/prism-tomorrow.css": "/css/prism-tomorrow.css?id=f46d7519e3b65a691281"
 }

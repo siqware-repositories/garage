@@ -28,9 +28,9 @@ class ProductController extends Controller
         $store = new Product();
         $store->name = $input['name'];
         $store->description = $input['description'];
-        $store->unit = $input['unit'];
-        $store->category = $input['category'];
-        $store->brand = $input['brand'];
+        $store->unit = $input['unit']['name'];
+        $store->category = $input['category']['name'];
+        $store->brand = $input['brand']['name'];
         $store->inventory_type = $input['inventory_type'];
         $store->default_purchase = $input['default_purchase'];
         $store->default_sale = $input['default_sale'];
@@ -55,9 +55,9 @@ class ProductController extends Controller
         $update = Product::find($id);
         $update->name = $input['name'];
         $update->description = $input['description'];
-        $update->unit = $input['unit'];
-        $update->category = $input['category'];
-        $update->brand = $input['brand'];
+        $update->unit = $input['unit']['name'];
+        $update->category = $input['category']['name'];
+        $update->brand = $input['brand']['name'];
         $update->inventory_type = $input['inventory_type'];
         $update->default_purchase = $input['default_purchase'];
         $update->default_sale = $input['default_sale'];

@@ -35,14 +35,7 @@
                             <div class="vx-col md:w-1/2 w-full">
                                 <label>Unit</label>
                                 <vx-input-group>
-                                    <vs-select
-                                            class="w-full"
-                                            v-model="product.unit"
-                                            name="unit" v-validate="'required'"
-                                    >
-                                        <vs-select-item :key="index" :value="item.name" :text="item.name"
-                                                        v-for="item,index in all_units"/>
-                                    </vs-select>
+                                    <v-select name="unit" v-validate="'required'" :clearable="false" label="name" v-model="product.unit" :options="all_units"/>
                                     <template slot="append">
                                         <div class="append-text btn-addon" @click="$refs.addUnit.show()">
                                             <vs-button class="rounded-none" type="filled" icon-pack="feather"
@@ -56,14 +49,7 @@
                             <div class="vx-col md:w-1/2 w-full">
                                 <label>ប្រភេទ</label>
                                 <vx-input-group>
-                                    <vs-select
-                                            class="w-full"
-                                            v-model="product.category"
-                                            name="category" v-validate="'required'"
-                                    >
-                                        <vs-select-item :key="index" :value="item.name" :text="item.name"
-                                                        v-for="item,index in all_categories"/>
-                                    </vs-select>
+                                    <v-select name="category" v-validate="'required'" :clearable="false" label="name" v-model="product.category" :options="all_categories"/>
                                     <template slot="append">
                                         <div class="append-text btn-addon" @click="$refs.addCategory.show()">
                                             <vs-button class="rounded-none" type="filled" icon-pack="feather"
@@ -79,14 +65,7 @@
                             <div class="vx-col md:w-1/2 w-full">
                                 <label>Model</label>
                                 <vx-input-group>
-                                    <vs-select
-                                            class="w-full"
-                                            v-model="product.brand"
-                                            name="brand" v-validate="'required'"
-                                    >
-                                        <vs-select-item :key="index" :value="item.name" :text="item.name"
-                                                        v-for="item,index in all_brands"/>
-                                    </vs-select>
+                                    <v-select name="brand" v-validate="'required'" :clearable="false" label="name" v-model="product.brand" :options="all_brands"/>
                                     <template slot="append">
                                         <div class="append-text btn-addon" @click="$refs.addBrand.show()">
                                             <vs-button class="rounded-none" type="filled" icon-pack="feather"
@@ -98,15 +77,8 @@
                                       v-show="errors.has('brand')">{{ errors.first('brand') }}</span>
                             </div>
                             <div class="vx-col md:w-1/2 w-full">
-                                <vs-select
-                                        label="Inventory Type"
-                                        class="w-full"
-                                        v-model="product.inventory_type"
-                                        name="inventory_type" v-validate="'required'"
-                                >
-                                    <vs-select-item :key="index" :value="item.name" :text="item.name"
-                                                    v-for="item,index in inventory_type"/>
-                                </vs-select>
+                                <label>Inventory Type</label>
+                                <v-select name="inventory_type" v-validate="'required'" v-model="product.inventory_type" :options="['inventory_part','service','sale_only','purchase_only']"/>
                                 <span class="text-danger text-sm"
                                       v-show="errors.has('inventory_type')">{{ errors.first('inventory_type') }}</span>
                             </div>
@@ -139,24 +111,24 @@
     import AddUnit from "./addUnit";
     import AddCategory from "./addCategory";
     import AddBrand from "./addBrand";
+    import vSelect from 'vue-select'
 
     export default {
         name: "addProduct",
-        components: {AddBrand, AddCategory, AddUnit, vueDropzone: vue2Dropzone},
+        components: {AddBrand, AddCategory, AddUnit, vueDropzone: vue2Dropzone,'v-select': vSelect},
         data() {
             return {
                 product: {
                     name: '',
                     description: '',
-                    unit: 'ដំុ',
-                    category: 'គ្រឿងក្រោម',
-                    brand: 'AKA',
+                    unit: {name:'ដំុ'},
+                    category: {name:'RX300'},
+                    brand: {name:'Toyota'},
                     inventory_type: 'inventory_part',
                     default_purchase: 1,
                     default_sale: 1,
                     image: 'images/placeholder/placeholder.png',
                 },
-                inventory_type: [{name: 'inventory_part'}, {name: 'service'}, {name: 'sale_only'}, {name: 'purchase_only'}],
                 //dropzone option
                 dropzoneOptions: {
                     url: route('file.upload.thumb'),
@@ -229,13 +201,13 @@
                 this.product = {
                     name: '',
                     description: '',
-                    unit: 'ដំុ',
-                    category: 'គ្រឿងក្រោម',
-                    brand: 'AKA',
+                    unit: {name:'ដំុ'},
+                    category: {name:'RX300'},
+                    brand: {name:'Toyota'},
                     inventory_type: 'inventory_part',
-                    purchase: 1,
-                    sale: 1,
-                    image: 'placeholder/placeholder.png',
+                    default_purchase: 1,
+                    default_sale: 1,
+                    image: 'images/placeholder/placeholder.png',
                 };
             },
             //image upload

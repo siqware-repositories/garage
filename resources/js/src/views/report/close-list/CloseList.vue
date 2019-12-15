@@ -78,7 +78,7 @@
 
 <script>
     import ShowPurchase from "../../purchase/showPurchase";
-    let moment = require('moment-mini');
+
     import StatisticsCardLine from '@/components/statistics-cards/StatisticsCardLine.vue'
     import MoneyFormat from 'vue-money-format'
     import ShowInvoice from "../../sale/showInvoice";
@@ -92,10 +92,10 @@
         },
         data() {
             return {
-                date_range:`${moment().startOf('month').format('YYYY-MM-DD')} ~ ${moment().endOf('month').format('YYYY-MM-DD')}`,
+                date_range:`${this.$moment().startOf('month').format('YYYY-MM-DD')} ~ ${this.$moment().endOf('month').format('YYYY-MM-DD')}`,
                 date_picker:{
-                  start:moment().startOf('month').format('YYYY-MM-DD'),
-                  end:moment().endOf('month').format('YYYY-MM-DD'),
+                  start:this.$moment().startOf('month').format('YYYY-MM-DD'),
+                  end:this.$moment().endOf('month').format('YYYY-MM-DD'),
                 }
             }
         },

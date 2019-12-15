@@ -12,7 +12,6 @@ class InvoiceController extends Controller
     //index
     public function index(){
         return Invoice::with('invoice_detail')->with('customer')->where('status',true)->orderBy('id','desc')->get();
-//        return Invoice::with('invoice_detail')->with('supplier')->where('status',true)->orderBy('id','desc')->get();
     }
     //store
     public function store(Request $request){
@@ -58,7 +57,10 @@ class InvoiceController extends Controller
                 DB::table('purchase_details')->where('id',$item['id']['id'])->decrement('remain_qty',$item['qty']);
             }
         }
-        return $store;
+        return Invoice::with('invoice_detail')
+            ->with('customer')
+            ->where('status',true)
+            ->where('id',$store->id)->first();
     }
     //destroy
     public function destroy($id){
@@ -119,6 +121,9 @@ class InvoiceController extends Controller
                 DB::table('purchase_details')->where('id',$item['id']['id'])->decrement('remain_qty',$item['qty']);
             }
         }
-        return $update;
+        return Invoice::with('invoice_detail')
+            ->with('customer')
+            ->where('status',true)
+            ->where('id',$update->id)->first();
     }
 }

@@ -18,7 +18,8 @@ const actions = {
     },
     async storePurchase({commit},data){
         try {
-            await axios.post(route('purchase.store'),data);
+            const res = await axios.post(route('purchase.store'),data);
+            commit('STORE_PURCHASE',res.data);
             return true
         }catch (e) {
             return false
@@ -49,9 +50,10 @@ const actions = {
             return false
         }
     },
-    async updatePurchase({},data){
+    async updatePurchase({commit},data){
         try {
-            await axios.put(route('purchase.update',data.id),data);
+            const res = await axios.put(route('purchase.update',data.id),data);
+            commit('UPDATE_PURCHASE',res.data);
             return true
         }catch (e) {
             return false
@@ -69,6 +71,12 @@ const mutations = {
         return state.purchase = state.purchase.filter(function (purchase,index) {
             return purchase.id !== id
         })
+    },
+    UPDATE_PURCHASE:function (state,data) {
+        let index = state.purchase.findIndex(function (x) {
+            return parseInt(x.id) === parseInt(data.id)
+        });
+        state.purchase.splice(index,1,data);
     }
 };
 export default {
