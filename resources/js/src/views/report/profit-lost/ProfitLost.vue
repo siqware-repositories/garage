@@ -161,10 +161,14 @@
                 let total = 0;
                 self.filtered_range_date_invoice.forEach(function (item,index) {
                     item.invoice_detail.forEach(function (el,index) {
-                        if (el.inventory_type !=='purchase_only') {
-                            total += parseFloat(el.amount)
+                        if (el.inventory_type === 'bundle'){
+                            total = parseFloat(item.amount);
+                        } else {
+                            if (el.inventory_type !=='purchase_only') {
+                                total += parseFloat(el.amount)
+                            }
                         }
-                    })
+                    });
                 });
                 return total;
             }

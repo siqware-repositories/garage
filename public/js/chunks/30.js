@@ -314,10 +314,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
-      date_range: "".concat(this.moment().startOf('month').format('YYYY-MM-DD'), " ~ ").concat(this.moment().endOf('month').format('YYYY-MM-DD')),
+      date_range: "".concat(this.$moment().startOf('month').format('YYYY-MM-DD'), " ~ ").concat(this.$moment().endOf('month').format('YYYY-MM-DD')),
       date_picker: {
-        start: this.moment().startOf('month').format('YYYY-MM-DD'),
-        end: this.moment().endOf('month').format('YYYY-MM-DD')
+        start: this.$moment().startOf('month').format('YYYY-MM-DD'),
+        end: this.$moment().endOf('month').format('YYYY-MM-DD')
       },
       selected: [],
       users: [{
@@ -367,8 +367,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var total = 0;
       self.filtered_range_date.forEach(function (item, index) {
         item.invoice_detail.forEach(function (el, index) {
-          if (el.inventory_type !== 'purchase_only') {
-            total += parseFloat(el.amount);
+          if (el.inventory_type === 'bundle') {
+            total = parseFloat(item.amount);
+          } else {
+            if (el.inventory_type !== 'purchase_only') {
+              total += parseFloat(el.amount);
+            }
           }
         });
       });
@@ -379,8 +383,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var total = 0;
       self.filtered_range_date.forEach(function (item, index) {
         item.invoice_detail.forEach(function (el, index) {
-          if (el.inventory_type !== 'purchase_only') {
-            total += parseFloat(el.purchase * el.qty);
+          if (el.inventory_type === 'bundle') {
+            total = parseFloat(item.purchase_amount);
+          } else {
+            if (el.inventory_type !== 'purchase_only') {
+              total += parseFloat(el.purchase * el.qty);
+            }
           }
         });
       });

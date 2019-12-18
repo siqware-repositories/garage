@@ -225,10 +225,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
-      date_range: "".concat(this.moment().startOf('month').format('YYYY-MM-DD'), " ~ ").concat(this.moment().endOf('month').format('YYYY-MM-DD')),
+      date_range: "".concat(this.$moment().startOf('month').format('YYYY-MM-DD'), " ~ ").concat(this.$moment().endOf('month').format('YYYY-MM-DD')),
       date_picker: {
-        start: this.moment().startOf('month').format('YYYY-MM-DD'),
-        end: this.moment().endOf('month').format('YYYY-MM-DD')
+        start: this.$moment().startOf('month').format('YYYY-MM-DD'),
+        end: this.$moment().endOf('month').format('YYYY-MM-DD')
       },
       selected: [],
       users: [{

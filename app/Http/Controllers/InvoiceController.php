@@ -34,11 +34,17 @@ class InvoiceController extends Controller
         $store->invoice_status = $input['invoice_status'];
         $store->description = $input['description'];
         $store->qty = $input['qty'];
+        if ($input['is_bundle']){
+            $store->purchase_amount = $input['purchase_amount'];
+        }
         $store->balance = $input['balance'];
         $store->due_balance = $input['due_balance'];
         $store->amount = $input['total_balance'];
         $store->save();
         foreach ($input['items'] as $item){
+            if ($input['is_bundle']){
+                $item['inventory_type'] = 'bundle';
+            }
             DB::table('invoice_details')->insert([
                 'invoice_id' => $store->id,
                 'purchase_detail_id' => $item['id']['id'],
@@ -97,12 +103,18 @@ class InvoiceController extends Controller
         $update->invoice_status = $input['invoice_status'];
         $update->description = $input['description'];
         $update->qty = $input['qty'];
+        if ($input['is_bundle']){
+            $update->purchase_amount = $input['purchase_amount'];
+        }
         $update->balance = $input['balance'];
         $update->due_balance = $input['due_balance'];
         $update->amount = $input['total_balance'];
         $update->save();
         $update->invoice_detail()->delete();
         foreach ($input['items'] as $item){
+            if ($input['is_bundle']){
+                $item['inventory_type'] = 'bundle';
+            }
             DB::table('invoice_details')->insert([
                 'invoice_id' => $update->id,
                 'purchase_detail_id' => $item['id']['id'],

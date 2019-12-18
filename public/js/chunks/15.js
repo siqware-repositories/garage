@@ -747,6 +747,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -766,7 +779,11 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      checkBox1: false,
       invoice: {
+        is_bundle: false,
+        purchase_amount: 0,
+        sale_amount: 0,
         customer: null,
         user_id: this.$store.state.AppActiveUser.uid,
         invoice_date: null,
@@ -809,8 +826,15 @@ __webpack_require__.r(__webpack_exports__);
       self.invoice.items.forEach(function (item, index) {
         total += parseFloat(item.amount);
       });
-      self.invoice.total_balance = total;
-      self.invoice.balance = total;
+
+      if (self.invoice.is_bundle) {
+        self.invoice.total_balance = self.invoice.sale_amount;
+        self.invoice.balance = self.invoice.sale_amount;
+      } else {
+        self.invoice.total_balance = total;
+        self.invoice.balance = total;
+      }
+
       return total;
     },
     total_qty: function total_qty() {
@@ -1249,6 +1273,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -1270,6 +1306,9 @@ __webpack_require__.r(__webpack_exports__);
     return {
       invoice: {
         id: null,
+        is_bundle: false,
+        purchase_amount: 0,
+        sale_amount: 0,
         customer: null,
         user_id: this.$store.state.AppActiveUser.uid,
         invoice_date: null,
@@ -1306,8 +1345,15 @@ __webpack_require__.r(__webpack_exports__);
       self.invoice.items.forEach(function (item, index) {
         total += parseFloat(item.amount);
       });
-      self.invoice.total_balance = total;
-      self.invoice.balance = total;
+
+      if (self.invoice.is_bundle) {
+        self.invoice.total_balance = self.invoice.sale_amount;
+        self.invoice.balance = self.invoice.sale_amount - self.invoice.due_balance;
+      } else {
+        self.invoice.total_balance = total;
+        self.invoice.balance = total;
+      }
+
       return total;
     },
     total_qty: function total_qty() {
@@ -1365,6 +1411,13 @@ __webpack_require__.r(__webpack_exports__);
     show: function show(data) {
       var self = this;
       this.$modal.show('edit-invoice');
+
+      if (data.purchase_amount > 0) {
+        self.invoice.is_bundle = true;
+        self.invoice.purchase_amount = data.purchase_amount;
+        self.invoice.sale_amount = data.amount;
+      }
+
       self.invoice.id = data.id;
       self.invoice.customer = data.customer;
       self.invoice.invoice_date = data.date;
@@ -2944,14 +2997,14 @@ var render = function() {
                         "div",
                         { staticClass: "vx-col md:w-1/2 w-full" },
                         [
-                          _c("label", [_vm._v("ប្រាក់ទិញទំនិញ")]),
+                          _c("label", [_vm._v("ប្រាក់លក់ទំនិញ")]),
                           _vm._v(" "),
                           _c("vs-input-number", {
                             attrs: {
                               color: "warning",
                               min: "0",
                               max: _vm.invoice.total_balance,
-                              label: "ប្រាក់ទិញទំនិញ:"
+                              label: "ប្រាក់លក់ទំនិញ:"
                             },
                             model: {
                               value: _vm.invoice.balance,
@@ -2997,7 +3050,76 @@ var render = function() {
                         ],
                         1
                       )
-                    ])
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "vs-divider",
+                      { attrs: { position: "left" } },
+                      [
+                        _c(
+                          "vs-checkbox",
+                          {
+                            model: {
+                              value: _vm.invoice.is_bundle,
+                              callback: function($$v) {
+                                _vm.$set(_vm.invoice, "is_bundle", $$v)
+                              },
+                              expression: "invoice.is_bundle"
+                            }
+                          },
+                          [_vm._v("ទំនិញដំុ?")]
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _vm.invoice.is_bundle
+                      ? _c("div", { staticClass: "vx-row" }, [
+                          _c(
+                            "div",
+                            { staticClass: "vx-col md:w-1/2 w-full" },
+                            [
+                              _c("label", [_vm._v("តម្លៃទិញ")]),
+                              _vm._v(" "),
+                              _c("vs-input-number", {
+                                attrs: { min: "0", label: "តម្លៃទិញ:" },
+                                model: {
+                                  value: _vm.invoice.purchase_amount,
+                                  callback: function($$v) {
+                                    _vm.$set(
+                                      _vm.invoice,
+                                      "purchase_amount",
+                                      $$v
+                                    )
+                                  },
+                                  expression: "invoice.purchase_amount"
+                                }
+                              })
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "vx-col md:w-1/2 w-full" },
+                            [
+                              _c("label", [_vm._v("តម្លៃលក់")]),
+                              _vm._v(" "),
+                              _c("vs-input-number", {
+                                attrs: { min: "0", label: "តម្លៃលក់:" },
+                                model: {
+                                  value: _vm.invoice.sale_amount,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.invoice, "sale_amount", $$v)
+                                  },
+                                  expression: "invoice.sale_amount"
+                                }
+                              })
+                            ],
+                            1
+                          )
+                        ])
+                      : _vm._e()
                   ],
                   1
                 )
@@ -3885,7 +4007,76 @@ var render = function() {
                         ],
                         1
                       )
-                    ])
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "vs-divider",
+                      { attrs: { position: "left" } },
+                      [
+                        _c(
+                          "vs-checkbox",
+                          {
+                            model: {
+                              value: _vm.invoice.is_bundle,
+                              callback: function($$v) {
+                                _vm.$set(_vm.invoice, "is_bundle", $$v)
+                              },
+                              expression: "invoice.is_bundle"
+                            }
+                          },
+                          [_vm._v("ទំនិញដំុ?")]
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _vm.invoice.is_bundle
+                      ? _c("div", { staticClass: "vx-row" }, [
+                          _c(
+                            "div",
+                            { staticClass: "vx-col md:w-1/2 w-full" },
+                            [
+                              _c("label", [_vm._v("តម្លៃទិញ")]),
+                              _vm._v(" "),
+                              _c("vs-input-number", {
+                                attrs: { min: "0", label: "តម្លៃទិញ:" },
+                                model: {
+                                  value: _vm.invoice.purchase_amount,
+                                  callback: function($$v) {
+                                    _vm.$set(
+                                      _vm.invoice,
+                                      "purchase_amount",
+                                      $$v
+                                    )
+                                  },
+                                  expression: "invoice.purchase_amount"
+                                }
+                              })
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "vx-col md:w-1/2 w-full" },
+                            [
+                              _c("label", [_vm._v("តម្លៃលក់")]),
+                              _vm._v(" "),
+                              _c("vs-input-number", {
+                                attrs: { min: "0", label: "តម្លៃលក់:" },
+                                model: {
+                                  value: _vm.invoice.sale_amount,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.invoice, "sale_amount", $$v)
+                                  },
+                                  expression: "invoice.sale_amount"
+                                }
+                              })
+                            ],
+                            1
+                          )
+                        ])
+                      : _vm._e()
                   ],
                   1
                 )
@@ -3914,8 +4105,7 @@ var render = function() {
               )
             ],
             1
-          ),
-          _vm._v("\n        " + _vm._s(_vm.invoice) + "\n    ")
+          )
         ],
         1
       ),

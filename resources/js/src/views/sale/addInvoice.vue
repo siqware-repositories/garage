@@ -108,14 +108,27 @@
                         <vs-divider position="left">Payment</vs-divider>
                        <div class="vx-row">
                            <div class="vx-col md:w-1/2 w-full">
-                               <label>ប្រាក់ទិញទំនិញ</label>
-                               <vs-input-number color="warning" v-model="invoice.balance" min="0" :max="invoice.total_balance" label="ប្រាក់ទិញទំនិញ:"/>
+                               <label>ប្រាក់លក់ទំនិញ</label>
+                               <vs-input-number color="warning" v-model="invoice.balance" min="0" :max="invoice.total_balance" label="ប្រាក់លក់ទំនិញ:"/>
                            </div>
                            <div class="vx-col md:w-1/2 w-full">
                                <label>ទឹកប្រាក់ជំពាក់</label>
                                <vs-input step="any" readonly type="number" class="w-full" v-model="invoice.due_balance = invoice.total_balance - invoice.balance"/>
                            </div>
                        </div>
+                        <vs-divider position="left">
+                            <vs-checkbox v-model="invoice.is_bundle">ទំនិញដំុ?</vs-checkbox>
+                        </vs-divider>
+                        <div class="vx-row" v-if="invoice.is_bundle">
+                            <div class="vx-col md:w-1/2 w-full">
+                                <label>តម្លៃទិញ</label>
+                                <vs-input-number v-model="invoice.purchase_amount" min="0" label="តម្លៃទិញ:"/>
+                            </div>
+                            <div class="vx-col md:w-1/2 w-full">
+                                <label>តម្លៃលក់</label>
+                                <vs-input-number v-model="invoice.sale_amount" min="0" label="តម្លៃលក់:"/>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <vs-divider/>
@@ -145,7 +158,11 @@
         components: {AddCustomer, AddBrand, AddCategory, AddUnit,flatPickr,'v-select': vSelect,},
         data() {
             return {
+                checkBox1:false,
                 invoice:{
+                    is_bundle:false,
+                    purchase_amount:0,
+                    sale_amount:0,
                     customer:null,
                     user_id:this.$store.state.AppActiveUser.uid,
                     invoice_date:null,
@@ -179,8 +196,13 @@
                 self.invoice.items.forEach(function (item,index) {
                     total+=parseFloat(item.amount)
                 });
-                self.invoice.total_balance = total;
-                self.invoice.balance = total;
+                if (self.invoice.is_bundle){
+                    self.invoice.total_balance = self.invoice.sale_amount;
+                    self.invoice.balance = self.invoice.sale_amount;
+                }else {
+                    self.invoice.total_balance = total;
+                    self.invoice.balance = total;
+                }
                 return total
             },
             total_qty(){

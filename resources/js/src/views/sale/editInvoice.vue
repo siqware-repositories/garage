@@ -116,6 +116,19 @@
                                 <vs-input step="any" readonly type="number" class="w-full" v-model="invoice.due_balance = invoice.total_balance - invoice.balance"/>
                             </div>
                         </div>
+                        <vs-divider position="left">
+                            <vs-checkbox v-model="invoice.is_bundle">ទំនិញដំុ?</vs-checkbox>
+                        </vs-divider>
+                        <div class="vx-row" v-if="invoice.is_bundle">
+                            <div class="vx-col md:w-1/2 w-full">
+                                <label>តម្លៃទិញ</label>
+                                <vs-input-number v-model="invoice.purchase_amount" min="0" label="តម្លៃទិញ:"/>
+                            </div>
+                            <div class="vx-col md:w-1/2 w-full">
+                                <label>តម្លៃលក់</label>
+                                <vs-input-number v-model="invoice.sale_amount" min="0" label="តម្លៃលក់:"/>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <vs-divider/>
@@ -124,7 +137,6 @@
                     <vs-button @click="updateInvoice" icon="icon-edit" icon-pack="feather" type="relief">កែប្រែ</vs-button>
                 </div>
             </vx-card>
-            {{invoice}}
         </modal>
         <add-customer ref="addCustomer"></add-customer>
         <add-unit ref="addUnit"></add-unit>
@@ -148,6 +160,9 @@
             return {
                 invoice:{
                     id:null,
+                    is_bundle:false,
+                    purchase_amount:0,
+                    sale_amount:0,
                     customer:null,
                     user_id:this.$store.state.AppActiveUser.uid,
                     invoice_date:null,
@@ -175,8 +190,13 @@
                 self.invoice.items.forEach(function (item,index) {
                     total+=parseFloat(item.amount)
                 });
-                self.invoice.total_balance = total;
-                self.invoice.balance = total;
+                if (self.invoice.is_bundle){
+                    self.invoice.total_balance = self.invoice.sale_amount;
+                    self.invoice.balance = self.invoice.sale_amount - self.invoice.due_balance;
+                }else {
+                    self.invoice.total_balance = total;
+                    self.invoice.balance = total;
+                }
                 return total
             },
             total_qty(){
@@ -237,6 +257,11 @@
             show(data) {
                 let self = this;
                 this.$modal.show('edit-invoice');
+                if (data.purchase_amount>0){
+                    self.invoice.is_bundle = true;
+                    self.invoice.purchase_amount = data.purchase_amount;
+                    self.invoice.sale_amount = data.amount;
+                }
                 self.invoice.id = data.id;
                 self.invoice.customer = data.customer;
                 self.invoice.invoice_date = data.date;

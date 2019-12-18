@@ -23,6 +23,7 @@ class CreateInvoicesTable extends Migration
             $table->float('qty');
             $table->float('balance');
             $table->float('due_balance');
+            $table->float('purchase_amount')->default(0);
             $table->float('amount');
             $table->boolean('status')->default(true);
             $table->timestamps();

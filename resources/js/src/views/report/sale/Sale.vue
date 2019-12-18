@@ -194,10 +194,14 @@
                 let total = 0;
                 self.filtered_range_date.forEach(function (item,index) {
                     item.invoice_detail.forEach(function (el,index) {
-                        if (el.inventory_type !=='purchase_only') {
-                            total += parseFloat(el.amount)
+                        if (el.inventory_type === 'bundle'){
+                            total = parseFloat(item.amount);
+                        } else {
+                            if (el.inventory_type !=='purchase_only') {
+                                total += parseFloat(el.amount)
+                            }
                         }
-                    })
+                    });
                 });
                 return total;
             },
@@ -206,8 +210,12 @@
                 let total = 0;
                 self.filtered_range_date.forEach(function (item,index) {
                     item.invoice_detail.forEach(function (el,index) {
-                        if (el.inventory_type !=='purchase_only') {
-                            total += parseFloat(el.purchase*el.qty)
+                        if (el.inventory_type === 'bundle'){
+                            total = parseFloat(item.purchase_amount);
+                        } else {
+                            if (el.inventory_type !=='purchase_only') {
+                                total += parseFloat(el.purchase*el.qty)
+                            }
                         }
                     })
                 });
