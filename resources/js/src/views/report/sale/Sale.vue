@@ -193,15 +193,15 @@
                 let self = this;
                 let total = 0;
                 self.filtered_range_date.forEach(function (item,index) {
-                    item.invoice_detail.forEach(function (el,index) {
+                    for (const [index, el] of item.invoice_detail.entries()) {
                         if (el.inventory_type === 'bundle'){
-                            total = parseFloat(item.amount);
-                        } else {
-                            if (el.inventory_type !=='purchase_only') {
-                                total += parseFloat(el.amount)
-                            }
+                            total += parseFloat(item.amount);
+                            break;
                         }
-                    });
+                        if (el.inventory_type !=='purchase_only' && el.inventory_type !=='service') {
+                            total += parseFloat(el.amount)
+                        }
+                    }
                 });
                 return total;
             },
@@ -235,10 +235,10 @@
             },
             //date range
             dateRange(value) {
-                this.date_range = `${moment(value.from).format('YYYY-MM-DD')} ~ ${moment(value.to).format('YYYY-MM-DD')}`;
+                this.date_range = `${this.$moment(value.from).format('YYYY-MM-DD')} ~ ${this.$moment(value.to).format('YYYY-MM-DD')}`;
                 this.$modal.hide('show-date-range');
-                this.date_picker.start = moment(value.from).format('YYYY-MM-DD');
-                this.date_picker.end = moment(value.to).format('YYYY-MM-DD');
+                this.date_picker.start = this.$moment(value.from).format('YYYY-MM-DD');
+                this.date_picker.end = this.$moment(value.to).format('YYYY-MM-DD');
             },
         },
         async created() {

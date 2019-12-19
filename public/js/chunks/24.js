@@ -175,6 +175,14 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 //
 //
 //
@@ -278,15 +286,39 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var self = this;
       var total = 0;
       self.filtered_range_date_invoice.forEach(function (item, index) {
-        item.invoice_detail.forEach(function (el, index) {
-          if (el.inventory_type === 'bundle') {
-            total = parseFloat(item.amount);
-          } else {
-            if (el.inventory_type !== 'purchase_only') {
+        var _iteratorNormalCompletion = true;
+        var _didIteratorError = false;
+        var _iteratorError = undefined;
+
+        try {
+          for (var _iterator = item.invoice_detail.entries()[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+            var _step$value = _slicedToArray(_step.value, 2),
+                _index = _step$value[0],
+                el = _step$value[1];
+
+            if (el.inventory_type === 'bundle') {
+              total += parseFloat(item.amount);
+              break;
+            }
+
+            if (el.inventory_type !== 'purchase_only' && el.inventory_type !== 'service') {
               total += parseFloat(el.amount);
             }
           }
-        });
+        } catch (err) {
+          _didIteratorError = true;
+          _iteratorError = err;
+        } finally {
+          try {
+            if (!_iteratorNormalCompletion && _iterator.return != null) {
+              _iterator.return();
+            }
+          } finally {
+            if (_didIteratorError) {
+              throw _iteratorError;
+            }
+          }
+        }
       });
       return total;
     }
@@ -320,10 +352,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }(),
     //date range
     dateRange: function dateRange(value) {
-      this.date_range = "".concat(moment(value.from).format('YYYY-MM-DD'), " ~ ").concat(moment(value.to).format('YYYY-MM-DD'));
+      this.date_range = "".concat(this.$moment(value.from).format('YYYY-MM-DD'), " ~ ").concat(this.$moment(value.to).format('YYYY-MM-DD'));
       this.$modal.hide('show-date-range');
-      this.date_picker.start = moment(value.from).format('YYYY-MM-DD');
-      this.date_picker.end = moment(value.to).format('YYYY-MM-DD');
+      this.date_picker.start = this.$moment(value.from).format('YYYY-MM-DD');
+      this.date_picker.end = this.$moment(value.to).format('YYYY-MM-DD');
     }
   },
   created: function () {

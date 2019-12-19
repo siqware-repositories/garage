@@ -395,10 +395,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }(),
     //date range
     dateRange: function dateRange(value) {
-      this.date_range = "".concat(moment(value.from).format('YYYY-MM-DD'), " ~ ").concat(moment(value.to).format('YYYY-MM-DD'));
+      this.date_range = "".concat(this.$moment(value.from).format('YYYY-MM-DD'), " ~ ").concat(this.$moment(value.to).format('YYYY-MM-DD'));
       this.$modal.hide('show-date-range');
-      this.date_picker.start = moment(value.from).format('YYYY-MM-DD');
-      this.date_picker.end = moment(value.to).format('YYYY-MM-DD');
+      this.date_picker.start = this.$moment(value.from).format('YYYY-MM-DD');
+      this.date_picker.end = this.$moment(value.to).format('YYYY-MM-DD');
     }
   },
   created: function () {
