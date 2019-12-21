@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[14],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/income/Income.vue?vue&type=script&lang=js&":
-/*!***********************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/income/Income.vue?vue&type=script&lang=js& ***!
-  \***********************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/expense/Expense.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/expense/Expense.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -12,9 +12,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vue_money_format__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-money-format */ "./node_modules/vue-money-format/src/main.js");
-/* harmony import */ var _addIncome__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./addIncome */ "./resources/js/src/views/income/addIncome.vue");
-/* harmony import */ var _editIncome__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./editIncome */ "./resources/js/src/views/income/editIncome.vue");
-/* harmony import */ var _showIncome__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./showIncome */ "./resources/js/src/views/income/showIncome.vue");
+/* harmony import */ var _editIncome__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./editIncome */ "./resources/js/src/views/expense/editIncome.vue");
+/* harmony import */ var _addExpense__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./addExpense */ "./resources/js/src/views/expense/addExpense.vue");
+/* harmony import */ var _showExpense__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./showExpense */ "./resources/js/src/views/expense/showExpense.vue");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -71,16 +71,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
 
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "Income",
+  name: "Expense",
   components: {
-    ShowIncome: _showIncome__WEBPACK_IMPORTED_MODULE_4__["default"],
-    EditIncome: _editIncome__WEBPACK_IMPORTED_MODULE_3__["default"],
-    AddIncome: _addIncome__WEBPACK_IMPORTED_MODULE_2__["default"],
+    ShowExpense: _showExpense__WEBPACK_IMPORTED_MODULE_4__["default"],
+    AddExpense: _addExpense__WEBPACK_IMPORTED_MODULE_3__["default"],
+    EditIncome: _editIncome__WEBPACK_IMPORTED_MODULE_2__["default"],
     'money-format': vue_money_format__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   data: function data() {
@@ -102,8 +104,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     };
   },
   computed: {
-    all_incomes: function all_incomes() {
-      return this.$store.getters.all_income;
+    all_expenses: function all_expenses() {
+      return this.$store.getters.all_expense;
     }
   },
   created: function () {
@@ -115,11 +117,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return this.fetchIncomeType();
+              return this.fetchExpenseType();
 
             case 2:
               _context.next = 4;
-              return this.fetchIncome();
+              return this.fetchExpense();
 
             case 4:
             case "end":
@@ -142,12 +144,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         color: 'danger',
         title: "\u1795\u17D2\u1791\u17C0\u1784\u1795\u17D2\u1791\u17B6\u178F\u17CB",
         text: 'ចុចពាក្យ Accept ដើម្បីលុប!',
-        accept: this.destroyIncome
+        accept: this.destroyExpense
       });
     },
     //destroy
-    destroyIncome: function () {
-      var _destroyIncome = _asyncToGenerator(
+    destroyExpense: function () {
+      var _destroyExpense = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
         var self, promises;
@@ -168,7 +170,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                         switch (_context2.prev = _context2.next) {
                           case 0:
                             _context2.next = 2;
-                            return self.$store.dispatch('destroyIncome', data.id);
+                            return self.$store.dispatch('destroyExpense', data.id);
 
                           case 2:
                           case "end":
@@ -205,11 +207,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee3, this);
       }));
 
-      function destroyIncome() {
-        return _destroyIncome.apply(this, arguments);
+      function destroyExpense() {
+        return _destroyExpense.apply(this, arguments);
       }
 
-      return destroyIncome;
+      return destroyExpense;
     }(),
     //calc total income
     total_income: function total_income(data) {
@@ -218,8 +220,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }, 0);
     },
     //fetch income
-    fetchIncome: function () {
-      var _fetchIncome = _asyncToGenerator(
+    fetchExpense: function () {
+      var _fetchExpense = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
@@ -227,7 +229,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context4.prev = _context4.next) {
               case 0:
                 _context4.next = 2;
-                return this.$store.dispatch('fetchIncome');
+                return this.$store.dispatch('fetchExpense');
 
               case 2:
               case "end":
@@ -237,15 +239,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee4, this);
       }));
 
-      function fetchIncome() {
-        return _fetchIncome.apply(this, arguments);
+      function fetchExpense() {
+        return _fetchExpense.apply(this, arguments);
       }
 
-      return fetchIncome;
+      return fetchExpense;
     }(),
     //fetch type
-    fetchIncomeType: function () {
-      var _fetchIncomeType = _asyncToGenerator(
+    fetchExpenseType: function () {
+      var _fetchExpenseType = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5() {
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
@@ -253,7 +255,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context5.prev = _context5.next) {
               case 0:
                 _context5.next = 2;
-                return this.$store.dispatch('fetchIncomeType');
+                return this.$store.dispatch('fetchExpenseType');
 
               case 2:
               case "end":
@@ -263,21 +265,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee5, this);
       }));
 
-      function fetchIncomeType() {
-        return _fetchIncomeType.apply(this, arguments);
+      function fetchExpenseType() {
+        return _fetchExpenseType.apply(this, arguments);
       }
 
-      return fetchIncomeType;
+      return fetchExpenseType;
     }()
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/income/addIncome.vue?vue&type=script&lang=js&":
-/*!**************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/income/addIncome.vue?vue&type=script&lang=js& ***!
-  \**************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/expense/addExpense.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/expense/addExpense.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -290,7 +292,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_flatpickr_component__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_flatpickr_component__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var flatpickr_dist_flatpickr_min_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! flatpickr/dist/flatpickr.min.css */ "./node_modules/flatpickr/dist/flatpickr.min.css");
 /* harmony import */ var flatpickr_dist_flatpickr_min_css__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(flatpickr_dist_flatpickr_min_css__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _addIncomeType__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./addIncomeType */ "./resources/js/src/views/income/addIncomeType.vue");
+/* harmony import */ var _addExpenseType__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./addExpenseType */ "./resources/js/src/views/expense/addExpenseType.vue");
 //
 //
 //
@@ -389,9 +391,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "addIncome",
+  name: "addExpense",
   components: {
-    AddIncomeType: _addIncomeType__WEBPACK_IMPORTED_MODULE_4__["default"],
+    AddExpenseType: _addExpenseType__WEBPACK_IMPORTED_MODULE_4__["default"],
     'v-select': vue_select__WEBPACK_IMPORTED_MODULE_1___default.a,
     flatPickr: vue_flatpickr_component__WEBPACK_IMPORTED_MODULE_2___default.a,
     'money-format': vue_money_format__WEBPACK_IMPORTED_MODULE_0__["default"]
@@ -410,8 +412,8 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   computed: {
-    all_income_types: function all_income_types() {
-      return this.$store.getters.all_income_type;
+    all_expense_types: function all_expense_types() {
+      return this.$store.getters.all_expense_type;
     },
     total_income: function total_income() {
       return this.data.items.reduce(function (total, item) {
@@ -421,7 +423,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     show: function show() {
-      this.$modal.show('add-income');
+      this.$modal.show('add-expense');
     },
     removeLine: function removeLine(index) {
       this.data.items.splice(index, 1);
@@ -439,16 +441,16 @@ __webpack_require__.r(__webpack_exports__);
         color: 'warning',
         title: "\u1795\u17D2\u1791\u17C0\u1784\u1795\u17D2\u1791\u17B6\u178F\u17CB",
         text: 'ចុចពាក្យ Accept ដើម្បីរក្សាទុក!',
-        accept: this.storeIncome
+        accept: this.storeExpense
       });
     },
     //store
-    storeIncome: function storeIncome() {
+    storeExpense: function storeExpense() {
       var self = this;
       this.$validator.validateAll().then(function (result) {
         if (result) {
           self.$vs.loading();
-          self.$store.dispatch('storeIncome', self.data).then(function (data) {
+          self.$store.dispatch('storeExpense', self.data).then(function (data) {
             if (data) {
               self.$vs.notify({
                 time: 4000,
@@ -459,7 +461,7 @@ __webpack_require__.r(__webpack_exports__);
                 icon: 'icon-check',
                 position: 'top-center'
               });
-              self.$modal.hide('add-income');
+              self.$modal.hide('add-expense');
             } else {
               self.$vs.notify({
                 title: 'ប្រតិបត្តិការបរាជ័យ',
@@ -490,10 +492,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/income/addIncomeType.vue?vue&type=script&lang=js&":
-/*!******************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/income/addIncomeType.vue?vue&type=script&lang=js& ***!
-  \******************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/expense/addExpenseType.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/expense/addExpenseType.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -516,7 +518,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "addIncomeType",
+  name: "addExpenseType",
   data: function data() {
     return {
       data: {
@@ -526,15 +528,15 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     show: function show() {
-      this.$modal.show('add-income-type');
+      this.$modal.show('add-expense-type');
     },
     //store
-    storeIncomeType: function storeIncomeType() {
+    storeExpenseType: function storeExpenseType() {
       var self = this;
       this.$validator.validateAll().then(function (result) {
         if (result) {
           self.$vs.loading();
-          self.$store.dispatch('storeIncomeType', self.data).then(function (data) {
+          self.$store.dispatch('storeExpenseType', self.data).then(function (data) {
             if (data) {
               self.$vs.notify({
                 time: 4000,
@@ -579,10 +581,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/income/editIncome.vue?vue&type=script&lang=js&":
-/*!***************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/income/editIncome.vue?vue&type=script&lang=js& ***!
-  \***************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/expense/editIncome.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/expense/editIncome.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -595,7 +597,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_flatpickr_component__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_flatpickr_component__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var flatpickr_dist_flatpickr_min_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! flatpickr/dist/flatpickr.min.css */ "./node_modules/flatpickr/dist/flatpickr.min.css");
 /* harmony import */ var flatpickr_dist_flatpickr_min_css__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(flatpickr_dist_flatpickr_min_css__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _addIncomeType__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./addIncomeType */ "./resources/js/src/views/income/addIncomeType.vue");
+/* harmony import */ var _addExpenseType__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./addExpenseType */ "./resources/js/src/views/expense/addExpenseType.vue");
 //
 //
 //
@@ -696,7 +698,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "editIncome",
   components: {
-    AddIncomeType: _addIncomeType__WEBPACK_IMPORTED_MODULE_4__["default"],
+    AddExpenseType: _addExpenseType__WEBPACK_IMPORTED_MODULE_4__["default"],
     'v-select': vue_select__WEBPACK_IMPORTED_MODULE_1___default.a,
     flatPickr: vue_flatpickr_component__WEBPACK_IMPORTED_MODULE_2___default.a,
     'money-format': vue_money_format__WEBPACK_IMPORTED_MODULE_0__["default"]
@@ -715,8 +717,8 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   computed: {
-    all_income_types: function all_income_types() {
-      return this.$store.getters.all_income_type;
+    all_expense_types: function all_expense_types() {
+      return this.$store.getters.all_expense_type;
     },
     total_income: function total_income() {
       return this.data.items.reduce(function (total, item) {
@@ -727,12 +729,12 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     show: function show(data) {
       var self = this;
-      self.$modal.show('edit-income');
+      self.$modal.show('edit-expense');
       self.data.id = data.id;
       self.data.date = data.date;
       self.data.note = data.note;
       self.data.items = [];
-      data.income_detail.forEach(function (item, index) {
+      data.expense_detail.forEach(function (item, index) {
         self.data.items.push({
           description: item.description,
           type: item.type,
@@ -756,32 +758,32 @@ __webpack_require__.r(__webpack_exports__);
         color: 'warning',
         title: "\u1795\u17D2\u1791\u17C0\u1784\u1795\u17D2\u1791\u17B6\u178F\u17CB",
         text: 'ចុចពាក្យ Accept ដើម្បីកែប្រែ!',
-        accept: this.updateIncome
+        accept: this.updateExpense
       });
     },
     //store
-    updateIncome: function updateIncome() {
+    updateExpense: function updateExpense() {
       var self = this;
       this.$validator.validateAll().then(function (result) {
         if (result) {
           self.$vs.loading();
-          self.$store.dispatch('updateIncome', self.data).then(function (data) {
+          self.$store.dispatch('updateExpense', self.data).then(function (data) {
             if (data) {
               self.$vs.notify({
                 time: 4000,
                 title: 'ប្រតិបត្តិការជោគជ័យ',
-                text: 'ទិន្នន័យបានបន្ថែម',
+                text: 'ទិន្នន័យបានកែប្រែ',
                 color: 'success',
                 iconPack: 'feather',
                 icon: 'icon-check',
                 position: 'top-center'
               });
               self.$emit('finished');
-              self.$modal.hide('edit-income');
+              self.$modal.hide('edit-expense');
             } else {
               self.$vs.notify({
                 title: 'ប្រតិបត្តិការបរាជ័យ',
-                text: 'ទិន្នន័យមិនបានបន្ថែម',
+                text: 'ទិន្នន័យមិនបានកែប្រែ',
                 color: 'danger',
                 iconPack: 'feather',
                 icon: 'icon-message-square',
@@ -808,10 +810,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/income/addIncome.vue?vue&type=style&index=0&id=85fd2864&scoped=true&lang=css&":
-/*!*********************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader??ref--7-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/income/addIncome.vue?vue&type=style&index=0&id=85fd2864&scoped=true&lang=css& ***!
-  \*********************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/expense/addExpense.vue?vue&type=style&index=0&id=4fcd97d0&scoped=true&lang=css&":
+/*!***********************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--7-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/expense/addExpense.vue?vue&type=style&index=0&id=4fcd97d0&scoped=true&lang=css& ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -820,17 +822,17 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "[dir] table[data-v-85fd2864], [dir] td[data-v-85fd2864], [dir] th[data-v-85fd2864] {\n  border: 1px solid black;\n}\ntable[data-v-85fd2864] {\n  border-collapse: collapse;\n  width: 100%;\n}\n[dir=ltr] th[data-v-85fd2864] {\n  text-align: left;\n}\n[dir=rtl] th[data-v-85fd2864] {\n  text-align: right;\n}\n", ""]);
+exports.push([module.i, "[dir] table[data-v-4fcd97d0], [dir] td[data-v-4fcd97d0], [dir] th[data-v-4fcd97d0] {\n  border: 1px solid black;\n}\ntable[data-v-4fcd97d0] {\n  border-collapse: collapse;\n  width: 100%;\n}\n[dir=ltr] th[data-v-4fcd97d0] {\n  text-align: left;\n}\n[dir=rtl] th[data-v-4fcd97d0] {\n  text-align: right;\n}\n", ""]);
 
 // exports
 
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/income/editIncome.vue?vue&type=style&index=0&id=3fa45a5f&scoped=true&lang=css&":
-/*!**********************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader??ref--7-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/income/editIncome.vue?vue&type=style&index=0&id=3fa45a5f&scoped=true&lang=css& ***!
-  \**********************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/expense/editIncome.vue?vue&type=style&index=0&id=34e791f4&scoped=true&lang=css&":
+/*!***********************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--7-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/expense/editIncome.vue?vue&type=style&index=0&id=34e791f4&scoped=true&lang=css& ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -839,22 +841,22 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "[dir] table[data-v-3fa45a5f], [dir] td[data-v-3fa45a5f], [dir] th[data-v-3fa45a5f] {\n  border: 1px solid black;\n}\ntable[data-v-3fa45a5f] {\n  border-collapse: collapse;\n  width: 100%;\n}\n[dir=ltr] th[data-v-3fa45a5f] {\n  text-align: left;\n}\n[dir=rtl] th[data-v-3fa45a5f] {\n  text-align: right;\n}\n", ""]);
+exports.push([module.i, "[dir] table[data-v-34e791f4], [dir] td[data-v-34e791f4], [dir] th[data-v-34e791f4] {\n  border: 1px solid black;\n}\ntable[data-v-34e791f4] {\n  border-collapse: collapse;\n  width: 100%;\n}\n[dir=ltr] th[data-v-34e791f4] {\n  text-align: left;\n}\n[dir=rtl] th[data-v-34e791f4] {\n  text-align: right;\n}\n", ""]);
 
 // exports
 
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/income/addIncome.vue?vue&type=style&index=0&id=85fd2864&scoped=true&lang=css&":
-/*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--7-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/income/addIncome.vue?vue&type=style&index=0&id=85fd2864&scoped=true&lang=css& ***!
-  \*************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/expense/addExpense.vue?vue&type=style&index=0&id=4fcd97d0&scoped=true&lang=css&":
+/*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--7-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/expense/addExpense.vue?vue&type=style&index=0&id=4fcd97d0&scoped=true&lang=css& ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(/*! !../../../../../node_modules/css-loader??ref--7-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--7-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./addIncome.vue?vue&type=style&index=0&id=85fd2864&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/income/addIncome.vue?vue&type=style&index=0&id=85fd2864&scoped=true&lang=css&");
+var content = __webpack_require__(/*! !../../../../../node_modules/css-loader??ref--7-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--7-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./addExpense.vue?vue&type=style&index=0&id=4fcd97d0&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/expense/addExpense.vue?vue&type=style&index=0&id=4fcd97d0&scoped=true&lang=css&");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -876,15 +878,15 @@ if(false) {}
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/income/editIncome.vue?vue&type=style&index=0&id=3fa45a5f&scoped=true&lang=css&":
-/*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--7-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/income/editIncome.vue?vue&type=style&index=0&id=3fa45a5f&scoped=true&lang=css& ***!
-  \**************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/expense/editIncome.vue?vue&type=style&index=0&id=34e791f4&scoped=true&lang=css&":
+/*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--7-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/expense/editIncome.vue?vue&type=style&index=0&id=34e791f4&scoped=true&lang=css& ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(/*! !../../../../../node_modules/css-loader??ref--7-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--7-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./editIncome.vue?vue&type=style&index=0&id=3fa45a5f&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/income/editIncome.vue?vue&type=style&index=0&id=3fa45a5f&scoped=true&lang=css&");
+var content = __webpack_require__(/*! !../../../../../node_modules/css-loader??ref--7-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--7-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./editIncome.vue?vue&type=style&index=0&id=34e791f4&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/expense/editIncome.vue?vue&type=style&index=0&id=34e791f4&scoped=true&lang=css&");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -906,10 +908,10 @@ if(false) {}
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/income/Income.vue?vue&type=template&id=bd37ea56&scoped=true&":
-/*!***************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/income/Income.vue?vue&type=template&id=bd37ea56&scoped=true& ***!
-  \***************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/expense/Expense.vue?vue&type=template&id=a8ff9232&scoped=true&":
+/*!*****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/expense/Expense.vue?vue&type=template&id=a8ff9232&scoped=true& ***!
+  \*****************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -941,7 +943,7 @@ var render = function() {
                   },
                   on: {
                     click: function($event) {
-                      return _vm.$refs.showIncome.show(_vm.selected[0])
+                      return _vm.$refs.showExpense.show(_vm.selected[0])
                     }
                   }
                 },
@@ -959,7 +961,7 @@ var render = function() {
               },
               on: {
                 click: function($event) {
-                  return _vm.$refs.addIncome.show()
+                  return _vm.$refs.addExpense.show()
                 }
               }
             },
@@ -1005,7 +1007,7 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c("add-income", { ref: "addIncome" }),
+      _c("add-expense", { ref: "addExpense" }),
       _vm._v(" "),
       _c("edit-income", {
         ref: "editIncome",
@@ -1016,7 +1018,7 @@ var render = function() {
         }
       }),
       _vm._v(" "),
-      _c("show-income", { ref: "showIncome" }),
+      _c("show-expense", { ref: "showExpense" }),
       _vm._v(" "),
       _c(
         "vs-table",
@@ -1026,7 +1028,7 @@ var render = function() {
             pagination: "",
             "max-items": "3",
             search: "",
-            data: _vm.all_incomes
+            data: _vm.all_expenses
           },
           scopedSlots: _vm._u([
             {
@@ -1059,7 +1061,7 @@ var render = function() {
                         [
                           _c("money-format", {
                             attrs: {
-                              value: _vm.total_income(item.income_detail),
+                              value: _vm.total_income(item.expense_detail),
                               locale: "en",
                               "currency-code": "USD"
                             }
@@ -1123,10 +1125,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/income/addIncome.vue?vue&type=template&id=85fd2864&scoped=true&":
-/*!******************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/income/addIncome.vue?vue&type=template&id=85fd2864&scoped=true& ***!
-  \******************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/expense/addExpense.vue?vue&type=template&id=4fcd97d0&scoped=true&":
+/*!********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/expense/addExpense.vue?vue&type=template&id=4fcd97d0&scoped=true& ***!
+  \********************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1147,7 +1149,7 @@ var render = function() {
         scrollable: true,
         pivotY: 0.2,
         clickToClose: false,
-        name: "add-income"
+        name: "add-expense"
       }
     },
     [
@@ -1159,7 +1161,7 @@ var render = function() {
             staticStyle: { background: "rgb(255, 255, 255)" },
             on: {
               click: function($event) {
-                return _vm.$modal.hide("add-income")
+                return _vm.$modal.hide("add-expense")
               }
             }
           },
@@ -1362,7 +1364,7 @@ var render = function() {
                                   staticClass: "w-full",
                                   attrs: {
                                     name: index + "-type",
-                                    options: _vm.all_income_types
+                                    options: _vm.all_expense_types
                                   },
                                   model: {
                                     value: item.type,
@@ -1388,7 +1390,7 @@ var render = function() {
                                         },
                                         on: {
                                           click: function($event) {
-                                            return _vm.$refs.addIncomeType.show()
+                                            return _vm.$refs.addExpenseType.show()
                                           }
                                         }
                                       })
@@ -1531,7 +1533,7 @@ var render = function() {
                   ])
                 ]),
                 _vm._v(" "),
-                _c("add-income-type", { ref: "addIncomeType" }),
+                _c("add-expense-type", { ref: "addExpenseType" }),
                 _vm._v(" "),
                 _c(
                   "vs-button",
@@ -1585,10 +1587,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/income/addIncomeType.vue?vue&type=template&id=4558a728&scoped=true&":
-/*!**********************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/income/addIncomeType.vue?vue&type=template&id=4558a728&scoped=true& ***!
-  \**********************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/expense/addExpenseType.vue?vue&type=template&id=035f3a72&scoped=true&":
+/*!************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/expense/addExpenseType.vue?vue&type=template&id=035f3a72&scoped=true& ***!
+  \************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1608,7 +1610,7 @@ var render = function() {
         scrollable: true,
         pivotY: 0.2,
         clickToClose: false,
-        name: "add-income-type"
+        name: "add-expense-type"
       }
     },
     [
@@ -1620,7 +1622,7 @@ var render = function() {
             staticStyle: { background: "rgb(255, 255, 255)" },
             on: {
               click: function($event) {
-                return _vm.$modal.hide("add-income-type")
+                return _vm.$modal.hide("add-expense-type")
               }
             }
           },
@@ -1653,7 +1655,7 @@ var render = function() {
                     ) {
                       return null
                     }
-                    return _vm.storeIncomeType($event)
+                    return _vm.storeExpenseType($event)
                   }
                 },
                 model: {
@@ -1696,10 +1698,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/income/editIncome.vue?vue&type=template&id=3fa45a5f&scoped=true&":
-/*!*******************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/income/editIncome.vue?vue&type=template&id=3fa45a5f&scoped=true& ***!
-  \*******************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/expense/editIncome.vue?vue&type=template&id=34e791f4&scoped=true&":
+/*!********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/expense/editIncome.vue?vue&type=template&id=34e791f4&scoped=true& ***!
+  \********************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1720,7 +1722,7 @@ var render = function() {
         scrollable: true,
         pivotY: 0.2,
         clickToClose: false,
-        name: "edit-income"
+        name: "edit-expense"
       }
     },
     [
@@ -1732,7 +1734,7 @@ var render = function() {
             staticStyle: { background: "rgb(255, 255, 255)" },
             on: {
               click: function($event) {
-                return _vm.$modal.hide("edit-income")
+                return _vm.$modal.hide("edit-expense")
               }
             }
           },
@@ -1935,7 +1937,7 @@ var render = function() {
                                   staticClass: "w-full",
                                   attrs: {
                                     name: index + "-type",
-                                    options: _vm.all_income_types
+                                    options: _vm.all_expense_types
                                   },
                                   model: {
                                     value: item.type,
@@ -1961,7 +1963,7 @@ var render = function() {
                                         },
                                         on: {
                                           click: function($event) {
-                                            return _vm.$refs.addIncomeType.show()
+                                            return _vm.$refs.addExpenseType.show()
                                           }
                                         }
                                       })
@@ -2104,7 +2106,7 @@ var render = function() {
                   ])
                 ]),
                 _vm._v(" "),
-                _c("add-income-type", { ref: "addIncomeType" }),
+                _c("add-expense-type", { ref: "addExpenseType" }),
                 _vm._v(" "),
                 _c(
                   "vs-button",
@@ -2158,17 +2160,17 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/src/views/income/Income.vue":
-/*!**************************************************!*\
-  !*** ./resources/js/src/views/income/Income.vue ***!
-  \**************************************************/
+/***/ "./resources/js/src/views/expense/Expense.vue":
+/*!****************************************************!*\
+  !*** ./resources/js/src/views/expense/Expense.vue ***!
+  \****************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Income_vue_vue_type_template_id_bd37ea56_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Income.vue?vue&type=template&id=bd37ea56&scoped=true& */ "./resources/js/src/views/income/Income.vue?vue&type=template&id=bd37ea56&scoped=true&");
-/* harmony import */ var _Income_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Income.vue?vue&type=script&lang=js& */ "./resources/js/src/views/income/Income.vue?vue&type=script&lang=js&");
+/* harmony import */ var _Expense_vue_vue_type_template_id_a8ff9232_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Expense.vue?vue&type=template&id=a8ff9232&scoped=true& */ "./resources/js/src/views/expense/Expense.vue?vue&type=template&id=a8ff9232&scoped=true&");
+/* harmony import */ var _Expense_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Expense.vue?vue&type=script&lang=js& */ "./resources/js/src/views/expense/Expense.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -2178,67 +2180,67 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _Income_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _Income_vue_vue_type_template_id_bd37ea56_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _Income_vue_vue_type_template_id_bd37ea56_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _Expense_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Expense_vue_vue_type_template_id_a8ff9232_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Expense_vue_vue_type_template_id_a8ff9232_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  "bd37ea56",
+  "a8ff9232",
   null
   
 )
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/src/views/income/Income.vue"
+component.options.__file = "resources/js/src/views/expense/Expense.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/src/views/income/Income.vue?vue&type=script&lang=js&":
-/*!***************************************************************************!*\
-  !*** ./resources/js/src/views/income/Income.vue?vue&type=script&lang=js& ***!
-  \***************************************************************************/
+/***/ "./resources/js/src/views/expense/Expense.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/src/views/expense/Expense.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Income_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Income.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/income/Income.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Income_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Expense_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Expense.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/expense/Expense.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Expense_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/src/views/income/Income.vue?vue&type=template&id=bd37ea56&scoped=true&":
-/*!*********************************************************************************************!*\
-  !*** ./resources/js/src/views/income/Income.vue?vue&type=template&id=bd37ea56&scoped=true& ***!
-  \*********************************************************************************************/
+/***/ "./resources/js/src/views/expense/Expense.vue?vue&type=template&id=a8ff9232&scoped=true&":
+/*!***********************************************************************************************!*\
+  !*** ./resources/js/src/views/expense/Expense.vue?vue&type=template&id=a8ff9232&scoped=true& ***!
+  \***********************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Income_vue_vue_type_template_id_bd37ea56_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Income.vue?vue&type=template&id=bd37ea56&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/income/Income.vue?vue&type=template&id=bd37ea56&scoped=true&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Income_vue_vue_type_template_id_bd37ea56_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Expense_vue_vue_type_template_id_a8ff9232_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Expense.vue?vue&type=template&id=a8ff9232&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/expense/Expense.vue?vue&type=template&id=a8ff9232&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Expense_vue_vue_type_template_id_a8ff9232_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Income_vue_vue_type_template_id_bd37ea56_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Expense_vue_vue_type_template_id_a8ff9232_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
 /***/ }),
 
-/***/ "./resources/js/src/views/income/addIncome.vue":
-/*!*****************************************************!*\
-  !*** ./resources/js/src/views/income/addIncome.vue ***!
-  \*****************************************************/
+/***/ "./resources/js/src/views/expense/addExpense.vue":
+/*!*******************************************************!*\
+  !*** ./resources/js/src/views/expense/addExpense.vue ***!
+  \*******************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _addIncome_vue_vue_type_template_id_85fd2864_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./addIncome.vue?vue&type=template&id=85fd2864&scoped=true& */ "./resources/js/src/views/income/addIncome.vue?vue&type=template&id=85fd2864&scoped=true&");
-/* harmony import */ var _addIncome_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./addIncome.vue?vue&type=script&lang=js& */ "./resources/js/src/views/income/addIncome.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _addIncome_vue_vue_type_style_index_0_id_85fd2864_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./addIncome.vue?vue&type=style&index=0&id=85fd2864&scoped=true&lang=css& */ "./resources/js/src/views/income/addIncome.vue?vue&type=style&index=0&id=85fd2864&scoped=true&lang=css&");
+/* harmony import */ var _addExpense_vue_vue_type_template_id_4fcd97d0_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./addExpense.vue?vue&type=template&id=4fcd97d0&scoped=true& */ "./resources/js/src/views/expense/addExpense.vue?vue&type=template&id=4fcd97d0&scoped=true&");
+/* harmony import */ var _addExpense_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./addExpense.vue?vue&type=script&lang=js& */ "./resources/js/src/views/expense/addExpense.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _addExpense_vue_vue_type_style_index_0_id_4fcd97d0_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./addExpense.vue?vue&type=style&index=0&id=4fcd97d0&scoped=true&lang=css& */ "./resources/js/src/views/expense/addExpense.vue?vue&type=style&index=0&id=4fcd97d0&scoped=true&lang=css&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -2249,82 +2251,82 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
-  _addIncome_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _addIncome_vue_vue_type_template_id_85fd2864_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _addIncome_vue_vue_type_template_id_85fd2864_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _addExpense_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _addExpense_vue_vue_type_template_id_4fcd97d0_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _addExpense_vue_vue_type_template_id_4fcd97d0_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  "85fd2864",
+  "4fcd97d0",
   null
   
 )
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/src/views/income/addIncome.vue"
+component.options.__file = "resources/js/src/views/expense/addExpense.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/src/views/income/addIncome.vue?vue&type=script&lang=js&":
-/*!******************************************************************************!*\
-  !*** ./resources/js/src/views/income/addIncome.vue?vue&type=script&lang=js& ***!
-  \******************************************************************************/
+/***/ "./resources/js/src/views/expense/addExpense.vue?vue&type=script&lang=js&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/src/views/expense/addExpense.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_addIncome_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./addIncome.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/income/addIncome.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_addIncome_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_addExpense_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./addExpense.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/expense/addExpense.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_addExpense_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/src/views/income/addIncome.vue?vue&type=style&index=0&id=85fd2864&scoped=true&lang=css&":
-/*!**************************************************************************************************************!*\
-  !*** ./resources/js/src/views/income/addIncome.vue?vue&type=style&index=0&id=85fd2864&scoped=true&lang=css& ***!
-  \**************************************************************************************************************/
+/***/ "./resources/js/src/views/expense/addExpense.vue?vue&type=style&index=0&id=4fcd97d0&scoped=true&lang=css&":
+/*!****************************************************************************************************************!*\
+  !*** ./resources/js/src/views/expense/addExpense.vue?vue&type=style&index=0&id=4fcd97d0&scoped=true&lang=css& ***!
+  \****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_addIncome_vue_vue_type_style_index_0_id_85fd2864_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/style-loader!../../../../../node_modules/css-loader??ref--7-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--7-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./addIncome.vue?vue&type=style&index=0&id=85fd2864&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/income/addIncome.vue?vue&type=style&index=0&id=85fd2864&scoped=true&lang=css&");
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_addIncome_vue_vue_type_style_index_0_id_85fd2864_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_addIncome_vue_vue_type_style_index_0_id_85fd2864_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_addIncome_vue_vue_type_style_index_0_id_85fd2864_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_addIncome_vue_vue_type_style_index_0_id_85fd2864_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_addIncome_vue_vue_type_style_index_0_id_85fd2864_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_addExpense_vue_vue_type_style_index_0_id_4fcd97d0_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/style-loader!../../../../../node_modules/css-loader??ref--7-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--7-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./addExpense.vue?vue&type=style&index=0&id=4fcd97d0&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/expense/addExpense.vue?vue&type=style&index=0&id=4fcd97d0&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_addExpense_vue_vue_type_style_index_0_id_4fcd97d0_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_addExpense_vue_vue_type_style_index_0_id_4fcd97d0_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_addExpense_vue_vue_type_style_index_0_id_4fcd97d0_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_addExpense_vue_vue_type_style_index_0_id_4fcd97d0_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_addExpense_vue_vue_type_style_index_0_id_4fcd97d0_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
-/***/ "./resources/js/src/views/income/addIncome.vue?vue&type=template&id=85fd2864&scoped=true&":
-/*!************************************************************************************************!*\
-  !*** ./resources/js/src/views/income/addIncome.vue?vue&type=template&id=85fd2864&scoped=true& ***!
-  \************************************************************************************************/
+/***/ "./resources/js/src/views/expense/addExpense.vue?vue&type=template&id=4fcd97d0&scoped=true&":
+/*!**************************************************************************************************!*\
+  !*** ./resources/js/src/views/expense/addExpense.vue?vue&type=template&id=4fcd97d0&scoped=true& ***!
+  \**************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_addIncome_vue_vue_type_template_id_85fd2864_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./addIncome.vue?vue&type=template&id=85fd2864&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/income/addIncome.vue?vue&type=template&id=85fd2864&scoped=true&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_addIncome_vue_vue_type_template_id_85fd2864_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_addExpense_vue_vue_type_template_id_4fcd97d0_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./addExpense.vue?vue&type=template&id=4fcd97d0&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/expense/addExpense.vue?vue&type=template&id=4fcd97d0&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_addExpense_vue_vue_type_template_id_4fcd97d0_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_addIncome_vue_vue_type_template_id_85fd2864_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_addExpense_vue_vue_type_template_id_4fcd97d0_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
 /***/ }),
 
-/***/ "./resources/js/src/views/income/addIncomeType.vue":
-/*!*********************************************************!*\
-  !*** ./resources/js/src/views/income/addIncomeType.vue ***!
-  \*********************************************************/
+/***/ "./resources/js/src/views/expense/addExpenseType.vue":
+/*!***********************************************************!*\
+  !*** ./resources/js/src/views/expense/addExpenseType.vue ***!
+  \***********************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _addIncomeType_vue_vue_type_template_id_4558a728_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./addIncomeType.vue?vue&type=template&id=4558a728&scoped=true& */ "./resources/js/src/views/income/addIncomeType.vue?vue&type=template&id=4558a728&scoped=true&");
-/* harmony import */ var _addIncomeType_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./addIncomeType.vue?vue&type=script&lang=js& */ "./resources/js/src/views/income/addIncomeType.vue?vue&type=script&lang=js&");
+/* harmony import */ var _addExpenseType_vue_vue_type_template_id_035f3a72_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./addExpenseType.vue?vue&type=template&id=035f3a72&scoped=true& */ "./resources/js/src/views/expense/addExpenseType.vue?vue&type=template&id=035f3a72&scoped=true&");
+/* harmony import */ var _addExpenseType_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./addExpenseType.vue?vue&type=script&lang=js& */ "./resources/js/src/views/expense/addExpenseType.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -2334,67 +2336,67 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _addIncomeType_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _addIncomeType_vue_vue_type_template_id_4558a728_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _addIncomeType_vue_vue_type_template_id_4558a728_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _addExpenseType_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _addExpenseType_vue_vue_type_template_id_035f3a72_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _addExpenseType_vue_vue_type_template_id_035f3a72_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  "4558a728",
+  "035f3a72",
   null
   
 )
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/src/views/income/addIncomeType.vue"
+component.options.__file = "resources/js/src/views/expense/addExpenseType.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/src/views/income/addIncomeType.vue?vue&type=script&lang=js&":
-/*!**********************************************************************************!*\
-  !*** ./resources/js/src/views/income/addIncomeType.vue?vue&type=script&lang=js& ***!
-  \**********************************************************************************/
+/***/ "./resources/js/src/views/expense/addExpenseType.vue?vue&type=script&lang=js&":
+/*!************************************************************************************!*\
+  !*** ./resources/js/src/views/expense/addExpenseType.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_addIncomeType_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./addIncomeType.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/income/addIncomeType.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_addIncomeType_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_addExpenseType_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./addExpenseType.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/expense/addExpenseType.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_addExpenseType_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/src/views/income/addIncomeType.vue?vue&type=template&id=4558a728&scoped=true&":
-/*!****************************************************************************************************!*\
-  !*** ./resources/js/src/views/income/addIncomeType.vue?vue&type=template&id=4558a728&scoped=true& ***!
-  \****************************************************************************************************/
+/***/ "./resources/js/src/views/expense/addExpenseType.vue?vue&type=template&id=035f3a72&scoped=true&":
+/*!******************************************************************************************************!*\
+  !*** ./resources/js/src/views/expense/addExpenseType.vue?vue&type=template&id=035f3a72&scoped=true& ***!
+  \******************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_addIncomeType_vue_vue_type_template_id_4558a728_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./addIncomeType.vue?vue&type=template&id=4558a728&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/income/addIncomeType.vue?vue&type=template&id=4558a728&scoped=true&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_addIncomeType_vue_vue_type_template_id_4558a728_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_addExpenseType_vue_vue_type_template_id_035f3a72_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./addExpenseType.vue?vue&type=template&id=035f3a72&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/expense/addExpenseType.vue?vue&type=template&id=035f3a72&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_addExpenseType_vue_vue_type_template_id_035f3a72_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_addIncomeType_vue_vue_type_template_id_4558a728_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_addExpenseType_vue_vue_type_template_id_035f3a72_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
 /***/ }),
 
-/***/ "./resources/js/src/views/income/editIncome.vue":
-/*!******************************************************!*\
-  !*** ./resources/js/src/views/income/editIncome.vue ***!
-  \******************************************************/
+/***/ "./resources/js/src/views/expense/editIncome.vue":
+/*!*******************************************************!*\
+  !*** ./resources/js/src/views/expense/editIncome.vue ***!
+  \*******************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _editIncome_vue_vue_type_template_id_3fa45a5f_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./editIncome.vue?vue&type=template&id=3fa45a5f&scoped=true& */ "./resources/js/src/views/income/editIncome.vue?vue&type=template&id=3fa45a5f&scoped=true&");
-/* harmony import */ var _editIncome_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./editIncome.vue?vue&type=script&lang=js& */ "./resources/js/src/views/income/editIncome.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _editIncome_vue_vue_type_style_index_0_id_3fa45a5f_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./editIncome.vue?vue&type=style&index=0&id=3fa45a5f&scoped=true&lang=css& */ "./resources/js/src/views/income/editIncome.vue?vue&type=style&index=0&id=3fa45a5f&scoped=true&lang=css&");
+/* harmony import */ var _editIncome_vue_vue_type_template_id_34e791f4_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./editIncome.vue?vue&type=template&id=34e791f4&scoped=true& */ "./resources/js/src/views/expense/editIncome.vue?vue&type=template&id=34e791f4&scoped=true&");
+/* harmony import */ var _editIncome_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./editIncome.vue?vue&type=script&lang=js& */ "./resources/js/src/views/expense/editIncome.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _editIncome_vue_vue_type_style_index_0_id_34e791f4_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./editIncome.vue?vue&type=style&index=0&id=34e791f4&scoped=true&lang=css& */ "./resources/js/src/views/expense/editIncome.vue?vue&type=style&index=0&id=34e791f4&scoped=true&lang=css&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -2406,65 +2408,65 @@ __webpack_require__.r(__webpack_exports__);
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _editIncome_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _editIncome_vue_vue_type_template_id_3fa45a5f_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _editIncome_vue_vue_type_template_id_3fa45a5f_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _editIncome_vue_vue_type_template_id_34e791f4_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _editIncome_vue_vue_type_template_id_34e791f4_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  "3fa45a5f",
+  "34e791f4",
   null
   
 )
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/src/views/income/editIncome.vue"
+component.options.__file = "resources/js/src/views/expense/editIncome.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/src/views/income/editIncome.vue?vue&type=script&lang=js&":
-/*!*******************************************************************************!*\
-  !*** ./resources/js/src/views/income/editIncome.vue?vue&type=script&lang=js& ***!
-  \*******************************************************************************/
+/***/ "./resources/js/src/views/expense/editIncome.vue?vue&type=script&lang=js&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/src/views/expense/editIncome.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_editIncome_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./editIncome.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/income/editIncome.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_editIncome_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./editIncome.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/expense/editIncome.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_editIncome_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/src/views/income/editIncome.vue?vue&type=style&index=0&id=3fa45a5f&scoped=true&lang=css&":
-/*!***************************************************************************************************************!*\
-  !*** ./resources/js/src/views/income/editIncome.vue?vue&type=style&index=0&id=3fa45a5f&scoped=true&lang=css& ***!
-  \***************************************************************************************************************/
+/***/ "./resources/js/src/views/expense/editIncome.vue?vue&type=style&index=0&id=34e791f4&scoped=true&lang=css&":
+/*!****************************************************************************************************************!*\
+  !*** ./resources/js/src/views/expense/editIncome.vue?vue&type=style&index=0&id=34e791f4&scoped=true&lang=css& ***!
+  \****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_editIncome_vue_vue_type_style_index_0_id_3fa45a5f_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/style-loader!../../../../../node_modules/css-loader??ref--7-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--7-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./editIncome.vue?vue&type=style&index=0&id=3fa45a5f&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/income/editIncome.vue?vue&type=style&index=0&id=3fa45a5f&scoped=true&lang=css&");
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_editIncome_vue_vue_type_style_index_0_id_3fa45a5f_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_editIncome_vue_vue_type_style_index_0_id_3fa45a5f_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_editIncome_vue_vue_type_style_index_0_id_3fa45a5f_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_editIncome_vue_vue_type_style_index_0_id_3fa45a5f_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_editIncome_vue_vue_type_style_index_0_id_3fa45a5f_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_editIncome_vue_vue_type_style_index_0_id_34e791f4_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/style-loader!../../../../../node_modules/css-loader??ref--7-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--7-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./editIncome.vue?vue&type=style&index=0&id=34e791f4&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/expense/editIncome.vue?vue&type=style&index=0&id=34e791f4&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_editIncome_vue_vue_type_style_index_0_id_34e791f4_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_editIncome_vue_vue_type_style_index_0_id_34e791f4_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_editIncome_vue_vue_type_style_index_0_id_34e791f4_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_editIncome_vue_vue_type_style_index_0_id_34e791f4_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_editIncome_vue_vue_type_style_index_0_id_34e791f4_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
-/***/ "./resources/js/src/views/income/editIncome.vue?vue&type=template&id=3fa45a5f&scoped=true&":
-/*!*************************************************************************************************!*\
-  !*** ./resources/js/src/views/income/editIncome.vue?vue&type=template&id=3fa45a5f&scoped=true& ***!
-  \*************************************************************************************************/
+/***/ "./resources/js/src/views/expense/editIncome.vue?vue&type=template&id=34e791f4&scoped=true&":
+/*!**************************************************************************************************!*\
+  !*** ./resources/js/src/views/expense/editIncome.vue?vue&type=template&id=34e791f4&scoped=true& ***!
+  \**************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_editIncome_vue_vue_type_template_id_3fa45a5f_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./editIncome.vue?vue&type=template&id=3fa45a5f&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/income/editIncome.vue?vue&type=template&id=3fa45a5f&scoped=true&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_editIncome_vue_vue_type_template_id_3fa45a5f_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_editIncome_vue_vue_type_template_id_34e791f4_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./editIncome.vue?vue&type=template&id=34e791f4&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/expense/editIncome.vue?vue&type=template&id=34e791f4&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_editIncome_vue_vue_type_template_id_34e791f4_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_editIncome_vue_vue_type_template_id_3fa45a5f_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_editIncome_vue_vue_type_template_id_34e791f4_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

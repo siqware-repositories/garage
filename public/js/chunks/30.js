@@ -414,15 +414,39 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       var self = this;
       var total = 0;
       self.filtered_range_date.forEach(function (item, index) {
-        item.invoice_detail.forEach(function (el, index) {
-          if (el.inventory_type === 'bundle') {
-            total = parseFloat(item.purchase_amount);
-          } else {
-            if (el.inventory_type !== 'purchase_only') {
+        var _iteratorNormalCompletion2 = true;
+        var _didIteratorError2 = false;
+        var _iteratorError2 = undefined;
+
+        try {
+          for (var _iterator2 = item.invoice_detail.entries()[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+            var _step2$value = _slicedToArray(_step2.value, 2),
+                _index2 = _step2$value[0],
+                el = _step2$value[1];
+
+            if (el.inventory_type === 'bundle') {
+              total += parseFloat(item.purchase_amount);
+              break;
+            }
+
+            if (el.inventory_type !== 'purchase_only' && el.inventory_type !== 'service') {
               total += parseFloat(el.purchase * el.qty);
             }
           }
-        });
+        } catch (err) {
+          _didIteratorError2 = true;
+          _iteratorError2 = err;
+        } finally {
+          try {
+            if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
+              _iterator2.return();
+            }
+          } finally {
+            if (_didIteratorError2) {
+              throw _iteratorError2;
+            }
+          }
+        }
       });
       return total;
     },

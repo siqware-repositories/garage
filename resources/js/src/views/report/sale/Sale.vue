@@ -209,15 +209,15 @@
                 let self = this;
                 let total = 0;
                 self.filtered_range_date.forEach(function (item,index) {
-                    item.invoice_detail.forEach(function (el,index) {
+                    for (const [index, el] of item.invoice_detail.entries()) {
                         if (el.inventory_type === 'bundle'){
-                            total = parseFloat(item.purchase_amount);
-                        } else {
-                            if (el.inventory_type !=='purchase_only') {
-                                total += parseFloat(el.purchase*el.qty)
-                            }
+                            total += parseFloat(item.purchase_amount);
+                            break;
                         }
-                    })
+                        if (el.inventory_type !=='purchase_only' && el.inventory_type !=='service') {
+                            total += parseFloat(el.purchase*el.qty)
+                        }
+                    }
                 });
                 return total;
             },
