@@ -205,6 +205,7 @@
                 });
                 return total;
             },
+            //invoice
             total_invoice_with_purchase(){
                 let self = this;
                 let total = 0;
