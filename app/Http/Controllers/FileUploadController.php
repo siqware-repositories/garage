@@ -13,9 +13,7 @@ class FileUploadController extends Controller
         $img = Image::make($file)->encode('jpg',90);
         $name = uniqid().'-'.time() . '.jpg';
         $store = Storage::disk('public')->put($name, $img);
-        if ($store){
-            return Storage::url($name);
-        }
+        return Storage::url($name);
     }
     public function upload_thumb(Request $request){
         $file = $request->file('file');

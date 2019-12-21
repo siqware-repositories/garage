@@ -35,6 +35,7 @@ Route::resource('/income_type','IncomeTypeController');
 Route::resource('/expense_type','ExpenseTypeController');
 Route::resource('/income','IncomeController');
 Route::resource('/expense','ExpenseController');
+Route::resource('/investment','InvestmentController');
 Route::post('/auth-change-password/{id}','AuthController@change_password')->name('auth.change.password');
 Route::post('/auth-register','AuthController@register')->name('auth.register');
 Route::post('/auth-login','AuthController@login')->name('auth.login');

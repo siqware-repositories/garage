@@ -261,6 +261,15 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -283,6 +292,16 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     };
   },
   computed: {
+    //purchase
+    all_investments: function all_investments() {
+      return this.$store.getters.all_investment;
+    },
+    //total investment
+    total_investment: function total_investment() {
+      return this.all_investments.reduce(function (total, item) {
+        return total + parseFloat(item.balance);
+      }, 0);
+    },
     //purchase
     all_purchases: function all_purchases() {
       return this.$store.getters.all_purchase;
@@ -456,8 +475,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
   },
   methods: {
     //fetch purchase
-    fetchReportClosePayroll: function () {
-      var _fetchReportClosePayroll = _asyncToGenerator(
+    fetchInvestment: function () {
+      var _fetchInvestment = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
@@ -465,7 +484,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return this.$store.dispatch('fetchReportClosePayroll');
+                return this.$store.dispatch('fetchInvestment');
 
               case 2:
               case "end":
@@ -473,6 +492,32 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
             }
           }
         }, _callee, this);
+      }));
+
+      function fetchInvestment() {
+        return _fetchInvestment.apply(this, arguments);
+      }
+
+      return fetchInvestment;
+    }(),
+    //fetch purchase
+    fetchReportClosePayroll: function () {
+      var _fetchReportClosePayroll = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return this.$store.dispatch('fetchReportClosePayroll');
+
+              case 2:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this);
       }));
 
       function fetchReportClosePayroll() {
@@ -485,20 +530,20 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     fetchPurchase: function () {
       var _fetchPurchase = _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
           while (1) {
-            switch (_context2.prev = _context2.next) {
+            switch (_context3.prev = _context3.next) {
               case 0:
-                _context2.next = 2;
+                _context3.next = 2;
                 return this.$store.dispatch('fetchPurchase');
 
               case 2:
               case "end":
-                return _context2.stop();
+                return _context3.stop();
             }
           }
-        }, _callee2, this);
+        }, _callee3, this);
       }));
 
       function fetchPurchase() {
@@ -511,20 +556,20 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     fetchInvoice: function () {
       var _fetchInvoice = _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
           while (1) {
-            switch (_context3.prev = _context3.next) {
+            switch (_context4.prev = _context4.next) {
               case 0:
-                _context3.next = 2;
+                _context4.next = 2;
                 return this.$store.dispatch('fetchInvoice');
 
               case 2:
               case "end":
-                return _context3.stop();
+                return _context4.stop();
             }
           }
-        }, _callee3, this);
+        }, _callee4, this);
       }));
 
       function fetchInvoice() {
@@ -550,20 +595,20 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     fetchExpense: function () {
       var _fetchExpense = _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
           while (1) {
-            switch (_context4.prev = _context4.next) {
+            switch (_context5.prev = _context5.next) {
               case 0:
-                _context4.next = 2;
+                _context5.next = 2;
                 return this.$store.dispatch('fetchExpense');
 
               case 2:
               case "end":
-                return _context4.stop();
+                return _context5.stop();
             }
           }
-        }, _callee4, this);
+        }, _callee5, this);
       }));
 
       function fetchExpense() {
@@ -582,20 +627,20 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     fetchIncome: function () {
       var _fetchIncome = _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee6$(_context6) {
           while (1) {
-            switch (_context5.prev = _context5.next) {
+            switch (_context6.prev = _context6.next) {
               case 0:
-                _context5.next = 2;
+                _context6.next = 2;
                 return this.$store.dispatch('fetchIncome');
 
               case 2:
               case "end":
-                return _context5.stop();
+                return _context6.stop();
             }
           }
-        }, _callee5, this);
+        }, _callee6, this);
       }));
 
       function fetchIncome() {
@@ -608,36 +653,40 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
   created: function () {
     var _created = _asyncToGenerator(
     /*#__PURE__*/
-    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6() {
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee6$(_context6) {
+    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee7() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee7$(_context7) {
         while (1) {
-          switch (_context6.prev = _context6.next) {
+          switch (_context7.prev = _context7.next) {
             case 0:
-              _context6.next = 2;
-              return this.fetchInvoice();
+              _context7.next = 2;
+              return this.fetchInvestment();
 
             case 2:
-              _context6.next = 4;
-              return this.fetchPurchase();
+              _context7.next = 4;
+              return this.fetchInvoice();
 
             case 4:
-              _context6.next = 6;
-              return this.fetchExpense();
+              _context7.next = 6;
+              return this.fetchPurchase();
 
             case 6:
-              _context6.next = 8;
-              return this.fetchIncome();
+              _context7.next = 8;
+              return this.fetchExpense();
 
             case 8:
-              _context6.next = 10;
-              return this.fetchReportClosePayroll();
+              _context7.next = 10;
+              return this.fetchIncome();
 
             case 10:
+              _context7.next = 12;
+              return this.fetchReportClosePayroll();
+
+            case 12:
             case "end":
-              return _context6.stop();
+              return _context7.stop();
           }
         }
-      }, _callee6, this);
+      }, _callee7, this);
     }));
 
     function created() {
@@ -975,8 +1024,27 @@ var render = function() {
               hideChart: "",
               icon: "DollarSignIcon",
               "icon-right": "",
+              statistic: _vm.$formatter.format(_vm.total_investment),
+              statisticTitle: "ប្រាក់វិនិយោគ"
+            }
+          })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "vx-col md:w-1/3 w-full mt-base" },
+        [
+          _c("statistics-card-line", {
+            attrs: {
+              color: "success",
+              hideChart: "",
+              icon: "DollarSignIcon",
+              "icon-right": "",
               statistic: _vm.$formatter.format(
                 _vm._total_income +
+                  _vm.total_investment +
                   (_vm.total_invoice - _vm.total_due_balance_invoice) -
                   (_vm._total_expense +
                     _vm._total_close_payroll +

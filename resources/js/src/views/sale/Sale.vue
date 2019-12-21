@@ -7,6 +7,7 @@
             <vs-tab label="Received">
                 <div class="flex btn-group">
                     <vs-button v-if="selected_received.length===1&&selected_received[0].due_balance>0" @click="$refs.addPayment.show(selected_received[0])" color="warning" type="relief" icon-pack="feather" icon="icon-dollar-sign">Add Payment</vs-button>
+                    <vs-button color="success" v-if="selected_received.length===1" @click="$refs.printInvoice.show(selected_received[0])" type="relief" icon-pack="feather" icon="icon-printer">បោះពុម្ភ</vs-button>
                     <vs-button v-if="selected_received.length===1" @click="$refs.showInvoice.show(selected_received[0])" type="relief" icon-pack="feather" icon="icon-eye">បង្ហាញ</vs-button>
                 </div>
                 <vs-table multiple v-model="selected_received" pagination max-items="10" search :data="all_invoice_received">
@@ -55,6 +56,7 @@
                 <div class="flex btn-group">
                     <vs-button v-if="selected_pending.length===1&&selected_pending[0].due_balance>0" @click="$refs.addPaymentPending.show(selected_pending[0])" type="relief" icon-pack="feather" icon="icon-dollar-sign">Add Payment</vs-button>
                     <vs-button v-if="selected_pending.length===1" @click="$refs.showInvoice.show(selected_pending[0])" type="relief" icon-pack="feather" icon="icon-eye">បង្ហាញ</vs-button>
+                    <vs-button v-if="selected_pending.length===1" @click="$refs.printInvoice.show(selected_pending[0])" type="relief" icon-pack="feather" icon="icon-printer">បោះពុម្ភ</vs-button>
                     <vs-button v-if="selected_pending.length===1" @click="$refs.editInvoice.show(selected_pending[0])" color="warning" type="relief" icon-pack="feather" icon="icon-edit">កែប្រែ</vs-button>
                     <vs-button v-if="selected_pending.length" @click="destroyInvoice" color="danger" type="relief" icon-pack="feather" icon="icon-trash-2">លុប</vs-button>
                 </div>
@@ -102,6 +104,7 @@
             </vs-tab>
         </vs-tabs>
         <show-invoice ref="showInvoice"></show-invoice>
+        <print-invoice ref="printInvoice"></print-invoice>
         <add-invoice ref="addInvoice"></add-invoice>
         <edit-invoice @finished="selected_pending=[]" ref="editInvoice"></edit-invoice>
         <edit-product @finished="selected_received = []" ref="editProduct"></edit-product>
@@ -114,9 +117,10 @@
     import ShowInvoice from "./showInvoice";
     import AddInvoice from "./addInvoice";
     import EditInvoice from "./editInvoice";
+    import PrintInvoice from "./printInvoice";
     export default {
         name: "Sale",
-        components: {EditInvoice, AddInvoice, ShowInvoice, AddPayment, EditProduct},
+        components: {PrintInvoice, EditInvoice, AddInvoice, ShowInvoice, AddPayment, EditProduct},
         data(){
             return{
                 selected_pending:[],

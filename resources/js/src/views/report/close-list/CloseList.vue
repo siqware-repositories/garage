@@ -69,7 +69,16 @@
                         hideChart
                         icon="DollarSignIcon"
                         icon-right
-                        :statistic="$formatter.format((_total_income+(total_invoice-total_due_balance_invoice))-(_total_expense+_total_close_payroll+(total_purchase-total_due_balance_purchase)))"
+                        :statistic="$formatter.format(total_investment)"
+                        statisticTitle="ប្រាក់វិនិយោគ"/>
+            </div>
+            <div class="vx-col md:w-1/3 w-full mt-base">
+                <statistics-card-line
+                        color="success"
+                        hideChart
+                        icon="DollarSignIcon"
+                        icon-right
+                        :statistic="$formatter.format((_total_income+total_investment+(total_invoice-total_due_balance_invoice))-(_total_expense+_total_close_payroll+(total_purchase-total_due_balance_purchase)))"
                         statisticTitle="សរុបបញ្ជីរួម"/>
             </div>
         </div>
@@ -100,6 +109,16 @@
             }
         },
         computed: {
+            //purchase
+            all_investments(){
+                return this.$store.getters.all_investment
+            },
+            //total investment
+            total_investment() {
+                return this.all_investments.reduce(function (total, item) {
+                    return total + parseFloat(item.balance)
+                }, 0)
+            },
             //purchase
             all_purchases(){
                 return this.$store.getters.all_purchase
@@ -249,6 +268,10 @@
         },
         methods: {
             //fetch purchase
+            async fetchInvestment(){
+                await this.$store.dispatch('fetchInvestment')
+            },
+            //fetch purchase
             async fetchReportClosePayroll(){
                 await this.$store.dispatch('fetchReportClosePayroll')
             },
@@ -289,6 +312,7 @@
             },
         },
         async created() {
+            await this.fetchInvestment();
             await this.fetchInvoice();
             await this.fetchPurchase();
             await this.fetchExpense();
