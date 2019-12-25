@@ -125,6 +125,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -199,6 +204,9 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   computed: {
+    all_product: function all_product() {
+      return this.$store.getters.all_product;
+    },
     all_units: function all_units() {
       return this.$store.getters.all_unit;
     },
@@ -342,7 +350,9 @@ var render = function() {
                   "div",
                   { staticClass: "vx-col w-full" },
                   [
-                    _c("vs-input", {
+                    _c("label", [_vm._v("ឈ្មោះ")]),
+                    _vm._v(" "),
+                    _c("vue-instant", {
                       directives: [
                         {
                           name: "validate",
@@ -351,8 +361,13 @@ var render = function() {
                           expression: "'required'"
                         }
                       ],
-                      staticClass: "w-full",
-                      attrs: { "label-placeholder": "ឈ្មោះ", name: "name" },
+                      attrs: {
+                        id: "styles",
+                        "suggestion-attribute": "name",
+                        suggestions: _vm.all_product,
+                        type: "google",
+                        name: "name"
+                      },
                       model: {
                         value: _vm.product.name,
                         callback: function($$v) {

@@ -9,11 +9,13 @@ const getters = {
 };
 const actions = {
     async fetchCategory({commit}){
-        try {
-            const res = await axios.get(route('category.index'));
-            commit('SET_CATEGORY',res.data)
-        }catch (e) {
-            return false
+        if (!state.category.length) {
+            try {
+                const res = await axios.get(route('category.index'));
+                commit('SET_CATEGORY', res.data)
+            } catch (e) {
+                return false
+            }
         }
     },
     async storeCategory({commit},data){

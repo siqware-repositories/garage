@@ -158,7 +158,6 @@
         components: {AddCustomer, AddBrand, AddCategory, AddUnit,flatPickr,'v-select': vSelect,},
         data() {
             return {
-                checkBox1:false,
                 invoice:{
                     is_bundle:false,
                     purchase_amount:0,
@@ -255,7 +254,7 @@
                     return parseInt(x.id) === parseInt(id.id);
                 });
                 self.invoice.items[index].name = selected[0].product.name;
-                self.invoice.items[index].inventory_type = selected[0].product.inventory_type;
+                self.invoice.items[index].inventory_type = selected[0].inventory_type;
                 self.invoice.items[index].remain_qty = selected[0].remain_qty;
                 self.invoice.items[index].description = selected[0].product.description;
                 self.invoice.items[index].sale_price = selected[0].sale;
@@ -307,6 +306,9 @@
             },
             resetField() {
                 this.invoice = {
+                    is_bundle:false,
+                    purchase_amount:0,
+                    sale_amount:0,
                     customer:null,
                     user_id:this.$store.state.AppActiveUser.uid,
                     invoice_date:null,
@@ -325,6 +327,10 @@
                 this.product.image = (res.path)
             }
         },
+        async created() {
+            let self = this;
+            await self.$store.dispatch('fetchPurchaseDetail')
+        }
     }
 </script>
 

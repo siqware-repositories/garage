@@ -36,7 +36,7 @@ import store from './store/store'
 
 // Vuejs - Vue wrapper for hammerjs
 import { VueHammer } from 'vue2-hammer'
-Vue.use(VueHammer)
+Vue.use(VueHammer);
 
 
 // PrismJS
@@ -73,6 +73,13 @@ Vue.prototype.$formatter = new Intl.NumberFormat('en-US', {
 import moment from 'moment';
 Vue.prototype.$moment = moment;
 Vue.config.productionTip = false;
+//auto suggestion
+import VueBootstrapTypeahead from 'vue-bootstrap-typeahead'
+// Global registration
+Vue.component('vue-bootstrap-typeahead', VueBootstrapTypeahead);
+import VueInstant from 'vue-instant/dist/vue-instant.common'
+Vue.use(VueInstant);
+
 new Vue({
     router,
     store,

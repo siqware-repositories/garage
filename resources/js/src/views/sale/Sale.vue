@@ -162,39 +162,7 @@
                 })
             }
         },
-        async created(){
-            await this.fetchCustomer();
-            await this.fetchProduct();
-            await this.fetchSupplier();
-            await this.fetchPurchase();
-            await this.fetchPurchaseDetail();
-            await this.fetchInvoice();
-        },
         methods:{
-            //fetch purchase
-            async fetchInvoice(){
-                await this.$store.dispatch('fetchInvoice')
-            },
-            //fetch purchase
-            async fetchCustomer(){
-                await this.$store.dispatch('fetchCustomer')
-            },
-            //fetch purchase
-            async fetchPurchaseDetail(){
-                await this.$store.dispatch('fetchPurchaseDetail')
-            },
-            //fetch purchase
-            async fetchPurchase(){
-                await this.$store.dispatch('fetchPurchase')
-            },
-            //fetch product
-            async fetchProduct(){
-                await this.$store.dispatch('fetchProduct')
-            },
-            //fetch supplier
-            async fetchSupplier(){
-                await this.$store.dispatch('fetchSupplier')
-            },
             //destroy
             async destroyInvoice(){
                 let self = this;

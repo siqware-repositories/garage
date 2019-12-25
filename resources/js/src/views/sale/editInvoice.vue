@@ -249,7 +249,7 @@
                     return parseInt(x.id) === parseInt(id.id);
                 });
                 self.invoice.items[index].name = selected[0].product.name;
-                self.invoice.items[index].inventory_type = selected[0].product.inventory_type;
+                self.invoice.items[index].inventory_type = selected[0].inventory_type;
                 self.invoice.items[index].remain_qty = selected[0].remain_qty;
                 self.invoice.items[index].description = selected[0].product.description;
                 self.invoice.items[index].sale_price = selected[0].sale;
@@ -319,6 +319,10 @@
                 this.product.image = (res.path)
             }
         },
+        async created() {
+            let self = this;
+            await self.$store.dispatch('fetchPurchaseDetail')
+        }
     }
 </script>
 

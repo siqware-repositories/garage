@@ -84,10 +84,6 @@
                 return this.$store.getters.all_expense;
             },
         },
-        async created(){
-            await this.fetchExpenseType();
-            await this.fetchExpense();
-        },
         methods:{
             confirmDelete() {
                 this.$vs.dialog({
@@ -125,14 +121,6 @@
                     return total+parseFloat(item.balance)
                 },0)
             },
-            //fetch income
-            async fetchExpense(){
-                await this.$store.dispatch('fetchExpense')
-            },
-            //fetch type
-            async fetchExpenseType(){
-                await this.$store.dispatch('fetchExpenseType')
-            }
         }
     }
 </script>

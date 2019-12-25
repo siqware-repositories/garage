@@ -267,22 +267,6 @@
             }
         },
         methods: {
-            //fetch purchase
-            async fetchInvestment(){
-                await this.$store.dispatch('fetchInvestment')
-            },
-            //fetch purchase
-            async fetchReportClosePayroll(){
-                await this.$store.dispatch('fetchReportClosePayroll')
-            },
-            //fetch purchase
-            async fetchPurchase(){
-                await this.$store.dispatch('fetchPurchase')
-            },
-            //fetch purchase
-            async fetchInvoice(){
-                await this.$store.dispatch('fetchInvoice')
-            },
             //date range
             dateRange(value) {
                 this.date_range = `${this.$moment(value.from).format('YYYY-MM-DD')} ~ ${this.$moment(value.to).format('YYYY-MM-DD')}`;
@@ -296,28 +280,12 @@
                     return total+parseFloat(item.balance)
                 },0)
             },
-            //fetch expense
-            async fetchExpense(){
-                await this.$store.dispatch('fetchExpense')
-            },
             //calc total income
             total_income(data){
                 return data.reduce(function (total,item) {
                     return total+parseFloat(item.balance)
                 },0)
             },
-            //fetch income
-            async fetchIncome(){
-                await this.$store.dispatch('fetchIncome')
-            },
-        },
-        async created() {
-            await this.fetchInvestment();
-            await this.fetchInvoice();
-            await this.fetchPurchase();
-            await this.fetchExpense();
-            await this.fetchIncome();
-            await this.fetchReportClosePayroll();
         }
     }
 </script>

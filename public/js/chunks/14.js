@@ -108,35 +108,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return this.$store.getters.all_expense;
     }
   },
-  created: function () {
-    var _created = _asyncToGenerator(
-    /*#__PURE__*/
-    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _context.next = 2;
-              return this.fetchExpenseType();
-
-            case 2:
-              _context.next = 4;
-              return this.fetchExpense();
-
-            case 4:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee, this);
-    }));
-
-    function created() {
-      return _created.apply(this, arguments);
-    }
-
-    return created;
-  }(),
   methods: {
     confirmDelete: function confirmDelete() {
       this.$vs.dialog({
@@ -151,11 +122,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     destroyExpense: function () {
       var _destroyExpense = _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
         var self, promises;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
-            switch (_context3.prev = _context3.next) {
+            switch (_context2.prev = _context2.next) {
               case 0:
                 self = this;
                 self.$vs.loading();
@@ -164,27 +135,27 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 function () {
                   var _ref = _asyncToGenerator(
                   /*#__PURE__*/
-                  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(data) {
-                    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+                  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(data) {
+                    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
                       while (1) {
-                        switch (_context2.prev = _context2.next) {
+                        switch (_context.prev = _context.next) {
                           case 0:
-                            _context2.next = 2;
+                            _context.next = 2;
                             return self.$store.dispatch('destroyExpense', data.id);
 
                           case 2:
                           case "end":
-                            return _context2.stop();
+                            return _context.stop();
                         }
                       }
-                    }, _callee2);
+                    }, _callee);
                   }));
 
                   return function (_x) {
                     return _ref.apply(this, arguments);
                   };
                 }());
-                _context3.next = 5;
+                _context2.next = 5;
                 return Promise.all(promises).then(function () {
                   self.$vs.notify({
                     time: 4000,
@@ -201,10 +172,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 5:
               case "end":
-                return _context3.stop();
+                return _context2.stop();
             }
           }
-        }, _callee3, this);
+        }, _callee2, this);
       }));
 
       function destroyExpense() {
@@ -218,59 +189,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return data.reduce(function (total, item) {
         return total + parseFloat(item.balance);
       }, 0);
-    },
-    //fetch income
-    fetchExpense: function () {
-      var _fetchExpense = _asyncToGenerator(
-      /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
-          while (1) {
-            switch (_context4.prev = _context4.next) {
-              case 0:
-                _context4.next = 2;
-                return this.$store.dispatch('fetchExpense');
-
-              case 2:
-              case "end":
-                return _context4.stop();
-            }
-          }
-        }, _callee4, this);
-      }));
-
-      function fetchExpense() {
-        return _fetchExpense.apply(this, arguments);
-      }
-
-      return fetchExpense;
-    }(),
-    //fetch type
-    fetchExpenseType: function () {
-      var _fetchExpenseType = _asyncToGenerator(
-      /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
-          while (1) {
-            switch (_context5.prev = _context5.next) {
-              case 0:
-                _context5.next = 2;
-                return this.$store.dispatch('fetchExpenseType');
-
-              case 2:
-              case "end":
-                return _context5.stop();
-            }
-          }
-        }, _callee5, this);
-      }));
-
-      function fetchExpenseType() {
-        return _fetchExpenseType.apply(this, arguments);
-      }
-
-      return fetchExpenseType;
-    }()
+    }
   }
 });
 

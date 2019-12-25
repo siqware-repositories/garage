@@ -51,7 +51,7 @@
             },
             //fetch about
             async fetchAbout() {
-                await this.$store.dispatch('fetchAbout');
+
             },
             //edit
             editAbout(id){

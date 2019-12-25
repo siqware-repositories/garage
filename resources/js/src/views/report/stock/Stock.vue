@@ -188,17 +188,11 @@
             }
         },
         methods: {
-            async fetchReportStock() {
-                await this.$store.dispatch('fetchReportStock')
-            },
             sum_qty(data) {
                 return data.reduce(function (total, item) {
                     return total + parseFloat(item.remain_qty)
                 }, 0)
             }
-        },
-        async created() {
-            await this.fetchReportStock();
         }
     }
 </script>

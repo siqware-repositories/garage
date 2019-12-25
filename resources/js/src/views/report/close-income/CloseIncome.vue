@@ -82,10 +82,6 @@
                     return total+parseFloat(item.balance)
                 },0)
             },
-            //fetch income
-            async fetchIncome(){
-                await this.$store.dispatch('fetchIncome')
-            },
             //date range
             dateRange(value) {
                 this.date_range = `${this.$moment(value.from).format('YYYY-MM-DD')} ~ ${this.$moment(value.to).format('YYYY-MM-DD')}`;
@@ -93,9 +89,6 @@
                 this.date_picker.start = this.$moment(value.from).format('YYYY-MM-DD');
                 this.date_picker.end = this.$moment(value.to).format('YYYY-MM-DD');
             }
-        },
-        async created() {
-            await this.fetchIncome();
         }
     }
 </script>

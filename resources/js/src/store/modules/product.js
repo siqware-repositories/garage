@@ -9,11 +9,13 @@ const getters = {
 };
 const actions = {
     async fetchProduct({commit}){
-        try {
-            const res = await axios.get(route('product.index'));
-            commit('SET_PRODUCT',res.data)
-        }catch (e) {
-            return false
+        if (!state.product.length) {
+            try {
+                const res = await axios.get(route('product.index'));
+                commit('SET_PRODUCT', res.data)
+            } catch (e) {
+                return false
+            }
         }
     },
     async storeProduct({commit}, data){

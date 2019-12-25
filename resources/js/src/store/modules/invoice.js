@@ -15,17 +15,19 @@ const actions = {
     async fetchPurchaseDetail({commit}){
         try {
             const res = await axios.get(route('purchase-detail.index'));
-            commit('SET_PURCHASE_DETAIL',res.data)
-        }catch (e) {
+            commit('SET_PURCHASE_DETAIL', res.data)
+        } catch (e) {
             return false
         }
     },
     async fetchInvoice({commit}){
-        try {
-            const res = await axios.get(route('invoice.index'));
-            commit('SET_INVOICE',res.data)
-        }catch (e) {
-            return false
+        if (!state.invoice.length) {
+            try {
+                const res = await axios.get(route('invoice.index'));
+                commit('SET_INVOICE', res.data)
+            } catch (e) {
+                return false
+            }
         }
     },
     async storeInvoice({commit},data){

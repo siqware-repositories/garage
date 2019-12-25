@@ -85,10 +85,6 @@
                     }
                 });
             },
-            //fetch purchase
-            async fetchPurchase(){
-                await this.$store.dispatch('fetchPurchase')
-            },
         },
         data(){
             return{

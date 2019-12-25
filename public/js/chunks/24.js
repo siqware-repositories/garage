@@ -163,18 +163,10 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _purchase_showPurchase__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../purchase/showPurchase */ "./resources/js/src/views/purchase/showPurchase.vue");
-/* harmony import */ var _components_statistics_cards_StatisticsCardLine_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/statistics-cards/StatisticsCardLine.vue */ "./resources/js/src/components/statistics-cards/StatisticsCardLine.vue");
-/* harmony import */ var vue_money_format__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-money-format */ "./node_modules/vue-money-format/src/main.js");
-/* harmony import */ var _sale_showInvoice__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../sale/showInvoice */ "./resources/js/src/views/sale/showInvoice.vue");
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
+/* harmony import */ var _purchase_showPurchase__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../purchase/showPurchase */ "./resources/js/src/views/purchase/showPurchase.vue");
+/* harmony import */ var _components_statistics_cards_StatisticsCardLine_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/components/statistics-cards/StatisticsCardLine.vue */ "./resources/js/src/components/statistics-cards/StatisticsCardLine.vue");
+/* harmony import */ var vue_money_format__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-money-format */ "./node_modules/vue-money-format/src/main.js");
+/* harmony import */ var _sale_showInvoice__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../sale/showInvoice */ "./resources/js/src/views/sale/showInvoice.vue");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -226,10 +218,10 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "CloseSell",
   components: {
-    ShowInvoice: _sale_showInvoice__WEBPACK_IMPORTED_MODULE_4__["default"],
-    ShowPurchase: _purchase_showPurchase__WEBPACK_IMPORTED_MODULE_1__["default"],
-    'money-format': vue_money_format__WEBPACK_IMPORTED_MODULE_3__["default"],
-    StatisticsCardLine: _components_statistics_cards_StatisticsCardLine_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+    ShowInvoice: _sale_showInvoice__WEBPACK_IMPORTED_MODULE_3__["default"],
+    ShowPurchase: _purchase_showPurchase__WEBPACK_IMPORTED_MODULE_0__["default"],
+    'money-format': vue_money_format__WEBPACK_IMPORTED_MODULE_2__["default"],
+    StatisticsCardLine: _components_statistics_cards_StatisticsCardLine_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   data: function data() {
     return {
@@ -324,32 +316,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     }
   },
   methods: {
-    //fetch purchase
-    fetchInvoice: function () {
-      var _fetchInvoice = _asyncToGenerator(
-      /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.next = 2;
-                return this.$store.dispatch('fetchInvoice');
-
-              case 2:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee, this);
-      }));
-
-      function fetchInvoice() {
-        return _fetchInvoice.apply(this, arguments);
-      }
-
-      return fetchInvoice;
-    }(),
     //date range
     dateRange: function dateRange(value) {
       this.date_range = "".concat(this.$moment(value.from).format('YYYY-MM-DD'), " ~ ").concat(this.$moment(value.to).format('YYYY-MM-DD'));
@@ -357,32 +323,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       this.date_picker.start = this.$moment(value.from).format('YYYY-MM-DD');
       this.date_picker.end = this.$moment(value.to).format('YYYY-MM-DD');
     }
-  },
-  created: function () {
-    var _created = _asyncToGenerator(
-    /*#__PURE__*/
-    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
-        while (1) {
-          switch (_context2.prev = _context2.next) {
-            case 0:
-              _context2.next = 2;
-              return this.fetchInvoice();
-
-            case 2:
-            case "end":
-              return _context2.stop();
-          }
-        }
-      }, _callee2, this);
-    }));
-
-    function created() {
-      return _created.apply(this, arguments);
-    }
-
-    return created;
-  }()
+  }
 });
 
 /***/ }),

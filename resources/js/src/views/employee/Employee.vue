@@ -127,11 +127,6 @@
                 return this.$store.getters.all_payroll;
             }
         },
-        async created() {
-            await this.fetchEmployee();
-            await this.fetchUser();
-            await this.fetchPayroll();
-        },
         methods: {
             confirmDelete() {
                 this.$vs.dialog({
@@ -150,18 +145,6 @@
                     text: 'ចុចពាក្យ Accept ដើម្បីលុប!',
                     accept: this.destroyPayroll
                 });
-            },
-            //fetch payroll
-            async fetchPayroll(){
-                await this.$store.dispatch('fetchPayroll');
-            },
-            //fetch employee
-            async fetchUser(){
-                await this.$store.dispatch('fetchUser');
-            },
-            //fetch employee
-            async fetchEmployee(){
-                await this.$store.dispatch('fetchEmployee');
             },
             calcTotalSalary(data){
                 return data.reduce(function (total,item) {

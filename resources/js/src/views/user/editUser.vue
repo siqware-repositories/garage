@@ -70,10 +70,6 @@
             }
         },
         methods: {
-            //fetch employee
-            async fetchUser(){
-                await this.$store.dispatch('fetchUser');
-            },
             //load profile
             loadProfile(){
                 this.$refs.profile.manuallyAddFile({ size: 123}, this.data.profile);

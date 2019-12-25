@@ -230,10 +230,6 @@
             }
         },
         methods: {
-            //fetch purchase
-            async fetchInvoice(){
-                await this.$store.dispatch('fetchInvoice')
-            },
             //date range
             dateRange(value) {
                 this.date_range = `${this.$moment(value.from).format('YYYY-MM-DD')} ~ ${this.$moment(value.to).format('YYYY-MM-DD')}`;
@@ -243,7 +239,7 @@
             },
         },
         async created() {
-            await this.fetchInvoice();
+
         }
     }
 </script>

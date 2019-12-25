@@ -85,11 +85,7 @@
                         })
                     }
                 });
-            },
-            //fetch invoice
-            async fetchInvoice(){
-                await this.$store.dispatch('fetchInvoice')
-            },
+            }
         },
         data(){
             return{

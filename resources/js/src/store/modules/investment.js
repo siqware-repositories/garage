@@ -9,11 +9,13 @@ const getters = {
 };
 const actions = {
     async fetchInvestment({commit}){
-        try {
-            const res = await axios.get(route('investment.index'));
-            commit('SET_INVESTMENT',res.data)
-        }catch (e) {
-            return false
+        if (!state.investment.length) {
+            try {
+                const res = await axios.get(route('investment.index'));
+                commit('SET_INVESTMENT', res.data)
+            } catch (e) {
+                return false
+            }
         }
     },
     async storeInvestment({commit},data){

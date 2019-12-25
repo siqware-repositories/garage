@@ -9,11 +9,13 @@ const getters = {
 };
 const actions = {
     async fetchUnit({commit}){
-        try {
-            const res = await axios.get(route('unit.index'));
-            commit('SET_UNIT',res.data)
-        }catch (e) {
-            return false
+        if (!state.unit.length) {
+            try {
+                const res = await axios.get(route('unit.index'));
+                commit('SET_UNIT', res.data)
+            } catch (e) {
+                return false
+            }
         }
     },
     async storeUnit({commit},data){

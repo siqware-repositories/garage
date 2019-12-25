@@ -9,11 +9,13 @@ const getters = {
 };
 const actions = {
     async fetchAbout({commit}){
-        try {
-            const res = await axios.get(route('about.index'));
-            commit('SET_ABOUT',res.data)
-        }catch (e) {
-            return false
+        if (!state.about.length) {
+            try {
+                const res = await axios.get(route('about.index'));
+                commit('SET_ABOUT', res.data)
+            } catch (e) {
+                return false
+            }
         }
     },
     async storeAbout({commit},data){

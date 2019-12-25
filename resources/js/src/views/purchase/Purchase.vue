@@ -151,24 +151,7 @@
                 })
             }
         },
-        async created(){
-            await this.fetchProduct();
-            await this.fetchSupplier();
-            await this.fetchPurchase();
-        },
         methods:{
-            //fetch purchase
-            async fetchPurchase(){
-                await this.$store.dispatch('fetchPurchase')
-            },
-            //fetch product
-            async fetchProduct(){
-                await this.$store.dispatch('fetchProduct')
-            },
-            //fetch supplier
-            async fetchSupplier(){
-                await this.$store.dispatch('fetchSupplier')
-            },
             //destroy
             async destroyPurchase(){
                 let self = this;

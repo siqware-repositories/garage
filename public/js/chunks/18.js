@@ -180,127 +180,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       });
     }
   },
-  created: function () {
-    var _created = _asyncToGenerator(
-    /*#__PURE__*/
-    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _context.next = 2;
-              return this.fetchProduct();
-
-            case 2:
-              _context.next = 4;
-              return this.fetchSupplier();
-
-            case 4:
-              _context.next = 6;
-              return this.fetchPurchase();
-
-            case 6:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee, this);
-    }));
-
-    function created() {
-      return _created.apply(this, arguments);
-    }
-
-    return created;
-  }(),
   methods: {
-    //fetch purchase
-    fetchPurchase: function () {
-      var _fetchPurchase = _asyncToGenerator(
-      /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                _context2.next = 2;
-                return this.$store.dispatch('fetchPurchase');
-
-              case 2:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2, this);
-      }));
-
-      function fetchPurchase() {
-        return _fetchPurchase.apply(this, arguments);
-      }
-
-      return fetchPurchase;
-    }(),
-    //fetch product
-    fetchProduct: function () {
-      var _fetchProduct = _asyncToGenerator(
-      /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
-          while (1) {
-            switch (_context3.prev = _context3.next) {
-              case 0:
-                _context3.next = 2;
-                return this.$store.dispatch('fetchProduct');
-
-              case 2:
-              case "end":
-                return _context3.stop();
-            }
-          }
-        }, _callee3, this);
-      }));
-
-      function fetchProduct() {
-        return _fetchProduct.apply(this, arguments);
-      }
-
-      return fetchProduct;
-    }(),
-    //fetch supplier
-    fetchSupplier: function () {
-      var _fetchSupplier = _asyncToGenerator(
-      /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
-          while (1) {
-            switch (_context4.prev = _context4.next) {
-              case 0:
-                _context4.next = 2;
-                return this.$store.dispatch('fetchSupplier');
-
-              case 2:
-              case "end":
-                return _context4.stop();
-            }
-          }
-        }, _callee4, this);
-      }));
-
-      function fetchSupplier() {
-        return _fetchSupplier.apply(this, arguments);
-      }
-
-      return fetchSupplier;
-    }(),
     //destroy
     destroyPurchase: function () {
       var _destroyPurchase = _asyncToGenerator(
       /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6() {
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
         var self, promises;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee6$(_context6) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
-            switch (_context6.prev = _context6.next) {
+            switch (_context2.prev = _context2.next) {
               case 0:
                 self = this;
                 self.$vs.loading();
@@ -309,27 +198,27 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 function () {
                   var _ref = _asyncToGenerator(
                   /*#__PURE__*/
-                  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5(data) {
-                    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
+                  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(data) {
+                    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
                       while (1) {
-                        switch (_context5.prev = _context5.next) {
+                        switch (_context.prev = _context.next) {
                           case 0:
-                            _context5.next = 2;
+                            _context.next = 2;
                             return self.$store.dispatch('destroyPurchase', data.id);
 
                           case 2:
                           case "end":
-                            return _context5.stop();
+                            return _context.stop();
                         }
                       }
-                    }, _callee5);
+                    }, _callee);
                   }));
 
                   return function (_x) {
                     return _ref.apply(this, arguments);
                   };
                 }());
-                _context6.next = 5;
+                _context2.next = 5;
                 return Promise.all(promises).then(function () {
                   self.$vs.notify({
                     time: 4000,
@@ -346,10 +235,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 5:
               case "end":
-                return _context6.stop();
+                return _context2.stop();
             }
           }
-        }, _callee6, this);
+        }, _callee2, this);
       }));
 
       function destroyPurchase() {
@@ -372,14 +261,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
 //
 //
 //
@@ -466,33 +347,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           });
         }
       });
-    },
-    //fetch purchase
-    fetchPurchase: function () {
-      var _fetchPurchase = _asyncToGenerator(
-      /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.next = 2;
-                return this.$store.dispatch('fetchPurchase');
-
-              case 2:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee, this);
-      }));
-
-      function fetchPurchase() {
-        return _fetchPurchase.apply(this, arguments);
-      }
-
-      return fetchPurchase;
-    }()
+    }
   },
   data: function data() {
     return {
@@ -532,6 +387,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _addSupplier__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./addSupplier */ "./resources/js/src/views/purchase/addSupplier.vue");
 /* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vue-select */ "./node_modules/vue-select/dist/vue-select.js");
 /* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(vue_select__WEBPACK_IMPORTED_MODULE_6__);
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -867,6 +728,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vue-select */ "./node_modules/vue-select/dist/vue-select.js");
 /* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(vue_select__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var _xkeshi_vue_barcode__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @xkeshi/vue-barcode */ "./node_modules/@xkeshi/vue-barcode/dist/vue-barcode.esm.js");
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2348,6 +2215,8 @@ var render = function() {
                     _vm._v(" "),
                     _c("th", [_vm._v("ពិពណ៌នា")]),
                     _vm._v(" "),
+                    _c("th", [_vm._v("Inventory Type")]),
+                    _vm._v(" "),
                     _c("th", [_vm._v("ចំនួន")]),
                     _vm._v(" "),
                     _c("th", [_vm._v("តម្លៃទិញ")]),
@@ -2362,12 +2231,12 @@ var render = function() {
                 _vm._v(" "),
                 _c(
                   "tbody",
-                  _vm._l(_vm.purchase.items, function(tr, indextr) {
-                    return _c("tr", { key: indextr }, [
+                  _vm._l(_vm.purchase.items, function(tr, index) {
+                    return _c("tr", { key: index }, [
                       _c("td", { staticClass: "py-1" }, [
                         _vm._v(
                           "\n                        " +
-                            _vm._s(indextr + 1) +
+                            _vm._s(index + 1) +
                             "\n                    "
                         )
                       ]),
@@ -2388,12 +2257,12 @@ var render = function() {
                             attrs: {
                               filterBy: _vm.searchProduct,
                               label: "name",
-                              name: "product-" + indextr,
+                              name: "product-" + index,
                               options: _vm.all_products
                             },
                             on: {
                               input: function($event) {
-                                return _vm.selectProduct(tr.id, indextr)
+                                return _vm.selectProduct(tr.id, index)
                               }
                             },
                             scopedSlots: _vm._u(
@@ -2439,15 +2308,15 @@ var render = function() {
                                 {
                                   name: "show",
                                   rawName: "v-show",
-                                  value: _vm.errors.has("product-" + indextr),
-                                  expression: "errors.has(`product-${indextr}`)"
+                                  value: _vm.errors.has("product-" + index),
+                                  expression: "errors.has(`product-${index}`)"
                                 }
                               ],
                               staticClass: "text-danger text-sm"
                             },
                             [
                               _vm._v(
-                                _vm._s(_vm.errors.first("product-" + indextr))
+                                _vm._s(_vm.errors.first("product-" + index))
                               )
                             ]
                           )
@@ -2466,7 +2335,7 @@ var render = function() {
                       _c(
                         "td",
                         [
-                          _c("vs-input-number", {
+                          _c("v-select", {
                             directives: [
                               {
                                 name: "validate",
@@ -2476,61 +2345,20 @@ var render = function() {
                               }
                             ],
                             attrs: {
-                              color: "danger",
-                              min: "0",
-                              name: "qty-" + indextr
+                              name: "inventory_type-" + index,
+                              options: [
+                                "inventory_part",
+                                "service",
+                                "sale_only",
+                                "purchase_only"
+                              ]
                             },
                             model: {
-                              value: tr.qty,
+                              value: tr.inventory_type,
                               callback: function($$v) {
-                                _vm.$set(tr, "qty", $$v)
+                                _vm.$set(tr, "inventory_type", $$v)
                               },
-                              expression: "tr.qty"
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c(
-                            "span",
-                            {
-                              directives: [
-                                {
-                                  name: "show",
-                                  rawName: "v-show",
-                                  value: _vm.errors.has("qty-" + indextr),
-                                  expression: "errors.has(`qty-${indextr}`)"
-                                }
-                              ],
-                              staticClass: "text-danger text-sm"
-                            },
-                            [_vm._v(_vm._s(_vm.errors.first("qty-" + indextr)))]
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "td",
-                        [
-                          _c("vs-input-number", {
-                            directives: [
-                              {
-                                name: "validate",
-                                rawName: "v-validate",
-                                value: "required",
-                                expression: "'required'"
-                              }
-                            ],
-                            attrs: {
-                              color: "danger",
-                              min: "0",
-                              name: "purchase_price-" + indextr
-                            },
-                            model: {
-                              value: tr.purchase_price,
-                              callback: function($$v) {
-                                _vm.$set(tr, "purchase_price", $$v)
-                              },
-                              expression: "tr.purchase_price"
+                              expression: "tr.inventory_type"
                             }
                           }),
                           _vm._v(" "),
@@ -2542,10 +2370,10 @@ var render = function() {
                                   name: "show",
                                   rawName: "v-show",
                                   value: _vm.errors.has(
-                                    "purchase_price-" + indextr
+                                    "inventory_type-" + index
                                   ),
                                   expression:
-                                    "errors.has(`purchase_price-${indextr}`)"
+                                    "errors.has(`inventory_type-${index}`)"
                                 }
                               ],
                               staticClass: "text-danger text-sm"
@@ -2553,7 +2381,7 @@ var render = function() {
                             [
                               _vm._v(
                                 _vm._s(
-                                  _vm.errors.first("purchase_price-" + indextr)
+                                  _vm.errors.first("inventory_type-" + index)
                                 )
                               )
                             ]
@@ -2577,7 +2405,106 @@ var render = function() {
                             attrs: {
                               color: "danger",
                               min: "0",
-                              name: "sale_price-" + indextr
+                              name: "qty-" + index
+                            },
+                            model: {
+                              value: tr.qty,
+                              callback: function($$v) {
+                                _vm.$set(tr, "qty", $$v)
+                              },
+                              expression: "tr.qty"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "span",
+                            {
+                              directives: [
+                                {
+                                  name: "show",
+                                  rawName: "v-show",
+                                  value: _vm.errors.has("qty-" + index),
+                                  expression: "errors.has(`qty-${index}`)"
+                                }
+                              ],
+                              staticClass: "text-danger text-sm"
+                            },
+                            [_vm._v(_vm._s(_vm.errors.first("qty-" + index)))]
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        [
+                          _c("vs-input-number", {
+                            directives: [
+                              {
+                                name: "validate",
+                                rawName: "v-validate",
+                                value: "required",
+                                expression: "'required'"
+                              }
+                            ],
+                            attrs: {
+                              color: "danger",
+                              min: "0",
+                              name: "purchase_price-" + index
+                            },
+                            model: {
+                              value: tr.purchase_price,
+                              callback: function($$v) {
+                                _vm.$set(tr, "purchase_price", $$v)
+                              },
+                              expression: "tr.purchase_price"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "span",
+                            {
+                              directives: [
+                                {
+                                  name: "show",
+                                  rawName: "v-show",
+                                  value: _vm.errors.has(
+                                    "purchase_price-" + index
+                                  ),
+                                  expression:
+                                    "errors.has(`purchase_price-${index}`)"
+                                }
+                              ],
+                              staticClass: "text-danger text-sm"
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(
+                                  _vm.errors.first("purchase_price-" + index)
+                                )
+                              )
+                            ]
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        [
+                          _c("vs-input-number", {
+                            directives: [
+                              {
+                                name: "validate",
+                                rawName: "v-validate",
+                                value: "required",
+                                expression: "'required'"
+                              }
+                            ],
+                            attrs: {
+                              color: "danger",
+                              min: "0",
+                              name: "sale_price-" + index
                             },
                             model: {
                               value: tr.sale_price,
@@ -2595,20 +2522,16 @@ var render = function() {
                                 {
                                   name: "show",
                                   rawName: "v-show",
-                                  value: _vm.errors.has(
-                                    "sale_price-" + indextr
-                                  ),
+                                  value: _vm.errors.has("sale_price-" + index),
                                   expression:
-                                    "errors.has(`sale_price-${indextr}`)"
+                                    "errors.has(`sale_price-${index}`)"
                                 }
                               ],
                               staticClass: "text-danger text-sm"
                             },
                             [
                               _vm._v(
-                                _vm._s(
-                                  _vm.errors.first("sale_price-" + indextr)
-                                )
+                                _vm._s(_vm.errors.first("sale_price-" + index))
                               )
                             ]
                           )
@@ -2637,7 +2560,7 @@ var render = function() {
                             },
                             on: {
                               click: function($event) {
-                                return _vm.removeItemLine(indextr)
+                                return _vm.removeItemLine(index)
                               }
                             }
                           })
@@ -3163,6 +3086,8 @@ var render = function() {
                     _vm._v(" "),
                     _c("th", [_vm._v("ពិពណ៌នា")]),
                     _vm._v(" "),
+                    _c("th", [_vm._v("Inventory Type")]),
+                    _vm._v(" "),
                     _c("th", [_vm._v("ចំនួន")]),
                     _vm._v(" "),
                     _c("th", [_vm._v("តម្លៃទិញ")]),
@@ -3177,12 +3102,12 @@ var render = function() {
                 _vm._v(" "),
                 _c(
                   "tbody",
-                  _vm._l(_vm.purchase.items, function(tr, indextr) {
-                    return _c("tr", { key: indextr }, [
+                  _vm._l(_vm.purchase.items, function(tr, index) {
+                    return _c("tr", { key: index }, [
                       _c("td", { staticClass: "py-1" }, [
                         _vm._v(
                           "\n                        " +
-                            _vm._s(indextr + 1) +
+                            _vm._s(index + 1) +
                             "\n                    "
                         )
                       ]),
@@ -3203,12 +3128,12 @@ var render = function() {
                             attrs: {
                               filterBy: _vm.searchProduct,
                               label: "name",
-                              name: "product-" + indextr,
+                              name: "product-" + index,
                               options: _vm.all_products
                             },
                             on: {
                               input: function($event) {
-                                return _vm.selectProduct(tr.id, indextr)
+                                return _vm.selectProduct(tr.id, index)
                               }
                             },
                             scopedSlots: _vm._u(
@@ -3254,15 +3179,15 @@ var render = function() {
                                 {
                                   name: "show",
                                   rawName: "v-show",
-                                  value: _vm.errors.has("product-" + indextr),
-                                  expression: "errors.has(`product-${indextr}`)"
+                                  value: _vm.errors.has("product-" + index),
+                                  expression: "errors.has(`product-${index}`)"
                                 }
                               ],
                               staticClass: "text-danger text-sm"
                             },
                             [
                               _vm._v(
-                                _vm._s(_vm.errors.first("product-" + indextr))
+                                _vm._s(_vm.errors.first("product-" + index))
                               )
                             ]
                           )
@@ -3281,7 +3206,7 @@ var render = function() {
                       _c(
                         "td",
                         [
-                          _c("vs-input-number", {
+                          _c("v-select", {
                             directives: [
                               {
                                 name: "validate",
@@ -3291,61 +3216,20 @@ var render = function() {
                               }
                             ],
                             attrs: {
-                              color: "danger",
-                              min: "0",
-                              name: "qty-" + indextr
+                              name: "inventory_type-" + index,
+                              options: [
+                                "inventory_part",
+                                "service",
+                                "sale_only",
+                                "purchase_only"
+                              ]
                             },
                             model: {
-                              value: tr.qty,
+                              value: tr.inventory_type,
                               callback: function($$v) {
-                                _vm.$set(tr, "qty", $$v)
+                                _vm.$set(tr, "inventory_type", $$v)
                               },
-                              expression: "tr.qty"
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c(
-                            "span",
-                            {
-                              directives: [
-                                {
-                                  name: "show",
-                                  rawName: "v-show",
-                                  value: _vm.errors.has("qty-" + indextr),
-                                  expression: "errors.has(`qty-${indextr}`)"
-                                }
-                              ],
-                              staticClass: "text-danger text-sm"
-                            },
-                            [_vm._v(_vm._s(_vm.errors.first("qty-" + indextr)))]
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "td",
-                        [
-                          _c("vs-input-number", {
-                            directives: [
-                              {
-                                name: "validate",
-                                rawName: "v-validate",
-                                value: "required",
-                                expression: "'required'"
-                              }
-                            ],
-                            attrs: {
-                              color: "danger",
-                              min: "0",
-                              name: "purchase_price-" + indextr
-                            },
-                            model: {
-                              value: tr.purchase_price,
-                              callback: function($$v) {
-                                _vm.$set(tr, "purchase_price", $$v)
-                              },
-                              expression: "tr.purchase_price"
+                              expression: "tr.inventory_type"
                             }
                           }),
                           _vm._v(" "),
@@ -3357,10 +3241,10 @@ var render = function() {
                                   name: "show",
                                   rawName: "v-show",
                                   value: _vm.errors.has(
-                                    "purchase_price-" + indextr
+                                    "inventory_type-" + index
                                   ),
                                   expression:
-                                    "errors.has(`purchase_price-${indextr}`)"
+                                    "errors.has(`inventory_type-${index}`)"
                                 }
                               ],
                               staticClass: "text-danger text-sm"
@@ -3368,7 +3252,7 @@ var render = function() {
                             [
                               _vm._v(
                                 _vm._s(
-                                  _vm.errors.first("purchase_price-" + indextr)
+                                  _vm.errors.first("inventory_type-" + index)
                                 )
                               )
                             ]
@@ -3392,7 +3276,106 @@ var render = function() {
                             attrs: {
                               color: "danger",
                               min: "0",
-                              name: "sale_price-" + indextr
+                              name: "qty-" + index
+                            },
+                            model: {
+                              value: tr.qty,
+                              callback: function($$v) {
+                                _vm.$set(tr, "qty", $$v)
+                              },
+                              expression: "tr.qty"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "span",
+                            {
+                              directives: [
+                                {
+                                  name: "show",
+                                  rawName: "v-show",
+                                  value: _vm.errors.has("qty-" + index),
+                                  expression: "errors.has(`qty-${index}`)"
+                                }
+                              ],
+                              staticClass: "text-danger text-sm"
+                            },
+                            [_vm._v(_vm._s(_vm.errors.first("qty-" + index)))]
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        [
+                          _c("vs-input-number", {
+                            directives: [
+                              {
+                                name: "validate",
+                                rawName: "v-validate",
+                                value: "required",
+                                expression: "'required'"
+                              }
+                            ],
+                            attrs: {
+                              color: "danger",
+                              min: "0",
+                              name: "purchase_price-" + index
+                            },
+                            model: {
+                              value: tr.purchase_price,
+                              callback: function($$v) {
+                                _vm.$set(tr, "purchase_price", $$v)
+                              },
+                              expression: "tr.purchase_price"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "span",
+                            {
+                              directives: [
+                                {
+                                  name: "show",
+                                  rawName: "v-show",
+                                  value: _vm.errors.has(
+                                    "purchase_price-" + index
+                                  ),
+                                  expression:
+                                    "errors.has(`purchase_price-${index}`)"
+                                }
+                              ],
+                              staticClass: "text-danger text-sm"
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(
+                                  _vm.errors.first("purchase_price-" + index)
+                                )
+                              )
+                            ]
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        [
+                          _c("vs-input-number", {
+                            directives: [
+                              {
+                                name: "validate",
+                                rawName: "v-validate",
+                                value: "required",
+                                expression: "'required'"
+                              }
+                            ],
+                            attrs: {
+                              color: "danger",
+                              min: "0",
+                              name: "sale_price-" + index
                             },
                             model: {
                               value: tr.sale_price,
@@ -3410,20 +3393,16 @@ var render = function() {
                                 {
                                   name: "show",
                                   rawName: "v-show",
-                                  value: _vm.errors.has(
-                                    "sale_price-" + indextr
-                                  ),
+                                  value: _vm.errors.has("sale_price-" + index),
                                   expression:
-                                    "errors.has(`sale_price-${indextr}`)"
+                                    "errors.has(`sale_price-${index}`)"
                                 }
                               ],
                               staticClass: "text-danger text-sm"
                             },
                             [
                               _vm._v(
-                                _vm._s(
-                                  _vm.errors.first("sale_price-" + indextr)
-                                )
+                                _vm._s(_vm.errors.first("sale_price-" + index))
                               )
                             ]
                           )
@@ -3452,7 +3431,7 @@ var render = function() {
                             },
                             on: {
                               click: function($event) {
-                                return _vm.removeItemLine(indextr)
+                                return _vm.removeItemLine(index)
                               }
                             }
                           })

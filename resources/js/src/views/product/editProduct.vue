@@ -9,8 +9,13 @@
                 <div class="vx-col md:w-1/3 w-full">
                     <div class="vx-row">
                         <div class="vx-col w-full">
-                            <vs-input class="w-full" label-placeholder="ឈ្មោះ" name="name" v-model="product.name"
-                                      v-validate="'required'"/>
+                            <label>ឈ្មោះ</label>
+                            <vue-instant id="styles" v-model="product.name"
+                                         suggestion-attribute="name"
+                                         :suggestions="all_product"
+                                         type="google"
+                                         v-validate="'required'"
+                                         name="name"></vue-instant>
                             <span class="text-danger text-sm"
                                   v-show="errors.has('name')">{{ errors.first('name') }}</span>
                         </div>
@@ -144,6 +149,9 @@
             }
         },
         computed:{
+            all_product(){
+                return this.$store.getters.all_product
+            },
             all_units(){
                 return this.$store.getters.all_unit
             },

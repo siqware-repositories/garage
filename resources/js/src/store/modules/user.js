@@ -9,11 +9,13 @@ const getters = {
 };
 const actions = {
     async fetchUser({commit}){
-        try {
-            const res = await axios.get(route('auth.index'));
-            commit('SET_USER',res.data)
-        }catch (e) {
-            return false
+        if (!state.user.length) {
+            try {
+                const res = await axios.get(route('auth.index'));
+                commit('SET_USER', res.data)
+            } catch (e) {
+                return false
+            }
         }
     },
     async storeUser({commit},data){

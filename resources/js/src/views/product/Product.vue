@@ -77,29 +77,7 @@
                 return this.$store.getters.all_product
             }
         },
-        async created(){
-            await this.fetchProduct();
-            await this.fetchUnit();
-            await this.fetchCategory();
-            await this.fetchBrand();
-        },
         methods:{
-            //fetch product
-            async fetchUnit(){
-                await this.$store.dispatch('fetchUnit')
-            },
-            //fetch brand
-            async fetchBrand(){
-                await this.$store.dispatch('fetchBrand')
-            },
-            //fetch category
-            async fetchCategory(){
-                await this.$store.dispatch('fetchCategory')
-            },
-            //fetch product
-            async fetchProduct(){
-                await this.$store.dispatch('fetchProduct')
-            },
             //destroy
             async destroyProduct(){
                 let self = this;

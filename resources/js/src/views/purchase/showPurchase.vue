@@ -228,10 +228,6 @@
                 let image = await this._print();
                 printJS(image, 'image')
             },
-            //fetch purchase
-            async fetchPurchase() {
-                await this.$store.dispatch('fetchPurchase')
-            },
             searchSupplier(option, label, search) {
                 return (
                     String(label).toLowerCase().indexOf(search.toLowerCase()) > -1 ||

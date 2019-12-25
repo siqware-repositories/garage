@@ -71,6 +71,7 @@
                     <th>ល.រ</th>
                     <th>ឈ្មោះ</th>
                     <th>ពិពណ៌នា</th>
+                    <th>Inventory Type</th>
                     <th>ចំនួន</th>
                     <th>តម្លៃទិញ</th>
                     <th>តម្លៃលក់</th>
@@ -79,42 +80,47 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr :key="indextr" v-for="(tr, indextr) in purchase.items">
+                    <tr :key="index" v-for="(tr, index) in purchase.items">
                         <td class="py-1">
-                            {{indextr+1}}
+                            {{index+1}}
                         </td>
                         <td width="400">
-                            <v-select :filterBy="searchProduct" v-model="tr.id" label="name" :name="`product-${indextr}`" v-validate="'required'" :options="all_products" @input="selectProduct(tr.id,indextr)">
+                            <v-select :filterBy="searchProduct" v-model="tr.id" label="name" :name="`product-${index}`" v-validate="'required'" :options="all_products" @input="selectProduct(tr.id,index)">
                                 <template v-slot:option="option" class="vs-list">
                                     <vs-list-item :title="`ID: ${option.id} ឈ្មោះ​ ${option.name}`" :subtitle="`តម្លៃលក់ ${option.default_purchase} តម្លៃទិញ ${option.default_sale}`"></vs-list-item>
                                 </template>
                             </v-select>
                             <span class="text-danger text-sm"
-                                  v-show="errors.has(`product-${indextr}`)">{{ errors.first(`product-${indextr}`) }}</span>
+                                  v-show="errors.has(`product-${index}`)">{{ errors.first(`product-${index}`) }}</span>
                         </td>
                         <td>
                             {{ tr.description }}
                         </td>
                         <td>
-                            <vs-input-number color="danger" v-model="tr.qty" min="0" :name="`qty-${indextr}`" v-validate="'required'"/>
+                            <v-select :name="`inventory_type-${index}`" v-validate="'required'" v-model="tr.inventory_type" :options="['inventory_part','service','sale_only','purchase_only']"/>
                             <span class="text-danger text-sm"
-                                  v-show="errors.has(`qty-${indextr}`)">{{ errors.first(`qty-${indextr}`) }}</span>
+                                  v-show="errors.has(`inventory_type-${index}`)">{{ errors.first(`inventory_type-${index}`) }}</span>
                         </td>
                         <td>
-                            <vs-input-number color="danger" v-model="tr.purchase_price" min="0" :name="`purchase_price-${indextr}`" v-validate="'required'"/>
+                            <vs-input-number color="danger" v-model="tr.qty" min="0" :name="`qty-${index}`" v-validate="'required'"/>
                             <span class="text-danger text-sm"
-                                  v-show="errors.has(`purchase_price-${indextr}`)">{{ errors.first(`purchase_price-${indextr}`) }}</span>
+                                  v-show="errors.has(`qty-${index}`)">{{ errors.first(`qty-${index}`) }}</span>
                         </td>
                         <td>
-                            <vs-input-number color="danger" v-model="tr.sale_price" min="0" :name="`sale_price-${indextr}`" v-validate="'required'"/>
+                            <vs-input-number color="danger" v-model="tr.purchase_price" min="0" :name="`purchase_price-${index}`" v-validate="'required'"/>
                             <span class="text-danger text-sm"
-                                  v-show="errors.has(`sale_price-${indextr}`)">{{ errors.first(`sale_price-${indextr}`) }}</span>
+                                  v-show="errors.has(`purchase_price-${index}`)">{{ errors.first(`purchase_price-${index}`) }}</span>
+                        </td>
+                        <td>
+                            <vs-input-number color="danger" v-model="tr.sale_price" min="0" :name="`sale_price-${index}`" v-validate="'required'"/>
+                            <span class="text-danger text-sm"
+                                  v-show="errors.has(`sale_price-${index}`)">{{ errors.first(`sale_price-${index}`) }}</span>
                         </td>
                         <td>
                             {{ tr.amount = tr.purchase_price*tr.qty }}
                         </td>
                         <td class="py-1">
-                            <vs-button @click="removeItemLine(indextr)" icon="icon-trash-2" color="warning" icon-pack="feather" type="flat"></vs-button>
+                            <vs-button @click="removeItemLine(index)" icon="icon-trash-2" color="warning" icon-pack="feather" type="flat"></vs-button>
                         </td>
                     </tr>
                     </tbody>

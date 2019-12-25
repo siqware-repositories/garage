@@ -82,10 +82,6 @@
                 return this.$store.getters.all_income;
             },
         },
-        async created(){
-            await this.fetchIncomeType();
-            await this.fetchIncome();
-        },
         methods:{
             confirmDelete() {
                 this.$vs.dialog({
@@ -123,14 +119,6 @@
                     return total+parseFloat(item.balance)
                 },0)
             },
-            //fetch income
-            async fetchIncome(){
-                await this.$store.dispatch('fetchIncome')
-            },
-            //fetch type
-            async fetchIncomeType(){
-                await this.$store.dispatch('fetchIncomeType')
-            }
         }
     }
 </script>

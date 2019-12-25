@@ -9,11 +9,13 @@ const getters = {
 };
 const actions = {
     async fetchExpenseType({commit}){
-        try {
-            const res = await axios.get(route('expense_type.index'));
-            commit('SET_EXPENSE_TYPE',res.data)
-        }catch (e) {
-            return false
+        if (!state.expense_type.length) {
+            try {
+                const res = await axios.get(route('expense_type.index'));
+                commit('SET_EXPENSE_TYPE', res.data)
+            } catch (e) {
+                return false
+            }
         }
     },
     async storeExpenseType({commit},data){

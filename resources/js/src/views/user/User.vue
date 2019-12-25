@@ -91,9 +91,6 @@
                 return this.$store.getters.all_user;
             }
         },
-        async created() {
-            await this.fetchUser();
-        },
         methods: {
             confirmDelete() {
                 this.$vs.dialog({
@@ -103,10 +100,6 @@
                     text: 'ចុចពាក្យ Accept ដើម្បីលុប!',
                     accept: this.destroyUser
                 });
-            },
-            //fetch employee
-            async fetchUser(){
-                await this.$store.dispatch('fetchUser');
             },
             //destroy
             async destroyUser() {

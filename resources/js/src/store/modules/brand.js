@@ -9,11 +9,13 @@ const getters = {
 };
 const actions = {
     async fetchBrand({commit}){
-        try {
-            const res = await axios.get(route('brand.index'));
-            commit('SET_BRAND',res.data)
-        }catch (e) {
-            return false
+        if (!state.brand.length) {
+            try {
+                const res = await axios.get(route('brand.index'));
+                commit('SET_BRAND', res.data)
+            } catch (e) {
+                return false
+            }
         }
     },
     async storeBrand({commit},data){

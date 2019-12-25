@@ -410,6 +410,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       });
       return total;
     },
+    //invoice
     total_invoice_with_purchase: function total_invoice_with_purchase() {
       var self = this;
       var total = 0;
@@ -458,32 +459,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     }
   },
   methods: {
-    //fetch purchase
-    fetchInvoice: function () {
-      var _fetchInvoice = _asyncToGenerator(
-      /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.next = 2;
-                return this.$store.dispatch('fetchInvoice');
-
-              case 2:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee, this);
-      }));
-
-      function fetchInvoice() {
-        return _fetchInvoice.apply(this, arguments);
-      }
-
-      return fetchInvoice;
-    }(),
     //date range
     dateRange: function dateRange(value) {
       this.date_range = "".concat(this.$moment(value.from).format('YYYY-MM-DD'), " ~ ").concat(this.$moment(value.to).format('YYYY-MM-DD'));
@@ -495,20 +470,16 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
   created: function () {
     var _created = _asyncToGenerator(
     /*#__PURE__*/
-    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
         while (1) {
-          switch (_context2.prev = _context2.next) {
+          switch (_context.prev = _context.next) {
             case 0:
-              _context2.next = 2;
-              return this.fetchInvoice();
-
-            case 2:
             case "end":
-              return _context2.stop();
+              return _context.stop();
           }
         }
-      }, _callee2, this);
+      }, _callee);
     }));
 
     function created() {

@@ -196,10 +196,6 @@
             }
         },
         methods: {
-            //fetch purchase
-            async fetchPurchase(){
-                await this.$store.dispatch('fetchPurchase')
-            },
             //date range
             dateRange(value) {
                 this.date_range = `${this.$moment(value.from).format('YYYY-MM-DD')} ~ ${this.$moment(value.to).format('YYYY-MM-DD')}`;
@@ -207,9 +203,6 @@
                 this.date_picker.start = this.$moment(value.from).format('YYYY-MM-DD');
                 this.date_picker.end = this.$moment(value.to).format('YYYY-MM-DD');
             }
-        },
-        async created() {
-            await this.fetchPurchase();
         }
     }
 </script>

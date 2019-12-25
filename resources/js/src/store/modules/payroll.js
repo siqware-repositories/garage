@@ -9,11 +9,13 @@ const getters = {
 };
 const actions = {
     async fetchPayroll({commit}){
-        try {
-            const res = await axios.get(route('payroll.index'));
-            commit('SET_PAYROLL',res.data)
-        }catch (e) {
-            return false
+        if (!state.payroll.length) {
+            try {
+                const res = await axios.get(route('payroll.index'));
+                commit('SET_PAYROLL', res.data)
+            } catch (e) {
+                return false
+            }
         }
     },
     async storePayroll({commit},data){
