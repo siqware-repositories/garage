@@ -1021,7 +1021,7 @@ __webpack_require__.r(__webpack_exports__);
           purchase_price: item.purchase,
           sale_price: item.sale,
           amount: item.amount,
-          inventory_type: item.product.inventory_type
+          inventory_type: item.inventory_type
         });
       });
     },

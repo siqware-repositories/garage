@@ -265,7 +265,7 @@
                 this.purchase.balance = data.balance;
                 self.purchase.items = [];
                 data.purchase_detail.forEach(function (item,index) {
-                    self.purchase.items.push({id:item.product,name:item.product.name,description:item.product.description,qty:item.qty,purchase_price:item.purchase,sale_price:item.sale,amount:item.amount,inventory_type:item.product.inventory_type})
+                    self.purchase.items.push({id:item.product,name:item.product.name,description:item.product.description,qty:item.qty,purchase_price:item.purchase,sale_price:item.sale,amount:item.amount,inventory_type:item.inventory_type})
                 })
             },
             //store
