@@ -72,7 +72,7 @@
                         <td width="600">
                             <v-select :filterBy="searchProduct" v-model="tr.id" :getOptionLabel="opt => opt.product.name" :name="`product-${indextr}`" v-validate="'required'" :options="all_purchase_details" @input="selectProduct(tr.id,indextr)">
                                 <template v-slot:option="option" class="vs-list">
-                                    <vs-list-item :title="`កូដ: ${option.product.id} ឈ្មោះ​៖ ${option.product.name} តម្លៃលក់ ${option.sale}`" :subtitle="`Unit: ${option.product.unit} Brand: ${option.product.brand}`"></vs-list-item>
+                                    <vs-list-item :title="`កូដ: ${option.product.id} - ឈ្មោះ: ${option.product.name} - តម្លៃលក់: ${option.sale}`" :subtitle="`Unit: ${option.product.unit} - Brand: ${option.product.brand} - Inventory Type: ${option.inventory_type}`"></vs-list-item>
                                     <vs-list-item :title="`អ្នកផ្គត់ផ្គង់៖ ${option.supplier.name} ក្រុមហ៊ុន៖ ${option.supplier.company}`" :subtitle="`ទំនាក់ទំនង ${option.supplier.contact}`"></vs-list-item>
                                 </template>
                             </v-select>

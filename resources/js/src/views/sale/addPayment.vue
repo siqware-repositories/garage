@@ -48,7 +48,7 @@
                 this.$validator.validateAll().then(result => {
                     if (result) {
                         self.$vs.loading();
-                        self.$store.dispatch('updateInvoicePayment', self.data).then(function (data) {
+                        self.$store.dispatch('updateInvoicePayment', self.data).then( async function (data) {
                             if (data) {
                                 self.$vs.notify({
                                     time: 4000,
@@ -59,7 +59,7 @@
                                     icon: 'icon-check',
                                     position: 'top-center'
                                 });
-                                self.fetchInvoice();
+                                await self.$store.dispatch('fetchInvoice');
                                 self.$emit('finished');
                                 self.$modal.hide('add-payment')
                             } else {

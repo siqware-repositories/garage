@@ -39,9 +39,10 @@ const actions = {
             return false
         }
     },
-    async updateInvoicePayment({},data){
+    async updateInvoicePayment({commit},data){
         try {
-            await axios.post(route('invoice.payment',data.id),data);
+            const res = await axios.post(route('invoice.payment',data.id),data);
+            commit('UPDATE_INVOICE',res.data);
             return true
         }catch (e) {
             return false

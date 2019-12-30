@@ -819,6 +819,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //
 //
 //
@@ -868,33 +876,64 @@ __webpack_require__.r(__webpack_exports__);
       this.$validator.validateAll().then(function (result) {
         if (result) {
           self.$vs.loading();
-          self.$store.dispatch('updateInvoicePayment', self.data).then(function (data) {
-            if (data) {
-              self.$vs.notify({
-                time: 4000,
-                title: 'ប្រតិបត្តិការជោគជ័យ',
-                text: 'ទឹកប្រាក់បានបន្ថែម',
-                color: 'success',
-                iconPack: 'feather',
-                icon: 'icon-check',
-                position: 'top-center'
-              });
-              self.fetchInvoice();
-              self.$emit('finished');
-              self.$modal.hide('add-payment');
-            } else {
-              self.$vs.notify({
-                title: 'ប្រតិបត្តិការបរាជ័យ',
-                text: 'ទឹកប្រាក់មិនបានបន្ថែម',
-                color: 'danger',
-                iconPack: 'feather',
-                icon: 'icon-message-square',
-                position: 'top-center'
-              });
-            }
+          self.$store.dispatch('updateInvoicePayment', self.data).then(
+          /*#__PURE__*/
+          function () {
+            var _ref = _asyncToGenerator(
+            /*#__PURE__*/
+            _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(data) {
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+                while (1) {
+                  switch (_context.prev = _context.next) {
+                    case 0:
+                      if (!data) {
+                        _context.next = 8;
+                        break;
+                      }
 
-            self.$vs.loading.close();
-          });
+                      self.$vs.notify({
+                        time: 4000,
+                        title: 'ប្រតិបត្តិការជោគជ័យ',
+                        text: 'ទឹកប្រាក់បានបន្ថែម',
+                        color: 'success',
+                        iconPack: 'feather',
+                        icon: 'icon-check',
+                        position: 'top-center'
+                      });
+                      _context.next = 4;
+                      return self.$store.dispatch('fetchInvoice');
+
+                    case 4:
+                      self.$emit('finished');
+                      self.$modal.hide('add-payment');
+                      _context.next = 9;
+                      break;
+
+                    case 8:
+                      self.$vs.notify({
+                        title: 'ប្រតិបត្តិការបរាជ័យ',
+                        text: 'ទឹកប្រាក់មិនបានបន្ថែម',
+                        color: 'danger',
+                        iconPack: 'feather',
+                        icon: 'icon-message-square',
+                        position: 'top-center'
+                      });
+
+                    case 9:
+                      self.$vs.loading.close();
+
+                    case 10:
+                    case "end":
+                      return _context.stop();
+                  }
+                }
+              }, _callee);
+            }));
+
+            return function (_x) {
+              return _ref.apply(this, arguments);
+            };
+          }());
         } else {
           self.$vs.notify({
             title: 'ប្រតិបត្តិការបរាជ័យ',
@@ -2004,6 +2043,7 @@ var render = function() {
                         "vs-button",
                         {
                           attrs: {
+                            color: "warning",
                             type: "relief",
                             "icon-pack": "feather",
                             icon: "icon-dollar-sign"
@@ -2025,6 +2065,7 @@ var render = function() {
                         "vs-button",
                         {
                           attrs: {
+                            color: "success",
                             type: "relief",
                             "icon-pack": "feather",
                             icon: "icon-eye"
@@ -2975,15 +3016,17 @@ var render = function() {
                                           title:
                                             "កូដ: " +
                                             option.product.id +
-                                            " ឈ្មោះ​៖ " +
+                                            " - ឈ្មោះ: " +
                                             option.product.name +
-                                            " តម្លៃលក់ " +
+                                            " - តម្លៃលក់: " +
                                             option.sale,
                                           subtitle:
                                             "Unit: " +
                                             option.product.unit +
-                                            " Brand: " +
-                                            option.product.brand
+                                            " - Brand: " +
+                                            option.product.brand +
+                                            " - Inventory Type: " +
+                                            option.inventory_type
                                         }
                                       }),
                                       _vm._v(" "),
@@ -3932,15 +3975,17 @@ var render = function() {
                                           title:
                                             "កូដ: " +
                                             option.product.id +
-                                            " ឈ្មោះ​៖ " +
+                                            " - ឈ្មោះ: " +
                                             option.product.name +
-                                            " តម្លៃលក់ " +
+                                            " - តម្លៃលក់: " +
                                             option.sale,
                                           subtitle:
                                             "Unit: " +
                                             option.product.unit +
-                                            " Brand: " +
-                                            option.product.brand
+                                            " - Brand: " +
+                                            option.product.brand +
+                                            " - Inventory Type: " +
+                                            option.inventory_type
                                         }
                                       }),
                                       _vm._v(" "),

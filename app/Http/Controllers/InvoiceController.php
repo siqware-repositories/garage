@@ -81,6 +81,10 @@ class InvoiceController extends Controller
         ]);
         Invoice::where('id',$id)->increment('balance',$input['input_balance']);
         Invoice::where('id',$id)->update(['due_balance'=>$input['due_balance']]);
+        return Invoice::with('invoice_detail')
+            ->with('customer')
+            ->where('status',true)
+            ->where('id',$id)->first();
     }
     //update
     public function update(Request $request,$id){
