@@ -668,7 +668,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return String(label).toLowerCase().indexOf(search.toLowerCase()) > -1 || String(option.note).toLowerCase().indexOf(search.toLowerCase()) > -1 || String(option.contact).toLowerCase().indexOf(search.toLowerCase()) > -1;
     },
     searchProduct: function searchProduct(option, label, search) {
-      return String(label).toLowerCase().indexOf(search.toLowerCase()) > -1 || String(option.product.id).toLowerCase().indexOf(search.toLowerCase()) > -1 || String(option.product.unit).toLowerCase().indexOf(search.toLowerCase()) > -1 || String(option.product.brand).toLowerCase().indexOf(search.toLowerCase()) > -1 || String(option.supplier.name).toLowerCase().indexOf(search.toLowerCase()) > -1 || String(option.supplier.company).toLowerCase().indexOf(search.toLowerCase()) > -1 || String(option.supplier.contact).toLowerCase().indexOf(search.toLowerCase()) > -1;
+      return (// String(label).toLowerCase().indexOf(search.toLowerCase()) > -1 ||
+        String(option.product.id).toLowerCase().indexOf(search.toLowerCase()) > -1
+        /*String(option.product.unit).toLowerCase().indexOf(search.toLowerCase()) > -1||
+        String(option.product.brand).toLowerCase().indexOf(search.toLowerCase()) > -1||
+        String(option.supplier.name).toLowerCase().indexOf(search.toLowerCase()) > -1||
+        String(option.supplier.company).toLowerCase().indexOf(search.toLowerCase()) > -1||
+        String(option.supplier.contact).toLowerCase().indexOf(search.toLowerCase()) > -1*/
+
+      );
     },
     //add line
     addItemLine: function addItemLine() {
@@ -4928,14 +4936,15 @@ __webpack_require__.r(__webpack_exports__);
 /*!****************************************************!*\
   !*** ./resources/js/src/views/sale/addInvoice.vue ***!
   \****************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _addInvoice_vue_vue_type_template_id_51ec9c0c_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./addInvoice.vue?vue&type=template&id=51ec9c0c&scoped=true& */ "./resources/js/src/views/sale/addInvoice.vue?vue&type=template&id=51ec9c0c&scoped=true&");
 /* harmony import */ var _addInvoice_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./addInvoice.vue?vue&type=script&lang=js& */ "./resources/js/src/views/sale/addInvoice.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _addInvoice_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _addInvoice_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -4965,7 +4974,7 @@ component.options.__file = "resources/js/src/views/sale/addInvoice.vue"
 /*!*****************************************************************************!*\
   !*** ./resources/js/src/views/sale/addInvoice.vue?vue&type=script&lang=js& ***!
   \*****************************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

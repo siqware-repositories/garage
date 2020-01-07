@@ -4,7 +4,7 @@
             <vs-button @click="$refs.addUser.show()" type="relief" icon-pack="feather" icon="icon-plus-square">
                 បន្ថែម
             </vs-button>
-            <vs-button v-if="selected.length===1" @click="$refs.editUser.show(selected[0])" color="warning" type="relief" icon-pack="feather" icon="icon-edit">
+            <vs-button v-if="selected.length===1" @click="$refs.editUser.show(selected[0])" color="success" type="relief" icon-pack="feather" icon="icon-edit">
                 កែប្រែ
             </vs-button>
             <vs-button v-if="selected.length===1" @click="$refs.changePassword.show(selected[0])" color="dark" type="relief" icon-pack="feather" icon="icon-edit">

@@ -667,7 +667,7 @@ var render = function() {
                 "vs-button",
                 {
                   attrs: {
-                    color: "warning",
+                    color: "success",
                     type: "relief",
                     "icon-pack": "feather",
                     icon: "icon-edit"

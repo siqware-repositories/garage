@@ -228,13 +228,13 @@
             },
             searchProduct(option, label, search) {
                 return (
-                    String(label).toLowerCase().indexOf(search.toLowerCase()) > -1 ||
-                    String(option.product.id).toLowerCase().indexOf(search.toLowerCase()) > -1||
-                    String(option.product.unit).toLowerCase().indexOf(search.toLowerCase()) > -1||
+                    // String(label).toLowerCase().indexOf(search.toLowerCase()) > -1 ||
+                    String(option.product.id).toLowerCase().indexOf(search.toLowerCase()) > -1
+                    /*String(option.product.unit).toLowerCase().indexOf(search.toLowerCase()) > -1||
                     String(option.product.brand).toLowerCase().indexOf(search.toLowerCase()) > -1||
                     String(option.supplier.name).toLowerCase().indexOf(search.toLowerCase()) > -1||
                     String(option.supplier.company).toLowerCase().indexOf(search.toLowerCase()) > -1||
-                    String(option.supplier.contact).toLowerCase().indexOf(search.toLowerCase()) > -1
+                    String(option.supplier.contact).toLowerCase().indexOf(search.toLowerCase()) > -1*/
                 );
             },
             //add line
