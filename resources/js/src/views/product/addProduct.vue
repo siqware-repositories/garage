@@ -225,6 +225,6 @@
     }
 </script>
 
-<style scoped>
-
+<style lang="scss">
+    @import "../../../../sass/vue-instant/vue-instant-input.css";
 </style>

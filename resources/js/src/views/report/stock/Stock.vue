@@ -32,7 +32,18 @@
                 </vs-collapse>
             </div>
         </div>
-        <vs-table pagination max-items="3" stripe search :data="all_report_stocks">
+        <div class="vx-row">
+            <div class="vx-col w-full">
+                <vue-instant id="styles" class="mb-base" v-model="data.id"
+                             suggestion-attribute="id"
+                             :suggestions="all_report_stocks_id"
+                             type="google"
+                             @click-button="searchStock"
+                             @clear="data.id = '';data.searchId = null"
+                ></vue-instant>
+            </div>
+        </div>
+        <vs-table pagination max-items="20" stripe :data="search_all_report_stocks">
             <template slot="thead">
                 <vs-th sort-key="id">ID</vs-th>
                 <vs-th sort-key="name">Name</vs-th>
@@ -41,7 +52,6 @@
                 <vs-th sort-key="category">Category</vs-th>
                 <vs-th sort-key="brand">Brand</vs-th>
             </template>
-
             <template slot-scope="{data}">
                 <vs-tr :data="item" :key="index" v-for="(item, index) in data"
                        :class="sum_qty(item.purchase_detail)<=0?'text-danger':''">
@@ -140,27 +150,29 @@
         data() {
             return {
                 selected: [],
-                users: [
-                    {
-                        "id": 1,
-                        "name": "Leanne Graham",
-                        "username": "Bret",
-                        "email": "Sincere@april.biz",
-                        "website": "hildegard.org",
-                    },
-                    {
-                        "id": 2,
-                        "name": "Ervin Howell",
-                        "username": "Antonette",
-                        "email": "Shanna@melissa.tv",
-                        "website": "anastasia.net",
-                    }
-                ]
+                data:{
+                    id:'',
+                    searchId:null,
+                }
             }
         },
         computed: {
             all_report_stocks() {
                 return this.$store.getters.all_report_stock
+            },
+            search_all_report_stocks: function () {
+                let self = this;
+                return self.all_report_stocks.filter(function (x) {
+                    return self.data.searchId ? parseInt(self.data.id) === x.id : true
+                })
+            },
+            all_report_stocks_id(){
+                let self = this;
+                return self.all_report_stocks.map(function (x) {
+                    return{
+                        id: String(x.id)
+                    }
+                })
             },
             out_stock_count() {
                 let count = 0;
@@ -192,6 +204,10 @@
                 return data.reduce(function (total, item) {
                     return total + parseFloat(item.remain_qty)
                 }, 0)
+            },
+            searchStock(){
+                let self = this;
+                self.data.searchId = parseInt(self.data.id)
             }
         }
     }
@@ -201,13 +217,14 @@
     table.expense, td.expense, th.expense {
         border: 1px solid black;
     }
-
     table.expense {
         border-collapse: collapse;
         width: 100%;
     }
-
     th.expense {
         text-align: left;
     }
+</style>
+<style lang="sass">
+    @import "../../../../../sass/vue-instant/vue-instant.css"
 </style>
