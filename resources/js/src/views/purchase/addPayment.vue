@@ -58,7 +58,6 @@
                                     icon: 'icon-check',
                                     position: 'top-center'
                                 });
-                                self.fetchPurchase();
                                 self.$emit('finished');
                                 self.$modal.hide('add-payment')
                             } else {

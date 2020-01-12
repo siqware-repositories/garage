@@ -82,6 +82,11 @@ class PurchaseController extends Controller
         ]);
         Purchase::where('id',$id)->increment('balance',$input['input_balance']);
         Purchase::where('id',$id)->update(['due_balance'=>$input['due_balance']]);
+        return Purchase::with('purchase_detail')
+            ->with('supplier')
+            ->where('status',true)
+            ->where('id',$id)
+            ->first();
     }
     //update
     public function update(Request $request,$id){

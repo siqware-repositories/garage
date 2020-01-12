@@ -320,7 +320,6 @@ __webpack_require__.r(__webpack_exports__);
                 icon: 'icon-check',
                 position: 'top-center'
               });
-              self.fetchPurchase();
               self.$emit('finished');
               self.$modal.hide('add-payment');
             } else {
@@ -919,6 +918,7 @@ __webpack_require__.r(__webpack_exports__);
         due_balance: 0,
         amount: 0,
         qty: 0,
+        old_due: 0,
         items: [{
           id: '',
           name: null,
@@ -946,7 +946,7 @@ __webpack_require__.r(__webpack_exports__);
         total += parseFloat(item.amount);
       });
       self.purchase.total_balance = total;
-      self.purchase.balance = total;
+      self.purchase.balance = total - self.purchase.old_due;
       return total;
     },
     total_qty: function total_qty() {
@@ -1011,6 +1011,7 @@ __webpack_require__.r(__webpack_exports__);
       this.purchase.purchase_status = data.purchase_status;
       this.purchase.description = data.description;
       this.purchase.balance = data.balance;
+      this.purchase.old_due = data.due_balance;
       self.purchase.items = [];
       data.purchase_detail.forEach(function (item, index) {
         self.purchase.items.push({

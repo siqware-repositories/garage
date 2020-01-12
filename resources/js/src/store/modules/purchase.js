@@ -27,9 +27,10 @@ const actions = {
             return false
         }
     },
-    async updatePurchasePayment({},data){
+    async updatePurchasePayment({commit},data){
         try {
-            await axios.post(route('purchase.payment',data.id),data);
+            const res = await axios.post(route('purchase.payment',data.id),data);
+            commit('UPDATE_PURCHASE',res.data);
             return true
         }catch (e) {
             return false

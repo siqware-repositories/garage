@@ -1180,6 +1180,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         total_balance: null,
         balance: null,
         due_balance: 0,
+        old_due: 0,
         amount: 0,
         qty: 0,
         items: [{
@@ -1211,10 +1212,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       if (self.invoice.is_bundle) {
         self.invoice.total_balance = self.invoice.sale_amount;
-        self.invoice.balance = self.invoice.sale_amount - self.invoice.due_balance;
+        self.invoice.balance = self.invoice.sale_amount - self.invoice.old_due;
       } else {
         self.invoice.total_balance = total;
-        self.invoice.balance = total;
+        self.invoice.balance = total - self.invoice.old_due;
       }
 
       return total;
@@ -1286,6 +1287,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       self.invoice.invoice_date = data.date;
       self.invoice.invoice_status = data.invoice_status;
       self.invoice.description = data.description;
+      self.invoice.old_due = data.due_balance;
       self.invoice.items = [];
       data.invoice_detail.forEach(function (item, index) {
         self.invoice.items.push({

@@ -171,6 +171,7 @@
                     total_balance:null,
                     balance:null,
                     due_balance:0,
+                    old_due:0,
                     amount:0,
                     qty:0,
                     items:[{id:'',name:null,description:null,qty:1,sale_price:1,amount:1,inventory_type: '',remain_qty:''}]
@@ -192,10 +193,10 @@
                 });
                 if (self.invoice.is_bundle){
                     self.invoice.total_balance = self.invoice.sale_amount;
-                    self.invoice.balance = self.invoice.sale_amount - self.invoice.due_balance;
+                    self.invoice.balance = self.invoice.sale_amount - self.invoice.old_due;
                 }else {
                     self.invoice.total_balance = total;
-                    self.invoice.balance = total;
+                    self.invoice.balance = total-self.invoice.old_due;
                 }
                 return total
             },
@@ -267,6 +268,7 @@
                 self.invoice.invoice_date = data.date;
                 self.invoice.invoice_status = data.invoice_status;
                 self.invoice.description = data.description;
+                self.invoice.old_due = data.due_balance;
                 self.invoice.items = [];
                 data.invoice_detail.forEach(function (item,index) {
                     self.invoice.items.push({id:item.purchase_detail,name:item.purchase_detail.product.name,description:item.purchase_detail.product.description,qty:item.qty,sale_price:item.sale,amount:item.amount,inventory_type: item.inventory_type,remain_qty:item.purchase_detail.remain_qty});

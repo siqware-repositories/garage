@@ -182,6 +182,7 @@
                     due_balance:0,
                     amount:0,
                     qty:0,
+                    old_due:0,
                     items:[{id:'',name:null,description:null,qty:1,purchase_price:1,sale_price:1,amount:1,inventory_type:''}]
                 },
             }
@@ -200,7 +201,7 @@
                     total+=parseFloat(item.amount)
                 });
                 self.purchase.total_balance = total;
-                self.purchase.balance = total;
+                self.purchase.balance = total-self.purchase.old_due;
                 return total
             },
             total_qty(){
@@ -263,6 +264,7 @@
                 this.purchase.purchase_status = data.purchase_status;
                 this.purchase.description = data.description;
                 this.purchase.balance = data.balance;
+                this.purchase.old_due = data.due_balance;
                 self.purchase.items = [];
                 data.purchase_detail.forEach(function (item,index) {
                     self.purchase.items.push({id:item.product,name:item.product.name,description:item.product.description,qty:item.qty,purchase_price:item.purchase,sale_price:item.sale,amount:item.amount,inventory_type:item.inventory_type})
