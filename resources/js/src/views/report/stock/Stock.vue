@@ -226,5 +226,5 @@
     }
 </style>
 <style lang="sass">
-    @import "../../../../../sass/vue-instant/vue-instant.css"
+    /*@import "../../../../../sass/vue-instant/vue-instant.css"*/
 </style>

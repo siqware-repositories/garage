@@ -10,7 +10,13 @@
                     <vs-button color="success" v-if="selected_received.length===1" @click="$refs.printInvoice.show(selected_received[0])" type="relief" icon-pack="feather" icon="icon-printer">បោះពុម្ភ</vs-button>
                     <vs-button v-if="selected_received.length===1" @click="$refs.showInvoice.show(selected_received[0])" type="relief" icon-pack="feather" icon="icon-eye">បង្ហាញ</vs-button>
                 </div>
-                <vs-table multiple v-model="selected_received" pagination max-items="10" search :data="all_invoice_received">
+                <vue-instant id="purchase_rec" class="mb-base mt-base" v-model="invoice_id"
+                             suggestion-attribute="id"
+                             :suggestions="suggestion_all_invoice_received"
+                             type="google"
+                             @clear="invoice_id = ''"
+                ></vue-instant>
+                <vs-table multiple v-model="selected_received" pagination max-items="10" :data="search_all_invoice_received">
                     <template slot="thead">
                         <vs-th sort-key="id">ល.រ</vs-th>
                         <vs-th sort-key="description">Description</vs-th>
@@ -61,7 +67,13 @@
                     <vs-button v-if="selected_pending.length" @click="destroyInvoice" color="danger" type="relief" icon-pack="feather" icon="icon-trash-2">លុប</vs-button>
                 </div>
                 <add-payment @finished="selected_pending = []" ref="addPaymentPending"></add-payment>
-                <vs-table multiple v-model="selected_pending" pagination max-items="10" search :data="all_invoice_pending">
+                <vue-instant id="purchase_pen" class="mb-base mt-base" v-model="invoice_id"
+                             suggestion-attribute="id"
+                             :suggestions="suggestion_all_invoice_pending"
+                             type="google"
+                             @clear="invoice_id = ''"
+                ></vue-instant>
+                <vs-table multiple v-model="selected_pending" pagination max-items="10" :data="search_all_invoice_pending">
                     <template slot="thead">
                         <vs-th sort-key="id">ល.រ</vs-th>
                         <vs-th sort-key="description">Description</vs-th>
@@ -123,6 +135,7 @@
         components: {PrintInvoice, EditInvoice, AddInvoice, ShowInvoice, AddPayment, EditProduct},
         data(){
             return{
+                invoice_id:'',
                 selected_pending:[],
                 selected_received:[]
             }
@@ -143,10 +156,38 @@
                     return x.invoice_status === 'received'
                 })
             },
+            search_all_invoice_received(){
+                let self =  this;
+                return self.all_invoice_received.filter(function (x) {
+                    return self.invoice_id?x.id === parseInt(self.invoice_id):true
+                })
+            },
+            suggestion_all_invoice_received(){
+                let self =  this;
+                return self.all_invoice_received.map(function (x) {
+                    return{
+                        id:String(x.id)
+                    }
+                })
+            },
             all_invoice_pending(){
                 let self =  this;
                 return self.all_invoices.filter(function (x) {
                     return x.invoice_status === 'pending'
+                })
+            },
+            search_all_invoice_pending(){
+                let self =  this;
+                return self.all_invoice_pending.filter(function (x) {
+                    return self.invoice_id?x.id === parseInt(self.invoice_id):true
+                })
+            },
+            suggestion_all_invoice_pending(){
+                let self =  this;
+                return self.all_invoice_pending.map(function (x) {
+                    return{
+                        id:String(x.id)
+                    }
                 })
             },
             all_purchase_received(){
@@ -155,12 +196,6 @@
                     return x.purchase_status === 'received'
                 })
             },
-            all_purchase_pending(){
-                let self =  this;
-                return self.all_purchases.filter(function (x) {
-                    return x.purchase_status === 'pending'
-                })
-            }
         },
         methods:{
             //destroy

@@ -9,7 +9,13 @@
                     <vs-button v-if="selected_received.length===1&&selected_received[0].due_balance>0" @click="$refs.addPayment.show(selected_received[0])" color="warning" type="relief" icon-pack="feather" icon="icon-dollar-sign">Add Payment</vs-button>
                     <vs-button v-if="selected_received.length===1" @click="$refs.showPurchase.show(selected_received[0])" type="relief" icon-pack="feather" icon="icon-eye">បង្ហាញ</vs-button>
                 </div>
-                <vs-table multiple v-model="selected_received" pagination max-items="10" search :data="all_purchase_received">
+                <vue-instant id="purchase_rec" class="mb-base mt-base" v-model="invoice_id"
+                             suggestion-attribute="id"
+                             :suggestions="suggestion_all_purchase_received"
+                             type="google"
+                             @clear="invoice_id = ''"
+                ></vue-instant>
+                <vs-table multiple v-model="selected_received" pagination max-items="10" :data="search_all_purchase_received">
                     <template slot="thead">
                         <vs-th sort-key="id">ល.រ</vs-th>
                         <vs-th sort-key="description">Description</vs-th>
@@ -63,7 +69,13 @@
                     <vs-button v-if="selected_pending.length" @click="destroyPurchase" color="danger" type="relief" icon-pack="feather" icon="icon-trash-2">លុប</vs-button>
                 </div>
                 <add-payment @finished="selected_pending = []" ref="addPaymentPending"></add-payment>
-                <vs-table multiple v-model="selected_pending" pagination max-items="10" search :data="all_purchase_pending">
+                <vue-instant id="purchase_pen" class="mb-base mt-base" v-model="invoice_id"
+                             suggestion-attribute="id"
+                             :suggestions="suggestion_all_purchase_pending"
+                             type="google"
+                             @clear="invoice_id = ''"
+                ></vue-instant>
+                <vs-table multiple v-model="selected_pending" pagination max-items="10" :data="search_all_purchase_pending">
                     <template slot="thead">
                         <vs-th sort-key="id">ល.រ</vs-th>
                         <vs-th sort-key="description">Description</vs-th>
@@ -127,6 +139,7 @@
         components: {ShowPurchase, EditPurchase, AddPayment, AddPurchase, EditProduct},
         data(){
             return{
+                invoice_id:'',
                 selected_pending:[],
                 selected_received:[]
             }
@@ -144,12 +157,40 @@
                     return x.purchase_status === 'received'
                 })
             },
+            search_all_purchase_received(){
+                let self =  this;
+                return self.all_purchase_received.filter(function (x) {
+                    return self.invoice_id?x.id === parseInt(self.invoice_id):true
+                })
+            },
+            suggestion_all_purchase_received(){
+                let self =  this;
+                return self.all_purchase_received.map(function (x) {
+                    return{
+                        id:String(x.id)
+                    }
+                })
+            },
             all_purchase_pending(){
                 let self =  this;
                 return self.all_purchases.filter(function (x) {
                     return x.purchase_status === 'pending'
                 })
-            }
+            },
+            search_all_purchase_pending(){
+                let self =  this;
+                return self.all_purchase_pending.filter(function (x) {
+                    return self.invoice_id?x.id === parseInt(self.invoice_id):true
+                })
+            },
+            suggestion_all_purchase_pending(){
+                let self =  this;
+                return self.all_purchase_pending.map(function (x) {
+                    return{
+                        id:String(x.id)
+                    }
+                })
+            },
         },
         methods:{
             //destroy

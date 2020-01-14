@@ -136,6 +136,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -154,6 +166,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
+      invoice_id: '',
       selected_pending: [],
       selected_received: []
     };
@@ -174,22 +187,44 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         return x.invoice_status === 'received';
       });
     },
+    search_all_invoice_received: function search_all_invoice_received() {
+      var self = this;
+      return self.all_invoice_received.filter(function (x) {
+        return self.invoice_id ? x.id === parseInt(self.invoice_id) : true;
+      });
+    },
+    suggestion_all_invoice_received: function suggestion_all_invoice_received() {
+      var self = this;
+      return self.all_invoice_received.map(function (x) {
+        return {
+          id: String(x.id)
+        };
+      });
+    },
     all_invoice_pending: function all_invoice_pending() {
       var self = this;
       return self.all_invoices.filter(function (x) {
         return x.invoice_status === 'pending';
       });
     },
+    search_all_invoice_pending: function search_all_invoice_pending() {
+      var self = this;
+      return self.all_invoice_pending.filter(function (x) {
+        return self.invoice_id ? x.id === parseInt(self.invoice_id) : true;
+      });
+    },
+    suggestion_all_invoice_pending: function suggestion_all_invoice_pending() {
+      var self = this;
+      return self.all_invoice_pending.map(function (x) {
+        return {
+          id: String(x.id)
+        };
+      });
+    },
     all_purchase_received: function all_purchase_received() {
       var self = this;
       return self.all_purchases.filter(function (x) {
         return x.purchase_status === 'received';
-      });
-    },
-    all_purchase_pending: function all_purchase_pending() {
-      var self = this;
-      return self.all_purchases.filter(function (x) {
-        return x.purchase_status === 'pending';
       });
     }
   },
@@ -1854,6 +1889,28 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
+              _c("vue-instant", {
+                staticClass: "mb-base mt-base",
+                attrs: {
+                  id: "purchase_rec",
+                  "suggestion-attribute": "id",
+                  suggestions: _vm.suggestion_all_invoice_received,
+                  type: "google"
+                },
+                on: {
+                  clear: function($event) {
+                    _vm.invoice_id = ""
+                  }
+                },
+                model: {
+                  value: _vm.invoice_id,
+                  callback: function($$v) {
+                    _vm.invoice_id = $$v
+                  },
+                  expression: "invoice_id"
+                }
+              }),
+              _vm._v(" "),
               _c(
                 "vs-table",
                 {
@@ -1861,8 +1918,7 @@ var render = function() {
                     multiple: "",
                     pagination: "",
                     "max-items": "10",
-                    search: "",
-                    data: _vm.all_invoice_received
+                    data: _vm.search_all_invoice_received
                   },
                   scopedSlots: _vm._u([
                     {
@@ -2163,6 +2219,28 @@ var render = function() {
                 }
               }),
               _vm._v(" "),
+              _c("vue-instant", {
+                staticClass: "mb-base mt-base",
+                attrs: {
+                  id: "purchase_pen",
+                  "suggestion-attribute": "id",
+                  suggestions: _vm.suggestion_all_invoice_pending,
+                  type: "google"
+                },
+                on: {
+                  clear: function($event) {
+                    _vm.invoice_id = ""
+                  }
+                },
+                model: {
+                  value: _vm.invoice_id,
+                  callback: function($$v) {
+                    _vm.invoice_id = $$v
+                  },
+                  expression: "invoice_id"
+                }
+              }),
+              _vm._v(" "),
               _c(
                 "vs-table",
                 {
@@ -2170,8 +2248,7 @@ var render = function() {
                     multiple: "",
                     pagination: "",
                     "max-items": "10",
-                    search: "",
-                    data: _vm.all_invoice_pending
+                    data: _vm.search_all_invoice_pending
                   },
                   scopedSlots: _vm._u([
                     {
