@@ -493,7 +493,7 @@ var render = function() {
               icon: "DollarSignIcon",
               "icon-right": "",
               statistic: _vm.$formatter.format(_vm._total_income),
-              statisticTitle: "ចំណាយ"
+              statisticTitle: "ចំណូល"
             }
           })
         ],

@@ -3,9 +3,16 @@
         <div class="flex btn-group">
             <vs-button @click="$refs.addProduct.show()" type="relief" icon-pack="feather" icon="icon-plus-square">បន្ថែម</vs-button>
             <vs-button v-if="selected.length===1" @click="$refs.editProduct.show(selected[0])" color="warning" type="relief" icon-pack="feather" icon="icon-edit">កែប្រែ</vs-button>
+            <vs-button v-if="selected.length" @click="$refs.printLabel.show(selected)" color="success" type="relief" icon-pack="feather" icon="icon-printer">Print Label</vs-button>
             <vs-button v-if="selected.length" @click="destroyProduct" color="danger" type="relief" icon-pack="feather" icon="icon-trash-2">លុប</vs-button>
         </div>
-        <vs-table multiple v-model="selected" pagination max-items="10" search :data="all_product">
+        <vue-instant id="purchase_pen" class="mt-base" v-model="product_id"
+                     suggestion-attribute="id"
+                     :suggestions="suggestion_all_product"
+                     type="google"
+                     @clear="product_id = ''"
+        ></vue-instant>
+        <vs-table multiple v-model="selected" pagination max-items="10" search :data="search_all_product">
             <template slot="thead">
                 <vs-th sort-key="id">ល.រ</vs-th>
                 <vs-th sort-key="name">ឈ្មោះ</vs-th>
@@ -55,17 +62,20 @@
         </vs-table>
         <add-product ref="addProduct"></add-product>
         <edit-product @finished="selected = []" ref="editProduct"></edit-product>
+        <print-label @finished="" ref="printLabel"/>
     </vx-card>
 </template>
 
 <script>
     import AddProduct from "./addProduct";
     import EditProduct from "./editProduct";
+    import PrintLabel from "./printLabel";
     export default {
         name: "Product",
-        components: {EditProduct, AddProduct},
+        components: {PrintLabel, EditProduct, AddProduct},
         data(){
             return{
+                product_id:'',
                 selected:[]
             }
         },
@@ -75,7 +85,21 @@
             },
             all_product(){
                 return this.$store.getters.all_product
-            }
+            },
+            search_all_product(){
+                let self =  this;
+                return self.all_product.filter(function (x) {
+                    return self.product_id?x.id === parseInt(self.product_id):true
+                })
+            },
+            suggestion_all_product(){
+                let self =  this;
+                return self.all_product.map(function (x) {
+                    return{
+                        id:String(x.id)
+                    }
+                })
+            },
         },
         methods:{
             //destroy

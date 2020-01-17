@@ -10,13 +10,13 @@
                     <vs-button color="success" v-if="selected_received.length===1" @click="$refs.printInvoice.show(selected_received[0])" type="relief" icon-pack="feather" icon="icon-printer">បោះពុម្ភ</vs-button>
                     <vs-button v-if="selected_received.length===1" @click="$refs.showInvoice.show(selected_received[0])" type="relief" icon-pack="feather" icon="icon-eye">បង្ហាញ</vs-button>
                 </div>
-                <vue-instant id="purchase_rec" class="mb-base mt-base" v-model="invoice_id"
+                <vue-instant id="purchase_rec" class="mt-base" v-model="invoice_id"
                              suggestion-attribute="id"
                              :suggestions="suggestion_all_invoice_received"
                              type="google"
                              @clear="invoice_id = ''"
                 ></vue-instant>
-                <vs-table multiple v-model="selected_received" pagination max-items="10" :data="search_all_invoice_received">
+                <vs-table multiple v-model="selected_received" pagination max-items="10" search :data="search_all_invoice_received">
                     <template slot="thead">
                         <vs-th sort-key="id">ល.រ</vs-th>
                         <vs-th sort-key="description">Description</vs-th>
@@ -67,13 +67,13 @@
                     <vs-button v-if="selected_pending.length" @click="destroyInvoice" color="danger" type="relief" icon-pack="feather" icon="icon-trash-2">លុប</vs-button>
                 </div>
                 <add-payment @finished="selected_pending = []" ref="addPaymentPending"></add-payment>
-                <vue-instant id="purchase_pen" class="mb-base mt-base" v-model="invoice_id"
+                <vue-instant id="purchase_pen" class="mt-base" v-model="invoice_id"
                              suggestion-attribute="id"
                              :suggestions="suggestion_all_invoice_pending"
                              type="google"
                              @clear="invoice_id = ''"
                 ></vue-instant>
-                <vs-table multiple v-model="selected_pending" pagination max-items="10" :data="search_all_invoice_pending">
+                <vs-table multiple v-model="selected_pending" pagination max-items="10" search :data="search_all_invoice_pending">
                     <template slot="thead">
                         <vs-th sort-key="id">ល.រ</vs-th>
                         <vs-th sort-key="description">Description</vs-th>

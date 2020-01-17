@@ -802,7 +802,7 @@ var render = function() {
           { staticClass: "vx-col w-full" },
           [
             _c("vue-instant", {
-              staticClass: "mb-base",
+              staticClass: "mt-base",
               attrs: {
                 id: "styles",
                 "suggestion-attribute": "id",
@@ -835,6 +835,7 @@ var render = function() {
           attrs: {
             pagination: "",
             "max-items": "20",
+            search: "",
             stripe: "",
             data: _vm.search_all_report_stocks
           },

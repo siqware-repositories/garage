@@ -36,7 +36,7 @@
                         icon="DollarSignIcon"
                         icon-right
                         :statistic="$formatter.format(total_due_balance)"
-                        statisticTitle="ជំពាក់"/>
+                        statisticTitle="ជំពាក់គេ"/>
             </div>
             <div class="vx-col md:w-1/3 w-full">
                 <statistics-card-line

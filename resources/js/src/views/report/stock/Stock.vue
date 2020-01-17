@@ -34,7 +34,7 @@
         </div>
         <div class="vx-row">
             <div class="vx-col w-full">
-                <vue-instant id="styles" class="mb-base" v-model="data.id"
+                <vue-instant id="styles" class="mt-base" v-model="data.id"
                              suggestion-attribute="id"
                              :suggestions="all_report_stocks_id"
                              type="google"
@@ -43,7 +43,7 @@
                 ></vue-instant>
             </div>
         </div>
-        <vs-table pagination max-items="20" stripe :data="search_all_report_stocks">
+        <vs-table pagination max-items="20" search stripe :data="search_all_report_stocks">
             <template slot="thead">
                 <vs-th sort-key="id">ID</vs-th>
                 <vs-th sort-key="name">Name</vs-th>

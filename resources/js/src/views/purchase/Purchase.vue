@@ -9,13 +9,13 @@
                     <vs-button v-if="selected_received.length===1&&selected_received[0].due_balance>0" @click="$refs.addPayment.show(selected_received[0])" color="warning" type="relief" icon-pack="feather" icon="icon-dollar-sign">Add Payment</vs-button>
                     <vs-button v-if="selected_received.length===1" @click="$refs.showPurchase.show(selected_received[0])" type="relief" icon-pack="feather" icon="icon-eye">បង្ហាញ</vs-button>
                 </div>
-                <vue-instant id="purchase_rec" class="mb-base mt-base" v-model="invoice_id"
+                <vue-instant id="purchase_rec" class="mt-base" v-model="invoice_id"
                              suggestion-attribute="id"
                              :suggestions="suggestion_all_purchase_received"
                              type="google"
                              @clear="invoice_id = ''"
                 ></vue-instant>
-                <vs-table multiple v-model="selected_received" pagination max-items="10" :data="search_all_purchase_received">
+                <vs-table multiple v-model="selected_received" pagination max-items="10" search :data="search_all_purchase_received">
                     <template slot="thead">
                         <vs-th sort-key="id">ល.រ</vs-th>
                         <vs-th sort-key="description">Description</vs-th>

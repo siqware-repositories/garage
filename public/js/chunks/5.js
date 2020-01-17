@@ -347,10 +347,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
 
 
 
@@ -401,37 +397,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }]
       }
     };
-  },
-  computed: {
-    all_suppliers: function all_suppliers() {
-      return this.$store.getters.all_supplier;
-    },
-    all_products: function all_products() {
-      return this.$store.getters.all_product;
-    },
-    total: function total() {
-      var self = this;
-      var total = 0.0;
-      self.purchase.items.forEach(function (item, index) {
-        total += parseFloat(item.amount);
-      });
-      self.purchase.total_balance = total;
-      self.purchase.balance = total;
-      return total;
-    },
-    total_qty: function total_qty() {
-      var self = this;
-      var total = 0;
-      self.purchase.items.forEach(function (item, index) {
-        total += parseFloat(item.qty);
-      });
-      self.purchase.qty = total;
-      return total;
-    }
-  },
-  updated: function updated() {
-    var x = this.total_qty;
-    var y = this.total;
   },
   methods: {
     _print: function () {
@@ -497,41 +462,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return printHtml;
     }(),
-    searchSupplier: function searchSupplier(option, label, search) {
-      return String(label).toLowerCase().indexOf(search.toLowerCase()) > -1 || String(option.company).toLowerCase().indexOf(search.toLowerCase()) > -1 || String(option.contact).toLowerCase().indexOf(search.toLowerCase()) > -1;
-    },
-    searchProduct: function searchProduct(option, label, search) {
-      return String(label).toLowerCase().indexOf(search.toLowerCase()) > -1 || String(option.id).toLowerCase().indexOf(search.toLowerCase()) > -1;
-    },
-    //add line
-    addItemLine: function addItemLine() {
-      var self = this;
-      self.purchase.items.push({
-        id: '',
-        name: null,
-        description: null,
-        qty: 1,
-        purchase_price: 1,
-        sale_price: 1,
-        amount: 1
-      });
-    },
-    //remove line
-    removeItemLine: function removeItemLine(index) {
-      var self = this;
-      self.purchase.items.splice(index, 1);
-    },
-    //select product
-    selectProduct: function selectProduct(id, index) {
-      var self = this;
-      var selected = self.all_products.filter(function (x) {
-        return parseInt(x.id) === parseInt(id.id);
-      });
-      self.purchase.items[index].name = selected[0].name;
-      self.purchase.items[index].description = selected[0].description;
-      self.purchase.items[index].sale_price = selected[0].default_sale;
-      self.purchase.items[index].purchase_price = selected[0].default_purchase;
-    },
     show: function show(data) {
       var self = this;
       this.$modal.show('show-purchase');
@@ -542,6 +472,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.purchase.purchase_status = data.purchase_status;
       this.purchase.description = data.description;
       this.purchase.balance = data.balance;
+      this.purchase.amount = data.amount;
+      this.purchase.due_balance = data.due_balance;
       self.purchase.items = [];
       data.purchase_detail.forEach(function (item, index) {
         self.purchase.items.push({
@@ -554,54 +486,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           amount: item.amount
         });
       });
-    },
-    //store
-    updatePurchase: function updatePurchase() {
-      var self = this;
-      this.$validator.validateAll().then(function (result) {
-        if (result) {
-          self.$vs.loading();
-          self.$store.dispatch('updatePurchase', self.purchase).then(function (data) {
-            if (data) {
-              self.$vs.notify({
-                time: 4000,
-                title: 'ប្រតិបត្តិការជោគជ័យ',
-                text: 'ទិន្នន័យកែប្រែ',
-                color: 'success',
-                iconPack: 'feather',
-                icon: 'icon-check',
-                position: 'top-center'
-              });
-              self.$emit('finished');
-              self.fetchPurchase();
-            } else {
-              self.$vs.notify({
-                title: 'ប្រតិបត្តិការបរាជ័យ',
-                text: 'ទិន្នន័យមិនកែប្រែ',
-                color: 'danger',
-                iconPack: 'feather',
-                icon: 'icon-message-square',
-                position: 'top-center'
-              });
-            }
-
-            self.$vs.loading.close();
-          });
-        } else {
-          self.$vs.notify({
-            title: 'ប្រតិបត្តិការបរាជ័យ',
-            text: 'សូមបំពេញទិន្នន័យអោយបានត្រឹមត្រូវ',
-            color: 'danger',
-            iconPack: 'feather',
-            icon: 'icon-message-square',
-            position: 'top-center'
-          });
-        }
-      });
-    },
-    //image upload
-    successUpload: function successUpload(file, res) {
-      this.product.image = res.path;
     }
   }
 });
@@ -654,6 +538,153 @@ var update = __webpack_require__(/*! ../../../../../node_modules/style-loader/li
 if(content.locals) module.exports = content.locals;
 
 if(false) {}
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/index.js?!./node_modules/vue-money-format/src/components/MoneyFormat.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib??vue-loader-options!./node_modules/vue-money-format/src/components/MoneyFormat.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    value: Number,
+    locale: {
+      type: String,
+      default: 'en'
+    },
+    currencyCode: {
+      type: String,
+      default: 'USD'
+    },
+    supplementalPrecision: {
+      type: Number,
+      default: 0
+    },
+    subunitsValue: {
+      type: Boolean,
+      default: false
+    },
+    subunitsToUnit: {
+      type: Number,
+      default: 1
+    },
+    hideSubunits: {
+      type: Boolean,
+      default: false
+    }
+  },
+  methods: {
+    /////////////////////////////////////////////////////////////////////
+    // Format money based on integer or floating input
+    // ===============================================
+    // Possible inputs are:
+    // value:                 Numerical input (required)
+    // locale:                Language and country information, such as 'en' or 'en-US'
+    // currencyCode:          3-character cdde from ISO 4217
+    // subunitsValue:         Value is denominated in subunits, such as cents
+    // subunitsToUnits:       Overrides the minor unit value from ISO 4217. The "subunitsValue"
+    //                        option is redundant if you enter a value for this
+    // hideSubunits:          Set this to true if you don't want to display the subunits
+    // supplementalPrecision: Allows you to display partial subunits . This is ignored if
+    //                        you specify "hideSubunits=true"
+    /////////////////////////////////////////////////////////////////////
+    formatMoney: function(value, 
+                          locale, 
+                          currencyCode, 
+                          subunitsValue, 
+                          subunitsToUnit,
+                          hideSubunits, 
+                          supplementalPrecision) {
+      let ret = 0;
+      if (Number.isFinite(value)) {
+        try {
+          let numFormat = new Intl.NumberFormat(locale, { style: 'currency', currency: currencyCode });
+          let options = numFormat.resolvedOptions();
+          let fraction_digits = options.minimumFractionDigits;
+          if (subunitsToUnit > 1) {
+            value = value/subunitsToUnit;
+          }
+          else if (subunitsValue == true) {
+            value = value/10 ** options.minimumFractionDigits;
+          }
+          if (hideSubunits == true) {
+            numFormat = new Intl.NumberFormat(locale, { style: 'currency', currency: currencyCode, minimumFractionDigits: 0 , maximumFractionDigits: 0 });
+          }
+          else if (supplementalPrecision > 0) {
+            numFormat = new Intl.NumberFormat(locale, { style: 'currency', 
+              currency: currencyCode, 
+              minimumFractionDigits: options.minimumFractionDigits + supplementalPrecision , 
+              maximumFractionDigits: options.maximumFractionDigits + supplementalPrecision });
+          }
+          ret = numFormat.format(value);
+        }
+        catch (err) {
+          ret = err.message;
+        }
+      }
+      else {
+        ret = '#NaN!';
+      }
+      return ret;
+    }
+  }
+});
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./node_modules/vue-money-format/src/components/MoneyFormat.vue?vue&type=template&id=82a851d4&":
+/*!***********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./node_modules/vue-money-format/src/components/MoneyFormat.vue?vue&type=template&id=82a851d4& ***!
+  \***********************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "money_format" }, [
+    _vm._v(
+      "\n  " +
+        _vm._s(
+          _vm.formatMoney(
+            _vm.value,
+            _vm.locale,
+            _vm.currencyCode,
+            _vm.subunitsValue,
+            _vm.subunitsToUnit,
+            _vm.hideSubunits,
+            _vm.supplementalPrecision
+          )
+        ) +
+        "\n"
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
 
 /***/ }),
 
@@ -1220,20 +1251,13 @@ var render = function() {
                         )
                       ]),
                       _vm._v(" "),
-                      _c(
-                        "td",
-                        { staticClass: "pl-2 print:pl-2" },
-                        [
-                          _c("money-format", {
-                            attrs: {
-                              value: _vm.purchase.total_balance,
-                              locale: "en",
-                              "currency-code": "USD"
-                            }
-                          })
-                        ],
-                        1
-                      )
+                      _c("td", { staticClass: "pl-2 print:pl-2" }, [
+                        _vm._v(
+                          "\n                            " +
+                            _vm._s(_vm.$formatter.format(_vm.purchase.amount)) +
+                            "\n                        "
+                        )
+                      ])
                     ])
                   ])
                 ]),
@@ -1254,15 +1278,16 @@ var render = function() {
                           [
                             _c("label", [_vm._v("ប្រាក់ទិញទំនិញ")]),
                             _vm._v(" "),
-                            _c("money-format", {
-                              attrs: {
-                                value: parseFloat(_vm.purchase.balance),
-                                locale: "en",
-                                "currency-code": "USD"
-                              }
-                            })
-                          ],
-                          1
+                            _c("div", [
+                              _vm._v(
+                                "\n                                    " +
+                                  _vm._s(
+                                    _vm.$formatter.format(_vm.purchase.balance)
+                                  ) +
+                                  "\n                                "
+                              )
+                            ])
+                          ]
                         ),
                         _vm._v(" "),
                         _c(
@@ -1273,11 +1298,7 @@ var render = function() {
                             _vm._v(" "),
                             _c("money-format", {
                               attrs: {
-                                value: parseFloat(
-                                  (_vm.purchase.due_balance =
-                                    _vm.purchase.total_balance -
-                                    _vm.purchase.balance)
-                                ),
+                                value: parseFloat(_vm.purchase.due_balance),
                                 locale: "en",
                                 "currency-code": "USD"
                               }
@@ -1334,6 +1355,92 @@ var render = function() {
 var staticRenderFns = []
 render._withStripped = true
 
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-money-format/src/components/MoneyFormat.vue":
+/*!**********************************************************************!*\
+  !*** ./node_modules/vue-money-format/src/components/MoneyFormat.vue ***!
+  \**********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _MoneyFormat_vue_vue_type_template_id_82a851d4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./MoneyFormat.vue?vue&type=template&id=82a851d4& */ "./node_modules/vue-money-format/src/components/MoneyFormat.vue?vue&type=template&id=82a851d4&");
+/* harmony import */ var _MoneyFormat_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./MoneyFormat.vue?vue&type=script&lang=js& */ "./node_modules/vue-money-format/src/components/MoneyFormat.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _MoneyFormat_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _MoneyFormat_vue_vue_type_template_id_82a851d4___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _MoneyFormat_vue_vue_type_template_id_82a851d4___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "node_modules/vue-money-format/src/components/MoneyFormat.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./node_modules/vue-money-format/src/components/MoneyFormat.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************!*\
+  !*** ./node_modules/vue-money-format/src/components/MoneyFormat.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _vue_loader_lib_index_js_vue_loader_options_MoneyFormat_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../vue-loader/lib??vue-loader-options!./MoneyFormat.vue?vue&type=script&lang=js& */ "./node_modules/vue-loader/lib/index.js?!./node_modules/vue-money-format/src/components/MoneyFormat.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_vue_loader_lib_index_js_vue_loader_options_MoneyFormat_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./node_modules/vue-money-format/src/components/MoneyFormat.vue?vue&type=template&id=82a851d4&":
+/*!*****************************************************************************************************!*\
+  !*** ./node_modules/vue-money-format/src/components/MoneyFormat.vue?vue&type=template&id=82a851d4& ***!
+  \*****************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _vue_loader_lib_loaders_templateLoader_js_vue_loader_options_vue_loader_lib_index_js_vue_loader_options_MoneyFormat_vue_vue_type_template_id_82a851d4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../vue-loader/lib??vue-loader-options!./MoneyFormat.vue?vue&type=template&id=82a851d4& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./node_modules/vue-money-format/src/components/MoneyFormat.vue?vue&type=template&id=82a851d4&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _vue_loader_lib_loaders_templateLoader_js_vue_loader_options_vue_loader_lib_index_js_vue_loader_options_MoneyFormat_vue_vue_type_template_id_82a851d4___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _vue_loader_lib_loaders_templateLoader_js_vue_loader_options_vue_loader_lib_index_js_vue_loader_options_MoneyFormat_vue_vue_type_template_id_82a851d4___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-money-format/src/main.js":
+/*!***************************************************!*\
+  !*** ./node_modules/vue-money-format/src/main.js ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _components_MoneyFormat_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/MoneyFormat.vue */ "./node_modules/vue-money-format/src/components/MoneyFormat.vue");
+
+
+/* harmony default export */ __webpack_exports__["default"] = (_components_MoneyFormat_vue__WEBPACK_IMPORTED_MODULE_0__["default"]);
 
 
 /***/ }),

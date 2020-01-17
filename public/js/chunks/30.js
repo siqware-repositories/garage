@@ -749,7 +749,7 @@ var render = function() {
                 icon: "DollarSignIcon",
                 "icon-right": "",
                 statistic: _vm.$formatter.format(_vm.total_due_balance),
-                statisticTitle: "ជំពាក់"
+                statisticTitle: "គេជំពាក់"
               }
             })
           ],
@@ -785,7 +785,7 @@ var render = function() {
                 statistic: _vm.$formatter.format(
                   _vm.total_invoice - _vm.total_invoice_with_purchase
                 ),
-                statisticTitle: "ចំណេញពីលក់+ប្រាក់ជំពាក់"
+                statisticTitle: "ចំណេញពីលក់+ប្រាក់គេជំពាក់"
               }
             })
           ],
@@ -806,7 +806,7 @@ var render = function() {
                     _vm.total_invoice_with_purchase -
                     _vm.total_due_balance
                 ),
-                statisticTitle: "ចំណេញពីលក់-ប្រាក់ជំពាក់"
+                statisticTitle: "ចំណេញពីលក់-ប្រាក់គេជំពាក់"
               }
             })
           ],
@@ -826,7 +826,7 @@ var render = function() {
                   [
                     _c("div", { attrs: { slot: "header" }, slot: "header" }, [
                       _vm._v(
-                        "\n                        បង្ហាញវិក័យបត្រជំពាក់\n                    "
+                        "\n                        បង្ហាញវិក័យបត្រគេជំពាក់\n                    "
                       )
                     ]),
                     _vm._v(" "),

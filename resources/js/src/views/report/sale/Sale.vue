@@ -36,7 +36,7 @@
                         icon="DollarSignIcon"
                         icon-right
                         :statistic="$formatter.format(total_due_balance)"
-                        statisticTitle="ជំពាក់"/>
+                        statisticTitle="គេជំពាក់"/>
             </div>
             <div class="vx-col md:w-1/3 w-full">
                 <statistics-card-line
@@ -52,7 +52,7 @@
                         icon="DollarSignIcon"
                         icon-right
                         :statistic="$formatter.format(total_invoice-total_invoice_with_purchase)"
-                        statisticTitle="ចំណេញពីលក់+ប្រាក់ជំពាក់"/>
+                        statisticTitle="ចំណេញពីលក់+ប្រាក់គេជំពាក់"/>
             </div>
             <div class="vx-col md:w-1/3 w-full mt-base">
                 <statistics-card-line
@@ -60,13 +60,13 @@
                         icon="DollarSignIcon"
                         icon-right
                         :statistic="$formatter.format((total_invoice-total_invoice_with_purchase)-total_due_balance)"
-                        statisticTitle="ចំណេញពីលក់-ប្រាក់ជំពាក់"/>
+                        statisticTitle="ចំណេញពីលក់-ប្រាក់គេជំពាក់"/>
             </div>
             <div class="vx-col w-full">
                 <vs-collapse type="margin">
                     <vs-collapse-item>
                         <div slot="header">
-                            បង្ហាញវិក័យបត្រជំពាក់
+                            បង្ហាញវិក័យបត្រគេជំពាក់
                         </div>
                         <vs-list>
                             <vs-list-item :key="index" v-for="(item,index) in due_sale_invoice"

@@ -1221,7 +1221,7 @@ var render = function() {
               ),
               _vm._v(" "),
               _c("vue-instant", {
-                staticClass: "mb-base mt-base",
+                staticClass: "mt-base",
                 attrs: {
                   id: "purchase_rec",
                   "suggestion-attribute": "id",
@@ -1249,6 +1249,7 @@ var render = function() {
                     multiple: "",
                     pagination: "",
                     "max-items": "10",
+                    search: "",
                     data: _vm.search_all_purchase_received
                   },
                   scopedSlots: _vm._u([

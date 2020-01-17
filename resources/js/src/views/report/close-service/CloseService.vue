@@ -28,7 +28,7 @@
                         icon="DollarSignIcon"
                         icon-right
                         :statistic="$formatter.format(total_close_service)"
-                        statisticTitle="លក់បាន"/>
+                        statisticTitle="ថ្លៃឈ្នួល"/>
             </div>
         </div>
     </vx-card>

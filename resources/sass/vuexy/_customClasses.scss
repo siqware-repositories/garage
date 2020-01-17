@@ -553,3 +553,38 @@ ul.bordered-items {
 .vue-instant__suggestions{
   z-index: 999 !important;
 }
+.sweet-modal .sweet-title>h2 {
+  line-height: 64px;
+}
+//print
+//print
+@media print {
+  /*.flex{
+    display: flex;
+  }
+  .ml-2{
+    margin-left:.4rem !important;
+  }
+  .p-2{padding:1.5rem!important}
+  .bordered{
+    border: 1px dashed;
+    box-sizing: border-box;
+  }*/
+  body * {
+    visibility: hidden;
+  }
+  #section-to-print, #section-to-print * {
+    visibility: visible;
+  }
+  #section-to-print {
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin: 0;
+    padding: 0;
+  }
+}
+.bordered{
+  border: 1px dashed;
+  box-sizing: border-box;
+}

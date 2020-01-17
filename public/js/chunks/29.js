@@ -628,7 +628,7 @@ var render = function() {
                 icon: "DollarSignIcon",
                 "icon-right": "",
                 statistic: _vm.$formatter.format(_vm.total_due_balance),
-                statisticTitle: "ជំពាក់"
+                statisticTitle: "ជំពាក់គេ"
               }
             })
           ],

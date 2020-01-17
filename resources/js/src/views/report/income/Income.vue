@@ -28,7 +28,7 @@
                         icon="DollarSignIcon"
                         icon-right
                         :statistic="$formatter.format(_total_income)"
-                        statisticTitle="ចំណាយ"/>
+                        statisticTitle="ចំណូល"/>
             </div>
         </div>
         <div class="flex btn-group">
