@@ -7,70 +7,70 @@
             </div>
             <vx-card no-shadow>
                 <div id="printMe">
-                    <table>
+                    <table class="custom">
                         <tr>
-                            <td>អ្នកផ្គត់ផ្គង់</td>
-                            <td>Purchase Status</td>
-                            <td>ទីតាំងទិញចូល</td>
-                            <td>ពិពណ៌នា</td>
-                            <td>ថ្ងៃខែឆ្នាំទិញចូល</td>
-                            <td>Barcode</td>
+                            <td class="custom">អ្នកផ្គត់ផ្គង់</td>
+                            <td class="custom">Purchase Status</td>
+                            <td class="custom">ទីតាំងទិញចូល</td>
+                            <td class="custom">ពិពណ៌នា</td>
+                            <td class="custom">ថ្ងៃខែឆ្នាំទិញចូល</td>
+                            <td class="custom">Barcode</td>
                         </tr>
                         <tr>
-                            <td>
+                            <td class="custom">
                                 ឈ្មោះ: {{purchase.supplier.name}}<br>
                                 ក្រុមហ៊ុន: {{purchase.supplier.company}}<br>
                                 ទំនាក់ទំនង: {{purchase.supplier.contact}}<br>
                             </td>
-                            <td>{{purchase.purchase_status}}</td>
-                            <td>{{purchase.location}}</td>
-                            <td>{{purchase.description}}</td>
-                            <td>{{purchase.purchase_date}}</td>
+                            <td class="custom">{{purchase.purchase_status}}</td>
+                            <td class="custom">{{purchase.location}}</td>
+                            <td class="custom">{{purchase.description}}</td>
+                            <td class="custom">{{purchase.purchase_date}}</td>
                             <td class="p-2">
-                                <bar-code :value="purchase.id" :options="{ displayValue: true }"></bar-code>
+                                <bar-code :value="purchase.id" tag="img" :options="{ displayValue: true }"></bar-code>
                             </td>
                         </tr>
                     </table>
                     <vs-divider/>
-                    <table>
+                    <table class="custom">
                         <thead>
                         <tr>
-                            <th>ល.រ</th>
-                            <th>ឈ្មោះ</th>
-                            <th>ពិពណ៌នា</th>
-                            <th>ចំនួន</th>
-                            <th>តម្លៃទិញ</th>
-                            <th>តម្លៃលក់</th>
-                            <th>សរុប</th>
+                            <th class="custom">ល.រ</th>
+                            <th class="custom">ឈ្មោះ</th>
+                            <th class="custom">ពិពណ៌នា</th>
+                            <th class="custom">ចំនួន</th>
+                            <th class="custom">តម្លៃទិញ</th>
+                            <th class="custom">តម្លៃលក់</th>
+                            <th class="custom">សរុប</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr :key="indextr" v-for="(tr, indextr) in purchase.items">
-                            <td class="pl-2 print:pl-2">
+                            <td class="pl-2 custom">
                                 {{indextr+1}}
                             </td>
-                            <td class="pl-2 print:pl-2">
+                            <td class="pl-2 custom">
                                 {{tr.name}}
                             </td>
-                            <td class="pl-2 print:pl-2">
+                            <td class="pl-2 custom">
                                 {{ tr.description }}
                             </td>
-                            <td class="pl-2 print:pl-2">
+                            <td class="pl-2 custom">
                                 {{tr.qty}}
                             </td>
-                            <td class="pl-2 print:pl-2">
+                            <td class="pl-2 custom">
                                 <money-format :value="parseFloat(tr.purchase_price)"
                                               locale='en'
                                               currency-code='USD'>
                                 </money-format>
                             </td>
-                            <td class="pl-2 print:pl-2">
+                            <td class="pl-2 custom">
                                 <money-format :value="parseFloat(tr.sale_price)"
                                               locale='en'
                                               currency-code='USD'>
                                 </money-format>
                             </td>
-                            <td class="pl-2 print:pl-2">
+                            <td class="pl-2 custom">
                                 <money-format :value="tr.amount = tr.purchase_price*tr.qty"
                                               locale='en'
                                               currency-code='USD'>
@@ -80,15 +80,15 @@
                         </tbody>
                         <tfoot>
                         <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td class="custom"></td>
+                            <td class="custom"></td>
+                            <td class="custom"></td>
+                            <td class="custom"></td>
+                            <td class="custom"></td>
                             <td class="md:text-right">
                                 សរុប
                             </td>
-                            <td class="pl-2 print:pl-2">
+                            <td class="pl-2 custom">
                                 {{$formatter.format(purchase.amount)}}
                             </td>
                         </tr>
@@ -141,7 +141,6 @@
     import vSelect from 'vue-select'
     import VueBarcode from '@xkeshi/vue-barcode';
     import MoneyFormat from 'vue-money-format'
-    import printJS from 'print-js'
     export default {
         name: "showPurchase",
         components: {
@@ -182,16 +181,19 @@
             }
         },
         methods: {
-            async _print() {
-                const el = document.querySelector('#printMe');
-                const options = {
-                    type: 'dataURL'
-                };
-                return await this.$html2canvas(el, options);
-            },
             async printHtml() {
-                let image = await this._print();
-                printJS(image, 'image')
+                $("#printMe").printThis({
+                    pageTitle: `Print Invoice No: ${this.purchase.id}`,
+                    beforePrintEvent: function () {
+                        console.log('after before print printing')
+                    },     // function for printEvent in iframe
+                    beforePrint: function () {
+                        console.log('before print printing')
+                    },          // function called before iframe is filled
+                    afterPrint: function () {
+                        console.log('after print printing')
+                    }            // function called before iframe is removed
+                });
             },
             show(data) {
                 let self = this;
@@ -223,5 +225,4 @@
 </script>
 
 <style scoped>
-    table, td, th {border: 1px solid black;}  table {border-collapse: collapse;width: 100%;}  th {text-align: left;}
 </style>

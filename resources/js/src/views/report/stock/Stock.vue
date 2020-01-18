@@ -48,6 +48,7 @@
                 <vs-th sort-key="id">ID</vs-th>
                 <vs-th sort-key="name">Name</vs-th>
                 <vs-th>Qty</vs-th>
+                <vs-th sort-key="inventory_type">Inventory Type</vs-th>
                 <vs-th sort-key="unit">Unit</vs-th>
                 <vs-th sort-key="category">Category</vs-th>
                 <vs-th sort-key="brand">Brand</vs-th>
@@ -63,6 +64,9 @@
                     </vs-td>
                     <vs-td>
                         {{sum_qty(item.purchase_detail)}}
+                    </vs-td>
+                    <vs-td :data="item.inventory_type">
+                        {{ item.inventory_type }}
                     </vs-td>
                     <vs-td :data="item.unit">
                         {{ item.unit }}

@@ -12,7 +12,7 @@ class ReportController extends Controller
 {
     //stock
     public function stock(){
-        return Product::with('purchase_detail')->whereIn('inventory_type',['inventory_part','sale_only'])->get();
+        return Product::with('purchase_detail')->whereNotIn('inventory_type',['service'])->get();
     }
     //purchase
     public function purchase(){

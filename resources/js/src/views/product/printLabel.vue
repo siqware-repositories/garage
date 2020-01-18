@@ -1,6 +1,6 @@
 <template>
         <sweet-modal ref="printLabel" title="Print Label" :blocking="true" :width="!mobilecheck()?'60%':''">
-            <div id="section-to-print" class="flex">
+            <div id="printMe" class="flex">
                 <div v-for="(i,index) in 10" :key="index" class="text-center p-2 ml-2 bordered">
                     Border sizing
                     <bar-code :value="1" tag="img" :options="{ displayValue: true ,height:50, width:2}"></bar-code>
@@ -12,7 +12,6 @@
 
 <script>
     import VueBarcode from '@xkeshi/vue-barcode';
-    import printJS from 'print-js'
     export default {
         name: "printLabel",
         components:{
@@ -24,8 +23,18 @@
                 self.$refs.printLabel.open();
             },
             printHtml(){
-                // this.$htmlToPaper('printMe');
-                window.print();
+                $("#printMe").printThis({
+                    pageTitle: `Print Invoice No: ${this.purchase.id}`,
+                    beforePrintEvent: function () {
+                        console.log('after before print printing')
+                    },     // function for printEvent in iframe
+                    beforePrint: function () {
+                        console.log('before print printing')
+                    },          // function called before iframe is filled
+                    afterPrint: function () {
+                        console.log('after print printing')
+                    }            // function called before iframe is removed
+                });
             }
         }
     }

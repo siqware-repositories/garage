@@ -43,7 +43,6 @@ Vue.use(VueHammer);
 import 'prismjs'
 import 'prismjs/themes/prism-tomorrow.css'
 
-
 // Vue select css
 // Note: In latest version you have to add it separately
 // import 'vue-select/dist/vue-select.css';
@@ -52,8 +51,8 @@ import 'prismjs/themes/prism-tomorrow.css'
 import VeeValidate from 'vee-validate'
 Vue.use(VeeValidate);
 //Tinymce Editor
-import tinymce from 'vue-tinymce-editor'
-Vue.component('tinymce', tinymce);
+/*import tinymce from 'vue-tinymce-editor'
+Vue.component('tinymce', tinymce);*/
 //modal
 import VModal from 'vue-js-modal'
 Vue.use(VModal);
@@ -68,23 +67,6 @@ Vue.prototype.mobilecheck = function() {
 //print
 import VueHtml2Canvas from 'vue-html2canvas';
 Vue.use(VueHtml2Canvas);
-
-import VueHtmlToPaper from 'vue-html-to-paper';
-const options = {
-    name: '_blank',
-    specs: [
-        'fullscreen=yes',
-        'titlebar=yes',
-        'scrollbars=yes'
-    ],
-    styles: [
-        'https://fonts.googleapis.com/css?family=Battambang&display=swap',
-        'http://localhost:3000/css/main.css',
-        'http://localhost:3000/css/vuesax.css',
-        'http://localhost:3000/css/app.css'
-    ]
-};
-Vue.use(VueHtmlToPaper);
 //date range
 import DateRangePicker from 'vue-mj-daterangepicker'
 import 'vue-mj-daterangepicker/dist/vue-mj-daterangepicker.css'
@@ -95,16 +77,15 @@ Vue.prototype.$formatter = new Intl.NumberFormat('en-US', {
     currency: 'USD',
 });
 //moment
-import moment from 'moment';
-Vue.prototype.$moment = moment;
-Vue.config.productionTip = false;
+Vue.prototype.$moment = require('moment');
 //auto suggestion
-import VueBootstrapTypeahead from 'vue-bootstrap-typeahead'
-// Global registration
-Vue.component('vue-bootstrap-typeahead', VueBootstrapTypeahead);
 import VueInstant from 'vue-instant/dist/vue-instant.common'
 Vue.use(VueInstant);
-
+//jquery
+window.$ = window.jQuery = require('jquery');
+//printThis
+window.printThis = require('./plugins/printThis');
+Vue.config.productionTip = false;
 new Vue({
     router,
     store,
