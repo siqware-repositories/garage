@@ -13,10 +13,12 @@ import Vuesax from 'vuesax'
 
 Vue.use(Vuesax)
 
-// axios
-import axios from "./axios.js"
-Vue.prototype.$http = axios
-
+//axios
+window.axios = require('axios');
+const token = JSON.parse(localStorage.getItem("userInfo"));
+if (token) {
+    axios.defaults.headers.common['Authorization'] = `Bearer ${token.access_token}`;
+}
 
 // Theme Configurations
 import '../themeConfig.js'

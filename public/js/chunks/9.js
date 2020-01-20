@@ -484,20 +484,35 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "printLabel",
   components: {
     'bar-code': _xkeshi_vue_barcode__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
+  data: function data() {
+    return {
+      data: {
+        products: [{
+          name: 'name',
+          id: 1
+        }]
+      }
+    };
+  },
   methods: {
     show: function show(data) {
       var self = this;
       self.$refs.printLabel.open();
+      self.data.products = data;
     },
     printHtml: function printHtml() {
       $("#printMe").printThis({
-        pageTitle: "Print Invoice No: ".concat(this.purchase.id),
+        pageTitle: "Print Invoice No: 1",
         beforePrintEvent: function beforePrintEvent() {
           console.log('after before print printing');
         },
@@ -1469,28 +1484,41 @@ var render = function() {
       }
     },
     [
-      _c(
-        "div",
-        { staticClass: "flex", attrs: { id: "printMe" } },
-        _vm._l(10, function(i, index) {
-          return _c(
-            "div",
-            { key: index, staticClass: "text-center p-2 ml-2 bordered" },
-            [
-              _vm._v("\n            Border sizing\n            "),
-              _c("bar-code", {
-                attrs: {
-                  value: 1,
-                  tag: "img",
-                  options: { displayValue: true, height: 50, width: 2 }
-                }
-              })
-            ],
-            1
-          )
-        }),
-        0
-      ),
+      _c("div", { staticClass: "px-3", attrs: { id: "printMe" } }, [
+        _c(
+          "div",
+          { staticClass: "vx-row" },
+          _vm._l(_vm.data.products, function(item, index) {
+            return _c(
+              "div",
+              {
+                key: index,
+                staticClass:
+                  "vx-col md:w-1/4 w-full bordered print:w-1/4 text-left"
+              },
+              [
+                _c("div", { staticClass: "label-text" }, [
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(item.name) +
+                      "\n                "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("bar-code", {
+                  attrs: {
+                    value: item.id,
+                    tag: "img",
+                    options: { displayValue: true, height: 50, width: 2 }
+                  }
+                })
+              ],
+              1
+            )
+          }),
+          0
+        )
+      ]),
       _vm._v(" "),
       _c(
         "vs-button",

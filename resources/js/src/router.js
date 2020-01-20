@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-
+import store from './store/store'
 Vue.use(Router);
 
 const router = new Router({
@@ -24,7 +24,10 @@ const router = new Router({
                 {
                     path: '/',
                     name: 'home',
-                    component: () => import('./views/product/Product')
+                    component: () => import('./views/product/Product'),
+                    meta:{
+                        requiresAuth: true
+                    }
                 },
                 {
                     path: '/product',
@@ -32,7 +35,8 @@ const router = new Router({
                     component: () => import('./views/product/Product'),
                     meta: {
                         pageTitle: 'ទំនិញ',
-                        rule: 'editor'
+                        rule: 'editor',
+                        requiresAuth: true
                     }
                 },
                 {
@@ -41,7 +45,8 @@ const router = new Router({
                     component: () => import('./views/purchase/Purchase'),
                     meta: {
                         pageTitle: 'ទិញចូល',
-                        rule: 'editor'
+                        rule: 'editor',
+                        requiresAuth: true
                     }
                 },
                 {
@@ -50,7 +55,8 @@ const router = new Router({
                     component: () => import('./views/sale/Sale'),
                     meta: {
                         pageTitle: 'លក់ចេញ',
-                        rule: 'editor'
+                        rule: 'editor',
+                        requiresAuth: true
                     }
                 },
                 {
@@ -59,7 +65,8 @@ const router = new Router({
                     component: () => import('./views/employee/Employee'),
                     meta: {
                         pageTitle: 'បុគ្គលិក',
-                        rule: 'editor'
+                        rule: 'editor',
+                        requiresAuth: true
                     }
                 },
                 {
@@ -68,7 +75,8 @@ const router = new Router({
                     component: () => import('./views/user/User'),
                     meta: {
                         pageTitle: 'អ្នកប្រើប្រាស់',
-                        rule: 'editor'
+                        rule: 'editor',
+                        requiresAuth: true
                     }
                 },
                 {
@@ -77,7 +85,8 @@ const router = new Router({
                     component: () => import('./views/income/Income'),
                     meta: {
                         pageTitle: 'ចំណូល',
-                        rule: 'editor'
+                        rule: 'editor',
+                        requiresAuth: true
                     }
                 },
                 {
@@ -86,7 +95,8 @@ const router = new Router({
                     component: () => import('./views/expense/Expense'),
                     meta: {
                         pageTitle: 'ចំណាយ',
-                        rule: 'editor'
+                        rule: 'editor',
+                        requiresAuth: true
                     }
                 },
                 {
@@ -95,7 +105,8 @@ const router = new Router({
                     component: () => import('./views/report/stock/Stock'),
                     meta: {
                         pageTitle: 'របាយការណ៍ស្តុក',
-                        rule: 'editor'
+                        rule: 'editor',
+                        requiresAuth: true
                     }
                 },
                 {
@@ -104,7 +115,8 @@ const router = new Router({
                     component: () => import('./views/report/purchase/Purchase'),
                     meta: {
                         pageTitle: 'របាយការណ៍ទិញ',
-                        rule: 'editor'
+                        rule: 'editor',
+                        requiresAuth: true
                     }
                 },
                 {
@@ -113,7 +125,8 @@ const router = new Router({
                     component: () => import('./views/report/sale/Sale'),
                     meta: {
                         pageTitle: 'របាយការណ៍លក់',
-                        rule: 'editor'
+                        rule: 'editor',
+                        requiresAuth: true
                     }
                 },
                 {
@@ -122,7 +135,8 @@ const router = new Router({
                     component: () => import('./views/report/profit-lost/ProfitLost'),
                     meta: {
                         pageTitle: 'របាយការណ៍ ចំណេញ~ខាត នៃការលក់',
-                        rule: 'editor'
+                        rule: 'editor',
+                        requiresAuth: true
                     }
                 },
                 {
@@ -131,7 +145,8 @@ const router = new Router({
                     component: () => import('./views/report/income/Income'),
                     meta: {
                         pageTitle: 'របាយការណ៍ ចំណូល',
-                        rule: 'editor'
+                        rule: 'editor',
+                        requiresAuth: true
                     }
                 },
                 {
@@ -140,7 +155,8 @@ const router = new Router({
                     component: () => import('./views/report/expense/Expense'),
                     meta: {
                         pageTitle: 'របាយការណ៍ ចំណាយ',
-                        rule: 'editor'
+                        rule: 'editor',
+                        requiresAuth: true
                     }
                 },
                 {
@@ -149,7 +165,8 @@ const router = new Router({
                     component: () => import('./views/report/best-seller/BestSeller'),
                     meta: {
                         pageTitle: 'របាយការណ៍ ទំនិញលក់ដាច់ជាងគេ',
-                        rule: 'editor'
+                        rule: 'editor',
+                        requiresAuth: true
                     }
                 },
                 {
@@ -158,7 +175,8 @@ const router = new Router({
                     component: () => import('./views/report/close-sell/CloseSell'),
                     meta: {
                         pageTitle: 'របាយការណ៍ បិទបញ្ជីលក់',
-                        rule: 'editor'
+                        rule: 'editor',
+                        requiresAuth: true
                     }
                 },
                 {
@@ -167,7 +185,8 @@ const router = new Router({
                     component: () => import('./views/report/close-service/CloseService'),
                     meta: {
                         pageTitle: 'របាយការណ៍ បិទបញ្ជីថ្លៃឈ្នួល',
-                        rule: 'editor'
+                        rule: 'editor',
+                        requiresAuth: true
                     }
                 },
                 {
@@ -176,7 +195,8 @@ const router = new Router({
                     component: () => import('./views/report/close-income/CloseIncome'),
                     meta: {
                         pageTitle: 'របាយការណ៍ បិទបញ្ជីចំណូល',
-                        rule: 'editor'
+                        rule: 'editor',
+                        requiresAuth: true
                     }
                 },
                 {
@@ -185,7 +205,8 @@ const router = new Router({
                     component: () => import('./views/report/close-list/CloseList'),
                     meta: {
                         pageTitle: 'របាយការណ៍ បិទបញ្ជីសរុប',
-                        rule: 'editor'
+                        rule: 'editor',
+                        requiresAuth: true
                     }
                 },
                 {
@@ -198,7 +219,8 @@ const router = new Router({
                             {title: 'អ្នកប្រើប្រាស់', active: true},
                         ],
                         pageTitle: 'អ្នកប្រើប្រាស់',
-                        rule: 'editor'
+                        rule: 'editor',
+                        requiresAuth: true
                     }
                 },
             ],
@@ -238,6 +260,17 @@ router.afterEach(() => {
     const appLoading = document.getElementById('loading-bg')
     if (appLoading) {
         appLoading.style.display = "none";
+    }
+});
+router.beforeEach((to, from, next) => {
+    if(to.matched.some(record => record.meta.requiresAuth)) {
+        if (store.getters.isAuthenticated) {
+            next();
+            return
+        }
+        next('/pages/login')
+    } else {
+        next()
     }
 });
 

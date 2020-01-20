@@ -45,7 +45,8 @@ const state = {
     // Can be used to get current window with
     // Note: Above breakpoint state is for internal use of sidebar & navbar component
     windowWidth: null,
-    appUrl:'http://localhost:3000/'
+    appUrl:'http://localhost:3000/',
+    token: JSON.parse(localStorage.getItem("userInfo")) || ''
 };
 
 export default state

@@ -1477,9 +1477,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! firebase/app */ "./node_modules/firebase/app/dist/index.cjs.js");
-/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(firebase_app__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var firebase_auth__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! firebase/auth */ "./node_modules/firebase/auth/dist/index.esm.js");
 //
 //
 //
@@ -1546,8 +1543,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
-
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {};
@@ -1559,30 +1554,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     logout: function logout() {
-      var _this = this;
-
-      // if user is logged in via auth0
-      if (this.$auth.profile) this.$auth.logOut(); // if user is logged in via firebase
-
-      var firebaseCurrentUser = firebase_app__WEBPACK_IMPORTED_MODULE_0___default.a.auth().currentUser;
-
-      if (firebaseCurrentUser) {
-        firebase_app__WEBPACK_IMPORTED_MODULE_0___default.a.auth().signOut().then(function () {
-          _this.$router.push('/pages/login').catch(function () {});
-        });
-      } // If JWT login
-
-
-      if (localStorage.getItem("accessToken")) {
-        localStorage.removeItem("accessToken");
-        this.$router.push('/pages/login').catch(function () {});
-      } // Change role on logout. Same value as initialRole of acj.js
-
-
-      this.$acl.change('admin');
-      localStorage.removeItem('userInfo'); // This is just for demo Purpose. If user clicks on logout -> redirect
-
-      this.$router.push('/pages/login').catch(function () {});
+      localStorage.removeItem('userInfo');
+      window.location.href = "/pages/login";
     }
   }
 });
@@ -2713,7 +2686,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     var _created = _asyncToGenerator(
     /*#__PURE__*/
     _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-      var self, color;
+      var self, color, token;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
@@ -2727,11 +2700,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 type: 'material'
               });
               _context.next = 7;
-              return Promise.all([self.$store.dispatch('fetchUnit'), self.$store.dispatch('fetchBrand'), self.$store.dispatch('fetchCategory'), self.$store.dispatch('fetchProduct'), self.$store.dispatch('fetchPurchase'), self.$store.dispatch('fetchInvoice'), self.$store.dispatch('fetchSupplier'), self.$store.dispatch('fetchReportStock'), self.$store.dispatch('fetchReportBestSeller'), self.$store.dispatch('fetchIncome'), self.$store.dispatch('fetchExpense'), self.$store.dispatch('fetchReportCloseService'), self.$store.dispatch('fetchInvestment'), self.$store.dispatch('fetchReportClosePayroll'), self.$store.dispatch('fetchPayroll'), self.$store.dispatch('fetchUser'), self.$store.dispatch('fetchEmployee'), self.$store.dispatch('fetchIncomeType'), self.$store.dispatch('fetchExpenseType'), self.$store.dispatch('fetchCustomer'), self.$store.dispatch('fetchPurchaseDetail')]).then(function () {
+              return Promise.all([self.$store.dispatch('fetchUnit'), self.$store.dispatch('fetchBrand'), self.$store.dispatch('fetchCategory'), self.$store.dispatch('fetchProduct'), self.$store.dispatch('fetchPurchase'), self.$store.dispatch('fetchInvoice'), self.$store.dispatch('fetchSupplier'), self.$store.dispatch('fetchReportStock'), self.$store.dispatch('fetchReportBestSeller'), self.$store.dispatch('fetchIncome'), self.$store.dispatch('fetchExpense'), self.$store.dispatch('fetchReportCloseService'), self.$store.dispatch('fetchInvestment'), self.$store.dispatch('fetchReportClosePayroll'), self.$store.dispatch('fetchPayroll'), self.$store.dispatch('fetchUser'), self.$store.dispatch('fetchEmployee'), self.$store.dispatch('fetchIncomeType'), self.$store.dispatch('fetchExpenseType'), self.$store.dispatch('fetchCustomer'), self.$store.dispatch('fetchPurchaseDetail'), self.$store.dispatch('fetchUser')]).then(function () {
                 self.$vs.loading.close();
               });
 
             case 7:
+              token = JSON.parse(localStorage.getItem("userInfo"));
+
+              if (!token) {
+                _context.next = 11;
+                break;
+              }
+
+              _context.next = 11;
+              return self.$store.dispatch('updateUserData', token);
+
+            case 11:
             case "end":
               return _context.stop();
           }
@@ -4098,8 +4082,6 @@ var render = function() {
             _vm._v(" "),
             _c("search-bar"),
             _vm._v(" "),
-            _c("notification-drop-down"),
-            _vm._v(" "),
             _c("profile-drop-down")
           ],
           1
@@ -4162,8 +4144,6 @@ var render = function() {
             _c("vs-spacer"),
             _vm._v(" "),
             _c("search-bar"),
-            _vm._v(" "),
-            _c("notification-drop-down"),
             _vm._v(" "),
             _c("profile-drop-down")
           ],
@@ -4381,7 +4361,7 @@ var render = function() {
                       )
                     },
                     searchLimit: 5,
-                    placeholder: "Explore Vuexy...",
+                    placeholder: "Search...",
                     inputClassses: "w-full",
                     "show-action": "",
                     "show-pinned": "",
@@ -4664,148 +4644,24 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("vs-dropdown-menu", { staticClass: "vx-navbar-dropdown" }, [
-                _c(
-                  "ul",
-                  { staticStyle: { "min-width": "9rem" } },
-                  [
-                    _c(
-                      "li",
-                      {
-                        staticClass:
-                          "flex py-2 px-4 cursor-pointer hover:bg-primary hover:text-white",
-                        on: {
-                          click: function($event) {
-                            _vm.$router
-                              .push("/pages/profile")
-                              .catch(function() {})
-                          }
-                        }
-                      },
-                      [
-                        _c("feather-icon", {
-                          attrs: { icon: "UserIcon", svgClasses: "w-4 h-4" }
-                        }),
-                        _vm._v(" "),
-                        _c("span", { staticClass: "ml-2" }, [_vm._v("Profile")])
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "li",
-                      {
-                        staticClass:
-                          "flex py-2 px-4 cursor-pointer hover:bg-primary hover:text-white",
-                        on: {
-                          click: function($event) {
-                            _vm.$router.push("/apps/email").catch(function() {})
-                          }
-                        }
-                      },
-                      [
-                        _c("feather-icon", {
-                          attrs: { icon: "MailIcon", svgClasses: "w-4 h-4" }
-                        }),
-                        _vm._v(" "),
-                        _c("span", { staticClass: "ml-2" }, [_vm._v("Inbox")])
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "li",
-                      {
-                        staticClass:
-                          "flex py-2 px-4 cursor-pointer hover:bg-primary hover:text-white",
-                        on: {
-                          click: function($event) {
-                            _vm.$router.push("/apps/todo").catch(function() {})
-                          }
-                        }
-                      },
-                      [
-                        _c("feather-icon", {
-                          attrs: {
-                            icon: "CheckSquareIcon",
-                            svgClasses: "w-4 h-4"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("span", { staticClass: "ml-2" }, [_vm._v("Tasks")])
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "li",
-                      {
-                        staticClass:
-                          "flex py-2 px-4 cursor-pointer hover:bg-primary hover:text-white",
-                        on: {
-                          click: function($event) {
-                            _vm.$router.push("/apps/chat").catch(function() {})
-                          }
-                        }
-                      },
-                      [
-                        _c("feather-icon", {
-                          attrs: {
-                            icon: "MessageSquareIcon",
-                            svgClasses: "w-4 h-4"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("span", { staticClass: "ml-2" }, [_vm._v("Chat")])
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "li",
-                      {
-                        staticClass:
-                          "flex py-2 px-4 cursor-pointer hover:bg-primary hover:text-white",
-                        on: {
-                          click: function($event) {
-                            _vm.$router
-                              .push("/apps/eCommerce/wish-list")
-                              .catch(function() {})
-                          }
-                        }
-                      },
-                      [
-                        _c("feather-icon", {
-                          attrs: { icon: "HeartIcon", svgClasses: "w-4 h-4" }
-                        }),
-                        _vm._v(" "),
-                        _c("span", { staticClass: "ml-2" }, [
-                          _vm._v("Wish List")
-                        ])
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c("vs-divider", { staticClass: "m-1" }),
-                    _vm._v(" "),
-                    _c(
-                      "li",
-                      {
-                        staticClass:
-                          "flex py-2 px-4 cursor-pointer hover:bg-primary hover:text-white",
-                        on: { click: _vm.logout }
-                      },
-                      [
-                        _c("feather-icon", {
-                          attrs: { icon: "LogOutIcon", svgClasses: "w-4 h-4" }
-                        }),
-                        _vm._v(" "),
-                        _c("span", { staticClass: "ml-2" }, [_vm._v("Logout")])
-                      ],
-                      1
-                    )
-                  ],
-                  1
-                )
+                _c("ul", { staticStyle: { "min-width": "9rem" } }, [
+                  _c(
+                    "li",
+                    {
+                      staticClass:
+                        "flex py-2 px-4 cursor-pointer hover:bg-primary hover:text-white",
+                      on: { click: _vm.logout }
+                    },
+                    [
+                      _c("feather-icon", {
+                        attrs: { icon: "LogOutIcon", svgClasses: "w-4 h-4" }
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "ml-2" }, [_vm._v("Logout")])
+                    ],
+                    1
+                  )
+                ])
               ])
             ],
             1
@@ -4868,7 +4724,7 @@ var render = function() {
               inputClassses:
                 "w-full vs-input-no-border vs-input-no-shdow-focus",
               icon: "SearchIcon",
-              placeholder: "Explore Vuexy..."
+              placeholder: "Search..."
             },
             on: {
               input: _vm.hnd_search_query_update,

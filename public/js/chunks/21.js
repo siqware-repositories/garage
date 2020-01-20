@@ -586,7 +586,6 @@ __webpack_require__.r(__webpack_exports__);
                 icon: 'icon-check',
                 position: 'top-center'
               });
-              self.fetchUser();
               self.$emit('finished');
             } else {
               self.$vs.notify({

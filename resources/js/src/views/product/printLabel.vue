@@ -1,9 +1,13 @@
 <template>
         <sweet-modal ref="printLabel" title="Print Label" :blocking="true" :width="!mobilecheck()?'60%':''">
-            <div id="printMe" class="flex">
-                <div v-for="(i,index) in 10" :key="index" class="text-center p-2 ml-2 bordered">
-                    Border sizing
-                    <bar-code :value="1" tag="img" :options="{ displayValue: true ,height:50, width:2}"></bar-code>
+            <div id="printMe" class="px-3">
+                <div class="vx-row">
+                    <div v-for="(item,index) in data.products" :key="index" class="vx-col md:w-1/4 w-full bordered print:w-1/4 text-left">
+                        <div class="label-text">
+                            {{item.name}}
+                        </div>
+                        <bar-code :value="item.id" tag="img" :options="{ displayValue: true ,height:50, width:2}"></bar-code>
+                    </div>
                 </div>
             </div>
             <vs-button @click="printHtml" slot="button">Print</vs-button>
@@ -17,14 +21,22 @@
         components:{
             'bar-code': VueBarcode,
         },
+        data(){
+            return{
+                data:{
+                    products:[{name:'name',id:1}]
+                }
+            }
+        },
         methods:{
             show(data){
                 let self = this;
                 self.$refs.printLabel.open();
+                self.data.products = data;
             },
             printHtml(){
                 $("#printMe").printThis({
-                    pageTitle: `Print Invoice No: ${this.purchase.id}`,
+                    pageTitle: `Print Invoice No: 1`,
                     beforePrintEvent: function () {
                         console.log('after before print printing')
                     },     // function for printEvent in iframe

@@ -259,11 +259,14 @@
                 self.$store.dispatch('fetchExpenseType'),
                 self.$store.dispatch('fetchCustomer'),
                 self.$store.dispatch('fetchPurchaseDetail'),
+                self.$store.dispatch('fetchUser')
             ]).then(function () {
                 self.$vs.loading.close();
             });
-
-
+            const token = JSON.parse(localStorage.getItem("userInfo"));
+            if (token) {
+                await self.$store.dispatch('updateUserData',token);
+            }
         }
     }
 

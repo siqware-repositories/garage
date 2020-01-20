@@ -26,7 +26,8 @@ const getters = {
   },
   getAppUrl:function (state) {
     return state.appUrl
-  }
+  },
+  isAuthenticated: state => !!state.token,
 }
 
 export default getters

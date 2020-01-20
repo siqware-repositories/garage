@@ -774,7 +774,9 @@ ul.bordered-items {
     padding-bottom: 3rem !important
   }
 }
-
+.label-text {
+  font-size: smaller;
+}
 .bordered {
   border: 1px dashed;
   box-sizing: border-box;

@@ -98,7 +98,6 @@
                                     icon: 'icon-check',
                                     position: 'top-center'
                                 });
-                                self.fetchUser();
                                 self.$emit('finished');
                             } else {
                                 self.$vs.notify({

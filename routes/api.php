@@ -17,6 +17,11 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+//user
+Route::resource('/user', 'UserController');
+Route::post('/user-register', 'UserController@register')->name('user.register');
+Route::post('/user-login', 'UserController@login')->name('user.login');
+//end user
 Route::post('/file-upload','FileUploadController@upload')->name('file.upload');
 Route::post('/file-upload-thumb','FileUploadController@upload_thumb')->name('file.upload.thumb');
 Route::resource('/product','ProductController');
