@@ -2,7 +2,7 @@
     <div>
         <modal width="90%" height="auto" :scrollable="true" :pivotY="0.2" :clickToClose="false" name="edit-purchase">
             <div class="flex justify-end">
-                <i @click="$modal.hide('edit-purchase')" class="vs-icon vs-popup--close material-icons text-warning"
+                <i @click="$modal.hide('edit-purchase');$barcodeScanner.destroy()" class="vs-icon vs-popup--close material-icons text-warning"
                    style="background: rgb(255, 255, 255);">close</i>
             </div>
             <vx-card no-shadow>
@@ -183,7 +183,7 @@
                     amount:0,
                     qty:0,
                     old_due:0,
-                    items:[{id:'',name:null,description:null,qty:1,purchase_price:1,sale_price:1,amount:1,inventory_type:''}]
+                    items:[]
                 },
             }
         },
@@ -219,6 +219,12 @@
             let y = this.total;
         },
         methods: {
+            // Create callback function to receive barcode when the scanner is already done
+            onBarcodeScanned (barcode) {
+                this.addItemLine();
+                let index = this.purchase.items.length-1;
+                this.selectProduct({id:parseInt(barcode)},index);
+            },
             searchSupplier(option, label, search) {
                 return (
                     String(label).toLowerCase().indexOf(search.toLowerCase()) > -1 ||
@@ -249,6 +255,7 @@
                     return parseInt(x.id) === parseInt(id.id);
                 });
                 self.purchase.items[index].name = selected[0].name;
+                self.purchase.items[index].id = {id:selected[0].id,name:`ID: ${selected[0].id} - ${selected[0].name}`};
                 self.purchase.items[index].description = selected[0].description;
                 self.purchase.items[index].sale_price = selected[0].default_sale;
                 self.purchase.items[index].inventory_type = selected[0].inventory_type;
@@ -257,6 +264,9 @@
             show(data) {
                 let self = this;
                 this.$modal.show('edit-purchase');
+                self.purchase.items = [];
+                this.$barcodeScanner.init(this.onBarcodeScanned);
+                this.purchase.items = [];
                 this.purchase.id = data.id;
                 this.purchase.supplier = data.supplier;
                 this.purchase.location = data.location;
@@ -265,9 +275,8 @@
                 this.purchase.description = data.description;
                 this.purchase.balance = data.balance;
                 this.purchase.old_due = data.due_balance;
-                self.purchase.items = [];
                 data.purchase_detail.forEach(function (item,index) {
-                    self.purchase.items.push({id:item.product,name:item.product.name,description:item.product.description,qty:item.qty,purchase_price:item.purchase,sale_price:item.sale,amount:item.amount,inventory_type:item.inventory_type})
+                    self.purchase.items.push({id:{id:item.product.id,name:`ID: ${item.product.id} - ${item.product.name}`},name:item.product.name,description:item.product.description,qty:item.qty,purchase_price:item.purchase,sale_price:item.sale,amount:item.amount,inventory_type:item.inventory_type})
                 })
             },
             //store

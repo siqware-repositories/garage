@@ -45,7 +45,6 @@
           background-overlay
           @input="hnd_search_query_update"
           @selected="selected">
-
           <!-- Pages Suggestion -->
           <template v-slot:pages="{ suggestion }">
             <div class="flex items-center justify-between">

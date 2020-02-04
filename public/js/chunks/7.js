@@ -961,8 +961,8 @@ var render = function() {
                       [
                         _c("bar-code", {
                           attrs: {
-                            value: _vm.data.id,
-                            options: { displayValue: true }
+                            value: "000" + _vm.data.id,
+                            options: { displayValue: true, height: 30 }
                           }
                         })
                       ],

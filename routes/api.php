@@ -51,3 +51,5 @@ Route::post('/report-stock','ReportController@stock')->name('report.stock');
 Route::post('/report-best-seller','ReportController@best_seller')->name('report.best_seller');
 Route::post('/report-close-service','ReportController@service')->name('report.close_service');
 Route::post('/report-close-payroll','ReportController@payroll')->name('report.close_payroll');
+//import
+Route::post('/import-product','ExcelImportController@import_product')->name('import.product');

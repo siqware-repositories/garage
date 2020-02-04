@@ -192,7 +192,23 @@
                 })
             },
         },
+        created () {
+            // Add barcode scan listener and pass the callback function
+            this.$barcodeScanner.init(this.onBarcodeScanned)
+        },
+        destroyed () {
+            // Remove listener when component is destroyed
+            this.$barcodeScanner.destroy()
+        },
         methods:{
+            // Create callback function to receive barcode when the scanner is already done
+            onBarcodeScanned(barcode) {
+                let event = window.event;
+                if(event.keyCode === 13) {
+                    event.preventDefault();
+                }
+                this.invoice_id = String(parseInt(barcode))
+            },
             //destroy
             async destroyPurchase(){
                 let self = this;

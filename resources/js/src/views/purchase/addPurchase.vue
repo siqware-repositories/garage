@@ -2,7 +2,7 @@
     <div>
         <modal width="90%" height="auto" :scrollable="true" :pivotY="0.2" :clickToClose="false" name="add">
             <div class="flex justify-end">
-                <i @click="$modal.hide('add')" class="vs-icon vs-popup--close material-icons text-warning"
+                <i @click="$modal.hide('add');$barcodeScanner.destroy()" class="vs-icon vs-popup--close material-icons text-warning"
                    style="background: rgb(255, 255, 255);">close</i>
             </div>
             <vx-card no-shadow>
@@ -173,7 +173,7 @@
                     due_balance:0,
                     amount:0,
                     qty:0,
-                    items:[{id:'',name:null,description:null,qty:1,purchase_price:1,sale_price:1,amount:1,inventory_type:''}]
+                    items:[]
                 },
             }
         },
@@ -209,6 +209,12 @@
             let y = this.total;
         },
         methods: {
+            // Create callback function to receive barcode when the scanner is already done
+            onBarcodeScanned (barcode) {
+                this.addItemLine();
+                let index = this.purchase.items.length-1;
+                this.selectProduct({id:parseInt(barcode)},index);
+            },
             searchSupplier(option, label, search) {
                 return (
                     String(label).toLowerCase().indexOf(search.toLowerCase()) > -1 ||
@@ -218,7 +224,6 @@
             },
             searchProduct(option, label, search) {
                 return (
-                    String(label).toLowerCase().indexOf(search.toLowerCase()) > -1 ||
                     String(option.id).toLowerCase().indexOf(search.toLowerCase()) > -1
                 );
             },
@@ -239,6 +244,7 @@
                     return parseInt(x.id) === parseInt(id.id);
                 });
                 self.purchase.items[index].name = selected[0].name;
+                self.purchase.items[index].id = {id:selected[0].id,name:`ID: ${selected[0].id} - ${selected[0].name}`};
                 self.purchase.items[index].description = selected[0].description;
                 self.purchase.items[index].inventory_type = selected[0].inventory_type;
                 self.purchase.items[index].sale_price = selected[0].default_sale;
@@ -246,6 +252,8 @@
             },
             show() {
                 this.$modal.show('add');
+                this.$barcodeScanner.init(this.onBarcodeScanned);
+                this.purchase.items = [];
             },
             //store
             storePurchase() {

@@ -147,5 +147,11 @@ export default [
                 icon: "UserIcon",
             }
             ]
-    }
+    },
+    {
+        url: "/import",
+        name: "Import Data",
+        slug: "import",
+        icon: "FilePlusIcon",
+    },
 ]

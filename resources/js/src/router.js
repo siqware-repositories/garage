@@ -210,6 +210,16 @@ const router = new Router({
                     }
                 },
                 {
+                    path: '/import',
+                    name: 'import-data',
+                    component: () => import('./views/import/Excel'),
+                    meta: {
+                        pageTitle: 'Import',
+                        rule: 'editor',
+                        requiresAuth: true
+                    }
+                },
+                {
                     path: '/page2',
                     name: 'page-2',
                     component: () => import('./views/Page2.vue'),

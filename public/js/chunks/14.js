@@ -171,6 +171,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       selected_received: []
     };
   },
+  created: function created() {
+    // Add barcode scan listener and pass the callback function
+    this.$barcodeScanner.init(this.onBarcodeScanned);
+  },
+  destroyed: function destroyed() {
+    // Remove listener when component is destroyed
+    this.$barcodeScanner.destroy();
+  },
   computed: {
     all_invoices: function all_invoices() {
       return this.$store.getters.all_invoice;
@@ -229,6 +237,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   methods: {
+    // Create callback function to receive barcode when the scanner is already done
+    onBarcodeScanned: function onBarcodeScanned(barcode) {
+      var event = window.event;
+
+      if (event.keyCode === 13) {
+        event.preventDefault();
+      }
+
+      this.invoice_id = String(parseInt(barcode));
+    },
     //destroy
     destroyInvoice: function () {
       var _destroyInvoice = _asyncToGenerator(
@@ -607,7 +625,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
 
 
 
@@ -641,16 +658,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         due_balance: 0,
         amount: 0,
         qty: 0,
-        items: [{
-          id: '',
-          name: null,
-          description: null,
-          qty: 1,
-          sale_price: 1,
-          amount: 1,
-          inventory_type: '',
-          remain_qty: ''
-        }]
+        items: []
       }
     };
   },
@@ -698,20 +706,24 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     var x = this.total_qty;
     var y = this.total;
   },
+  destroyed: function destroyed() {
+    // Remove listener when component is destroyed
+    this.$barcodeScanner.destroy();
+  },
   methods: {
+    // Create callback function to receive barcode when the scanner is already done
+    onBarcodeScanned: function onBarcodeScanned(barcode) {
+      this.addItemLine();
+      var index = this.invoice.items.length - 1;
+      this.selectProduct({
+        product_id: parseInt(barcode)
+      }, index);
+    },
     searchCustomer: function searchCustomer(option, label, search) {
       return String(label).toLowerCase().indexOf(search.toLowerCase()) > -1 || String(option.note).toLowerCase().indexOf(search.toLowerCase()) > -1 || String(option.contact).toLowerCase().indexOf(search.toLowerCase()) > -1;
     },
     searchProduct: function searchProduct(option, label, search) {
-      return (// String(label).toLowerCase().indexOf(search.toLowerCase()) > -1 ||
-        String(option.product.id).toLowerCase().indexOf(search.toLowerCase()) > -1
-        /*String(option.product.unit).toLowerCase().indexOf(search.toLowerCase()) > -1||
-        String(option.product.brand).toLowerCase().indexOf(search.toLowerCase()) > -1||
-        String(option.supplier.name).toLowerCase().indexOf(search.toLowerCase()) > -1||
-        String(option.supplier.company).toLowerCase().indexOf(search.toLowerCase()) > -1||
-        String(option.supplier.contact).toLowerCase().indexOf(search.toLowerCase()) > -1*/
-
-      );
+      return String(option.product.id).toLowerCase().indexOf(search.toLowerCase()) > -1;
     },
     //add line
     addItemLine: function addItemLine() {
@@ -736,9 +748,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     selectProduct: function selectProduct(id, index) {
       var self = this;
       var selected = self.all_purchase_details.filter(function (x) {
-        return parseInt(x.id) === parseInt(id.id);
+        return parseInt(x.product_id) === parseInt(id.product_id);
       });
       self.invoice.items[index].name = selected[0].product.name;
+      self.invoice.items[index].id = {
+        id: selected[0].id,
+        name: "".concat(selected[0].product.name),
+        product: {
+          name: "ID: ".concat(selected[0].product.id, "-").concat(selected[0].product.name)
+        },
+        purchase: selected[0].purchase
+      };
       self.invoice.items[index].inventory_type = selected[0].inventory_type;
       self.invoice.items[index].remain_qty = selected[0].remain_qty;
       self.invoice.items[index].description = selected[0].product.description;
@@ -746,6 +766,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     show: function show() {
       this.$modal.show('add-invoice');
+      this.invoice.items = []; // Add barcode scan listener and pass the callback function
+
+      this.$barcodeScanner.init(this.onBarcodeScanned);
     },
     //store
     storeInvoice: function storeInvoice() {
@@ -1183,6 +1206,27 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -1270,6 +1314,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     var y = this.total;
   },
   methods: {
+    // Create callback function to receive barcode when the scanner is already done
+    onBarcodeScanned: function onBarcodeScanned(barcode) {
+      this.addItemLine();
+      var index = this.invoice.items.length - 1;
+      this.selectProduct({
+        product_id: parseInt(barcode)
+      }, index);
+    },
     searchCustomer: function searchCustomer(option, label, search) {
       return String(label).toLowerCase().indexOf(search.toLowerCase()) > -1 || String(option.note).toLowerCase().indexOf(search.toLowerCase()) > -1 || String(option.contact).toLowerCase().indexOf(search.toLowerCase()) > -1;
     },
@@ -1299,9 +1351,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     selectProduct: function selectProduct(id, index) {
       var self = this;
       var selected = self.all_purchase_details.filter(function (x) {
-        return parseInt(x.id) === parseInt(id.id);
+        return parseInt(x.product_id) === parseInt(id.product_id);
       });
       self.invoice.items[index].name = selected[0].product.name;
+      self.invoice.items[index].id = {
+        id: selected[0].id,
+        name: "".concat(selected[0].product.name),
+        product: {
+          name: "ID: ".concat(selected[0].product_id, "-").concat(selected[0].product.name)
+        },
+        purchase: selected[0].purchase
+      };
       self.invoice.items[index].inventory_type = selected[0].inventory_type;
       self.invoice.items[index].remain_qty = selected[0].remain_qty;
       self.invoice.items[index].description = selected[0].product.description;
@@ -1309,7 +1369,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     show: function show(data) {
       var self = this;
-      this.$modal.show('edit-invoice');
+      this.$modal.show('edit-invoice'); // Add barcode scan listener and pass the callback function
+
+      self.$barcodeScanner.init(self.onBarcodeScanned);
+      this.invoice.items = [];
 
       if (data.purchase_amount > 0) {
         self.invoice.is_bundle = true;
@@ -1326,7 +1389,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       self.invoice.items = [];
       data.invoice_detail.forEach(function (item, index) {
         self.invoice.items.push({
-          id: item.purchase_detail,
+          id: {
+            id: item.purchase_detail.id,
+            name: "".concat(item.purchase_detail.product.name),
+            product: {
+              name: "ID: ".concat(item.purchase_detail.product_id, "-").concat(item.purchase_detail.product.name)
+            },
+            purchase: item.purchase_detail.purchase
+          },
           name: item.purchase_detail.product.name,
           description: item.purchase_detail.product.description,
           qty: item.qty,
@@ -2771,7 +2841,8 @@ var render = function() {
                 staticStyle: { background: "rgb(255, 255, 255)" },
                 on: {
                   click: function($event) {
-                    return _vm.$modal.hide("add-invoice")
+                    _vm.$modal.hide("add-invoice")
+                    _vm.$barcodeScanner.destroy()
                   }
                 }
               },
@@ -3730,7 +3801,8 @@ var render = function() {
                 staticStyle: { background: "rgb(255, 255, 255)" },
                 on: {
                   click: function($event) {
-                    return _vm.$modal.hide("edit-invoice")
+                    _vm.$modal.hide("edit-invoice")
+                    _vm.$barcodeScanner.destroy()
                   }
                 }
               },
@@ -4309,7 +4381,7 @@ var render = function() {
                   },
                   on: { click: _vm.addItemLine }
                 },
-                [_vm._v("បន្ថែមទំនិញ")]
+                [_vm._v("បន្ថែមទំនិញ\n            ")]
               ),
               _vm._v(" "),
               _c("div", { staticClass: "vx-row" }, [
@@ -4470,7 +4542,7 @@ var render = function() {
                       },
                       on: { click: _vm.updateInvoice }
                     },
-                    [_vm._v("កែប្រែ")]
+                    [_vm._v("កែប្រែ\n                ")]
                   )
                 ],
                 1

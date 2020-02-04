@@ -87,6 +87,10 @@ Vue.use(VueInstant);
 window.$ = window.jQuery = require('jquery');
 //printThis
 window.printThis = require('./plugins/printThis');
+//barcode scanner
+import VueBarcodeScanner from 'vue-barcode-scanner'
+// inject vue barcode scanner
+Vue.use(VueBarcodeScanner);
 Vue.config.productionTip = false;
 new Vue({
     router,

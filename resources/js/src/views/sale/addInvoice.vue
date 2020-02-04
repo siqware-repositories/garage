@@ -2,7 +2,7 @@
     <div>
         <modal width="90%" height="auto" :scrollable="true" :pivotY="0.2" :clickToClose="false" name="add-invoice">
             <div class="flex justify-end">
-                <i @click="$modal.hide('add-invoice')" class="vs-icon vs-popup--close material-icons text-warning"
+                <i @click="$modal.hide('add-invoice');$barcodeScanner.destroy()" class="vs-icon vs-popup--close material-icons text-warning"
                    style="background: rgb(255, 255, 255);">close</i>
             </div>
             <vx-card no-shadow>
@@ -17,8 +17,7 @@
                             </v-select>
                             <template slot="append">
                                 <div class="append-text btn-addon" @click="$refs.addCustomer.show()">
-                                    <vs-button class="rounded-none" type="filled" icon-pack="feather"
-                                               icon="icon-plus"></vs-button>
+                                    <vs-button class="rounded-none" type="filled" icon-pack="feather" icon="icon-plus"></vs-button>
                                 </div>
                             </template>
                         </vx-input-group>
@@ -172,7 +171,7 @@
                     due_balance:0,
                     amount:0,
                     qty:0,
-                    items:[{id:'',name:null,description:null,qty:1,sale_price:1,amount:1,inventory_type: '',remain_qty:''}]
+                    items:[]
                 },
             }
         },
@@ -218,7 +217,17 @@
             let x = this.total_qty;
             let y = this.total;
         },
+        destroyed () {
+            // Remove listener when component is destroyed
+            this.$barcodeScanner.destroy()
+        },
         methods: {
+            // Create callback function to receive barcode when the scanner is already done
+            onBarcodeScanned (barcode) {
+                this.addItemLine();
+                let index = this.invoice.items.length-1;
+                this.selectProduct({product_id:parseInt(barcode)},index);
+            },
             searchCustomer(option, label, search) {
                 return (
                     String(label).toLowerCase().indexOf(search.toLowerCase()) > -1 ||
@@ -228,13 +237,7 @@
             },
             searchProduct(option, label, search) {
                 return (
-                    // String(label).toLowerCase().indexOf(search.toLowerCase()) > -1 ||
                     String(option.product.id).toLowerCase().indexOf(search.toLowerCase()) > -1
-                    /*String(option.product.unit).toLowerCase().indexOf(search.toLowerCase()) > -1||
-                    String(option.product.brand).toLowerCase().indexOf(search.toLowerCase()) > -1||
-                    String(option.supplier.name).toLowerCase().indexOf(search.toLowerCase()) > -1||
-                    String(option.supplier.company).toLowerCase().indexOf(search.toLowerCase()) > -1||
-                    String(option.supplier.contact).toLowerCase().indexOf(search.toLowerCase()) > -1*/
                 );
             },
             //add line
@@ -251,9 +254,10 @@
             selectProduct(id,index){
                 let self = this;
                 let selected = self.all_purchase_details.filter(function (x) {
-                    return parseInt(x.id) === parseInt(id.id);
+                    return parseInt(x.product_id) === parseInt(id.product_id);
                 });
                 self.invoice.items[index].name = selected[0].product.name;
+                self.invoice.items[index].id = {id:selected[0].id,name:`${selected[0].product.name}`,product:{name:`ID: ${selected[0].product.id}-${selected[0].product.name}`},purchase:selected[0].purchase};
                 self.invoice.items[index].inventory_type = selected[0].inventory_type;
                 self.invoice.items[index].remain_qty = selected[0].remain_qty;
                 self.invoice.items[index].description = selected[0].product.description;
@@ -261,6 +265,9 @@
             },
             show() {
                 this.$modal.show('add-invoice');
+                this.invoice.items = [];
+                // Add barcode scan listener and pass the callback function
+                this.$barcodeScanner.init(this.onBarcodeScanned);
             },
             //store
             storeInvoice() {
@@ -329,7 +336,7 @@
         },
         async created() {
             let self = this;
-            await self.$store.dispatch('fetchPurchaseDetail')
+            await self.$store.dispatch('fetchPurchaseDetail');
         }
     }
 </script>

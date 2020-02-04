@@ -6,7 +6,7 @@
                         <div class="label-text">
                             {{item.name}}
                         </div>
-                        <bar-code :value="item.id" tag="img" :options="{ displayValue: true ,height:50, width:2}"></bar-code>
+                        <bar-code :value="`000${item.id}`" tag="img" :options="{ displayValue: true, width: 1,height:30}"></bar-code>
                     </div>
                 </div>
             </div>

@@ -1203,7 +1203,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -7159,6 +7158,11 @@ __webpack_require__.r(__webpack_exports__);
     slug: "user",
     icon: "UserIcon"
   }]
+}, {
+  url: "/import",
+  name: "Import Data",
+  slug: "import",
+  icon: "FilePlusIcon"
 }]);
 
 /***/ }),

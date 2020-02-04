@@ -221,7 +221,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       });
     }
   },
+  created: function created() {
+    // Add barcode scan listener and pass the callback function
+    this.$barcodeScanner.init(this.onBarcodeScanned);
+  },
+  destroyed: function destroyed() {
+    // Remove listener when component is destroyed
+    this.$barcodeScanner.destroy();
+  },
   methods: {
+    // Create callback function to receive barcode when the scanner is already done
+    onBarcodeScanned: function onBarcodeScanned(barcode) {
+      var event = window.event;
+
+      if (event.keyCode === 13) {
+        event.preventDefault();
+      }
+
+      this.invoice_id = String(parseInt(barcode));
+    },
     //destroy
     destroyPurchase: function () {
       var _destroyPurchase = _asyncToGenerator(
@@ -608,16 +626,7 @@ __webpack_require__.r(__webpack_exports__);
         due_balance: 0,
         amount: 0,
         qty: 0,
-        items: [{
-          id: '',
-          name: null,
-          description: null,
-          qty: 1,
-          purchase_price: 1,
-          sale_price: 1,
-          amount: 1,
-          inventory_type: ''
-        }]
+        items: []
       }
     };
   },
@@ -653,11 +662,19 @@ __webpack_require__.r(__webpack_exports__);
     var y = this.total;
   },
   methods: {
+    // Create callback function to receive barcode when the scanner is already done
+    onBarcodeScanned: function onBarcodeScanned(barcode) {
+      this.addItemLine();
+      var index = this.purchase.items.length - 1;
+      this.selectProduct({
+        id: parseInt(barcode)
+      }, index);
+    },
     searchSupplier: function searchSupplier(option, label, search) {
       return String(label).toLowerCase().indexOf(search.toLowerCase()) > -1 || String(option.company).toLowerCase().indexOf(search.toLowerCase()) > -1 || String(option.contact).toLowerCase().indexOf(search.toLowerCase()) > -1;
     },
     searchProduct: function searchProduct(option, label, search) {
-      return String(label).toLowerCase().indexOf(search.toLowerCase()) > -1 || String(option.id).toLowerCase().indexOf(search.toLowerCase()) > -1;
+      return String(option.id).toLowerCase().indexOf(search.toLowerCase()) > -1;
     },
     //add line
     addItemLine: function addItemLine() {
@@ -685,6 +702,10 @@ __webpack_require__.r(__webpack_exports__);
         return parseInt(x.id) === parseInt(id.id);
       });
       self.purchase.items[index].name = selected[0].name;
+      self.purchase.items[index].id = {
+        id: selected[0].id,
+        name: "ID: ".concat(selected[0].id, " - ").concat(selected[0].name)
+      };
       self.purchase.items[index].description = selected[0].description;
       self.purchase.items[index].inventory_type = selected[0].inventory_type;
       self.purchase.items[index].sale_price = selected[0].default_sale;
@@ -692,6 +713,8 @@ __webpack_require__.r(__webpack_exports__);
     },
     show: function show() {
       this.$modal.show('add');
+      this.$barcodeScanner.init(this.onBarcodeScanned);
+      this.purchase.items = [];
     },
     //store
     storePurchase: function storePurchase() {
@@ -960,16 +983,7 @@ __webpack_require__.r(__webpack_exports__);
         amount: 0,
         qty: 0,
         old_due: 0,
-        items: [{
-          id: '',
-          name: null,
-          description: null,
-          qty: 1,
-          purchase_price: 1,
-          sale_price: 1,
-          amount: 1,
-          inventory_type: ''
-        }]
+        items: []
       }
     };
   },
@@ -1005,6 +1019,14 @@ __webpack_require__.r(__webpack_exports__);
     var y = this.total;
   },
   methods: {
+    // Create callback function to receive barcode when the scanner is already done
+    onBarcodeScanned: function onBarcodeScanned(barcode) {
+      this.addItemLine();
+      var index = this.purchase.items.length - 1;
+      this.selectProduct({
+        id: parseInt(barcode)
+      }, index);
+    },
     searchSupplier: function searchSupplier(option, label, search) {
       return String(label).toLowerCase().indexOf(search.toLowerCase()) > -1 || String(option.company).toLowerCase().indexOf(search.toLowerCase()) > -1 || String(option.contact).toLowerCase().indexOf(search.toLowerCase()) > -1;
     },
@@ -1037,6 +1059,10 @@ __webpack_require__.r(__webpack_exports__);
         return parseInt(x.id) === parseInt(id.id);
       });
       self.purchase.items[index].name = selected[0].name;
+      self.purchase.items[index].id = {
+        id: selected[0].id,
+        name: "ID: ".concat(selected[0].id, " - ").concat(selected[0].name)
+      };
       self.purchase.items[index].description = selected[0].description;
       self.purchase.items[index].sale_price = selected[0].default_sale;
       self.purchase.items[index].inventory_type = selected[0].inventory_type;
@@ -1045,6 +1071,9 @@ __webpack_require__.r(__webpack_exports__);
     show: function show(data) {
       var self = this;
       this.$modal.show('edit-purchase');
+      self.purchase.items = [];
+      this.$barcodeScanner.init(this.onBarcodeScanned);
+      this.purchase.items = [];
       this.purchase.id = data.id;
       this.purchase.supplier = data.supplier;
       this.purchase.location = data.location;
@@ -1053,10 +1082,12 @@ __webpack_require__.r(__webpack_exports__);
       this.purchase.description = data.description;
       this.purchase.balance = data.balance;
       this.purchase.old_due = data.due_balance;
-      self.purchase.items = [];
       data.purchase_detail.forEach(function (item, index) {
         self.purchase.items.push({
-          id: item.product,
+          id: {
+            id: item.product.id,
+            name: "ID: ".concat(item.product.id, " - ").concat(item.product.name)
+          },
           name: item.product.name,
           description: item.product.description,
           qty: item.qty,
@@ -2127,7 +2158,8 @@ var render = function() {
                 staticStyle: { background: "rgb(255, 255, 255)" },
                 on: {
                   click: function($event) {
-                    return _vm.$modal.hide("add")
+                    _vm.$modal.hide("add")
+                    _vm.$barcodeScanner.destroy()
                   }
                 }
               },
@@ -2978,7 +3010,8 @@ var render = function() {
                 staticStyle: { background: "rgb(255, 255, 255)" },
                 on: {
                   click: function($event) {
-                    return _vm.$modal.hide("edit-purchase")
+                    _vm.$modal.hide("edit-purchase")
+                    _vm.$barcodeScanner.destroy()
                   }
                 }
               },

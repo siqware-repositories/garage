@@ -95,6 +95,7 @@
         "sweet-modal-vue": "^2.0.0",
         "tinymce": "^5.1.2",
         "vue-autosuggest": "^2.0.4",
+        "vue-barcode-scanner": "^0.6.0",
         "vue-bootstrap-typeahead": "^0.2.6",
         "vue-html-to-paper": "^1.1.1",
         "vue-html2canvas": "0.0.4",

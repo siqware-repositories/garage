@@ -26,7 +26,7 @@
                             <td>{{data.description}}</td>
                             <td>{{data.invoice_date}}</td>
                             <td class="p-2">
-                                <bar-code :value="data.id" :options="{ displayValue: true }"></bar-code>
+                                <bar-code :value="`000${data.id}`" :options="{ displayValue: true,height:30 }"></bar-code>
                             </td>
                         </tr>
                     </table>

@@ -40,6 +40,7 @@ import report_best_seller from './modules/report/best_seller'
 import report_close_service from './modules/report/close_service'
 import report_close_payroll from './modules/report/close_payroll'
 import investment from './modules/investment'
+import excel_import from './modules/excel-import'
 export default new Vuex.Store({
     getters,
     mutations,
@@ -68,5 +69,7 @@ export default new Vuex.Store({
         report_best_seller,
         report_close_service,
         report_close_payroll,
+        /*excel import*/
+        excel_import
     }
 })

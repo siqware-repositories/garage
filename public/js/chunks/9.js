@@ -104,6 +104,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       selected: []
     };
   },
+  created: function created() {
+    // Add barcode scan listener and pass the callback function
+    this.$barcodeScanner.init(this.onBarcodeScanned);
+  },
+  destroyed: function destroyed() {
+    // Remove listener when component is destroyed
+    this.$barcodeScanner.destroy();
+  },
   computed: {
     all_about: function all_about() {
       return this.$store.getters.all_about;
@@ -127,6 +135,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   methods: {
+    // Create callback function to receive barcode when the scanner is already done
+    onBarcodeScanned: function onBarcodeScanned(barcode) {
+      var event = window.event;
+
+      if (event.keyCode === 13) {
+        event.preventDefault();
+      }
+
+      this.product_id = String(parseInt(barcode));
+    },
     //destroy
     destroyProduct: function () {
       var _destroyProduct = _asyncToGenerator(
@@ -1507,9 +1525,9 @@ var render = function() {
                 _vm._v(" "),
                 _c("bar-code", {
                   attrs: {
-                    value: item.id,
+                    value: "000" + item.id,
                     tag: "img",
-                    options: { displayValue: true, height: 50, width: 2 }
+                    options: { displayValue: true, width: 1, height: 30 }
                   }
                 })
               ],

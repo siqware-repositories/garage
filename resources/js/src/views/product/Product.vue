@@ -79,6 +79,14 @@
                 selected:[]
             }
         },
+        created () {
+            // Add barcode scan listener and pass the callback function
+            this.$barcodeScanner.init(this.onBarcodeScanned)
+        },
+        destroyed () {
+            // Remove listener when component is destroyed
+            this.$barcodeScanner.destroy()
+        },
         computed:{
             all_about(){
                 return this.$store.getters.all_about
@@ -102,6 +110,14 @@
             },
         },
         methods:{
+            // Create callback function to receive barcode when the scanner is already done
+            onBarcodeScanned (barcode) {
+                var event = window.event;
+                if(event.keyCode === 13) {
+                    event.preventDefault();
+                }
+                this.product_id = String(parseInt(barcode));
+            },
             //destroy
             async destroyProduct(){
                 let self = this;

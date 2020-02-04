@@ -2,7 +2,7 @@
     <div>
         <modal width="90%" height="auto" :scrollable="true" :pivotY="0.2" :clickToClose="false" name="edit-invoice">
             <div class="flex justify-end">
-                <i @click="$modal.hide('edit-invoice')" class="vs-icon vs-popup--close material-icons text-warning"
+                <i @click="$modal.hide('edit-invoice');$barcodeScanner.destroy()" class="vs-icon vs-popup--close material-icons text-warning"
                    style="background: rgb(255, 255, 255);">close</i>
             </div>
             <vx-card no-shadow>
@@ -10,9 +10,11 @@
                     <div class="vx-col md:w-1/3 w-full">
                         <label>អតិថិជន</label>
                         <vx-input-group>
-                            <v-select :filterBy="searchCustomer" v-model="invoice.customer" label="name" name="customer" v-validate="'required'" :options="all_customer">
+                            <v-select :filterBy="searchCustomer" v-model="invoice.customer" label="name" name="customer"
+                                      v-validate="'required'" :options="all_customer">
                                 <template v-slot:option="option" class="vs-list">
-                                    <vs-list-item :title="`ឈ្មោះ​ ${option.name}`" :subtitle="`ទំនាក់ទំនង ${option.contact} អាស័យដ្ឋាន ${option.address}`"></vs-list-item>
+                                    <vs-list-item :title="`ឈ្មោះ​ ${option.name}`"
+                                                  :subtitle="`ទំនាក់ទំនង ${option.contact} អាស័យដ្ឋាន ${option.address}`"></vs-list-item>
                                 </template>
                             </v-select>
                             <template slot="append">
@@ -27,7 +29,8 @@
                     </div>
                     <div class="vx-col md:w-1/3 w-full">
                         <label>ថ្ងៃខែឆ្នាំទិញ</label>
-                        <flat-pickr name="invoice_date" v-validate="'required'" class="w-full" v-model="invoice.invoice_date" placeholder="Choose Date" />
+                        <flat-pickr name="invoice_date" v-validate="'required'" class="w-full"
+                                    v-model="invoice.invoice_date" placeholder="Choose Date"/>
                         <span class="text-danger text-sm"
                               v-show="errors.has('invoice_date')">{{ errors.first('invoice_date') }}</span>
                     </div>
@@ -35,7 +38,8 @@
                 <div class="vx-row my-3">
                     <div class="vx-col md:w-1/3 w-full">
                         <label>Invoice Status</label>
-                        <v-select v-model="invoice.invoice_status" name="invoice_status" v-validate="'required'" :options="['received','pending']"/>
+                        <v-select v-model="invoice.invoice_status" name="invoice_status" v-validate="'required'"
+                                  :options="['received','pending']"/>
                         <span class="text-danger text-sm"
                               v-show="errors.has('status')">{{ errors.first('status') }}</span>
                     </div>
@@ -70,10 +74,17 @@
                             {{indextr+1}}
                         </td>
                         <td width="600">
-                            <v-select :filterBy="searchProduct" v-model="tr.id" :getOptionLabel="opt => opt.product.name" :name="`product-${indextr}`" v-validate="'required'" :options="all_purchase_details" @input="selectProduct(tr.id,indextr)">
+                            <v-select :filterBy="searchProduct" v-model="tr.id"
+                                      :getOptionLabel="opt => opt.product.name" :name="`product-${indextr}`"
+                                      v-validate="'required'" :options="all_purchase_details"
+                                      @input="selectProduct(tr.id,indextr)">
                                 <template v-slot:option="option" class="vs-list">
-                                    <vs-list-item :title="`កូដ: ${option.product.id} - ឈ្មោះ: ${option.product.name} - តម្លៃលក់: ${option.sale}`" :subtitle="`Unit: ${option.product.unit} - Brand: ${option.product.brand} - Inventory Type: ${option.inventory_type}`"></vs-list-item>
-                                    <vs-list-item :title="`អ្នកផ្គត់ផ្គង់៖ ${option.supplier.name} ក្រុមហ៊ុន៖ ${option.supplier.company}`" :subtitle="`ទំនាក់ទំនង ${option.supplier.contact}`"></vs-list-item>
+                                    <vs-list-item
+                                            :title="`កូដ: ${option.product.id} - ឈ្មោះ: ${option.product.name} - តម្លៃលក់: ${option.sale}`"
+                                            :subtitle="`Unit: ${option.product.unit} - Brand: ${option.product.brand} - Inventory Type: ${option.inventory_type}`"></vs-list-item>
+                                    <vs-list-item
+                                            :title="`អ្នកផ្គត់ផ្គង់៖ ${option.supplier.name} ក្រុមហ៊ុន៖ ${option.supplier.company}`"
+                                            :subtitle="`ទំនាក់ទំនង ${option.supplier.contact}`"></vs-list-item>
                                 </template>
                             </v-select>
                             <span class="text-danger text-sm"
@@ -83,13 +94,17 @@
                             {{ tr.description }}
                         </td>
                         <td>
-                            <vs-input-number color="danger" v-if="tr.inventory_type==='service'" v-model="tr.qty" min="0" :name="`qty-${indextr}`" v-validate="'required'"/>
-                            <vs-input-number color="success" v-if="tr.inventory_type!=='service'" v-model="tr.qty" min="0" :max="tr.remain_qty" :name="`qty-${indextr}`" v-validate="'required'"/>
+                            <vs-input-number color="danger" v-if="tr.inventory_type==='service'" v-model="tr.qty"
+                                             min="0" :name="`qty-${indextr}`" v-validate="'required'"/>
+                            <vs-input-number color="success" v-if="tr.inventory_type!=='service'" v-model="tr.qty"
+                                             min="0" :max="tr.remain_qty" :name="`qty-${indextr}`"
+                                             v-validate="'required'"/>
                             <span class="text-danger text-sm"
                                   v-show="errors.has(`qty-${indextr}`)">{{ errors.first(`qty-${indextr}`) }}</span>
                         </td>
                         <td>
-                            <vs-input-number color="danger" v-model="tr.sale_price" min="0" :name="`sale_price-${indextr}`" v-validate="'required'"/>
+                            <vs-input-number color="danger" v-model="tr.sale_price" min="0"
+                                             :name="`sale_price-${indextr}`" v-validate="'required'"/>
                             <span class="text-danger text-sm"
                                   v-show="errors.has(`sale_price-${indextr}`)">{{ errors.first(`sale_price-${indextr}`) }}</span>
                         </td>
@@ -97,23 +112,28 @@
                             {{ tr.amount = tr.sale_price*tr.qty }}
                         </td>
                         <td class="py-1">
-                            <vs-button @click="removeItemLine(indextr)" icon="icon-trash-2" color="warning" icon-pack="feather" type="flat"></vs-button>
+                            <vs-button @click="removeItemLine(indextr)" icon="icon-trash-2" color="warning"
+                                       icon-pack="feather" type="flat"></vs-button>
                         </td>
                     </tr>
                     </tbody>
                 </table>
-                <vs-button @click="addItemLine" icon="icon-plus" class="rounded-none my-3" icon-pack="feather" type="line">បន្ថែមទំនិញ</vs-button>
+                <vs-button @click="addItemLine" icon="icon-plus" class="rounded-none my-3" icon-pack="feather"
+                           type="line">បន្ថែមទំនិញ
+                </vs-button>
                 <div class="vx-row">
                     <div class="vx-col md:w-1/2 w-full">
                         <vs-divider position="left">Payment</vs-divider>
                         <div class="vx-row">
                             <div class="vx-col md:w-1/2 w-full">
                                 <label>ប្រាក់ទិញទំនិញ</label>
-                                <vs-input-number color="warning" v-model="invoice.balance" min="0" :max="invoice.total_balance" label="ប្រាក់ទិញទំនិញ:"/>
+                                <vs-input-number color="warning" v-model="invoice.balance" min="0"
+                                                 :max="invoice.total_balance" label="ប្រាក់ទិញទំនិញ:"/>
                             </div>
                             <div class="vx-col md:w-1/2 w-full">
                                 <label>ទឹកប្រាក់ជំពាក់</label>
-                                <vs-input step="any" readonly type="number" class="w-full" v-model="invoice.due_balance = invoice.total_balance - invoice.balance"/>
+                                <vs-input step="any" readonly type="number" class="w-full"
+                                          v-model="invoice.due_balance = invoice.total_balance - invoice.balance"/>
                             </div>
                         </div>
                         <vs-divider position="left">
@@ -134,7 +154,8 @@
                 <vs-divider/>
                 <!-- Save & Reset Button -->
                 <div class="flex justify-end btn-group">
-                    <vs-button @click="updateInvoice" icon="icon-edit" icon-pack="feather" type="relief">កែប្រែ</vs-button>
+                    <vs-button @click="updateInvoice" icon="icon-edit" icon-pack="feather" type="relief">កែប្រែ
+                    </vs-button>
                 </div>
             </vx-card>
         </modal>
@@ -153,68 +174,84 @@
     import AddBrand from "../product/addBrand";
     import vSelect from 'vue-select'
     import AddCustomer from "./addCustomer";
+
     export default {
         name: "editInvoice",
-        components: {AddCustomer, AddBrand, AddCategory, AddUnit,flatPickr,'v-select': vSelect,},
+        components: {AddCustomer, AddBrand, AddCategory, AddUnit, flatPickr, 'v-select': vSelect,},
         data() {
             return {
-                invoice:{
-                    id:null,
-                    is_bundle:false,
-                    purchase_amount:0,
-                    sale_amount:0,
-                    customer:null,
-                    user_id:this.$store.state.AppActiveUser.uid,
-                    invoice_date:null,
-                    invoice_status:'pending',
-                    description:'',
-                    total_balance:null,
-                    balance:null,
-                    due_balance:0,
-                    old_due:0,
-                    amount:0,
-                    qty:0,
-                    items:[{id:'',name:null,description:null,qty:1,sale_price:1,amount:1,inventory_type: '',remain_qty:''}]
+                invoice: {
+                    id: null,
+                    is_bundle: false,
+                    purchase_amount: 0,
+                    sale_amount: 0,
+                    customer: null,
+                    user_id: this.$store.state.AppActiveUser.uid,
+                    invoice_date: null,
+                    invoice_status: 'pending',
+                    description: '',
+                    total_balance: null,
+                    balance: null,
+                    due_balance: 0,
+                    old_due: 0,
+                    amount: 0,
+                    qty: 0,
+                    items: [{
+                        id: '',
+                        name: null,
+                        description: null,
+                        qty: 1,
+                        sale_price: 1,
+                        amount: 1,
+                        inventory_type: '',
+                        remain_qty: ''
+                    }]
                 },
             }
         },
-        computed:{
-            all_customer(){
+        computed: {
+            all_customer() {
                 return this.$store.getters.all_customer
             },
-            all_purchase_details(){
+            all_purchase_details() {
                 return this.$store.getters.all_purchase_detail
             },
-            total(){
+            total() {
                 let self = this;
                 let total = 0.0;
-                self.invoice.items.forEach(function (item,index) {
-                    total+=parseFloat(item.amount)
+                self.invoice.items.forEach(function (item, index) {
+                    total += parseFloat(item.amount)
                 });
-                if (self.invoice.is_bundle){
+                if (self.invoice.is_bundle) {
                     self.invoice.total_balance = self.invoice.sale_amount;
                     self.invoice.balance = self.invoice.sale_amount - self.invoice.old_due;
-                }else {
+                } else {
                     self.invoice.total_balance = total;
-                    self.invoice.balance = total-self.invoice.old_due;
+                    self.invoice.balance = total - self.invoice.old_due;
                 }
                 return total
             },
-            total_qty(){
+            total_qty() {
                 let self = this;
                 let total = 0;
-                self.invoice.items.forEach(function (item,index) {
-                    total+=parseFloat(item.qty)
+                self.invoice.items.forEach(function (item, index) {
+                    total += parseFloat(item.qty)
                 });
                 self.invoice.qty = total;
                 return total
             }
         },
-        updated(){
+        updated() {
             let x = this.total_qty;
             let y = this.total;
         },
         methods: {
+            // Create callback function to receive barcode when the scanner is already done
+            onBarcodeScanned(barcode) {
+                this.addItemLine();
+                let index = this.invoice.items.length - 1;
+                this.selectProduct({product_id: parseInt(barcode)}, index);
+            },
             searchCustomer(option, label, search) {
                 return (
                     String(label).toLowerCase().indexOf(search.toLowerCase()) > -1 ||
@@ -225,31 +262,41 @@
             searchProduct(option, label, search) {
                 return (
                     String(label).toLowerCase().indexOf(search.toLowerCase()) > -1 ||
-                    String(option.product.id).toLowerCase().indexOf(search.toLowerCase()) > -1||
-                    String(option.product.unit).toLowerCase().indexOf(search.toLowerCase()) > -1||
-                    String(option.product.brand).toLowerCase().indexOf(search.toLowerCase()) > -1||
-                    String(option.supplier.name).toLowerCase().indexOf(search.toLowerCase()) > -1||
-                    String(option.supplier.company).toLowerCase().indexOf(search.toLowerCase()) > -1||
+                    String(option.product.id).toLowerCase().indexOf(search.toLowerCase()) > -1 ||
+                    String(option.product.unit).toLowerCase().indexOf(search.toLowerCase()) > -1 ||
+                    String(option.product.brand).toLowerCase().indexOf(search.toLowerCase()) > -1 ||
+                    String(option.supplier.name).toLowerCase().indexOf(search.toLowerCase()) > -1 ||
+                    String(option.supplier.company).toLowerCase().indexOf(search.toLowerCase()) > -1 ||
                     String(option.supplier.contact).toLowerCase().indexOf(search.toLowerCase()) > -1
                 );
             },
             //add line
-            addItemLine(){
+            addItemLine() {
                 let self = this;
-                self.invoice.items.push({id:'',name:null,description:null,qty:1,sale_price:1,amount:1,inventory_type:'',remain_qty:''});
+                self.invoice.items.push({
+                    id: '',
+                    name: null,
+                    description: null,
+                    qty: 1,
+                    sale_price: 1,
+                    amount: 1,
+                    inventory_type: '',
+                    remain_qty: ''
+                });
             },
             //remove line
-            removeItemLine(index){
+            removeItemLine(index) {
                 let self = this;
-                self.invoice.items.splice(index,1);
+                self.invoice.items.splice(index, 1);
             },
             //select product
-            selectProduct(id,index){
+            selectProduct(id, index) {
                 let self = this;
                 let selected = self.all_purchase_details.filter(function (x) {
-                    return parseInt(x.id) === parseInt(id.id);
+                    return parseInt(x.product_id) === parseInt(id.product_id);
                 });
                 self.invoice.items[index].name = selected[0].product.name;
+                self.invoice.items[index].id = {id:selected[0].id,name:`${selected[0].product.name}`,product:{name:`ID: ${selected[0].product_id}-${selected[0].product.name}`},purchase:selected[0].purchase};
                 self.invoice.items[index].inventory_type = selected[0].inventory_type;
                 self.invoice.items[index].remain_qty = selected[0].remain_qty;
                 self.invoice.items[index].description = selected[0].product.description;
@@ -258,7 +305,10 @@
             show(data) {
                 let self = this;
                 this.$modal.show('edit-invoice');
-                if (data.purchase_amount>0){
+                // Add barcode scan listener and pass the callback function
+                self.$barcodeScanner.init(self.onBarcodeScanned);
+                this.invoice.items = [];
+                if (data.purchase_amount > 0) {
                     self.invoice.is_bundle = true;
                     self.invoice.purchase_amount = data.purchase_amount;
                     self.invoice.sale_amount = data.amount;
@@ -270,8 +320,17 @@
                 self.invoice.description = data.description;
                 self.invoice.old_due = data.due_balance;
                 self.invoice.items = [];
-                data.invoice_detail.forEach(function (item,index) {
-                    self.invoice.items.push({id:item.purchase_detail,name:item.purchase_detail.product.name,description:item.purchase_detail.product.description,qty:item.qty,sale_price:item.sale,amount:item.amount,inventory_type: item.inventory_type,remain_qty:item.purchase_detail.remain_qty});
+                data.invoice_detail.forEach(function (item, index) {
+                    self.invoice.items.push({
+                        id : {id:item.purchase_detail.id,name:`${item.purchase_detail.product.name}`,product:{name:`ID: ${item.purchase_detail.product_id}-${item.purchase_detail.product.name}`},purchase:item.purchase_detail.purchase},
+                        name: item.purchase_detail.product.name,
+                        description: item.purchase_detail.product.description,
+                        qty: item.qty,
+                        sale_price: item.sale,
+                        amount: item.amount,
+                        inventory_type: item.inventory_type,
+                        remain_qty: item.purchase_detail.remain_qty
+                    });
                 });
             },
             //store
@@ -323,7 +382,7 @@
         },
         async created() {
             let self = this;
-            await self.$store.dispatch('fetchPurchaseDetail')
+            await self.$store.dispatch('fetchPurchaseDetail');
         }
     }
 </script>
