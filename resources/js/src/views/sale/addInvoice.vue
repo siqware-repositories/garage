@@ -180,7 +180,7 @@
                 return this.$store.getters.all_customer
             },
             all_purchase_details(){
-                return this.$store.getters.all_purchase_detail
+                return this.$store.getters.all_purchase_detail.sort((a, b) => (a.product.id > b.product.id) ? 1 : -1)
             },
             filtered_purchase_details(){
                 let self = this;

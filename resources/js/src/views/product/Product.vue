@@ -6,6 +6,13 @@
             <vs-button v-if="selected.length" @click="$refs.printLabel.show(selected)" color="success" type="relief" icon-pack="feather" icon="icon-printer">Print Label</vs-button>
             <vs-button v-if="selected.length" @click="destroyProduct" color="danger" type="relief" icon-pack="feather" icon="icon-trash-2">លុប</vs-button>
         </div>
+        <div class="flex justify-end">
+            <download-excel
+                    v-if="selected.length"
+                    :data   = "selected">
+                <vs-button type="relief" icon-pack="feather" icon="icon-download">Excel Export</vs-button>
+            </download-excel>
+        </div>
         <vue-instant id="purchase_pen" class="mt-base" v-model="product_id"
                      suggestion-attribute="id"
                      :suggestions="suggestion_all_product"
@@ -70,9 +77,10 @@
     import AddProduct from "./addProduct";
     import EditProduct from "./editProduct";
     import PrintLabel from "./printLabel";
+    import JsonExcel from 'vue-json-excel';
     export default {
         name: "Product",
-        components: {PrintLabel, EditProduct, AddProduct},
+        components: {PrintLabel, EditProduct, AddProduct,'downloadExcel':JsonExcel},
         data(){
             return{
                 product_id:'',

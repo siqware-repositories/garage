@@ -667,7 +667,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return this.$store.getters.all_customer;
     },
     all_purchase_details: function all_purchase_details() {
-      return this.$store.getters.all_purchase_detail;
+      return this.$store.getters.all_purchase_detail.sort(function (a, b) {
+        return a.product.id > b.product.id ? 1 : -1;
+      });
     },
     filtered_purchase_details: function filtered_purchase_details() {
       var self = this;
