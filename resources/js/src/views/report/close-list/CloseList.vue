@@ -101,10 +101,10 @@
         },
         data() {
             return {
-                date_range:`${this.$moment().startOf('month').format('YYYY-MM-DD')} ~ ${this.$moment().endOf('month').format('YYYY-MM-DD')}`,
+                date_range:`${this.$moment('2019/01/01').format('YYYY-MM-DD')} ~ ${this.$moment().endOf('year').format('YYYY-MM-DD')}`,
                 date_picker:{
-                  start:this.$moment().startOf('month').format('YYYY-MM-DD'),
-                  end:this.$moment().endOf('month').format('YYYY-MM-DD'),
+                  start:this.$moment('2019/01/01').format('YYYY-MM-DD'),
+                  end:this.$moment().endOf('year').format('YYYY-MM-DD'),
                 }
             }
         },

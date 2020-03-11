@@ -1,170 +1,26 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[17],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/components/statistics-cards/StatisticsCardLine.vue?vue&type=script&lang=js&":
-/*!**************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/components/statistics-cards/StatisticsCardLine.vue?vue&type=script&lang=js& ***!
-  \**************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/income/Income.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/income/Income.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue_apexcharts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-apexcharts */ "./node_modules/vue-apexcharts/dist/vue-apexcharts.js");
-/* harmony import */ var vue_apexcharts__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_apexcharts__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _chartConfigs_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chartConfigs.js */ "./resources/js/src/components/statistics-cards/chartConfigs.js");
-/* harmony import */ var _assets_utils_color_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @assets/utils/color.js */ "./resources/assets/utils/color.js");
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  props: {
-    icon: {
-      type: String,
-      required: true
-    },
-    statistic: {
-      type: [Number, String],
-      required: true
-    },
-    statisticTitle: {
-      type: String
-    },
-    chartData: {// type: Array,
-      // required: true
-    },
-    color: {
-      type: String,
-      default: 'primary'
-    },
-    colorTo: {
-      type: String
-    },
-    // chartType: {
-    //     type: String,
-    //     default: 'line-chart',
-    // },
-    type: {
-      type: String,
-      default: 'line'
-    },
-    iconRight: {
-      type: Boolean,
-      default: false
-    },
-    hideChart: {
-      type: Boolean,
-      default: false
-    }
-  },
-  data: function data() {
-    return {
-      chartOptions: null
-    };
-  },
-  watch: {
-    themePrimaryColor: function themePrimaryColor() {
-      this.$refs.apexChart.updateOptions({
-        theme: {
-          monochrome: {
-            color: this.getHex(this.color)
-          }
-        }
-      });
-    }
-  },
-  computed: {
-    themePrimaryColor: function themePrimaryColor() {
-      return this.$store.state.themePrimaryColor;
-    }
-  },
-  methods: {
-    getHex: function getHex(color) {
-      if (_assets_utils_color_js__WEBPACK_IMPORTED_MODULE_2__["default"].isColor(color)) {
-        var rgb = window.getComputedStyle(document.documentElement).getPropertyValue("--vs-".concat(color));
-        rgb = rgb.split(",");
-        return "#" + ((1 << 24) + (Number(rgb[0]) << 16) + (Number(rgb[1]) << 8) + Number(rgb[2])).toString(16).slice(1);
-      }
-
-      return color;
-    },
-    gradientToColor: function gradientToColor(color) {
-      var gradientToColors = {
-        "primary": "#A9A2F6",
-        "success": "#55DD92",
-        "warning": "#ffc085",
-        "danger": "#F97794"
-      };
-      return gradientToColors[color] ? gradientToColors[color] : gradientToColors["primary"];
-    }
-  },
-  components: {
-    VueApexCharts: vue_apexcharts__WEBPACK_IMPORTED_MODULE_0___default.a
-  },
-  created: function created() {
-    if (this.type == 'area') {
-      // assign chart options
-      this.chartOptions = Object.assign({}, _chartConfigs_js__WEBPACK_IMPORTED_MODULE_1__["default"].areaChartOptions);
-      this.chartOptions['theme'] = {
-        monochrome: {
-          enabled: true,
-          color: this.getHex(this.color),
-          shadeTo: 'light',
-          shadeIntensity: 0.65
-        }
-      };
-    } else if (this.type == "line") {
-      // Assign chart options
-      this.chartOptions = JSON.parse(JSON.stringify(_chartConfigs_js__WEBPACK_IMPORTED_MODULE_1__["default"].lineChartOptions));
-      this.chartOptions.fill.gradient.gradientToColors = [this.gradientToColor(this.colorTo || this.color)];
-      this.chartOptions.colors = [this.getHex(this.color)];
-    }
-  }
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/report/stock/Stock.vue?vue&type=script&lang=js&":
-/*!****************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/report/stock/Stock.vue?vue&type=script&lang=js& ***!
-  \****************************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _components_statistics_cards_StatisticsCardLine_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/components/statistics-cards/StatisticsCardLine.vue */ "./resources/js/src/components/statistics-cards/StatisticsCardLine.vue");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vue_money_format__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-money-format */ "./node_modules/vue-money-format/src/main.js");
+/* harmony import */ var _addIncome__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./addIncome */ "./resources/js/src/views/income/addIncome.vue");
+/* harmony import */ var _editIncome__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./editIncome */ "./resources/js/src/views/income/editIncome.vue");
+/* harmony import */ var _showIncome__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./showIncome */ "./resources/js/src/views/income/showIncome.vue");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //
 //
 //
@@ -215,278 +71,348 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "Stock",
+  name: "Income",
   components: {
-    'money-format': vue_money_format__WEBPACK_IMPORTED_MODULE_1__["default"],
-    StatisticsCardLine: _components_statistics_cards_StatisticsCardLine_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+    ShowIncome: _showIncome__WEBPACK_IMPORTED_MODULE_4__["default"],
+    EditIncome: _editIncome__WEBPACK_IMPORTED_MODULE_3__["default"],
+    AddIncome: _addIncome__WEBPACK_IMPORTED_MODULE_2__["default"],
+    'money-format': vue_money_format__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   data: function data() {
     return {
       selected: [],
-      data: {
-        id: '',
-        searchId: null
-      }
+      users: [{
+        "id": 1,
+        "name": "Leanne Graham",
+        "username": "Bret",
+        "email": "Sincere@april.biz",
+        "website": "hildegard.org"
+      }, {
+        "id": 2,
+        "name": "Ervin Howell",
+        "username": "Antonette",
+        "email": "Shanna@melissa.tv",
+        "website": "anastasia.net"
+      }]
     };
   },
   computed: {
-    all_report_stocks: function all_report_stocks() {
-      return this.$store.getters.all_report_stock;
-    },
-    search_all_report_stocks: function search_all_report_stocks() {
-      var self = this;
-      return self.all_report_stocks.filter(function (x) {
-        return self.data.searchId ? parseInt(self.data.id) === x.id : true;
-      });
-    },
-    all_report_stocks_id: function all_report_stocks_id() {
-      var self = this;
-      return self.all_report_stocks.map(function (x) {
-        return {
-          id: String(x.id)
-        };
-      });
-    },
-    out_stock_count: function out_stock_count() {
-      var count = 0;
-      this.all_report_stocks.forEach(function (item, index) {
-        var sum = item.purchase_detail.reduce(function (total, item) {
-          return total + parseFloat(item.remain_qty);
-        }, 0);
-
-        if (sum <= 0) {
-          count += 1;
-        }
-      });
-      return count;
-    },
-    out_stock_product: function out_stock_product() {
-      var products = [];
-      this.all_report_stocks.forEach(function (item, index) {
-        var sum = item.purchase_detail.reduce(function (total, item) {
-          return total + parseFloat(item.remain_qty);
-        }, 0);
-
-        if (sum <= 0) {
-          products.push(item);
-        }
-      });
-      return products;
+    all_incomes: function all_incomes() {
+      return this.$store.getters.all_income;
     }
   },
   methods: {
-    sum_qty: function sum_qty(data) {
-      return data.reduce(function (total, item) {
-        return total + parseFloat(item.remain_qty);
-      }, 0);
+    confirmDelete: function confirmDelete() {
+      this.$vs.dialog({
+        type: 'confirm',
+        color: 'danger',
+        title: "\u1795\u17D2\u1791\u17C0\u1784\u1795\u17D2\u1791\u17B6\u178F\u17CB",
+        text: 'ចុចពាក្យ Accept ដើម្បីលុប!',
+        accept: this.destroyIncome
+      });
     },
-    searchStock: function searchStock() {
-      var self = this;
-      self.data.searchId = parseInt(self.data.id);
+    //destroy
+    destroyIncome: function () {
+      var _destroyIncome = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var self, promises;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                self = this;
+                self.$vs.loading();
+                promises = self.selected.map(
+                /*#__PURE__*/
+                function () {
+                  var _ref = _asyncToGenerator(
+                  /*#__PURE__*/
+                  _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(data) {
+                    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+                      while (1) {
+                        switch (_context.prev = _context.next) {
+                          case 0:
+                            _context.next = 2;
+                            return self.$store.dispatch('destroyIncome', data.id);
+
+                          case 2:
+                          case "end":
+                            return _context.stop();
+                        }
+                      }
+                    }, _callee);
+                  }));
+
+                  return function (_x) {
+                    return _ref.apply(this, arguments);
+                  };
+                }());
+                _context2.next = 5;
+                return Promise.all(promises).then(function () {
+                  self.$vs.notify({
+                    time: 4000,
+                    title: 'ប្រតិបត្តិការជោគជ័យ',
+                    text: 'ទិន្នន័យបានលុប',
+                    color: 'success',
+                    iconPack: 'feather',
+                    icon: 'icon-check',
+                    position: 'top-center'
+                  });
+                  self.selected = [];
+                  self.$vs.loading.close();
+                });
+
+              case 5:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this);
+      }));
+
+      function destroyIncome() {
+        return _destroyIncome.apply(this, arguments);
+      }
+
+      return destroyIncome;
+    }(),
+    //calc total income
+    total_income: function total_income(data) {
+      return data.reduce(function (total, item) {
+        return total + parseFloat(item.balance);
+      }, 0);
     }
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/report/stock/Stock.vue?vue&type=style&index=1&lang=sass&":
-/*!***************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--9-2!./node_modules/sass-loader/dist/cjs.js??ref--9-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/report/stock/Stock.vue?vue&type=style&index=1&lang=sass& ***!
-  \***************************************************************************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/income/addIncome.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/income/addIncome.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(/*! ../../../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
-// imports
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue_money_format__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-money-format */ "./node_modules/vue-money-format/src/main.js");
+/* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-select */ "./node_modules/vue-select/dist/vue-select.js");
+/* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_select__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var vue_flatpickr_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-flatpickr-component */ "./node_modules/vue-flatpickr-component/dist/vue-flatpickr.min.js");
+/* harmony import */ var vue_flatpickr_component__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_flatpickr_component__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var flatpickr_dist_flatpickr_min_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! flatpickr/dist/flatpickr.min.css */ "./node_modules/flatpickr/dist/flatpickr.min.css");
+/* harmony import */ var flatpickr_dist_flatpickr_min_css__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(flatpickr_dist_flatpickr_min_css__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _addIncomeType__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./addIncomeType */ "./resources/js/src/views/income/addIncomeType.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
-// module
-exports.push([module.i, "/*@import \"../../../../../sass/vue-instant/vue-instant.css\"*/", ""]);
 
-// exports
 
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "addIncome",
+  components: {
+    AddIncomeType: _addIncomeType__WEBPACK_IMPORTED_MODULE_4__["default"],
+    'v-select': vue_select__WEBPACK_IMPORTED_MODULE_1___default.a,
+    flatPickr: vue_flatpickr_component__WEBPACK_IMPORTED_MODULE_2___default.a,
+    'money-format': vue_money_format__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  data: function data() {
+    return {
+      data: {
+        date: null,
+        note: null,
+        items: [{
+          description: '',
+          type: null,
+          balance: 0
+        }]
+      }
+    };
+  },
+  computed: {
+    all_income_types: function all_income_types() {
+      return this.$store.getters.all_income_type;
+    },
+    total_income: function total_income() {
+      return this.data.items.reduce(function (total, item) {
+        return total + parseFloat(item.balance);
+      }, 0);
+    }
+  },
+  methods: {
+    show: function show() {
+      this.$modal.show('add-income');
+    },
+    removeLine: function removeLine(index) {
+      this.data.items.splice(index, 1);
+    },
+    addLine: function addLine() {
+      this.data.items.push({
+        description: '',
+        type: null,
+        balance: 0
+      });
+    },
+    confirmStore: function confirmStore() {
+      this.$vs.dialog({
+        type: 'confirm',
+        color: 'warning',
+        title: "\u1795\u17D2\u1791\u17C0\u1784\u1795\u17D2\u1791\u17B6\u178F\u17CB",
+        text: 'ចុចពាក្យ Accept ដើម្បីរក្សាទុក!',
+        accept: this.storeIncome
+      });
+    },
+    //store
+    storeIncome: function storeIncome() {
+      var self = this;
+      this.$validator.validateAll().then(function (result) {
+        if (result) {
+          self.$vs.loading();
+          self.$store.dispatch('storeIncome', self.data).then(function (data) {
+            if (data) {
+              self.$vs.notify({
+                time: 4000,
+                title: 'ប្រតិបត្តិការជោគជ័យ',
+                text: 'ទិន្នន័យបានបន្ថែម',
+                color: 'success',
+                iconPack: 'feather',
+                icon: 'icon-check',
+                position: 'top-center'
+              });
+              self.$modal.hide('add-income');
+            } else {
+              self.$vs.notify({
+                title: 'ប្រតិបត្តិការបរាជ័យ',
+                text: 'ទិន្នន័យមិនបានបន្ថែម',
+                color: 'danger',
+                iconPack: 'feather',
+                icon: 'icon-message-square',
+                position: 'top-center'
+              });
+            }
+
+            self.$vs.loading.close();
+          });
+        } else {
+          self.$vs.notify({
+            title: 'ប្រតិបត្តិការបរាជ័យ',
+            text: 'សូមបំពេញទិន្នន័យអោយបានត្រឹមត្រូវ',
+            color: 'danger',
+            iconPack: 'feather',
+            icon: 'icon-message-square',
+            position: 'top-center'
+          });
+        }
+      });
+    }
+  }
+});
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/report/stock/Stock.vue?vue&type=style&index=0&id=436b45ec&scoped=true&lang=css&":
-/*!***********************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader??ref--7-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/report/stock/Stock.vue?vue&type=style&index=0&id=436b45ec&scoped=true&lang=css& ***!
-  \***********************************************************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(/*! ../../../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "[dir] table.expense[data-v-436b45ec], [dir] td.expense[data-v-436b45ec], [dir] th.expense[data-v-436b45ec] {\n  border: 1px solid black;\n}\ntable.expense[data-v-436b45ec] {\n  border-collapse: collapse;\n  width: 100%;\n}\n[dir=ltr] th.expense[data-v-436b45ec] {\n  text-align: left;\n}\n[dir=rtl] th.expense[data-v-436b45ec] {\n  text-align: right;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
-
-/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/report/stock/Stock.vue?vue&type=style&index=1&lang=sass&":
-/*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader!./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--9-2!./node_modules/sass-loader/dist/cjs.js??ref--9-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/report/stock/Stock.vue?vue&type=style&index=1&lang=sass& ***!
-  \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-var content = __webpack_require__(/*! !../../../../../../node_modules/css-loader!../../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../../node_modules/postcss-loader/src??ref--9-2!../../../../../../node_modules/sass-loader/dist/cjs.js??ref--9-3!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./Stock.vue?vue&type=style&index=1&lang=sass& */ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/report/stock/Stock.vue?vue&type=style&index=1&lang=sass&");
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(/*! ../../../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {}
-
-/***/ }),
-
-/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/report/stock/Stock.vue?vue&type=style&index=0&id=436b45ec&scoped=true&lang=css&":
-/*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--7-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/report/stock/Stock.vue?vue&type=style&index=0&id=436b45ec&scoped=true&lang=css& ***!
-  \***************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-var content = __webpack_require__(/*! !../../../../../../node_modules/css-loader??ref--7-1!../../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../../node_modules/postcss-loader/src??ref--7-2!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./Stock.vue?vue&type=style&index=0&id=436b45ec&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/report/stock/Stock.vue?vue&type=style&index=0&id=436b45ec&scoped=true&lang=css&");
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(/*! ../../../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {}
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/index.js?!./node_modules/vue-money-format/src/components/MoneyFormat.vue?vue&type=script&lang=js&":
-/*!*************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib??vue-loader-options!./node_modules/vue-money-format/src/components/MoneyFormat.vue?vue&type=script&lang=js& ***!
-  \*************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/income/addIncomeType.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/income/addIncomeType.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -501,214 +427,408 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: {
-    value: Number,
-    locale: {
-      type: String,
-      default: 'en'
-    },
-    currencyCode: {
-      type: String,
-      default: 'USD'
-    },
-    supplementalPrecision: {
-      type: Number,
-      default: 0
-    },
-    subunitsValue: {
-      type: Boolean,
-      default: false
-    },
-    subunitsToUnit: {
-      type: Number,
-      default: 1
-    },
-    hideSubunits: {
-      type: Boolean,
-      default: false
-    }
+  name: "addIncomeType",
+  data: function data() {
+    return {
+      data: {
+        type: ''
+      }
+    };
   },
   methods: {
-    /////////////////////////////////////////////////////////////////////
-    // Format money based on integer or floating input
-    // ===============================================
-    // Possible inputs are:
-    // value:                 Numerical input (required)
-    // locale:                Language and country information, such as 'en' or 'en-US'
-    // currencyCode:          3-character cdde from ISO 4217
-    // subunitsValue:         Value is denominated in subunits, such as cents
-    // subunitsToUnits:       Overrides the minor unit value from ISO 4217. The "subunitsValue"
-    //                        option is redundant if you enter a value for this
-    // hideSubunits:          Set this to true if you don't want to display the subunits
-    // supplementalPrecision: Allows you to display partial subunits . This is ignored if
-    //                        you specify "hideSubunits=true"
-    /////////////////////////////////////////////////////////////////////
-    formatMoney: function(value, 
-                          locale, 
-                          currencyCode, 
-                          subunitsValue, 
-                          subunitsToUnit,
-                          hideSubunits, 
-                          supplementalPrecision) {
-      let ret = 0;
-      if (Number.isFinite(value)) {
-        try {
-          let numFormat = new Intl.NumberFormat(locale, { style: 'currency', currency: currencyCode });
-          let options = numFormat.resolvedOptions();
-          let fraction_digits = options.minimumFractionDigits;
-          if (subunitsToUnit > 1) {
-            value = value/subunitsToUnit;
-          }
-          else if (subunitsValue == true) {
-            value = value/10 ** options.minimumFractionDigits;
-          }
-          if (hideSubunits == true) {
-            numFormat = new Intl.NumberFormat(locale, { style: 'currency', currency: currencyCode, minimumFractionDigits: 0 , maximumFractionDigits: 0 });
-          }
-          else if (supplementalPrecision > 0) {
-            numFormat = new Intl.NumberFormat(locale, { style: 'currency', 
-              currency: currencyCode, 
-              minimumFractionDigits: options.minimumFractionDigits + supplementalPrecision , 
-              maximumFractionDigits: options.maximumFractionDigits + supplementalPrecision });
-          }
-          ret = numFormat.format(value);
+    show: function show() {
+      this.$modal.show('add-income-type');
+    },
+    //store
+    storeIncomeType: function storeIncomeType() {
+      var self = this;
+      this.$validator.validateAll().then(function (result) {
+        if (result) {
+          self.$vs.loading();
+          self.$store.dispatch('storeIncomeType', self.data).then(function (data) {
+            if (data) {
+              self.$vs.notify({
+                time: 4000,
+                title: 'ប្រតិបត្តិការជោគជ័យ',
+                text: 'ទិន្នន័យបានបន្ថែម',
+                color: 'success',
+                iconPack: 'feather',
+                icon: 'icon-check',
+                position: 'top-center'
+              });
+              self.resetField();
+            } else {
+              self.$vs.notify({
+                title: 'ប្រតិបត្តិការបរាជ័យ',
+                text: 'ទិន្នន័យមិនបានបន្ថែម',
+                color: 'danger',
+                iconPack: 'feather',
+                icon: 'icon-message-square',
+                position: 'top-center'
+              });
+            }
+
+            self.$vs.loading.close();
+          });
+        } else {
+          self.$vs.notify({
+            title: 'ប្រតិបត្តិការបរាជ័យ',
+            text: 'សូមបំពេញទិន្នន័យអោយបានត្រឹមត្រូវ',
+            color: 'danger',
+            iconPack: 'feather',
+            icon: 'icon-message-square',
+            position: 'top-center'
+          });
         }
-        catch (err) {
-          ret = err.message;
-        }
-      }
-      else {
-        ret = '#NaN!';
-      }
-      return ret;
+      });
+    },
+    resetField: function resetField() {
+      this.data.type = '';
     }
   }
 });
 
-
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./node_modules/vue-money-format/src/components/MoneyFormat.vue?vue&type=template&id=82a851d4&":
-/*!***********************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./node_modules/vue-money-format/src/components/MoneyFormat.vue?vue&type=template&id=82a851d4& ***!
-  \***********************************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/income/editIncome.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/income/editIncome.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************/
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "money_format" }, [
-    _vm._v(
-      "\n  " +
-        _vm._s(
-          _vm.formatMoney(
-            _vm.value,
-            _vm.locale,
-            _vm.currencyCode,
-            _vm.subunitsValue,
-            _vm.subunitsToUnit,
-            _vm.hideSubunits,
-            _vm.supplementalPrecision
-          )
-        ) +
-        "\n"
-    )
-  ])
-}
-var staticRenderFns = []
-render._withStripped = true
+/* harmony import */ var vue_money_format__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-money-format */ "./node_modules/vue-money-format/src/main.js");
+/* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-select */ "./node_modules/vue-select/dist/vue-select.js");
+/* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_select__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var vue_flatpickr_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-flatpickr-component */ "./node_modules/vue-flatpickr-component/dist/vue-flatpickr.min.js");
+/* harmony import */ var vue_flatpickr_component__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_flatpickr_component__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var flatpickr_dist_flatpickr_min_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! flatpickr/dist/flatpickr.min.css */ "./node_modules/flatpickr/dist/flatpickr.min.css");
+/* harmony import */ var flatpickr_dist_flatpickr_min_css__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(flatpickr_dist_flatpickr_min_css__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _addIncomeType__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./addIncomeType */ "./resources/js/src/views/income/addIncomeType.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "editIncome",
+  components: {
+    AddIncomeType: _addIncomeType__WEBPACK_IMPORTED_MODULE_4__["default"],
+    'v-select': vue_select__WEBPACK_IMPORTED_MODULE_1___default.a,
+    flatPickr: vue_flatpickr_component__WEBPACK_IMPORTED_MODULE_2___default.a,
+    'money-format': vue_money_format__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  data: function data() {
+    return {
+      data: {
+        date: null,
+        note: null,
+        items: [{
+          description: '',
+          type: null,
+          balance: 0
+        }]
+      }
+    };
+  },
+  computed: {
+    all_income_types: function all_income_types() {
+      return this.$store.getters.all_income_type;
+    },
+    total_income: function total_income() {
+      return this.data.items.reduce(function (total, item) {
+        return total + parseFloat(item.balance);
+      }, 0);
+    }
+  },
+  methods: {
+    show: function show(data) {
+      var self = this;
+      self.$modal.show('edit-income');
+      self.data.id = data.id;
+      self.data.date = data.date;
+      self.data.note = data.note;
+      self.data.items = [];
+      data.income_detail.forEach(function (item, index) {
+        self.data.items.push({
+          description: item.description,
+          type: item.type,
+          balance: item.balance
+        });
+      });
+    },
+    removeLine: function removeLine(index) {
+      this.data.items.splice(index, 1);
+    },
+    addLine: function addLine() {
+      this.data.items.push({
+        description: '',
+        type: null,
+        balance: 0
+      });
+    },
+    confirmUpdate: function confirmUpdate() {
+      this.$vs.dialog({
+        type: 'confirm',
+        color: 'warning',
+        title: "\u1795\u17D2\u1791\u17C0\u1784\u1795\u17D2\u1791\u17B6\u178F\u17CB",
+        text: 'ចុចពាក្យ Accept ដើម្បីកែប្រែ!',
+        accept: this.updateIncome
+      });
+    },
+    //store
+    updateIncome: function updateIncome() {
+      var self = this;
+      this.$validator.validateAll().then(function (result) {
+        if (result) {
+          self.$vs.loading();
+          self.$store.dispatch('updateIncome', self.data).then(function (data) {
+            if (data) {
+              self.$vs.notify({
+                time: 4000,
+                title: 'ប្រតិបត្តិការជោគជ័យ',
+                text: 'ទិន្នន័យបានបន្ថែម',
+                color: 'success',
+                iconPack: 'feather',
+                icon: 'icon-check',
+                position: 'top-center'
+              });
+              self.$emit('finished');
+              self.$modal.hide('edit-income');
+            } else {
+              self.$vs.notify({
+                title: 'ប្រតិបត្តិការបរាជ័យ',
+                text: 'ទិន្នន័យមិនបានបន្ថែម',
+                color: 'danger',
+                iconPack: 'feather',
+                icon: 'icon-message-square',
+                position: 'top-center'
+              });
+            }
+
+            self.$vs.loading.close();
+          });
+        } else {
+          self.$vs.notify({
+            title: 'ប្រតិបត្តិការបរាជ័យ',
+            text: 'សូមបំពេញទិន្នន័យអោយបានត្រឹមត្រូវ',
+            color: 'danger',
+            iconPack: 'feather',
+            icon: 'icon-message-square',
+            position: 'top-center'
+          });
+        }
+      });
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/income/addIncome.vue?vue&type=style&index=0&id=85fd2864&scoped=true&lang=css&":
+/*!*********************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--7-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/income/addIncome.vue?vue&type=style&index=0&id=85fd2864&scoped=true&lang=css& ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "[dir] table[data-v-85fd2864], [dir] td[data-v-85fd2864], [dir] th[data-v-85fd2864] {\n  border: 1px solid black;\n}\ntable[data-v-85fd2864] {\n  border-collapse: collapse;\n  width: 100%;\n}\n[dir=ltr] th[data-v-85fd2864] {\n  text-align: left;\n}\n[dir=rtl] th[data-v-85fd2864] {\n  text-align: right;\n}\n", ""]);
+
+// exports
 
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/components/statistics-cards/StatisticsCardLine.vue?vue&type=template&id=2d2fa5ad&":
-/*!******************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/components/statistics-cards/StatisticsCardLine.vue?vue&type=template&id=2d2fa5ad& ***!
-  \******************************************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/income/editIncome.vue?vue&type=style&index=0&id=3fa45a5f&scoped=true&lang=css&":
+/*!**********************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--7-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/income/editIncome.vue?vue&type=style&index=0&id=3fa45a5f&scoped=true&lang=css& ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("vx-card", { staticClass: "overflow-hidden" }, [
-    _c("div", { attrs: { slot: "no-body" }, slot: "no-body" }, [
-      _c(
-        "div",
-        {
-          staticClass: "p-6",
-          class: {
-            "flex justify-between flex-row-reverse items-center": _vm.iconRight,
-            "text-center": !_vm.iconRight && _vm.hideChart,
-            "pb-0": !_vm.hideChart
-          }
-        },
-        [
-          _c("feather-icon", {
-            staticClass: "p-3 inline-flex rounded-full",
-            class: ["text-" + _vm.color, { "mb-4": !_vm.iconRight }],
-            style: { background: "rgba(var(--vs-" + _vm.color + "),.15)" },
-            attrs: { icon: _vm.icon }
-          }),
-          _vm._v(" "),
-          _c("div", { staticClass: "truncate" }, [
-            _c("h2", { staticClass: "mb-1 font-bold" }, [
-              _vm._v(_vm._s(_vm.statistic))
-            ]),
-            _vm._v(" "),
-            _c("span", [_vm._v(_vm._s(_vm.statisticTitle))])
-          ])
-        ],
-        1
-      ),
-      _vm._v(" "),
-      !_vm.hideChart
-        ? _c(
-            "div",
-            { staticClass: "line-area-chart" },
-            [
-              _c("vue-apex-charts", {
-                ref: "apexChart",
-                attrs: {
-                  type: _vm.type,
-                  height: "100",
-                  width: "100%",
-                  options: _vm.chartOptions,
-                  series: _vm.chartData
-                }
-              })
-            ],
-            1
-          )
-        : _vm._e()
-    ])
-  ])
-}
-var staticRenderFns = []
-render._withStripped = true
+exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
 
+
+// module
+exports.push([module.i, "[dir] table[data-v-3fa45a5f], [dir] td[data-v-3fa45a5f], [dir] th[data-v-3fa45a5f] {\n  border: 1px solid black;\n}\ntable[data-v-3fa45a5f] {\n  border-collapse: collapse;\n  width: 100%;\n}\n[dir=ltr] th[data-v-3fa45a5f] {\n  text-align: left;\n}\n[dir=rtl] th[data-v-3fa45a5f] {\n  text-align: right;\n}\n", ""]);
+
+// exports
 
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/report/stock/Stock.vue?vue&type=template&id=436b45ec&scoped=true&":
-/*!********************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/report/stock/Stock.vue?vue&type=template&id=436b45ec&scoped=true& ***!
-  \********************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/income/addIncome.vue?vue&type=style&index=0&id=85fd2864&scoped=true&lang=css&":
+/*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--7-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/income/addIncome.vue?vue&type=style&index=0&id=85fd2864&scoped=true&lang=css& ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../../node_modules/css-loader??ref--7-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--7-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./addIncome.vue?vue&type=style&index=0&id=85fd2864&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/income/addIncome.vue?vue&type=style&index=0&id=85fd2864&scoped=true&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/income/editIncome.vue?vue&type=style&index=0&id=3fa45a5f&scoped=true&lang=css&":
+/*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--7-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/income/editIncome.vue?vue&type=style&index=0&id=3fa45a5f&scoped=true&lang=css& ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../../node_modules/css-loader??ref--7-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--7-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./editIncome.vue?vue&type=style&index=0&id=3fa45a5f&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/income/editIncome.vue?vue&type=style&index=0&id=3fa45a5f&scoped=true&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/income/Income.vue?vue&type=template&id=bd37ea56&scoped=true&":
+/*!***************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/income/Income.vue?vue&type=template&id=bd37ea56&scoped=true& ***!
+  \***************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -724,124 +844,108 @@ var render = function() {
     "vx-card",
     { attrs: { "no-shadow": "" } },
     [
-      _c("div", { staticClass: "vx-row" }, [
-        _c(
-          "div",
-          { staticClass: "vx-col md:w-1/3 w-full" },
-          [
-            _c("statistics-card-line", {
+      _c(
+        "div",
+        { staticClass: "flex btn-group" },
+        [
+          _vm.selected.length === 1
+            ? _c(
+                "vs-button",
+                {
+                  attrs: {
+                    type: "relief",
+                    color: "dark",
+                    "icon-pack": "feather",
+                    icon: "icon-eye"
+                  },
+                  on: {
+                    click: function($event) {
+                      return _vm.$refs.showIncome.show(_vm.selected[0])
+                    }
+                  }
+                },
+                [_vm._v("\n            បង្ហាញ\n        ")]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _c(
+            "vs-button",
+            {
               attrs: {
-                hideChart: "",
-                icon: "PackageIcon",
-                "icon-right": "",
-                statistic: _vm.all_report_stocks.length,
-                statisticTitle: "ទំនិញសរុប"
-              }
-            })
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "vx-col md:w-1/3 w-full" },
-          [
-            _c("statistics-card-line", {
-              attrs: {
-                hideChart: "",
-                icon: "PackageIcon",
-                "icon-right": "",
-                statistic: _vm.out_stock_count,
-                statisticTitle: "ទំនិញដាច់ស្តុក"
-              }
-            })
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "vx-col w-full" },
-          [
-            _c(
-              "vs-collapse",
-              { attrs: { type: "margin" } },
-              [
-                _c(
-                  "vs-collapse-item",
-                  [
-                    _c("div", { attrs: { slot: "header" }, slot: "header" }, [
-                      _vm._v(
-                        "\n                        បង្ហាញទំនិញដាច់ស្តុក\n                    "
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "vs-list",
-                      _vm._l(_vm.out_stock_product, function(item, index) {
-                        return _c("vs-list-item", {
-                          key: index,
-                          attrs: {
-                            title: "ID: " + item.id + " ឈ្មោះ​៖ " + item.name,
-                            subtitle: "Description: " + item.description
-                          }
-                        })
-                      }),
-                      1
-                    )
-                  ],
-                  1
-                )
-              ],
-              1
-            )
-          ],
-          1
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "vx-row" }, [
-        _c(
-          "div",
-          { staticClass: "vx-col w-full" },
-          [
-            _c("vue-instant", {
-              staticClass: "mt-base",
-              attrs: {
-                id: "styles",
-                "suggestion-attribute": "id",
-                suggestions: _vm.all_report_stocks_id,
-                type: "google"
+                type: "relief",
+                "icon-pack": "feather",
+                icon: "icon-plus-square"
               },
               on: {
-                "click-button": _vm.searchStock,
-                clear: function($event) {
-                  _vm.data.id = ""
-                  _vm.data.searchId = null
+                click: function($event) {
+                  return _vm.$refs.addIncome.show()
                 }
-              },
-              model: {
-                value: _vm.data.id,
-                callback: function($$v) {
-                  _vm.$set(_vm.data, "id", $$v)
-                },
-                expression: "data.id"
               }
-            })
-          ],
-          1
-        )
-      ]),
+            },
+            [_vm._v("\n            បន្ថែម\n        ")]
+          ),
+          _vm._v(" "),
+          _vm.selected.length === 1
+            ? _c(
+                "vs-button",
+                {
+                  attrs: {
+                    color: "warning",
+                    type: "relief",
+                    "icon-pack": "feather",
+                    icon: "icon-edit"
+                  },
+                  on: {
+                    click: function($event) {
+                      return _vm.$refs.editIncome.show(_vm.selected[0])
+                    }
+                  }
+                },
+                [_vm._v("\n            កែប្រែ\n        ")]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.selected.length
+            ? _c(
+                "vs-button",
+                {
+                  attrs: {
+                    color: "danger",
+                    type: "relief",
+                    "icon-pack": "feather",
+                    icon: "icon-trash"
+                  },
+                  on: { click: _vm.confirmDelete }
+                },
+                [_vm._v("\n            លុប\n        ")]
+              )
+            : _vm._e()
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("add-income", { ref: "addIncome" }),
+      _vm._v(" "),
+      _c("edit-income", {
+        ref: "editIncome",
+        on: {
+          finished: function($event) {
+            _vm.selected = []
+          }
+        }
+      }),
+      _vm._v(" "),
+      _c("show-income", { ref: "showIncome" }),
       _vm._v(" "),
       _c(
         "vs-table",
         {
           attrs: {
+            multiple: "",
             pagination: "",
-            "max-items": "20",
+            "max-items": "3",
             search: "",
-            stripe: "",
-            data: _vm.search_all_report_stocks
+            data: _vm.all_incomes
           },
           scopedSlots: _vm._u([
             {
@@ -851,14 +955,7 @@ var render = function() {
                 return _vm._l(data, function(item, index) {
                   return _c(
                     "vs-tr",
-                    {
-                      key: index,
-                      class:
-                        _vm.sum_qty(item.purchase_detail) <= 0
-                          ? "text-danger"
-                          : "",
-                      attrs: { data: item }
-                    },
+                    { key: index, attrs: { data: item } },
                     [
                       _c("vs-td", { attrs: { data: item.id } }, [
                         _vm._v(
@@ -868,214 +965,66 @@ var render = function() {
                         )
                       ]),
                       _vm._v(" "),
-                      _c("vs-td", { attrs: { data: item.name } }, [
+                      _c("vs-td", { attrs: { data: item.note } }, [
                         _vm._v(
                           "\n                    " +
-                            _vm._s(item.name) +
+                            _vm._s(item.note) +
                             "\n                "
                         )
                       ]),
                       _vm._v(" "),
-                      _c("vs-td", [
+                      _c(
+                        "vs-td",
+                        [
+                          _c("money-format", {
+                            attrs: {
+                              value: _vm.total_income(item.income_detail),
+                              locale: "en",
+                              "currency-code": "USD"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("vs-td", { attrs: { data: item.date } }, [
                         _vm._v(
                           "\n                    " +
-                            _vm._s(_vm.sum_qty(item.purchase_detail)) +
+                            _vm._s(item.date) +
                             "\n                "
                         )
-                      ]),
-                      _vm._v(" "),
-                      _c("vs-td", { attrs: { data: item.inventory_type } }, [
-                        _vm._v(
-                          "\n                    " +
-                            _vm._s(item.inventory_type) +
-                            "\n                "
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("vs-td", { attrs: { data: item.unit } }, [
-                        _vm._v(
-                          "\n                    " +
-                            _vm._s(item.unit) +
-                            "\n                "
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("vs-td", { attrs: { data: item.category } }, [
-                        _vm._v(
-                          "\n                    " +
-                            _vm._s(item.category) +
-                            "\n                "
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("vs-td", { attrs: { data: item.brand } }, [
-                        _vm._v(
-                          "\n                    " +
-                            _vm._s(item.brand) +
-                            "\n                "
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("template", { slot: "expand" }, [
-                        _c("div", { staticClass: "w-full" }, [
-                          _c("table", { staticClass: "expense" }, [
-                            _c("thead", [
-                              _c("tr", [
-                                _c("th", { staticClass: "expense" }, [
-                                  _vm._v("ល.រ"),
-                                  _c("br"),
-                                  _vm._v(
-                                    "\n                                    No\n                                "
-                                  )
-                                ]),
-                                _vm._v(" "),
-                                _c("th", { staticClass: "expense" }, [
-                                  _vm._v("អ្នកផ្គត់ផ្គង់"),
-                                  _c("br"),
-                                  _vm._v(
-                                    "\n                                    Supplier\n                                "
-                                  )
-                                ]),
-                                _vm._v(" "),
-                                _c("th", { staticClass: "expense" }, [
-                                  _vm._v("ចំនួន"),
-                                  _c("br"),
-                                  _vm._v(
-                                    "\n                                    Qty\n                                "
-                                  )
-                                ]),
-                                _vm._v(" "),
-                                _c("th", { staticClass: "expense" }, [
-                                  _vm._v("តម្លៃទិញ"),
-                                  _c("br"),
-                                  _vm._v(
-                                    "\n                                    Purchase Price\n                                "
-                                  )
-                                ]),
-                                _vm._v(" "),
-                                _c("th", { staticClass: "expense" }, [
-                                  _vm._v("តម្លៃលក់"),
-                                  _c("br"),
-                                  _vm._v(
-                                    "\n                                    Sale Price\n                                "
-                                  )
-                                ]),
-                                _vm._v(" "),
-                                _c("th", { staticClass: "expense" }, [
-                                  _vm._v("កាលបរិច្ឆេទ"),
-                                  _c("br"),
-                                  _vm._v(
-                                    "\n                                    Date\n                                "
-                                  )
-                                ])
-                              ])
-                            ]),
-                            _vm._v(" "),
-                            _c(
-                              "tbody",
-                              _vm._l(item.purchase_detail, function(
-                                tr,
-                                indextr
-                              ) {
-                                return _c("tr", { key: indextr }, [
-                                  _c("td", { staticClass: "expense pl-3" }, [
-                                    _vm._v(
-                                      "\n                                    " +
-                                        _vm._s(indextr + 1) +
-                                        "\n                                "
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("td", { staticClass: "expense pl-3" }, [
-                                    _vm._v(
-                                      "\n                                    " +
-                                        _vm._s(tr.supplier.name) +
-                                        "\n                                "
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("td", { staticClass: "expense pl-3" }, [
-                                    _vm._v(
-                                      "\n                                    " +
-                                        _vm._s(tr.remain_qty) +
-                                        "\n                                "
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c(
-                                    "td",
-                                    { staticClass: "expense pl-3" },
-                                    [
-                                      _c("money-format", {
-                                        attrs: {
-                                          value: parseFloat(tr.purchase),
-                                          locale: "en",
-                                          "currency-code": "USD"
-                                        }
-                                      })
-                                    ],
-                                    1
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "td",
-                                    { staticClass: "expense pl-3" },
-                                    [
-                                      _c("money-format", {
-                                        attrs: {
-                                          value: parseFloat(tr.sale),
-                                          locale: "en",
-                                          "currency-code": "USD"
-                                        }
-                                      })
-                                    ],
-                                    1
-                                  ),
-                                  _vm._v(" "),
-                                  _c("td", { staticClass: "expense pl-3" }, [
-                                    _vm._v(
-                                      "\n                                    " +
-                                        _vm._s(tr.date) +
-                                        "\n                                "
-                                    )
-                                  ])
-                                ])
-                              }),
-                              0
-                            )
-                          ])
-                        ])
                       ])
                     ],
-                    2
+                    1
                   )
                 })
               }
             }
-          ])
+          ]),
+          model: {
+            value: _vm.selected,
+            callback: function($$v) {
+              _vm.selected = $$v
+            },
+            expression: "selected"
+          }
         },
         [
           _c(
             "template",
             { slot: "thead" },
             [
-              _c("vs-th", { attrs: { "sort-key": "id" } }, [_vm._v("ID")]),
+              _c("vs-th", { attrs: { "sort-key": "id" } }, [_vm._v("ល.រ")]),
               _vm._v(" "),
-              _c("vs-th", { attrs: { "sort-key": "name" } }, [_vm._v("Name")]),
-              _vm._v(" "),
-              _c("vs-th", [_vm._v("Qty")]),
-              _vm._v(" "),
-              _c("vs-th", { attrs: { "sort-key": "inventory_type" } }, [
-                _vm._v("Inventory Type")
+              _c("vs-th", { attrs: { "sort-key": "note" } }, [
+                _vm._v("សំគាល់")
               ]),
               _vm._v(" "),
-              _c("vs-th", { attrs: { "sort-key": "unit" } }, [_vm._v("Unit")]),
+              _c("vs-th", [_vm._v("ទឹកប្រាក់")]),
               _vm._v(" "),
-              _c("vs-th", { attrs: { "sort-key": "category" } }, [
-                _vm._v("Category")
-              ]),
-              _vm._v(" "),
-              _c("vs-th", { attrs: { "sort-key": "brand" } }, [_vm._v("Brand")])
+              _c("vs-th", { attrs: { "sort-key": "date" } }, [
+                _vm._v("កាលបរិច្ឆេទ")
+              ])
             ],
             1
           )
@@ -1093,103 +1042,1052 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-money-format/src/components/MoneyFormat.vue":
-/*!**********************************************************************!*\
-  !*** ./node_modules/vue-money-format/src/components/MoneyFormat.vue ***!
-  \**********************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _MoneyFormat_vue_vue_type_template_id_82a851d4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./MoneyFormat.vue?vue&type=template&id=82a851d4& */ "./node_modules/vue-money-format/src/components/MoneyFormat.vue?vue&type=template&id=82a851d4&");
-/* harmony import */ var _MoneyFormat_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./MoneyFormat.vue?vue&type=script&lang=js& */ "./node_modules/vue-money-format/src/components/MoneyFormat.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _MoneyFormat_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _MoneyFormat_vue_vue_type_template_id_82a851d4___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _MoneyFormat_vue_vue_type_template_id_82a851d4___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "node_modules/vue-money-format/src/components/MoneyFormat.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./node_modules/vue-money-format/src/components/MoneyFormat.vue?vue&type=script&lang=js&":
-/*!***********************************************************************************************!*\
-  !*** ./node_modules/vue-money-format/src/components/MoneyFormat.vue?vue&type=script&lang=js& ***!
-  \***********************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _vue_loader_lib_index_js_vue_loader_options_MoneyFormat_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../vue-loader/lib??vue-loader-options!./MoneyFormat.vue?vue&type=script&lang=js& */ "./node_modules/vue-loader/lib/index.js?!./node_modules/vue-money-format/src/components/MoneyFormat.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_vue_loader_lib_index_js_vue_loader_options_MoneyFormat_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./node_modules/vue-money-format/src/components/MoneyFormat.vue?vue&type=template&id=82a851d4&":
-/*!*****************************************************************************************************!*\
-  !*** ./node_modules/vue-money-format/src/components/MoneyFormat.vue?vue&type=template&id=82a851d4& ***!
-  \*****************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/income/addIncome.vue?vue&type=template&id=85fd2864&scoped=true&":
+/*!******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/income/addIncome.vue?vue&type=template&id=85fd2864&scoped=true& ***!
+  \******************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _vue_loader_lib_loaders_templateLoader_js_vue_loader_options_vue_loader_lib_index_js_vue_loader_options_MoneyFormat_vue_vue_type_template_id_82a851d4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../vue-loader/lib??vue-loader-options!./MoneyFormat.vue?vue&type=template&id=82a851d4& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./node_modules/vue-money-format/src/components/MoneyFormat.vue?vue&type=template&id=82a851d4&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _vue_loader_lib_loaders_templateLoader_js_vue_loader_options_vue_loader_lib_index_js_vue_loader_options_MoneyFormat_vue_vue_type_template_id_82a851d4___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _vue_loader_lib_loaders_templateLoader_js_vue_loader_options_vue_loader_lib_index_js_vue_loader_options_MoneyFormat_vue_vue_type_template_id_82a851d4___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "modal",
+    {
+      attrs: {
+        width: "60%",
+        height: "auto",
+        scrollable: true,
+        pivotY: 0.2,
+        clickToClose: false,
+        name: "add-income"
+      }
+    },
+    [
+      _c("div", { staticClass: "flex justify-end" }, [
+        _c(
+          "i",
+          {
+            staticClass: "vs-icon vs-popup--close material-icons text-warning",
+            staticStyle: { background: "rgb(255, 255, 255)" },
+            on: {
+              click: function($event) {
+                return _vm.$modal.hide("add-income")
+              }
+            }
+          },
+          [_vm._v("close")]
+        )
+      ]),
+      _vm._v(" "),
+      _c(
+        "vx-card",
+        { attrs: { "no-shadow": "" } },
+        [
+          _c("div", { staticClass: "vx-row" }, [
+            _c(
+              "div",
+              { staticClass: "vx-col md:w-1/4 w-full" },
+              [
+                _c("label", [_vm._v("កាលបរិច្ឆេទ")]),
+                _vm._v(" "),
+                _c("flat-pickr", {
+                  directives: [
+                    {
+                      name: "validate",
+                      rawName: "v-validate",
+                      value: "required",
+                      expression: "'required'"
+                    }
+                  ],
+                  staticClass: "w-full",
+                  attrs: { name: "date", placeholder: "ជ្រើសរើស" },
+                  model: {
+                    value: _vm.data.date,
+                    callback: function($$v) {
+                      _vm.$set(_vm.data, "date", $$v)
+                    },
+                    expression: "data.date"
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "span",
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.errors.has("date"),
+                        expression: "errors.has('date')"
+                      }
+                    ],
+                    staticClass: "text-danger text-sm"
+                  },
+                  [_vm._v(_vm._s(_vm.errors.first("date")))]
+                )
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "vx-col md:w-3/4 w-full" },
+              [
+                _c("label", [_vm._v("សំគាល់")]),
+                _vm._v(" "),
+                _c("vs-textarea", {
+                  directives: [
+                    {
+                      name: "validate",
+                      rawName: "v-validate",
+                      value: "required",
+                      expression: "'required'"
+                    }
+                  ],
+                  staticClass: "w-full",
+                  attrs: { name: "note", label: "សំគាល់" },
+                  model: {
+                    value: _vm.data.note,
+                    callback: function($$v) {
+                      _vm.$set(_vm.data, "note", $$v)
+                    },
+                    expression: "data.note"
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "span",
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.errors.has("note"),
+                        expression: "errors.has('note')"
+                      }
+                    ],
+                    staticClass: "text-danger text-sm"
+                  },
+                  [_vm._v(_vm._s(_vm.errors.first("note")))]
+                )
+              ],
+              1
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "vx-row" }, [
+            _c(
+              "div",
+              { staticClass: "vx-col w-full" },
+              [
+                _c("table", [
+                  _c("thead", [
+                    _c("tr", [
+                      _c("th", [_vm._v("ល.រ")]),
+                      _vm._v(" "),
+                      _c("th", [_vm._v("ពិពណ៌នា")]),
+                      _vm._v(" "),
+                      _c("th", [_vm._v("ប្រភេទ")]),
+                      _vm._v(" "),
+                      _c("th", [_vm._v("ទឹកប្រាក់")]),
+                      _vm._v(" "),
+                      _c("th")
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "tbody",
+                    _vm._l(_vm.data.items, function(item, index) {
+                      return _c("tr", { key: index }, [
+                        _c("td", { staticClass: "pl-3" }, [
+                          _vm._v(_vm._s(index + 1))
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          { staticClass: "p-1" },
+                          [
+                            _c("vs-input", {
+                              directives: [
+                                {
+                                  name: "validate",
+                                  rawName: "v-validate",
+                                  value: "required",
+                                  expression: "'required'"
+                                }
+                              ],
+                              staticClass: "w-full",
+                              attrs: { name: index + "-description" },
+                              model: {
+                                value: item.description,
+                                callback: function($$v) {
+                                  _vm.$set(item, "description", $$v)
+                                },
+                                expression: "item.description"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "span",
+                              {
+                                directives: [
+                                  {
+                                    name: "show",
+                                    rawName: "v-show",
+                                    value: _vm.errors.has(
+                                      index + "-description"
+                                    ),
+                                    expression:
+                                      "errors.has(`${index}-description`)"
+                                  }
+                                ],
+                                staticClass: "text-danger text-sm"
+                              },
+                              [
+                                _vm._v(
+                                  _vm._s(
+                                    _vm.errors.first(index + "-description")
+                                  )
+                                )
+                              ]
+                            )
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          { staticClass: "p-1", attrs: { width: "300" } },
+                          [
+                            _c(
+                              "vx-input-group",
+                              [
+                                _c("v-select", {
+                                  directives: [
+                                    {
+                                      name: "validate",
+                                      rawName: "v-validate",
+                                      value: "required",
+                                      expression: "'required'"
+                                    }
+                                  ],
+                                  staticClass: "w-full",
+                                  attrs: {
+                                    name: index + "-type",
+                                    options: _vm.all_income_types
+                                  },
+                                  model: {
+                                    value: item.type,
+                                    callback: function($$v) {
+                                      _vm.$set(item, "type", $$v)
+                                    },
+                                    expression: "item.type"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("template", { slot: "append" }, [
+                                  _c(
+                                    "div",
+                                    { staticClass: "append-text btn-addon" },
+                                    [
+                                      _c("vs-button", {
+                                        attrs: {
+                                          color: "dark",
+                                          radius: "",
+                                          type: "line",
+                                          "icon-pack": "feather",
+                                          icon: "icon-plus"
+                                        },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.$refs.addIncomeType.show()
+                                          }
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ])
+                              ],
+                              2
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "span",
+                              {
+                                directives: [
+                                  {
+                                    name: "show",
+                                    rawName: "v-show",
+                                    value: _vm.errors.has(index + "-type"),
+                                    expression: "errors.has(`${index}-type`)"
+                                  }
+                                ],
+                                staticClass: "text-danger text-sm"
+                              },
+                              [
+                                _vm._v(
+                                  _vm._s(_vm.errors.first(index + "-type"))
+                                )
+                              ]
+                            )
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          { staticClass: "pl-3" },
+                          [
+                            _c("vs-input-number", {
+                              directives: [
+                                {
+                                  name: "validate",
+                                  rawName: "v-validate",
+                                  value: "required",
+                                  expression: "'required'"
+                                }
+                              ],
+                              attrs: {
+                                min: 0,
+                                name: index + "-balance",
+                                color: "warning"
+                              },
+                              model: {
+                                value: item.balance,
+                                callback: function($$v) {
+                                  _vm.$set(item, "balance", $$v)
+                                },
+                                expression: "item.balance"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "span",
+                              {
+                                directives: [
+                                  {
+                                    name: "show",
+                                    rawName: "v-show",
+                                    value: _vm.errors.has(index + "-balance"),
+                                    expression: "errors.has(`${index}-balance`)"
+                                  }
+                                ],
+                                staticClass: "text-danger text-sm"
+                              },
+                              [
+                                _vm._v(
+                                  _vm._s(_vm.errors.first(index + "-balance"))
+                                )
+                              ]
+                            )
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          [
+                            _c("vs-button", {
+                              attrs: {
+                                size: "small",
+                                radius: "",
+                                color: "danger",
+                                icon: "icon-minus-square",
+                                "icon-pack": "feather",
+                                type: "flat"
+                              },
+                              on: {
+                                click: function($event) {
+                                  return _vm.removeLine(index)
+                                }
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ])
+                    }),
+                    0
+                  ),
+                  _vm._v(" "),
+                  _c("tfoot", [
+                    _c("tr", [
+                      _c("td"),
+                      _vm._v(" "),
+                      _c("td"),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "text-right" }, [
+                        _vm._v(
+                          "\n                            សរុប\n                        "
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        { staticClass: "pl-3" },
+                        [
+                          _c("money-format", {
+                            attrs: {
+                              value: _vm.total_income,
+                              locale: "en",
+                              "currency-code": "USD"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("td")
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("add-income-type", { ref: "addIncomeType" }),
+                _vm._v(" "),
+                _c(
+                  "vs-button",
+                  {
+                    attrs: {
+                      type: "line",
+                      "icon-pack": "feather",
+                      icon: "icon-plus-circle"
+                    },
+                    on: { click: _vm.addLine }
+                  },
+                  [_vm._v("\n                    បន្ថែមជួរ\n                ")]
+                )
+              ],
+              1
+            )
+          ]),
+          _vm._v(" "),
+          _c("vs-divider"),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "flex justify-end btn-group" },
+            [
+              _c(
+                "vs-button",
+                {
+                  attrs: {
+                    icon: "icon-save",
+                    "icon-pack": "feather",
+                    type: "relief"
+                  },
+                  on: { click: _vm.confirmStore }
+                },
+                [_vm._v("រក្សាទុក")]
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
 
 
 
 /***/ }),
 
-/***/ "./node_modules/vue-money-format/src/main.js":
-/*!***************************************************!*\
-  !*** ./node_modules/vue-money-format/src/main.js ***!
-  \***************************************************/
-/*! exports provided: default */
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/income/addIncomeType.vue?vue&type=template&id=4558a728&scoped=true&":
+/*!**********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/income/addIncomeType.vue?vue&type=template&id=4558a728&scoped=true& ***!
+  \**********************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _components_MoneyFormat_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/MoneyFormat.vue */ "./node_modules/vue-money-format/src/components/MoneyFormat.vue");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "modal",
+    {
+      attrs: {
+        height: "auto",
+        scrollable: true,
+        pivotY: 0.2,
+        clickToClose: false,
+        name: "add-income-type"
+      }
+    },
+    [
+      _c("div", { staticClass: "flex justify-end" }, [
+        _c(
+          "i",
+          {
+            staticClass: "vs-icon vs-popup--close material-icons text-warning",
+            staticStyle: { background: "rgb(255, 255, 255)" },
+            on: {
+              click: function($event) {
+                return _vm.$modal.hide("add-income-type")
+              }
+            }
+          },
+          [_vm._v("close")]
+        )
+      ]),
+      _vm._v(" "),
+      _c("vx-card", { attrs: { "no-shadow": "" } }, [
+        _c("div", { staticClass: "vx-row" }, [
+          _c(
+            "div",
+            { staticClass: "vx-col w-full" },
+            [
+              _c("vs-input", {
+                directives: [
+                  {
+                    name: "validate",
+                    rawName: "v-validate",
+                    value: "required",
+                    expression: "'required'"
+                  }
+                ],
+                staticClass: "w-full",
+                attrs: { name: "type" },
+                on: {
+                  keyup: function($event) {
+                    if (
+                      !$event.type.indexOf("key") &&
+                      _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                    ) {
+                      return null
+                    }
+                    return _vm.storeIncomeType($event)
+                  }
+                },
+                model: {
+                  value: _vm.data.type,
+                  callback: function($$v) {
+                    _vm.$set(_vm.data, "type", $$v)
+                  },
+                  expression: "data.type"
+                }
+              }),
+              _vm._v(" "),
+              _c(
+                "span",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.errors.has("type"),
+                      expression: "errors.has('type')"
+                    }
+                  ],
+                  staticClass: "text-danger text-sm"
+                },
+                [_vm._v(_vm._s(_vm.errors.first("type")))]
+              )
+            ],
+            1
+          )
+        ])
+      ])
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
 
-
-/* harmony default export */ __webpack_exports__["default"] = (_components_MoneyFormat_vue__WEBPACK_IMPORTED_MODULE_0__["default"]);
 
 
 /***/ }),
 
-/***/ "./resources/js/src/components/statistics-cards/StatisticsCardLine.vue":
-/*!*****************************************************************************!*\
-  !*** ./resources/js/src/components/statistics-cards/StatisticsCardLine.vue ***!
-  \*****************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/income/editIncome.vue?vue&type=template&id=3fa45a5f&scoped=true&":
+/*!*******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/income/editIncome.vue?vue&type=template&id=3fa45a5f&scoped=true& ***!
+  \*******************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "modal",
+    {
+      attrs: {
+        width: "60%",
+        height: "auto",
+        scrollable: true,
+        pivotY: 0.2,
+        clickToClose: false,
+        name: "edit-income"
+      }
+    },
+    [
+      _c("div", { staticClass: "flex justify-end" }, [
+        _c(
+          "i",
+          {
+            staticClass: "vs-icon vs-popup--close material-icons text-warning",
+            staticStyle: { background: "rgb(255, 255, 255)" },
+            on: {
+              click: function($event) {
+                return _vm.$modal.hide("edit-income")
+              }
+            }
+          },
+          [_vm._v("close")]
+        )
+      ]),
+      _vm._v(" "),
+      _c(
+        "vx-card",
+        { attrs: { "no-shadow": "" } },
+        [
+          _c("div", { staticClass: "vx-row" }, [
+            _c(
+              "div",
+              { staticClass: "vx-col md:w-1/4 w-full" },
+              [
+                _c("label", [_vm._v("កាលបរិច្ឆេទ")]),
+                _vm._v(" "),
+                _c("flat-pickr", {
+                  directives: [
+                    {
+                      name: "validate",
+                      rawName: "v-validate",
+                      value: "required",
+                      expression: "'required'"
+                    }
+                  ],
+                  staticClass: "w-full",
+                  attrs: { name: "date", placeholder: "ជ្រើសរើស" },
+                  model: {
+                    value: _vm.data.date,
+                    callback: function($$v) {
+                      _vm.$set(_vm.data, "date", $$v)
+                    },
+                    expression: "data.date"
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "span",
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.errors.has("date"),
+                        expression: "errors.has('date')"
+                      }
+                    ],
+                    staticClass: "text-danger text-sm"
+                  },
+                  [_vm._v(_vm._s(_vm.errors.first("date")))]
+                )
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "vx-col md:w-3/4 w-full" },
+              [
+                _c("label", [_vm._v("សំគាល់")]),
+                _vm._v(" "),
+                _c("vs-textarea", {
+                  directives: [
+                    {
+                      name: "validate",
+                      rawName: "v-validate",
+                      value: "required",
+                      expression: "'required'"
+                    }
+                  ],
+                  staticClass: "w-full",
+                  attrs: { name: "note", label: "សំគាល់" },
+                  model: {
+                    value: _vm.data.note,
+                    callback: function($$v) {
+                      _vm.$set(_vm.data, "note", $$v)
+                    },
+                    expression: "data.note"
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "span",
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.errors.has("note"),
+                        expression: "errors.has('note')"
+                      }
+                    ],
+                    staticClass: "text-danger text-sm"
+                  },
+                  [_vm._v(_vm._s(_vm.errors.first("note")))]
+                )
+              ],
+              1
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "vx-row" }, [
+            _c(
+              "div",
+              { staticClass: "vx-col w-full" },
+              [
+                _c("table", [
+                  _c("thead", [
+                    _c("tr", [
+                      _c("th", [_vm._v("ល.រ")]),
+                      _vm._v(" "),
+                      _c("th", [_vm._v("ពិពណ៌នា")]),
+                      _vm._v(" "),
+                      _c("th", [_vm._v("ប្រភេទ")]),
+                      _vm._v(" "),
+                      _c("th", [_vm._v("ទឹកប្រាក់")]),
+                      _vm._v(" "),
+                      _c("th")
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "tbody",
+                    _vm._l(_vm.data.items, function(item, index) {
+                      return _c("tr", { key: index }, [
+                        _c("td", { staticClass: "pl-3" }, [
+                          _vm._v(_vm._s(index + 1))
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          { staticClass: "p-1" },
+                          [
+                            _c("vs-input", {
+                              directives: [
+                                {
+                                  name: "validate",
+                                  rawName: "v-validate",
+                                  value: "required",
+                                  expression: "'required'"
+                                }
+                              ],
+                              staticClass: "w-full",
+                              attrs: { name: index + "-description" },
+                              model: {
+                                value: item.description,
+                                callback: function($$v) {
+                                  _vm.$set(item, "description", $$v)
+                                },
+                                expression: "item.description"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "span",
+                              {
+                                directives: [
+                                  {
+                                    name: "show",
+                                    rawName: "v-show",
+                                    value: _vm.errors.has(
+                                      index + "-description"
+                                    ),
+                                    expression:
+                                      "errors.has(`${index}-description`)"
+                                  }
+                                ],
+                                staticClass: "text-danger text-sm"
+                              },
+                              [
+                                _vm._v(
+                                  _vm._s(
+                                    _vm.errors.first(index + "-description")
+                                  )
+                                )
+                              ]
+                            )
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          { staticClass: "p-1", attrs: { width: "300" } },
+                          [
+                            _c(
+                              "vx-input-group",
+                              [
+                                _c("v-select", {
+                                  directives: [
+                                    {
+                                      name: "validate",
+                                      rawName: "v-validate",
+                                      value: "required",
+                                      expression: "'required'"
+                                    }
+                                  ],
+                                  staticClass: "w-full",
+                                  attrs: {
+                                    name: index + "-type",
+                                    options: _vm.all_income_types
+                                  },
+                                  model: {
+                                    value: item.type,
+                                    callback: function($$v) {
+                                      _vm.$set(item, "type", $$v)
+                                    },
+                                    expression: "item.type"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("template", { slot: "append" }, [
+                                  _c(
+                                    "div",
+                                    { staticClass: "append-text btn-addon" },
+                                    [
+                                      _c("vs-button", {
+                                        attrs: {
+                                          color: "dark",
+                                          radius: "",
+                                          type: "line",
+                                          "icon-pack": "feather",
+                                          icon: "icon-plus"
+                                        },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.$refs.addIncomeType.show()
+                                          }
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ])
+                              ],
+                              2
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "span",
+                              {
+                                directives: [
+                                  {
+                                    name: "show",
+                                    rawName: "v-show",
+                                    value: _vm.errors.has(index + "-type"),
+                                    expression: "errors.has(`${index}-type`)"
+                                  }
+                                ],
+                                staticClass: "text-danger text-sm"
+                              },
+                              [
+                                _vm._v(
+                                  _vm._s(_vm.errors.first(index + "-type"))
+                                )
+                              ]
+                            )
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          { staticClass: "pl-3" },
+                          [
+                            _c("vs-input-number", {
+                              directives: [
+                                {
+                                  name: "validate",
+                                  rawName: "v-validate",
+                                  value: "required",
+                                  expression: "'required'"
+                                }
+                              ],
+                              attrs: {
+                                min: 0,
+                                name: index + "-balance",
+                                color: "warning"
+                              },
+                              model: {
+                                value: item.balance,
+                                callback: function($$v) {
+                                  _vm.$set(item, "balance", $$v)
+                                },
+                                expression: "item.balance"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "span",
+                              {
+                                directives: [
+                                  {
+                                    name: "show",
+                                    rawName: "v-show",
+                                    value: _vm.errors.has(index + "-balance"),
+                                    expression: "errors.has(`${index}-balance`)"
+                                  }
+                                ],
+                                staticClass: "text-danger text-sm"
+                              },
+                              [
+                                _vm._v(
+                                  _vm._s(_vm.errors.first(index + "-balance"))
+                                )
+                              ]
+                            )
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          [
+                            _c("vs-button", {
+                              attrs: {
+                                size: "small",
+                                radius: "",
+                                color: "danger",
+                                icon: "icon-minus-square",
+                                "icon-pack": "feather",
+                                type: "flat"
+                              },
+                              on: {
+                                click: function($event) {
+                                  return _vm.removeLine(index)
+                                }
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ])
+                    }),
+                    0
+                  ),
+                  _vm._v(" "),
+                  _c("tfoot", [
+                    _c("tr", [
+                      _c("td"),
+                      _vm._v(" "),
+                      _c("td"),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "text-right" }, [
+                        _vm._v(
+                          "\n                            សរុប\n                        "
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        { staticClass: "pl-3" },
+                        [
+                          _c("money-format", {
+                            attrs: {
+                              value: _vm.total_income,
+                              locale: "en",
+                              "currency-code": "USD"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("td")
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("add-income-type", { ref: "addIncomeType" }),
+                _vm._v(" "),
+                _c(
+                  "vs-button",
+                  {
+                    attrs: {
+                      type: "line",
+                      "icon-pack": "feather",
+                      icon: "icon-plus-circle"
+                    },
+                    on: { click: _vm.addLine }
+                  },
+                  [_vm._v("\n                    បន្ថែមជួរ\n                ")]
+                )
+              ],
+              1
+            )
+          ]),
+          _vm._v(" "),
+          _c("vs-divider"),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "flex justify-end btn-group" },
+            [
+              _c(
+                "vs-button",
+                {
+                  attrs: {
+                    icon: "icon-edit",
+                    "icon-pack": "feather",
+                    type: "relief"
+                  },
+                  on: { click: _vm.confirmUpdate }
+                },
+                [_vm._v("កែប្រែ")]
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./resources/js/src/views/income/Income.vue":
+/*!**************************************************!*\
+  !*** ./resources/js/src/views/income/Income.vue ***!
+  \**************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _StatisticsCardLine_vue_vue_type_template_id_2d2fa5ad___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./StatisticsCardLine.vue?vue&type=template&id=2d2fa5ad& */ "./resources/js/src/components/statistics-cards/StatisticsCardLine.vue?vue&type=template&id=2d2fa5ad&");
-/* harmony import */ var _StatisticsCardLine_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./StatisticsCardLine.vue?vue&type=script&lang=js& */ "./resources/js/src/components/statistics-cards/StatisticsCardLine.vue?vue&type=script&lang=js&");
+/* harmony import */ var _Income_vue_vue_type_template_id_bd37ea56_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Income.vue?vue&type=template&id=bd37ea56&scoped=true& */ "./resources/js/src/views/income/Income.vue?vue&type=template&id=bd37ea56&scoped=true&");
+/* harmony import */ var _Income_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Income.vue?vue&type=script&lang=js& */ "./resources/js/src/views/income/Income.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -1199,199 +2097,68 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _StatisticsCardLine_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _StatisticsCardLine_vue_vue_type_template_id_2d2fa5ad___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _StatisticsCardLine_vue_vue_type_template_id_2d2fa5ad___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _Income_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Income_vue_vue_type_template_id_bd37ea56_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Income_vue_vue_type_template_id_bd37ea56_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  null,
+  "bd37ea56",
   null
   
 )
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/src/components/statistics-cards/StatisticsCardLine.vue"
+component.options.__file = "resources/js/src/views/income/Income.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/src/components/statistics-cards/StatisticsCardLine.vue?vue&type=script&lang=js&":
-/*!******************************************************************************************************!*\
-  !*** ./resources/js/src/components/statistics-cards/StatisticsCardLine.vue?vue&type=script&lang=js& ***!
-  \******************************************************************************************************/
+/***/ "./resources/js/src/views/income/Income.vue?vue&type=script&lang=js&":
+/*!***************************************************************************!*\
+  !*** ./resources/js/src/views/income/Income.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_StatisticsCardLine_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./StatisticsCardLine.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/components/statistics-cards/StatisticsCardLine.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_StatisticsCardLine_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Income_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Income.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/income/Income.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Income_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/src/components/statistics-cards/StatisticsCardLine.vue?vue&type=template&id=2d2fa5ad&":
-/*!************************************************************************************************************!*\
-  !*** ./resources/js/src/components/statistics-cards/StatisticsCardLine.vue?vue&type=template&id=2d2fa5ad& ***!
-  \************************************************************************************************************/
+/***/ "./resources/js/src/views/income/Income.vue?vue&type=template&id=bd37ea56&scoped=true&":
+/*!*********************************************************************************************!*\
+  !*** ./resources/js/src/views/income/Income.vue?vue&type=template&id=bd37ea56&scoped=true& ***!
+  \*********************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StatisticsCardLine_vue_vue_type_template_id_2d2fa5ad___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./StatisticsCardLine.vue?vue&type=template&id=2d2fa5ad& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/components/statistics-cards/StatisticsCardLine.vue?vue&type=template&id=2d2fa5ad&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StatisticsCardLine_vue_vue_type_template_id_2d2fa5ad___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Income_vue_vue_type_template_id_bd37ea56_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Income.vue?vue&type=template&id=bd37ea56&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/income/Income.vue?vue&type=template&id=bd37ea56&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Income_vue_vue_type_template_id_bd37ea56_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StatisticsCardLine_vue_vue_type_template_id_2d2fa5ad___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Income_vue_vue_type_template_id_bd37ea56_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
 /***/ }),
 
-/***/ "./resources/js/src/components/statistics-cards/chartConfigs.js":
-/*!**********************************************************************!*\
-  !*** ./resources/js/src/components/statistics-cards/chartConfigs.js ***!
-  \**********************************************************************/
+/***/ "./resources/js/src/views/income/addIncome.vue":
+/*!*****************************************************!*\
+  !*** ./resources/js/src/views/income/addIncome.vue ***!
+  \*****************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ({
-  areaChartOptions: {
-    grid: {
-      show: false,
-      padding: {
-        left: 0,
-        right: 0
-      }
-    },
-    chart: {
-      toolbar: {
-        show: false
-      },
-      sparkline: {
-        enabled: true
-      }
-    },
-    dataLabels: {
-      enabled: false
-    },
-    stroke: {
-      curve: 'smooth',
-      width: 2.5
-    },
-    fill: {
-      type: 'gradient',
-      gradient: {
-        shadeIntensity: 0.9,
-        opacityFrom: 0.5,
-        opacityTo: 0.2,
-        stops: [0, 80, 100]
-      }
-    },
-    xaxis: {
-      type: 'numeric',
-      lines: {
-        show: false
-      },
-      axisBorder: {
-        show: false
-      },
-      labels: {
-        show: false
-      }
-    },
-    yaxis: [{
-      y: 0,
-      offsetX: 0,
-      offsetY: 0,
-      padding: {
-        left: 0,
-        right: 0
-      }
-    }],
-    tooltip: {
-      x: {
-        show: false
-      }
-    }
-  },
-  lineChartOptions: {
-    grid: {
-      show: false,
-      padding: {
-        left: 0,
-        right: 0
-      }
-    },
-    chart: {
-      type: 'line',
-      dropShadow: {
-        enabled: true,
-        top: 5,
-        left: 0,
-        blur: 4,
-        opacity: 0.10
-      },
-      toolbar: {
-        show: false
-      },
-      sparkline: {
-        enabled: true
-      }
-    },
-    stroke: {
-      width: 5,
-      curve: 'smooth'
-    },
-    xaxis: {
-      type: 'numeric'
-    },
-    // colors: ['#7367F0'],
-    fill: {
-      type: 'gradient',
-      gradient: {
-        shade: 'dark',
-        // gradientToColors: ['#A9A2F6'],
-        shadeIntensity: 1,
-        type: 'horizontal',
-        opacityFrom: 1,
-        opacityTo: 1,
-        stops: [0, 100, 100, 100]
-      }
-    },
-    markers: {
-      size: 0,
-      hover: {
-        size: 5
-      }
-    },
-    tooltip: {
-      x: {
-        show: false
-      }
-    }
-  }
-});
-
-/***/ }),
-
-/***/ "./resources/js/src/views/report/stock/Stock.vue":
-/*!*******************************************************!*\
-  !*** ./resources/js/src/views/report/stock/Stock.vue ***!
-  \*******************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Stock_vue_vue_type_template_id_436b45ec_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Stock.vue?vue&type=template&id=436b45ec&scoped=true& */ "./resources/js/src/views/report/stock/Stock.vue?vue&type=template&id=436b45ec&scoped=true&");
-/* harmony import */ var _Stock_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Stock.vue?vue&type=script&lang=js& */ "./resources/js/src/views/report/stock/Stock.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _Stock_vue_vue_type_style_index_0_id_436b45ec_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Stock.vue?vue&type=style&index=0&id=436b45ec&scoped=true&lang=css& */ "./resources/js/src/views/report/stock/Stock.vue?vue&type=style&index=0&id=436b45ec&scoped=true&lang=css&");
-/* harmony import */ var _Stock_vue_vue_type_style_index_1_lang_sass___WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Stock.vue?vue&type=style&index=1&lang=sass& */ "./resources/js/src/views/report/stock/Stock.vue?vue&type=style&index=1&lang=sass&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
+/* harmony import */ var _addIncome_vue_vue_type_template_id_85fd2864_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./addIncome.vue?vue&type=template&id=85fd2864&scoped=true& */ "./resources/js/src/views/income/addIncome.vue?vue&type=template&id=85fd2864&scoped=true&");
+/* harmony import */ var _addIncome_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./addIncome.vue?vue&type=script&lang=js& */ "./resources/js/src/views/income/addIncome.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _addIncome_vue_vue_type_style_index_0_id_85fd2864_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./addIncome.vue?vue&type=style&index=0&id=85fd2864&scoped=true&lang=css& */ "./resources/js/src/views/income/addIncome.vue?vue&type=style&index=0&id=85fd2864&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -1400,83 +2167,223 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_4__["default"])(
-  _Stock_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _Stock_vue_vue_type_template_id_436b45ec_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _Stock_vue_vue_type_template_id_436b45ec_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _addIncome_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _addIncome_vue_vue_type_template_id_85fd2864_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _addIncome_vue_vue_type_template_id_85fd2864_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  "436b45ec",
+  "85fd2864",
   null
   
 )
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/src/views/report/stock/Stock.vue"
+component.options.__file = "resources/js/src/views/income/addIncome.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/src/views/report/stock/Stock.vue?vue&type=script&lang=js&":
-/*!********************************************************************************!*\
-  !*** ./resources/js/src/views/report/stock/Stock.vue?vue&type=script&lang=js& ***!
-  \********************************************************************************/
+/***/ "./resources/js/src/views/income/addIncome.vue?vue&type=script&lang=js&":
+/*!******************************************************************************!*\
+  !*** ./resources/js/src/views/income/addIncome.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Stock_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./Stock.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/report/stock/Stock.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Stock_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_addIncome_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./addIncome.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/income/addIncome.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_addIncome_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/src/views/report/stock/Stock.vue?vue&type=style&index=0&id=436b45ec&scoped=true&lang=css&":
-/*!****************************************************************************************************************!*\
-  !*** ./resources/js/src/views/report/stock/Stock.vue?vue&type=style&index=0&id=436b45ec&scoped=true&lang=css& ***!
-  \****************************************************************************************************************/
+/***/ "./resources/js/src/views/income/addIncome.vue?vue&type=style&index=0&id=85fd2864&scoped=true&lang=css&":
+/*!**************************************************************************************************************!*\
+  !*** ./resources/js/src/views/income/addIncome.vue?vue&type=style&index=0&id=85fd2864&scoped=true&lang=css& ***!
+  \**************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Stock_vue_vue_type_style_index_0_id_436b45ec_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/style-loader!../../../../../../node_modules/css-loader??ref--7-1!../../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../../node_modules/postcss-loader/src??ref--7-2!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./Stock.vue?vue&type=style&index=0&id=436b45ec&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/report/stock/Stock.vue?vue&type=style&index=0&id=436b45ec&scoped=true&lang=css&");
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Stock_vue_vue_type_style_index_0_id_436b45ec_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Stock_vue_vue_type_style_index_0_id_436b45ec_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Stock_vue_vue_type_style_index_0_id_436b45ec_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Stock_vue_vue_type_style_index_0_id_436b45ec_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Stock_vue_vue_type_style_index_0_id_436b45ec_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_addIncome_vue_vue_type_style_index_0_id_85fd2864_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/style-loader!../../../../../node_modules/css-loader??ref--7-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--7-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./addIncome.vue?vue&type=style&index=0&id=85fd2864&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/income/addIncome.vue?vue&type=style&index=0&id=85fd2864&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_addIncome_vue_vue_type_style_index_0_id_85fd2864_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_addIncome_vue_vue_type_style_index_0_id_85fd2864_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_addIncome_vue_vue_type_style_index_0_id_85fd2864_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_addIncome_vue_vue_type_style_index_0_id_85fd2864_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_addIncome_vue_vue_type_style_index_0_id_85fd2864_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
-/***/ "./resources/js/src/views/report/stock/Stock.vue?vue&type=style&index=1&lang=sass&":
-/*!*****************************************************************************************!*\
-  !*** ./resources/js/src/views/report/stock/Stock.vue?vue&type=style&index=1&lang=sass& ***!
-  \*****************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_9_2_node_modules_sass_loader_dist_cjs_js_ref_9_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Stock_vue_vue_type_style_index_1_lang_sass___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/style-loader!../../../../../../node_modules/css-loader!../../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../../node_modules/postcss-loader/src??ref--9-2!../../../../../../node_modules/sass-loader/dist/cjs.js??ref--9-3!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./Stock.vue?vue&type=style&index=1&lang=sass& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/report/stock/Stock.vue?vue&type=style&index=1&lang=sass&");
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_9_2_node_modules_sass_loader_dist_cjs_js_ref_9_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Stock_vue_vue_type_style_index_1_lang_sass___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_9_2_node_modules_sass_loader_dist_cjs_js_ref_9_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Stock_vue_vue_type_style_index_1_lang_sass___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_9_2_node_modules_sass_loader_dist_cjs_js_ref_9_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Stock_vue_vue_type_style_index_1_lang_sass___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_9_2_node_modules_sass_loader_dist_cjs_js_ref_9_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Stock_vue_vue_type_style_index_1_lang_sass___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_9_2_node_modules_sass_loader_dist_cjs_js_ref_9_3_node_modules_vue_loader_lib_index_js_vue_loader_options_Stock_vue_vue_type_style_index_1_lang_sass___WEBPACK_IMPORTED_MODULE_0___default.a); 
-
-/***/ }),
-
-/***/ "./resources/js/src/views/report/stock/Stock.vue?vue&type=template&id=436b45ec&scoped=true&":
-/*!**************************************************************************************************!*\
-  !*** ./resources/js/src/views/report/stock/Stock.vue?vue&type=template&id=436b45ec&scoped=true& ***!
-  \**************************************************************************************************/
+/***/ "./resources/js/src/views/income/addIncome.vue?vue&type=template&id=85fd2864&scoped=true&":
+/*!************************************************************************************************!*\
+  !*** ./resources/js/src/views/income/addIncome.vue?vue&type=template&id=85fd2864&scoped=true& ***!
+  \************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Stock_vue_vue_type_template_id_436b45ec_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./Stock.vue?vue&type=template&id=436b45ec&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/report/stock/Stock.vue?vue&type=template&id=436b45ec&scoped=true&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Stock_vue_vue_type_template_id_436b45ec_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_addIncome_vue_vue_type_template_id_85fd2864_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./addIncome.vue?vue&type=template&id=85fd2864&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/income/addIncome.vue?vue&type=template&id=85fd2864&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_addIncome_vue_vue_type_template_id_85fd2864_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Stock_vue_vue_type_template_id_436b45ec_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_addIncome_vue_vue_type_template_id_85fd2864_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/src/views/income/addIncomeType.vue":
+/*!*********************************************************!*\
+  !*** ./resources/js/src/views/income/addIncomeType.vue ***!
+  \*********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _addIncomeType_vue_vue_type_template_id_4558a728_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./addIncomeType.vue?vue&type=template&id=4558a728&scoped=true& */ "./resources/js/src/views/income/addIncomeType.vue?vue&type=template&id=4558a728&scoped=true&");
+/* harmony import */ var _addIncomeType_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./addIncomeType.vue?vue&type=script&lang=js& */ "./resources/js/src/views/income/addIncomeType.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _addIncomeType_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _addIncomeType_vue_vue_type_template_id_4558a728_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _addIncomeType_vue_vue_type_template_id_4558a728_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "4558a728",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/src/views/income/addIncomeType.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/src/views/income/addIncomeType.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/src/views/income/addIncomeType.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_addIncomeType_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./addIncomeType.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/income/addIncomeType.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_addIncomeType_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/src/views/income/addIncomeType.vue?vue&type=template&id=4558a728&scoped=true&":
+/*!****************************************************************************************************!*\
+  !*** ./resources/js/src/views/income/addIncomeType.vue?vue&type=template&id=4558a728&scoped=true& ***!
+  \****************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_addIncomeType_vue_vue_type_template_id_4558a728_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./addIncomeType.vue?vue&type=template&id=4558a728&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/income/addIncomeType.vue?vue&type=template&id=4558a728&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_addIncomeType_vue_vue_type_template_id_4558a728_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_addIncomeType_vue_vue_type_template_id_4558a728_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/src/views/income/editIncome.vue":
+/*!******************************************************!*\
+  !*** ./resources/js/src/views/income/editIncome.vue ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _editIncome_vue_vue_type_template_id_3fa45a5f_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./editIncome.vue?vue&type=template&id=3fa45a5f&scoped=true& */ "./resources/js/src/views/income/editIncome.vue?vue&type=template&id=3fa45a5f&scoped=true&");
+/* harmony import */ var _editIncome_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./editIncome.vue?vue&type=script&lang=js& */ "./resources/js/src/views/income/editIncome.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _editIncome_vue_vue_type_style_index_0_id_3fa45a5f_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./editIncome.vue?vue&type=style&index=0&id=3fa45a5f&scoped=true&lang=css& */ "./resources/js/src/views/income/editIncome.vue?vue&type=style&index=0&id=3fa45a5f&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _editIncome_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _editIncome_vue_vue_type_template_id_3fa45a5f_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _editIncome_vue_vue_type_template_id_3fa45a5f_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "3fa45a5f",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/src/views/income/editIncome.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/src/views/income/editIncome.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/src/views/income/editIncome.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_editIncome_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./editIncome.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/income/editIncome.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_editIncome_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/src/views/income/editIncome.vue?vue&type=style&index=0&id=3fa45a5f&scoped=true&lang=css&":
+/*!***************************************************************************************************************!*\
+  !*** ./resources/js/src/views/income/editIncome.vue?vue&type=style&index=0&id=3fa45a5f&scoped=true&lang=css& ***!
+  \***************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_editIncome_vue_vue_type_style_index_0_id_3fa45a5f_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/style-loader!../../../../../node_modules/css-loader??ref--7-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--7-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./editIncome.vue?vue&type=style&index=0&id=3fa45a5f&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/income/editIncome.vue?vue&type=style&index=0&id=3fa45a5f&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_editIncome_vue_vue_type_style_index_0_id_3fa45a5f_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_editIncome_vue_vue_type_style_index_0_id_3fa45a5f_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_editIncome_vue_vue_type_style_index_0_id_3fa45a5f_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_editIncome_vue_vue_type_style_index_0_id_3fa45a5f_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_7_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_vue_loader_lib_index_js_vue_loader_options_editIncome_vue_vue_type_style_index_0_id_3fa45a5f_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/js/src/views/income/editIncome.vue?vue&type=template&id=3fa45a5f&scoped=true&":
+/*!*************************************************************************************************!*\
+  !*** ./resources/js/src/views/income/editIncome.vue?vue&type=template&id=3fa45a5f&scoped=true& ***!
+  \*************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_editIncome_vue_vue_type_template_id_3fa45a5f_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./editIncome.vue?vue&type=template&id=3fa45a5f&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/income/editIncome.vue?vue&type=template&id=3fa45a5f&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_editIncome_vue_vue_type_template_id_3fa45a5f_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_editIncome_vue_vue_type_template_id_3fa45a5f_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

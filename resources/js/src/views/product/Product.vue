@@ -9,7 +9,7 @@
         <div class="flex justify-end">
             <download-excel
                     v-if="selected.length"
-                    :data   = "selected">
+                    :data = "selected">
                 <vs-button type="relief" icon-pack="feather" icon="icon-download">Excel Export</vs-button>
             </download-excel>
         </div>
