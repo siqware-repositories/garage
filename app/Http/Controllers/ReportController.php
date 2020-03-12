@@ -14,6 +14,10 @@ class ReportController extends Controller
     public function stock(){
         return Product::with('purchase_detail')->whereNotIn('inventory_type',['service'])->get();
     }
+    //check_stock
+    public function check_stock(Request $request){
+        return Product::with('purchase_detail')->where('id',$request->input('id'))->whereNotIn('inventory_type',['service'])->first();
+    }
     //purchase
     public function purchase(){
         return Purchase::all();

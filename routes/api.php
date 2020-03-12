@@ -53,3 +53,5 @@ Route::post('/report-close-service','ReportController@service')->name('report.cl
 Route::post('/report-close-payroll','ReportController@payroll')->name('report.close_payroll');
 //import
 Route::post('/import-product','ExcelImportController@import_product')->name('import.product');
+//report mobile api
+Route::post('/check-stock','ReportController@check_stock');
