@@ -34,13 +34,7 @@
         </div>
         <div class="vx-row">
             <div class="vx-col w-full">
-                <vue-instant id="styles" class="mt-base" v-model="data.id"
-                             suggestion-attribute="id"
-                             :suggestions="all_report_stocks_id"
-                             type="google"
-                             @click-button="searchStock"
-                             @clear="data.id = '';data.searchId = null"
-                ></vue-instant>
+                <vs-input class="w-full" icon="search" placeholder="Search" v-model="data.searchId"/>
             </div>
         </div>
         <vs-table pagination max-items="20" search stripe :data="search_all_report_stocks">
@@ -167,7 +161,7 @@
             search_all_report_stocks: function () {
                 let self = this;
                 return self.all_report_stocks.filter(function (x) {
-                    return self.data.searchId ? parseInt(self.data.id) === x.id : true
+                    return self.data.searchId ? parseInt(self.data.searchId) === x.id : true
                 })
             },
             all_report_stocks_id(){

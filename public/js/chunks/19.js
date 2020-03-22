@@ -302,12 +302,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -332,7 +326,7 @@ __webpack_require__.r(__webpack_exports__);
     search_all_report_stocks: function search_all_report_stocks() {
       var self = this;
       return self.all_report_stocks.filter(function (x) {
-        return self.data.searchId ? parseInt(self.data.id) === x.id : true;
+        return self.data.searchId ? parseInt(self.data.searchId) === x.id : true;
       });
     },
     all_report_stocks_id: function all_report_stocks_id() {
@@ -805,27 +799,15 @@ var render = function() {
           "div",
           { staticClass: "vx-col w-full" },
           [
-            _c("vue-instant", {
-              staticClass: "mt-base",
-              attrs: {
-                id: "styles",
-                "suggestion-attribute": "id",
-                suggestions: _vm.all_report_stocks_id,
-                type: "google"
-              },
-              on: {
-                "click-button": _vm.searchStock,
-                clear: function($event) {
-                  _vm.data.id = ""
-                  _vm.data.searchId = null
-                }
-              },
+            _c("vs-input", {
+              staticClass: "w-full",
+              attrs: { icon: "search", placeholder: "Search" },
               model: {
-                value: _vm.data.id,
+                value: _vm.data.searchId,
                 callback: function($$v) {
-                  _vm.$set(_vm.data, "id", $$v)
+                  _vm.$set(_vm.data, "searchId", $$v)
                 },
-                expression: "data.id"
+                expression: "data.searchId"
               }
             })
           ],
