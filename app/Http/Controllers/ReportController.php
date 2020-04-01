@@ -49,7 +49,7 @@ class ReportController extends Controller
     }*/
     public function product_api(Request $request){
         return Product::where('name', 'like', '%' . $request->input('name') . '%')
-            ->limit(1)
+            ->limit(3)
             ->get();
     }
 }
