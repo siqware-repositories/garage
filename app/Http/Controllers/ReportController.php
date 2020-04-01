@@ -48,8 +48,6 @@ class ReportController extends Controller
         return Purchase::with()->whereBetween();
     }*/
     public function product_api(Request $request){
-        return Product::where('name', 'like', '%' . $request->input('name') . '%')
-            ->limit(5)
-            ->get();
+        return Product::all();
     }
 }
