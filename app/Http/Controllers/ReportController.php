@@ -38,8 +38,11 @@ class ReportController extends Controller
     /*public function report_api(Request $request){
         return Purchase::with()->whereBetween();
     }*/
-    public function product_api(){
+    public function product_api(Request $request){
+        $input = $request->all();
+        if ($input['name']){
+            return Product::where('name', 'like', '%' . $input['name'] . '%')->get();
+        }
         return response()->json([['id'=>0,'name'=>'No product',]]);
-        return Product::where('name', 'like', '%' . 'កញ្ជ្រែងក្ដៅសំរាប់កែ' . '%')->get();
     }
 }
