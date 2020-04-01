@@ -34,4 +34,11 @@ class ReportController extends Controller
     public function payroll(){
         return PayRollDetail::all();
     }
+    //report api
+    /*public function report_api(Request $request){
+        return Purchase::with()->whereBetween();
+    }*/
+    public function product_api(Request $request){
+        return Product::all();
+    }
 }
