@@ -21,37 +21,39 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::resource('/user', 'UserController');
 Route::post('/user-register', 'UserController@register')->name('user.register');
 Route::post('/user-login', 'UserController@login')->name('user.login');
-//end user
-Route::post('/file-upload','FileUploadController@upload')->name('file.upload');
-Route::post('/file-upload-thumb','FileUploadController@upload_thumb')->name('file.upload.thumb');
-Route::resource('/product','ProductController');
-Route::resource('/unit','UnitController');
-Route::resource('/category','CategoryController');
-Route::resource('/brand','BrandController');
-Route::resource('/supplier','SupplierController');
-Route::resource('/purchase','PurchaseController');
-Route::resource('/purchase-detail','PurchaseDetailController');
-Route::resource('/customer','CustomerController');
-Route::resource('/invoice','InvoiceController');
-Route::resource('/employee','EmployeeController');
-Route::resource('/auth','AuthController');
-Route::resource('/payroll','PayRollController');
-Route::resource('/income_type','IncomeTypeController');
-Route::resource('/expense_type','ExpenseTypeController');
-Route::resource('/income','IncomeController');
-Route::resource('/expense','ExpenseController');
-Route::resource('/investment','InvestmentController');
-Route::post('/auth-change-password/{id}','AuthController@change_password')->name('auth.change.password');
-Route::post('/auth-register','AuthController@register')->name('auth.register');
-Route::post('/auth-login','AuthController@login')->name('auth.login');
-Route::post('/invoice-payment/{id}','InvoiceController@payment')->name('invoice.payment');
-Route::post('/purchase-payment/{id}','PurchaseController@payment')->name('purchase.payment');
+Route::group(['middleware' => ['auth:api']], function () {
+    //end user
+    Route::post('/file-upload','FileUploadController@upload')->name('file.upload');
+    Route::post('/file-upload-thumb','FileUploadController@upload_thumb')->name('file.upload.thumb');
+    Route::resource('/product','ProductController');
+    Route::resource('/unit','UnitController');
+    Route::resource('/category','CategoryController');
+    Route::resource('/brand','BrandController');
+    Route::resource('/supplier','SupplierController');
+    Route::resource('/purchase','PurchaseController');
+    Route::resource('/purchase-detail','PurchaseDetailController');
+    Route::resource('/customer','CustomerController');
+    Route::resource('/invoice','InvoiceController');
+    Route::resource('/employee','EmployeeController');
+    Route::resource('/auth','AuthController');
+    Route::resource('/payroll','PayRollController');
+    Route::resource('/income_type','IncomeTypeController');
+    Route::resource('/expense_type','ExpenseTypeController');
+    Route::resource('/income','IncomeController');
+    Route::resource('/expense','ExpenseController');
+    Route::resource('/investment','InvestmentController');
+    Route::post('/auth-change-password/{id}','AuthController@change_password')->name('auth.change.password');
+    Route::post('/auth-register','AuthController@register')->name('auth.register');
+    Route::post('/auth-login','AuthController@login')->name('auth.login');
+    Route::post('/invoice-payment/{id}','InvoiceController@payment')->name('invoice.payment');
+    Route::post('/purchase-payment/{id}','PurchaseController@payment')->name('purchase.payment');
 //report
-Route::post('/report-stock','ReportController@stock')->name('report.stock');
-Route::post('/report-best-seller','ReportController@best_seller')->name('report.best_seller');
-Route::post('/report-close-service','ReportController@service')->name('report.close_service');
-Route::post('/report-close-payroll','ReportController@payroll')->name('report.close_payroll');
+    Route::post('/report-stock','ReportController@stock')->name('report.stock');
+    Route::post('/report-best-seller','ReportController@best_seller')->name('report.best_seller');
+    Route::post('/report-close-service','ReportController@service')->name('report.close_service');
+    Route::post('/report-close-payroll','ReportController@payroll')->name('report.close_payroll');
 //import
-Route::post('/import-product','ExcelImportController@import_product')->name('import.product');
+    Route::post('/import-product','ExcelImportController@import_product')->name('import.product');
 //report mobile api
-Route::post('/check-stock','ReportController@check_stock');
+    Route::post('/check-stock','ReportController@check_stock');
+});
