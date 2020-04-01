@@ -25,7 +25,7 @@ class ReportController extends Controller
         if ($request->input('name')) {
             $products = $products->where('name', 'like', '%' . $request->input('name') . '%');
         }
-        return $products->limit(10)->get();
+        return $products->limit(5)->get();
     }
     //purchase
     public function purchase(){
