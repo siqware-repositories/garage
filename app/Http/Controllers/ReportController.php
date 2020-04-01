@@ -39,6 +39,6 @@ class ReportController extends Controller
         return Purchase::with()->whereBetween();
     }*/
     public function product_api(){
-        return Product::all();
+        return Product::where('name', 'like', '%' . 'ឡាន' . '%')->get();
     }
 }
