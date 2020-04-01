@@ -16,19 +16,16 @@ class ReportController extends Controller
     }
     //check_stock
     public function check_stock(Request $request){
-        /*return Product::with('purchase_detail')->where('id',$request->input('id'))
-            ->whereNotIn('inventory_type',['service'])
-            ->orwhere('name', 'like', '%' . $request->input('name') . '%')
-            ->get();*/
         $products = new Product();
-        $products = $products->with('purchase_detail')->whereNotIn('inventory_type',['service']);
+        $products = $products->with('purchase_detail')
+            ->whereNotIn('inventory_type',['service']);
         if ($request->input('id')) {
             $products = $products->where('id',$request->input('id'));
         }
         if ($request->input('name')) {
             $products = $products->where('name', 'like', '%' . $request->input('name') . '%');
         }
-        return $products->get();
+        return $products->limit(5)->get();
     }
     //purchase
     public function purchase(){
