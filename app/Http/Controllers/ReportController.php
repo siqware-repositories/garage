@@ -21,7 +21,7 @@ class ReportController extends Controller
             ->orwhere('name', 'like', '%' . $request->input('name') . '%')
             ->get();*/
         $products = new Product();
-        $products->with('purchase_detail')->whereNotIn('inventory_type',['service']);
+        $products = $products->with('purchase_detail')->whereNotIn('inventory_type',['service']);
         if ($request->input('id')) {
             $products = $products->where('id',$request->input('id'));
         }
