@@ -38,7 +38,7 @@ class ReportController extends Controller
     /*public function report_api(Request $request){
         return Purchase::with()->whereBetween();
     }*/
-    public function product_api(Request $request){
+    public function product_api(){
         return Product::all();
     }
 }
