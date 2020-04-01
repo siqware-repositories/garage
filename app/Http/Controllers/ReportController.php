@@ -50,4 +50,8 @@ class ReportController extends Controller
     public function product_api(){
         return Product::all();
     }
+    public function product_count_api(){
+        return Product::count();
+    }
+
 }
