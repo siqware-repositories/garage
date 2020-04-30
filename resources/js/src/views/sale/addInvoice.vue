@@ -338,6 +338,7 @@
                     qty:0,
                     items:[{id:'',name:null,description:null,qty:1,sale_price:1,amount:1,inventory_type: '',remain_qty:''}]
                 };
+                this.$modal.hide('add-invoice');
             },
             //image upload
             successUpload(file, res) {

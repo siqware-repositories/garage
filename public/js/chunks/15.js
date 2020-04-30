@@ -849,6 +849,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           remain_qty: ''
         }]
       };
+      this.$modal.hide('add-invoice');
     },
     //image upload
     successUpload: function successUpload(file, res) {

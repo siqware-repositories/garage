@@ -2,7 +2,8 @@
     <div>
         <modal width="90%" height="auto" :scrollable="true" :pivotY="0.2" :clickToClose="false" name="add">
             <div class="flex justify-end">
-                <i @click="$modal.hide('add');$barcodeScanner.destroy()" class="vs-icon vs-popup--close material-icons text-warning"
+                <i @click="$modal.hide('add');$barcodeScanner.destroy()"
+                   class="vs-icon vs-popup--close material-icons text-warning"
                    style="background: rgb(255, 255, 255);">close</i>
             </div>
             <vx-card no-shadow>
@@ -10,9 +11,11 @@
                     <div class="vx-col md:w-1/3 w-full">
                         <label>អ្នកផ្គត់ផ្គង់</label>
                         <vx-input-group>
-                            <v-select :filterBy="searchSupplier" v-model="purchase.supplier" label="name" name="supplier" v-validate="'required'" :options="all_suppliers">
+                            <v-select :filterBy="searchSupplier" v-model="purchase.supplier" label="name"
+                                      name="supplier" v-validate="'required'" :options="all_suppliers">
                                 <template v-slot:option="option" class="vs-list">
-                                    <vs-list-item :title="`ឈ្មោះ​ ${option.name} ក្រុមហ៊ុន ${option.company}`" :subtitle="`ទំនាក់ទំនង ${option.contact} អាស័យដ្ឋាន ${option.address}`"></vs-list-item>
+                                    <vs-list-item :title="`ឈ្មោះ​ ${option.name} ក្រុមហ៊ុន ${option.company}`"
+                                                  :subtitle="`ទំនាក់ទំនង ${option.contact} អាស័យដ្ឋាន ${option.address}`"></vs-list-item>
                                 </template>
                             </v-select>
                             <template slot="append">
@@ -27,13 +30,15 @@
                     </div>
                     <div class="vx-col md:w-1/3 w-full">
                         <label>ទីតាំង</label>
-                        <v-select v-model="purchase.location" name="location" v-validate="'required'" :options="['Ly Put Garage']"/>
+                        <v-select v-model="purchase.location" name="location" v-validate="'required'"
+                                  :options="['Ly Put Garage']"/>
                         <span class="text-danger text-sm"
                               v-show="errors.has('location')">{{ errors.first('location') }}</span>
                     </div>
                     <div class="vx-col md:w-1/3 w-full">
                         <label>ថ្ងៃខែឆ្នាំទិញ</label>
-                        <flat-pickr name="date" v-validate="'required'" class="w-full" v-model="purchase.purchase_date" placeholder="Choose Date" />
+                        <flat-pickr name="date" v-validate="'required'" class="w-full" v-model="purchase.purchase_date"
+                                    placeholder="Choose Date"/>
                         <span class="text-danger text-sm"
                               v-show="errors.has('purchase_date')">{{ errors.first('purchase_date') }}</span>
                     </div>
@@ -41,7 +46,8 @@
                 <div class="vx-row my-3">
                     <div class="vx-col md:w-1/3 w-full">
                         <label>Purchase Status</label>
-                        <v-select v-model="purchase.purchase_status" name="purchase_status" v-validate="'required'" :options="['received','pending']"/>
+                        <v-select v-model="purchase.purchase_status" name="purchase_status" v-validate="'required'"
+                                  :options="['received','pending']"/>
                         <span class="text-danger text-sm"
                               v-show="errors.has('status')">{{ errors.first('status') }}</span>
                     </div>
@@ -61,15 +67,15 @@
                 <table class="vs-table vs-table--tbody-table">
                     <thead>
                     <tr>
-                    <th>ល.រ</th>
-                    <th>ឈ្មោះ</th>
-                    <th>ពិពណ៌នា</th>
-                    <th>Inventory Type</th>
-                    <th>ចំនួន</th>
-                    <th>តម្លៃទិញ</th>
-                    <th>តម្លៃលក់</th>
-                    <th>សរុប</th>
-                    <th></th>
+                        <th>ល.រ</th>
+                        <th>ឈ្មោះ</th>
+                        <th>ពិពណ៌នា</th>
+                        <th>Inventory Type</th>
+                        <th>ចំនួន</th>
+                        <th>តម្លៃទិញ</th>
+                        <th>តម្លៃលក់</th>
+                        <th>សរុប</th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -78,9 +84,12 @@
                             {{index+1}}
                         </td>
                         <td width="400">
-                            <v-select :filterBy="searchProduct" v-model="tr.id" label="name" :name="`product-${index}`" v-validate="'required'" :options="all_products" @input="selectProduct(tr.id,index)">
+                            <v-select :filterBy="searchProduct" v-model="tr.id" label="name" :name="`product-${index}`"
+                                      v-validate="'required'" :options="all_products"
+                                      @input="selectProduct(tr.id,index)">
                                 <template v-slot:option="option" class="vs-list">
-                                    <vs-list-item :title="`ID: ${option.id} ឈ្មោះ​ ${option.name}`" :subtitle="`តម្លៃលក់ ${option.default_purchase} តម្លៃទិញ ${option.default_sale}`"></vs-list-item>
+                                    <vs-list-item :title="`ID: ${option.id} ឈ្មោះ​ ${option.name}`"
+                                                  :subtitle="`តម្លៃលក់ ${option.default_purchase} តម្លៃទិញ ${option.default_sale}`"></vs-list-item>
                                 </template>
                             </v-select>
                             <span class="text-danger text-sm"
@@ -90,22 +99,27 @@
                             {{ tr.description }}
                         </td>
                         <td>
-                            <v-select :name="`inventory_type-${index}`" v-validate="'required'" v-model="tr.inventory_type" :options="['inventory_part','service','sale_only','purchase_only']"/>
+                            <v-select :name="`inventory_type-${index}`" v-validate="'required'"
+                                      v-model="tr.inventory_type"
+                                      :options="['inventory_part','service','sale_only','purchase_only']"/>
                             <span class="text-danger text-sm"
                                   v-show="errors.has(`inventory_type-${index}`)">{{ errors.first(`inventory_type-${index}`) }}</span>
                         </td>
                         <td>
-                            <vs-input-number color="danger" v-model="tr.qty" min="0" :name="`qty-${index}`" v-validate="'required'"/>
+                            <vs-input-number color="danger" v-model="tr.qty" min="0" :name="`qty-${index}`"
+                                             v-validate="'required'"/>
                             <span class="text-danger text-sm"
                                   v-show="errors.has(`qty-${index}`)">{{ errors.first(`qty-${index}`) }}</span>
                         </td>
                         <td>
-                            <vs-input-number color="danger" v-model="tr.purchase_price" min="0" :name="`purchase_price-${index}`" v-validate="'required'"/>
+                            <vs-input-number color="danger" v-model="tr.purchase_price" min="0"
+                                             :name="`purchase_price-${index}`" v-validate="'required'"/>
                             <span class="text-danger text-sm"
                                   v-show="errors.has(`purchase_price-${index}`)">{{ errors.first(`purchase_price-${index}`) }}</span>
                         </td>
                         <td>
-                            <vs-input-number color="danger" v-model="tr.sale_price" min="0" :name="`sale_price-${index}`" v-validate="'required'"/>
+                            <vs-input-number color="danger" v-model="tr.sale_price" min="0"
+                                             :name="`sale_price-${index}`" v-validate="'required'"/>
                             <span class="text-danger text-sm"
                                   v-show="errors.has(`sale_price-${index}`)">{{ errors.first(`sale_price-${index}`) }}</span>
                         </td>
@@ -113,31 +127,37 @@
                             {{ tr.amount = tr.purchase_price*tr.qty }}
                         </td>
                         <td class="py-1">
-                            <vs-button @click="removeItemLine(index)" icon="icon-trash-2" color="warning" icon-pack="feather" type="flat"></vs-button>
+                            <vs-button @click="removeItemLine(index)" icon="icon-trash-2" color="warning"
+                                       icon-pack="feather" type="flat"></vs-button>
                         </td>
                     </tr>
                     </tbody>
                 </table>
-                <vs-button @click="addItemLine" icon="icon-plus" class="rounded-none my-3" icon-pack="feather" type="line">បន្ថែមទំនិញ</vs-button>
+                <vs-button @click="addItemLine" icon="icon-plus" class="rounded-none my-3" icon-pack="feather"
+                           type="line">បន្ថែមទំនិញ
+                </vs-button>
                 <div class="vx-row">
                     <div class="vx-col md:w-1/2 w-full">
                         <vs-divider position="left">Payment</vs-divider>
-                       <div class="vx-row">
-                           <div class="vx-col md:w-1/2 w-full">
-                               <label>ប្រាក់ទិញទំនិញ</label>
-                               <vs-input-number color="warning" v-model="purchase.balance" min="0" :max="purchase.total_balance" label="ប្រាក់ទិញទំនិញ:"/>
-                           </div>
-                           <div class="vx-col md:w-1/2 w-full">
-                               <label>ទឹកប្រាក់ជំពាក់</label>
-                               <vs-input step="any" readonly type="number" class="w-full" v-model="purchase.due_balance = purchase.total_balance - purchase.balance"/>
-                           </div>
-                       </div>
+                        <div class="vx-row">
+                            <div class="vx-col md:w-1/2 w-full">
+                                <label>ប្រាក់ទិញទំនិញ</label>
+                                <vs-input-number color="warning" v-model="purchase.balance" min="0"
+                                                 :max="purchase.total_balance" label="ប្រាក់ទិញទំនិញ:"/>
+                            </div>
+                            <div class="vx-col md:w-1/2 w-full">
+                                <label>ទឹកប្រាក់ជំពាក់</label>
+                                <vs-input step="any" readonly type="number" class="w-full"
+                                          v-model="purchase.due_balance = purchase.total_balance - purchase.balance"/>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <vs-divider/>
                 <!-- Save & Reset Button -->
                 <div class="flex justify-end btn-group">
-                    <vs-button @click="storePurchase" icon="icon-save" icon-pack="feather" type="relief">រក្សាទុក</vs-button>
+                    <vs-button @click="storePurchase" icon="icon-save" icon-pack="feather" type="relief">រក្សាទុក
+                    </vs-button>
                 </div>
             </vx-card>
         </modal>
@@ -156,64 +176,65 @@
     import AddBrand from "../product/addBrand";
     import AddSupplier from "./addSupplier";
     import vSelect from 'vue-select'
+
     export default {
         name: "addPurchase",
-        components: {AddSupplier, AddBrand, AddCategory, AddUnit,flatPickr,'v-select': vSelect,},
+        components: {AddSupplier, AddBrand, AddCategory, AddUnit, flatPickr, 'v-select': vSelect,},
         data() {
             return {
-                purchase:{
-                    user_id:this.$store.state.AppActiveUser.uid,
-                    supplier:null,
-                    location:'Ly Put Garage',
-                    purchase_date:null,
-                    purchase_status:'pending',
-                    description:'',
-                    total_balance:null,
-                    balance:null,
-                    due_balance:0,
-                    amount:0,
-                    qty:0,
-                    items:[]
+                purchase: {
+                    user_id: this.$store.state.AppActiveUser.uid,
+                    supplier: null,
+                    location: 'Ly Put Garage',
+                    purchase_date: null,
+                    purchase_status: 'pending',
+                    description: '',
+                    total_balance: null,
+                    balance: null,
+                    due_balance: 0,
+                    amount: 0,
+                    qty: 0,
+                    items: []
                 },
             }
         },
-        computed:{
-            all_suppliers(){
+        computed: {
+            all_suppliers() {
                 return this.$store.getters.all_supplier
             },
-            all_products(){
+            all_products() {
                 return this.$store.getters.all_product.sort((a, b) => (a.id > b.id) ? 1 : -1)
             },
-            total(){
+            total() {
                 let self = this;
                 let total = 0.0;
-                self.purchase.items.forEach(function (item,index) {
-                    total+=parseFloat(item.amount)
+                self.purchase.items.forEach(function (item, index) {
+                    total += parseFloat(item.amount)
                 });
                 self.purchase.total_balance = total;
                 self.purchase.balance = total;
                 return total
             },
-            total_qty(){
+            total_qty() {
                 let self = this;
                 let total = 0;
-                self.purchase.items.forEach(function (item,index) {
-                    total+=parseFloat(item.qty)
+                self.purchase.items.forEach(function (item, index) {
+                    total += parseFloat(item.qty)
                 });
                 self.purchase.qty = total;
                 return total
             }
         },
-        updated(){
+        updated() {
             let x = this.total_qty;
             let y = this.total;
         },
         methods: {
             // Create callback function to receive barcode when the scanner is already done
-            onBarcodeScanned (barcode) {
+            onBarcodeScanned(barcode) {
                 this.addItemLine();
-                let index = this.purchase.items.length-1;
-                this.selectProduct({id:parseInt(barcode)},index);
+                let index = this.purchase.items.length - 1;
+                this.selectProduct({id: parseInt(barcode)}, index);
             },
             searchSupplier(option, label, search) {
                 return (
@@ -228,23 +249,35 @@
                 );
             },
             //add line
-            addItemLine(){
+            addItemLine() {
                 let self = this;
-                self.purchase.items.push({id:'',name:null,description:null,qty:null,purchase_price:1,sale_price:1,amount:1,inventory_type: ''});
+                self.purchase.items.push({
+                    id: '',
+                    name: null,
+                    description: null,
+                    qty: null,
+                    purchase_price: 1,
+                    sale_price: 1,
+                    amount: 1,
+                    inventory_type: ''
+                });
             },
             //remove line
-            removeItemLine(index){
+            removeItemLine(index) {
                 let self = this;
-                self.purchase.items.splice(index,1);
+                self.purchase.items.splice(index, 1);
             },
             //select product
-            selectProduct(id,index){
+            selectProduct(id, index) {
                 let self = this;
                 let selected = self.all_products.filter(function (x) {
                     return parseInt(x.id) === parseInt(id.id);
                 });
                 self.purchase.items[index].name = selected[0].name;
-                self.purchase.items[index].id = {id:selected[0].id,name:`ID: ${selected[0].id} - ${selected[0].name}`};
+                self.purchase.items[index].id = {
+                    id: selected[0].id,
+                    name: `ID: ${selected[0].id} - ${selected[0].name}`
+                };
                 self.purchase.items[index].description = selected[0].description;
                 self.purchase.items[index].inventory_type = selected[0].inventory_type;
                 /*self.purchase.items[index].sale_price = selected[0].default_sale;
@@ -301,6 +334,12 @@
             },
             resetField() {
                 this.purchase.items = [];
+                this.purchase.supplier = null;
+                this.purchase.location = 'Ly Put Garage';
+                this.purchase.purchase_date = null;
+                this.purchase.purchase_status = 'pending';
+                this.purchase.description = '';
+                this.$modal.hide('add');
             },
             //image upload
             successUpload(file, res) {

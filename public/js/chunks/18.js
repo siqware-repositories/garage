@@ -595,6 +595,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -766,6 +786,12 @@ __webpack_require__.r(__webpack_exports__);
     },
     resetField: function resetField() {
       this.purchase.items = [];
+      this.purchase.supplier = null;
+      this.purchase.location = 'Ly Put Garage';
+      this.purchase.purchase_date = null;
+      this.purchase.purchase_status = 'pending';
+      this.purchase.description = '';
+      this.$modal.hide('add');
     },
     //image upload
     successUpload: function successUpload(file, res) {
@@ -2853,7 +2879,7 @@ var render = function() {
                   },
                   on: { click: _vm.addItemLine }
                 },
-                [_vm._v("បន្ថែមទំនិញ")]
+                [_vm._v("បន្ថែមទំនិញ\n            ")]
               ),
               _vm._v(" "),
               _c("div", { staticClass: "vx-row" }, [
@@ -2945,7 +2971,7 @@ var render = function() {
                       },
                       on: { click: _vm.storePurchase }
                     },
-                    [_vm._v("រក្សាទុក")]
+                    [_vm._v("រក្សាទុក\n                ")]
                   )
                 ],
                 1
