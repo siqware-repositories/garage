@@ -685,7 +685,7 @@ __webpack_require__.r(__webpack_exports__);
         id: '',
         name: null,
         description: null,
-        qty: 1,
+        qty: null,
         purchase_price: 1,
         sale_price: 1,
         amount: 1,
@@ -710,8 +710,11 @@ __webpack_require__.r(__webpack_exports__);
       };
       self.purchase.items[index].description = selected[0].description;
       self.purchase.items[index].inventory_type = selected[0].inventory_type;
-      self.purchase.items[index].sale_price = selected[0].default_sale;
-      self.purchase.items[index].purchase_price = selected[0].default_purchase;
+      /*self.purchase.items[index].sale_price = selected[0].default_sale;
+      self.purchase.items[index].purchase_price = selected[0].default_purchase;*/
+
+      self.purchase.items[index].sale_price = null;
+      self.purchase.items[index].purchase_price = null;
     },
     show: function show() {
       this.$modal.show('add');

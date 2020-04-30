@@ -225,8 +225,8 @@
             // Create callback function to receive barcode when the scanner is already done
             onBarcodeScanned (barcode) {
                 this.addItemLine();
-                let index = this.invoice.items.length-1;
-                this.selectProduct({product_id:parseInt(barcode)},index);
+                /*let index = this.invoice.items.length-1;
+                this.selectProduct({product_id:parseInt(barcode)},index);*/
             },
             searchCustomer(option, label, search) {
                 return (
@@ -253,15 +253,25 @@
             //select product
             selectProduct(id,index){
                 let self = this;
-                let selected = self.all_purchase_details.filter(function (x) {
+                /*let selected = self.all_purchase_details.filter(function (x) {
                     return parseInt(x.product_id) === parseInt(id.product_id);
-                });
-                self.invoice.items[index].name = selected[0].product.name;
+                });*/
+                /*self.invoice.items[index].name = selected[0].product.name;
                 self.invoice.items[index].id = {id:selected[0].id,name:`${selected[0].product.name}`,product:{name:`ID: ${selected[0].product.id}-${selected[0].product.name}`},purchase:selected[0].purchase};
                 self.invoice.items[index].inventory_type = selected[0].inventory_type;
                 self.invoice.items[index].remain_qty = selected[0].remain_qty;
                 self.invoice.items[index].description = selected[0].product.description;
-                self.invoice.items[index].sale_price = selected[0].sale;
+                self.invoice.items[index].sale_price = selected[0].sale;*/
+
+                self.invoice.items[index].name = id.product.name;
+                self.invoice.items[index].id = {id:id.id,name:`${id.product.name}`,product:{name:`ID: ${id.product.id}-${id.product.name}`},purchase:id.purchase};
+                self.invoice.items[index].inventory_type = id.inventory_type;
+                self.invoice.items[index].remain_qty = parseFloat(id.remain_qty);
+                self.invoice.items[index].description = id.product.description;
+                self.invoice.items[index].sale_price = id.sale;
+
+                console.log(self.invoice.items);
+                console.log(id);
             },
             show() {
                 this.$modal.show('add-invoice');

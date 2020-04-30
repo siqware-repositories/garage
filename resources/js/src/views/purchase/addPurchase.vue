@@ -230,7 +230,7 @@
             //add line
             addItemLine(){
                 let self = this;
-                self.purchase.items.push({id:'',name:null,description:null,qty:1,purchase_price:1,sale_price:1,amount:1,inventory_type: ''});
+                self.purchase.items.push({id:'',name:null,description:null,qty:null,purchase_price:1,sale_price:1,amount:1,inventory_type: ''});
             },
             //remove line
             removeItemLine(index){
@@ -247,8 +247,10 @@
                 self.purchase.items[index].id = {id:selected[0].id,name:`ID: ${selected[0].id} - ${selected[0].name}`};
                 self.purchase.items[index].description = selected[0].description;
                 self.purchase.items[index].inventory_type = selected[0].inventory_type;
-                self.purchase.items[index].sale_price = selected[0].default_sale;
-                self.purchase.items[index].purchase_price = selected[0].default_purchase;
+                /*self.purchase.items[index].sale_price = selected[0].default_sale;
+                self.purchase.items[index].purchase_price = selected[0].default_purchase;*/
+                self.purchase.items[index].sale_price = null;
+                self.purchase.items[index].purchase_price = null;
             },
             show() {
                 this.$modal.show('add');
