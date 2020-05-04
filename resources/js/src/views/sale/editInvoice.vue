@@ -320,6 +320,17 @@
                 self.invoice.description = data.description;
                 self.invoice.old_due = data.due_balance;
                 self.invoice.items = [];
+                data.invoice_detail.sort((a,b)=>{
+                    const bandA = a.purchase_detail.product_id;
+                    const bandB = b.purchase_detail.product_id;
+                    let comparison = 0;
+                    if (bandA > bandB) {
+                        comparison = 1;
+                    } else if (bandA < bandB) {
+                        comparison = -1;
+                    }
+                    return comparison;
+                });
                 data.invoice_detail.forEach(function (item, index) {
                     self.invoice.items.push({
                         id : {id:item.purchase_detail.id,name:`${item.purchase_detail.product.name}`,product:{name:`ID: ${item.purchase_detail.product_id}-${item.purchase_detail.product.name}`},purchase:item.purchase_detail.purchase},
@@ -362,6 +373,7 @@
                                 });
                             }
                             self.$vs.loading.close();
+                            self.$modal.hide('edit-invoice');
                         });
                     } else {
                         self.$vs.notify({

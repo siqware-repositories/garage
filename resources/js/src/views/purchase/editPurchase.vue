@@ -275,6 +275,17 @@
                 this.purchase.description = data.description;
                 this.purchase.balance = data.balance;
                 this.purchase.old_due = data.due_balance;
+                data.purchase_detail.sort((a,b)=>{
+                    const bandA = a.product.id;
+                    const bandB = b.product.id;
+                    let comparison = 0;
+                    if (bandA > bandB) {
+                        comparison = 1;
+                    } else if (bandA < bandB) {
+                        comparison = -1;
+                    }
+                    return comparison;
+                });
                 data.purchase_detail.forEach(function (item,index) {
                     self.purchase.items.push({id:{id:item.product.id,name:`ID: ${item.product.id} - ${item.product.name}`},name:item.product.name,description:item.product.description,qty:item.qty,purchase_price:item.purchase,sale_price:item.sale,amount:item.amount,inventory_type:item.inventory_type})
                 })
@@ -308,6 +319,7 @@
                                 });
                             }
                             self.$vs.loading.close();
+                            self.$modal.hide('edit-purchase');
                         });
                     } else {
                         self.$vs.notify({

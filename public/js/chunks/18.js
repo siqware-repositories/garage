@@ -1113,6 +1113,19 @@ __webpack_require__.r(__webpack_exports__);
       this.purchase.description = data.description;
       this.purchase.balance = data.balance;
       this.purchase.old_due = data.due_balance;
+      data.purchase_detail.sort(function (a, b) {
+        var bandA = a.product.id;
+        var bandB = b.product.id;
+        var comparison = 0;
+
+        if (bandA > bandB) {
+          comparison = 1;
+        } else if (bandA < bandB) {
+          comparison = -1;
+        }
+
+        return comparison;
+      });
       data.purchase_detail.forEach(function (item, index) {
         self.purchase.items.push({
           id: {
@@ -1159,6 +1172,7 @@ __webpack_require__.r(__webpack_exports__);
             }
 
             self.$vs.loading.close();
+            self.$modal.hide('edit-purchase');
           });
         } else {
           self.$vs.notify({

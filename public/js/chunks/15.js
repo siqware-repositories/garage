@@ -1398,6 +1398,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       self.invoice.description = data.description;
       self.invoice.old_due = data.due_balance;
       self.invoice.items = [];
+      data.invoice_detail.sort(function (a, b) {
+        var bandA = a.purchase_detail.product_id;
+        var bandB = b.purchase_detail.product_id;
+        var comparison = 0;
+
+        if (bandA > bandB) {
+          comparison = 1;
+        } else if (bandA < bandB) {
+          comparison = -1;
+        }
+
+        return comparison;
+      });
       data.invoice_detail.forEach(function (item, index) {
         self.invoice.items.push({
           id: {
@@ -1448,6 +1461,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             }
 
             self.$vs.loading.close();
+            self.$modal.hide('edit-invoice');
           });
         } else {
           self.$vs.notify({
