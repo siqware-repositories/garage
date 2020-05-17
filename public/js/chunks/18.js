@@ -1023,7 +1023,9 @@ __webpack_require__.r(__webpack_exports__);
       return this.$store.getters.all_supplier;
     },
     all_products: function all_products() {
-      return this.$store.getters.all_product;
+      return this.$store.getters.all_product.sort(function (a, b) {
+        return a.id > b.id ? 1 : -1;
+      });
     },
     total: function total() {
       var self = this;

@@ -192,7 +192,7 @@
                 return this.$store.getters.all_supplier
             },
             all_products(){
-                return this.$store.getters.all_product
+                return this.$store.getters.all_product.sort((a, b) => (a.id > b.id) ? 1 : -1)
             },
             total(){
                 let self = this;
