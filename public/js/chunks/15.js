@@ -1070,6 +1070,12 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -1291,7 +1297,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return this.$store.getters.all_customer;
     },
     all_purchase_details: function all_purchase_details() {
-      return this.$store.getters.all_purchase_detail.sort(function (a, b) {
+      var data = this.$store.getters.all_purchase_detail.map(function (x) {
+        return _objectSpread({}, x, {
+          modified: true
+        });
+      });
+      return data.sort(function (a, b) {
         return a.product.id > b.product.id ? 1 : -1;
       });
     },
@@ -2033,9 +2044,9 @@ var render = function() {
                                 { attrs: { data: data[indextr].id } },
                                 [
                                   _vm._v(
-                                    "\n                            " +
+                                    "\n                                " +
                                       _vm._s(data[indextr].id) +
-                                      "\n                        "
+                                      "\n                            "
                                   )
                                 ]
                               ),
@@ -2045,9 +2056,9 @@ var render = function() {
                                 { attrs: { data: data[indextr].description } },
                                 [
                                   _vm._v(
-                                    "\n                            " +
+                                    "\n                                " +
                                       _vm._s(data[indextr].description) +
-                                      "\n                        "
+                                      "\n                            "
                                   )
                                 ]
                               ),
@@ -2059,9 +2070,9 @@ var render = function() {
                                 },
                                 [
                                   _vm._v(
-                                    "\n                            " +
+                                    "\n                                " +
                                       _vm._s(data[indextr].customer.name) +
-                                      "\n                        "
+                                      "\n                            "
                                   )
                                 ]
                               ),
@@ -2071,9 +2082,9 @@ var render = function() {
                                 { attrs: { data: data[indextr].qty } },
                                 [
                                   _vm._v(
-                                    "\n                            " +
+                                    "\n                                " +
                                       _vm._s(data[indextr].qty) +
-                                      "\n                        "
+                                      "\n                            "
                                   )
                                 ]
                               ),
@@ -2083,9 +2094,9 @@ var render = function() {
                                 { attrs: { data: data[indextr].balance } },
                                 [
                                   _vm._v(
-                                    "\n                            " +
+                                    "\n                                " +
                                       _vm._s(data[indextr].balance) +
-                                      "\n                        "
+                                      "\n                            "
                                   )
                                 ]
                               ),
@@ -2095,9 +2106,9 @@ var render = function() {
                                 { attrs: { data: data[indextr].amount } },
                                 [
                                   _vm._v(
-                                    "\n                            " +
+                                    "\n                                " +
                                       _vm._s(data[indextr].amount) +
-                                      "\n                        "
+                                      "\n                            "
                                   )
                                 ]
                               ),
@@ -2107,9 +2118,9 @@ var render = function() {
                                 { attrs: { data: data[indextr].due_balance } },
                                 [
                                   _vm._v(
-                                    "\n                            " +
+                                    "\n                                " +
                                       _vm._s(data[indextr].due_balance) +
-                                      "\n                        "
+                                      "\n                            "
                                   )
                                 ]
                               ),
@@ -2119,9 +2130,9 @@ var render = function() {
                                 { attrs: { data: data[indextr].date } },
                                 [
                                   _vm._v(
-                                    "\n                            " +
+                                    "\n                                " +
                                       _vm._s(data[indextr].date) +
-                                      "\n                        "
+                                      "\n                            "
                                   )
                                 ]
                               )
@@ -2364,9 +2375,9 @@ var render = function() {
                                 { attrs: { data: data[indextr].id } },
                                 [
                                   _vm._v(
-                                    "\n                            " +
+                                    "\n                                " +
                                       _vm._s(data[indextr].id) +
-                                      "\n                        "
+                                      "\n                            "
                                   )
                                 ]
                               ),
@@ -2376,9 +2387,9 @@ var render = function() {
                                 { attrs: { data: data[indextr].description } },
                                 [
                                   _vm._v(
-                                    "\n                            " +
+                                    "\n                                " +
                                       _vm._s(data[indextr].description) +
-                                      "\n                        "
+                                      "\n                            "
                                   )
                                 ]
                               ),
@@ -2390,9 +2401,9 @@ var render = function() {
                                 },
                                 [
                                   _vm._v(
-                                    "\n                            " +
+                                    "\n                                " +
                                       _vm._s(data[indextr].customer.name) +
-                                      "\n                        "
+                                      "\n                            "
                                   )
                                 ]
                               ),
@@ -2402,9 +2413,9 @@ var render = function() {
                                 { attrs: { data: data[indextr].qty } },
                                 [
                                   _vm._v(
-                                    "\n                            " +
+                                    "\n                                " +
                                       _vm._s(data[indextr].qty) +
-                                      "\n                        "
+                                      "\n                            "
                                   )
                                 ]
                               ),
@@ -2414,9 +2425,9 @@ var render = function() {
                                 { attrs: { data: data[indextr].balance } },
                                 [
                                   _vm._v(
-                                    "\n                            " +
+                                    "\n                                " +
                                       _vm._s(data[indextr].balance) +
-                                      "\n                        "
+                                      "\n                            "
                                   )
                                 ]
                               ),
@@ -2426,9 +2437,9 @@ var render = function() {
                                 { attrs: { data: data[indextr].amount } },
                                 [
                                   _vm._v(
-                                    "\n                            " +
+                                    "\n                                " +
                                       _vm._s(data[indextr].amount) +
-                                      "\n                        "
+                                      "\n                            "
                                   )
                                 ]
                               ),
@@ -2438,9 +2449,9 @@ var render = function() {
                                 { attrs: { data: data[indextr].due_balance } },
                                 [
                                   _vm._v(
-                                    "\n                            " +
+                                    "\n                                " +
                                       _vm._s(data[indextr].due_balance) +
-                                      "\n                        "
+                                      "\n                            "
                                   )
                                 ]
                               ),
@@ -2450,9 +2461,9 @@ var render = function() {
                                 { attrs: { data: data[indextr].date } },
                                 [
                                   _vm._v(
-                                    "\n                            " +
+                                    "\n                                " +
                                       _vm._s(data[indextr].date) +
-                                      "\n                        "
+                                      "\n                            "
                                   )
                                 ]
                               )
@@ -2529,15 +2540,6 @@ var render = function() {
         on: {
           finished: function($event) {
             _vm.selected_pending = []
-          }
-        }
-      }),
-      _vm._v(" "),
-      _c("edit-product", {
-        ref: "editProduct",
-        on: {
-          finished: function($event) {
-            _vm.selected_received = []
           }
         }
       })
@@ -3179,6 +3181,7 @@ var render = function() {
                                 expression: "'required'"
                               }
                             ],
+                            key: "add-invoice",
                             attrs: {
                               filterBy: _vm.searchProduct,
                               getOptionLabel: function(opt) {
@@ -3199,6 +3202,7 @@ var render = function() {
                                   fn: function(option) {
                                     return [
                                       _c("vs-list-item", {
+                                        key: option.product.id,
                                         attrs: {
                                           title:
                                             "កូដ: " +

@@ -119,7 +119,7 @@
         <print-invoice ref="printInvoice"></print-invoice>
         <add-invoice ref="addInvoice"></add-invoice>
         <edit-invoice @finished="selected_pending=[]" ref="editInvoice"></edit-invoice>
-        <edit-product @finished="selected_received = []" ref="editProduct"></edit-product>
+<!--        <edit-product @finished="selected_received = []" ref="editProduct"></edit-product>-->
     </vx-card>
 </template>
 
