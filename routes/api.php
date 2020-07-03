@@ -57,6 +57,6 @@ Route::group(['middleware' => ['auth:api']], function () {
 //report mobile api
     Route::post('/check-stock','ReportController@check_stock');
 });
-Route::get('/check-stock-id/{id}/scan','ReportController@check_stock');
+Route::post('/check-stock-id','ReportController@check_stock');
 Route::post('/product-api','ReportController@product_api');
 Route::post('/product-count-api','ReportController@product_count_api');
