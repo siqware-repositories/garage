@@ -1,5 +1,6 @@
 <template>
     <div>
+        Hi there
         <modal width="90%" height="auto" :scrollable="true" :pivotY="0.2" :clickToClose="false" name="edit-invoice">
             <div class="flex justify-end">
                 <i @click="$modal.hide('edit-invoice');$barcodeScanner.destroy()" class="vs-icon vs-popup--close material-icons text-warning"
