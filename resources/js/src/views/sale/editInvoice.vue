@@ -1,6 +1,5 @@
 <template>
     <div>
-        Hi there
         <modal width="90%" height="auto" :scrollable="true" :pivotY="0.2" :clickToClose="false" name="edit-invoice">
             <div class="flex justify-end">
                 <i @click="$modal.hide('edit-invoice');$barcodeScanner.destroy()" class="vs-icon vs-popup--close material-icons text-warning"
@@ -215,13 +214,14 @@
                 return this.$store.getters.all_customer
             },
             all_purchase_details() {
-                let data = this.$store.getters.all_purchase_detail.map(function (x) {
+                return this.$store.getters.all_purchase_detail.sort((a, b) => (a.product.id > b.product.id) ? 1 : -1)
+                /*let data = this.$store.getters.all_purchase_detail.map(function (x) {
                     return{
                         ...x,
                         modified:true
                     }
                 })
-                return data.sort((a, b) => (a.product.id > b.product.id) ? 1 : -1)
+                return data.sort((a, b) => (a.product.id > b.product.id) ? 1 : -1)*/
             },
             total() {
                 let self = this;
