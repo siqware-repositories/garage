@@ -1,93 +1,107 @@
 <template>
-    <modal width="60%" height="auto" :scrollable="true" :pivotY="0.2" :clickToClose="false" name="edit-expense">
-        <div class="flex justify-end">
-            <i @click="$modal.hide('edit-expense')" class="vs-icon vs-popup--close material-icons text-warning" style="background: rgb(255, 255, 255);">close</i>
-        </div>
-        <vx-card no-shadow>
-            <div class="vx-row">
-                <div class="vx-col md:w-1/4 w-full">
-                    <label>កាលបរិច្ឆេទ</label>
-                    <flat-pickr v-validate="'required'" name="date" class="w-full" v-model="data.date" placeholder="ជ្រើសរើស" />
-                    <span class="text-danger text-sm" v-show="errors.has('date')">{{ errors.first('date') }}</span>
-                </div>
-                <div class="vx-col md:w-3/4 w-full">
-                    <label>សំគាល់</label>
-                    <vs-textarea v-validate="'required'" name="note" class="w-full" label="សំគាល់" v-model="data.note" />
-                    <span class="text-danger text-sm" v-show="errors.has('note')">{{ errors.first('note') }}</span>
-                </div>
-            </div>
-            <div class="vx-row">
-                <div class="vx-col w-full">
-                    <table>
-                        <thead>
-                        <tr>
-                            <th>ល.រ</th>
-                            <th>ពិពណ៌នា</th>
-                            <th>ប្រភេទ</th>
-                            <th>ទឹកប្រាក់</th>
-                            <th></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr v-for="(item,index) in data.items" :key="index">
-                            <td class="pl-3">{{index+1}}</td>
-                            <td class="p-1">
-                                <vs-input v-validate="'required'" :name="`${index}-description`" v-model="item.description" class="w-full" />
-                                <span class="text-danger text-sm" v-show="errors.has(`${index}-description`)">{{ errors.first(`${index}-description`) }}</span>
-                            </td>
-                            <td class="p-1" width="300">
-                                <vx-input-group>
-                                    <v-select v-validate="'required'" v-model="item.type" :name="`${index}-type`" class="w-full" :options="all_expense_types"/>
-                                    <template slot="append">
-                                        <div class="append-text btn-addon">
-                                            <vs-button color="dark" @click="$refs.addExpenseType.show()" radius type="line" icon-pack="feather" icon="icon-plus"></vs-button>
-                                        </div>
-                                    </template>
-                                </vx-input-group>
-                                <span class="text-danger text-sm"
-                                      v-show="errors.has(`${index}-type`)">{{ errors.first(`${index}-type`) }}</span>
-                            </td>
-                            <td class="pl-3">
-                                <vs-input-number v-validate="'required'" :min="0" :name="`${index}-balance`" color="warning" v-model="item.balance"/>
-                                <span class="text-danger text-sm"
-                                      v-show="errors.has(`${index}-balance`)">{{ errors.first(`${index}-balance`) }}</span>
-                            </td>
-                            <td>
-                                <vs-button @click="removeLine(index)" size="small" radius color="danger" icon="icon-minus-square" icon-pack="feather" type="flat"/>
-                            </td>
-                        </tr>
-                        </tbody>
-                        <tfoot>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td class="text-right">
-                                សរុប
-                            </td>
-                            <td class="pl-3">
-                                <money-format
-                                        :value="total_income"
-                                        locale='en'
-                                        currency-code='USD'>
-                                </money-format>
-                            </td>
-                            <td></td>
-                        </tr>
-                        </tfoot>
-                    </table>
-                    <add-expense-type ref="addExpenseType"/>
-                    <vs-button @click="addLine" type="line" icon-pack="feather" icon="icon-plus-circle">
-                        បន្ថែមជួរ
-                    </vs-button>
-                </div>
-            </div>
-            <vs-divider/>
-            <!-- Save & Reset Button -->
-            <div class="flex justify-end btn-group">
-                <vs-button @click="confirmUpdate" icon="icon-edit" icon-pack="feather" type="relief">កែប្រែ</vs-button>
-            </div>
-        </vx-card>
-    </modal>
+    <q-dialog
+        v-model="dialog"
+        persistent
+        :maximized="true"
+        transition-show="slide-up"
+        transition-hide="slide-down"
+    >
+        <q-card>
+            <q-bar>
+                <q-space />
+                <q-btn dense flat icon="close" v-close-popup>
+                    <q-tooltip content-class="bg-white text-primary">Close</q-tooltip>
+                </q-btn>
+            </q-bar>
+
+            <q-card-section>
+                <vx-card no-shadow>
+                    <div class="vx-row">
+                        <div class="vx-col md:w-1/4 w-full">
+                            <label>កាលបរិច្ឆេទ</label>
+                            <flat-pickr v-validate="'required'" name="date" class="w-full" v-model="data.date" placeholder="ជ្រើសរើស" />
+                            <span class="text-danger text-sm" v-show="errors.has('date')">{{ errors.first('date') }}</span>
+                        </div>
+                        <div class="vx-col md:w-3/4 w-full">
+                            <label>សំគាល់</label>
+                            <vs-textarea v-validate="'required'" name="note" class="w-full" label="សំគាល់" v-model="data.note" />
+                            <span class="text-danger text-sm" v-show="errors.has('note')">{{ errors.first('note') }}</span>
+                        </div>
+                    </div>
+                    <div class="vx-row">
+                        <div class="vx-col w-full">
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th>ល.រ</th>
+                                    <th>ពិពណ៌នា</th>
+                                    <th>ប្រភេទ</th>
+                                    <th>ទឹកប្រាក់</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr v-for="(item,index) in data.items" :key="index">
+                                    <td class="pl-3">{{index+1}}</td>
+                                    <td class="p-1">
+                                        <vs-input v-validate="'required'" :name="`${index}-description`" v-model="item.description" class="w-full" />
+                                        <span class="text-danger text-sm" v-show="errors.has(`${index}-description`)">{{ errors.first(`${index}-description`) }}</span>
+                                    </td>
+                                    <td class="p-1" width="300">
+                                        <vx-input-group>
+                                            <v-select v-validate="'required'" v-model="item.type" :name="`${index}-type`" class="w-full" :options="all_expense_types"/>
+                                            <template slot="append">
+                                                <div class="append-text btn-addon">
+                                                    <vs-button color="dark" @click="$refs.addExpenseType.show()" radius type="line" icon-pack="feather" icon="icon-plus"></vs-button>
+                                                </div>
+                                            </template>
+                                        </vx-input-group>
+                                        <span class="text-danger text-sm"
+                                              v-show="errors.has(`${index}-type`)">{{ errors.first(`${index}-type`) }}</span>
+                                    </td>
+                                    <td class="pl-3">
+                                        <vs-input-number v-validate="'required'" :min="0" :name="`${index}-balance`" color="warning" v-model="item.balance"/>
+                                        <span class="text-danger text-sm"
+                                              v-show="errors.has(`${index}-balance`)">{{ errors.first(`${index}-balance`) }}</span>
+                                    </td>
+                                    <td>
+                                        <vs-button @click="removeLine(index)" size="small" radius color="danger" icon="icon-minus-square" icon-pack="feather" type="flat"/>
+                                    </td>
+                                </tr>
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="text-right">
+                                        សរុប
+                                    </td>
+                                    <td class="pl-3">
+                                        <money-format
+                                            :value="total_income"
+                                            locale='en'
+                                            currency-code='USD'>
+                                        </money-format>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                </tfoot>
+                            </table>
+                            <add-expense-type ref="addExpenseType"/>
+                            <vs-button @click="addLine" type="line" icon-pack="feather" icon="icon-plus-circle">
+                                បន្ថែមជួរ
+                            </vs-button>
+                        </div>
+                    </div>
+                    <vs-divider/>
+                    <!-- Save & Reset Button -->
+                    <div class="flex justify-end btn-group">
+                        <vs-button @click="confirmUpdate" icon="icon-edit" icon-pack="feather" type="relief">កែប្រែ</vs-button>
+                    </div>
+                </vx-card>
+            </q-card-section>
+        </q-card>
+    </q-dialog>
 </template>
 
 <script>
@@ -106,6 +120,7 @@
         },
         data(){
             return {
+                dialog:false,
                 data:{
                     date:null,
                     note:null,
@@ -126,7 +141,7 @@
         methods:{
             show (data) {
                 let self = this;
-                self.$modal.show('edit-expense');
+                self.dialog = true;
                 self.data.id = data.id;
                 self.data.date = data.date;
                 self.data.note = data.note;

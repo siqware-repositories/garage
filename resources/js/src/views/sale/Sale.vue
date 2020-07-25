@@ -124,7 +124,6 @@
 </template>
 
 <script>
-    import EditProduct from "../product/editProduct";
     import AddPayment from "./addPayment";
     import ShowInvoice from "./showInvoice";
     import AddInvoice from "./addInvoice";
@@ -132,7 +131,7 @@
     import PrintInvoice from "./printInvoice";
     export default {
         name: "Sale",
-        components: {PrintInvoice, EditInvoice, AddInvoice, ShowInvoice, AddPayment, EditProduct},
+        components: {PrintInvoice, EditInvoice, AddInvoice, ShowInvoice, AddPayment},
         data(){
             return{
                 invoice_id:'',

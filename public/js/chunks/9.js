@@ -356,6 +356,123 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -373,6 +490,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      dialog: false,
       product: {
         name: '',
         description: '',
@@ -417,7 +535,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     show: function show() {
-      this.$modal.show('add');
+      this.dialog = true;
     },
     //store
     storeProduct: function storeProduct() {
@@ -982,511 +1100,557 @@ var render = function() {
     "div",
     [
       _c(
-        "modal",
+        "q-dialog",
         {
           attrs: {
-            width: "90%",
-            height: "auto",
-            scrollable: true,
-            pivotY: 0.2,
-            clickToClose: false,
-            name: "add"
+            persistent: "",
+            maximized: true,
+            "transition-show": "slide-up",
+            "transition-hide": "slide-down"
+          },
+          model: {
+            value: _vm.dialog,
+            callback: function($$v) {
+              _vm.dialog = $$v
+            },
+            expression: "dialog"
           }
         },
         [
-          _c("div", { staticClass: "flex justify-end" }, [
-            _c(
-              "i",
-              {
-                staticClass:
-                  "vs-icon vs-popup--close material-icons text-warning",
-                staticStyle: { background: "rgb(255, 255, 255)" },
-                on: {
-                  click: function($event) {
-                    return _vm.$modal.hide("add")
-                  }
-                }
-              },
-              [_vm._v("close")]
-            )
-          ]),
-          _vm._v(" "),
           _c(
-            "vx-card",
-            { attrs: { "no-shadow": "" } },
+            "q-card",
             [
-              _c("div", { staticClass: "vx-row" }, [
-                _c("div", { staticClass: "vx-col md:w-1/3 w-full" }, [
-                  _c("div", { staticClass: "vx-row" }, [
-                    _c(
-                      "div",
-                      { staticClass: "vx-col w-full" },
-                      [
-                        _c("label", [_vm._v("ឈ្មោះ")]),
-                        _vm._v(" "),
-                        _c("vue-instant", {
-                          directives: [
-                            {
-                              name: "validate",
-                              rawName: "v-validate",
-                              value: "required",
-                              expression: "'required'"
-                            }
-                          ],
-                          attrs: {
-                            id: "styles",
-                            "suggestion-attribute": "name",
-                            suggestions: _vm.all_product,
-                            type: "google",
-                            name: "name"
-                          },
-                          model: {
-                            value: _vm.product.name,
-                            callback: function($$v) {
-                              _vm.$set(_vm.product, "name", $$v)
-                            },
-                            expression: "product.name"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c(
-                          "span",
-                          {
-                            directives: [
-                              {
-                                name: "show",
-                                rawName: "v-show",
-                                value: _vm.errors.has("name"),
-                                expression: "errors.has('name')"
-                              }
-                            ],
-                            staticClass: "text-danger text-sm"
-                          },
-                          [_vm._v(_vm._s(_vm.errors.first("name")))]
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "vx-col w-full my-2" },
-                      [
-                        _c("label", [_vm._v("ពិពណ៌នា")]),
-                        _vm._v(" "),
-                        _c("vs-textarea", {
-                          directives: [
-                            {
-                              name: "validate",
-                              rawName: "v-validate",
-                              value: "required",
-                              expression: "'required'"
-                            }
-                          ],
-                          staticClass: "w-full",
-                          attrs: { label: "ពិពណ៌នា", name: "description" },
-                          model: {
-                            value: _vm.product.description,
-                            callback: function($$v) {
-                              _vm.$set(_vm.product, "description", $$v)
-                            },
-                            expression: "product.description"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c(
-                          "span",
-                          {
-                            directives: [
-                              {
-                                name: "show",
-                                rawName: "v-show",
-                                value: _vm.errors.has("description"),
-                                expression: "errors.has('description')"
-                              }
-                            ],
-                            staticClass: "text-danger text-sm"
-                          },
-                          [_vm._v(_vm._s(_vm.errors.first("description")))]
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "vx-col w-full" },
-                      [
-                        _c("vs-input-number", {
-                          attrs: { min: "0", label: "តម្លៃទិញ:" },
-                          model: {
-                            value: _vm.product.default_purchase,
-                            callback: function($$v) {
-                              _vm.$set(_vm.product, "default_purchase", $$v)
-                            },
-                            expression: "product.default_purchase"
-                          }
-                        })
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "vx-col w-full" },
-                      [
-                        _c("vs-input-number", {
-                          attrs: { min: "0", label: "តម្លៃទលក់:" },
-                          model: {
-                            value: _vm.product.default_sale,
-                            callback: function($$v) {
-                              _vm.$set(_vm.product, "default_sale", $$v)
-                            },
-                            expression: "product.default_sale"
-                          }
-                        })
-                      ],
-                      1
-                    )
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "vx-col md:w-2/3 w-full" }, [
-                  _c("div", { staticClass: "vx-row" }, [
-                    _c(
-                      "div",
-                      { staticClass: "vx-col md:w-1/2 w-full" },
-                      [
-                        _c("label", [_vm._v("Unit")]),
-                        _vm._v(" "),
-                        _c(
-                          "vx-input-group",
-                          [
-                            _c("v-select", {
-                              directives: [
-                                {
-                                  name: "validate",
-                                  rawName: "v-validate",
-                                  value: "required",
-                                  expression: "'required'"
-                                }
-                              ],
-                              attrs: {
-                                name: "unit",
-                                clearable: false,
-                                label: "name",
-                                options: _vm.all_units
-                              },
-                              model: {
-                                value: _vm.product.unit,
-                                callback: function($$v) {
-                                  _vm.$set(_vm.product, "unit", $$v)
-                                },
-                                expression: "product.unit"
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c("template", { slot: "append" }, [
-                              _c(
-                                "div",
-                                {
-                                  staticClass: "append-text btn-addon",
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.$refs.addUnit.show()
-                                    }
-                                  }
-                                },
-                                [
-                                  _c("vs-button", {
-                                    staticClass: "rounded-none",
-                                    attrs: {
-                                      type: "filled",
-                                      "icon-pack": "feather",
-                                      icon: "icon-plus"
-                                    }
-                                  })
-                                ],
-                                1
-                              )
-                            ])
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "span",
-                          {
-                            directives: [
-                              {
-                                name: "show",
-                                rawName: "v-show",
-                                value: _vm.errors.has("unit"),
-                                expression: "errors.has('unit')"
-                              }
-                            ],
-                            staticClass: "text-danger text-sm"
-                          },
-                          [_vm._v(_vm._s(_vm.errors.first("unit")))]
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "vx-col md:w-1/2 w-full" },
-                      [
-                        _c("label", [_vm._v("ប្រភេទ")]),
-                        _vm._v(" "),
-                        _c(
-                          "vx-input-group",
-                          [
-                            _c("v-select", {
-                              directives: [
-                                {
-                                  name: "validate",
-                                  rawName: "v-validate",
-                                  value: "required",
-                                  expression: "'required'"
-                                }
-                              ],
-                              attrs: {
-                                name: "category",
-                                clearable: false,
-                                label: "name",
-                                options: _vm.all_categories
-                              },
-                              model: {
-                                value: _vm.product.category,
-                                callback: function($$v) {
-                                  _vm.$set(_vm.product, "category", $$v)
-                                },
-                                expression: "product.category"
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c("template", { slot: "append" }, [
-                              _c(
-                                "div",
-                                {
-                                  staticClass: "append-text btn-addon",
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.$refs.addCategory.show()
-                                    }
-                                  }
-                                },
-                                [
-                                  _c("vs-button", {
-                                    staticClass: "rounded-none",
-                                    attrs: {
-                                      type: "filled",
-                                      "icon-pack": "feather",
-                                      icon: "icon-plus"
-                                    }
-                                  })
-                                ],
-                                1
-                              )
-                            ])
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "span",
-                          {
-                            directives: [
-                              {
-                                name: "show",
-                                rawName: "v-show",
-                                value: _vm.errors.has("category"),
-                                expression: "errors.has('category')"
-                              }
-                            ],
-                            staticClass: "text-danger text-sm"
-                          },
-                          [_vm._v(_vm._s(_vm.errors.first("category")))]
-                        )
-                      ],
-                      1
-                    )
-                  ]),
+              _c(
+                "q-bar",
+                [
+                  _c("q-space"),
                   _vm._v(" "),
-                  _c("div", { staticClass: "vx-row" }, [
-                    _c(
-                      "div",
-                      { staticClass: "vx-col md:w-1/2 w-full" },
-                      [
-                        _c("label", [_vm._v("Model")]),
-                        _vm._v(" "),
-                        _c(
-                          "vx-input-group",
-                          [
-                            _c("v-select", {
-                              directives: [
-                                {
-                                  name: "validate",
-                                  rawName: "v-validate",
-                                  value: "required",
-                                  expression: "'required'"
-                                }
-                              ],
-                              attrs: {
-                                name: "brand",
-                                clearable: false,
-                                label: "name",
-                                options: _vm.all_brands
-                              },
-                              model: {
-                                value: _vm.product.brand,
-                                callback: function($$v) {
-                                  _vm.$set(_vm.product, "brand", $$v)
-                                },
-                                expression: "product.brand"
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c("template", { slot: "append" }, [
-                              _c(
-                                "div",
-                                {
-                                  staticClass: "append-text btn-addon",
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.$refs.addBrand.show()
-                                    }
-                                  }
-                                },
-                                [
-                                  _c("vs-button", {
-                                    staticClass: "rounded-none",
-                                    attrs: {
-                                      type: "filled",
-                                      "icon-pack": "feather",
-                                      icon: "icon-plus"
-                                    }
-                                  })
-                                ],
-                                1
-                              )
-                            ])
-                          ],
-                          2
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "span",
-                          {
-                            directives: [
-                              {
-                                name: "show",
-                                rawName: "v-show",
-                                value: _vm.errors.has("brand"),
-                                expression: "errors.has('brand')"
-                              }
-                            ],
-                            staticClass: "text-danger text-sm"
-                          },
-                          [_vm._v(_vm._s(_vm.errors.first("brand")))]
-                        )
+                  _c(
+                    "q-btn",
+                    {
+                      directives: [
+                        { name: "close-popup", rawName: "v-close-popup" }
                       ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "vx-col md:w-1/2 w-full" },
-                      [
-                        _c("label", [_vm._v("Inventory Type")]),
-                        _vm._v(" "),
-                        _c("v-select", {
-                          directives: [
-                            {
-                              name: "validate",
-                              rawName: "v-validate",
-                              value: "required",
-                              expression: "'required'"
-                            }
-                          ],
-                          attrs: {
-                            name: "inventory_type",
-                            options: [
-                              "inventory_part",
-                              "service",
-                              "sale_only",
-                              "purchase_only"
-                            ]
-                          },
-                          model: {
-                            value: _vm.product.inventory_type,
-                            callback: function($$v) {
-                              _vm.$set(_vm.product, "inventory_type", $$v)
-                            },
-                            expression: "product.inventory_type"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c(
-                          "span",
-                          {
-                            directives: [
-                              {
-                                name: "show",
-                                rawName: "v-show",
-                                value: _vm.errors.has("inventory_type"),
-                                expression: "errors.has('inventory_type')"
-                              }
-                            ],
-                            staticClass: "text-danger text-sm"
-                          },
-                          [_vm._v(_vm._s(_vm.errors.first("inventory_type")))]
-                        )
-                      ],
-                      1
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "vx-row" }, [
-                    _c(
-                      "div",
-                      { staticClass: "vx-col md:w-1/2 my-2" },
-                      [
-                        _c("vue-dropzone", {
-                          ref: "image",
-                          staticClass: "max-content p-1",
-                          attrs: {
-                            duplicateCheck: "",
-                            id: "dropzone",
-                            options: _vm.dropzoneOptions
-                          },
-                          on: { "vdropzone-success": _vm.successUpload }
-                        })
-                      ],
-                      1
-                    )
-                  ])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("vs-divider"),
+                      attrs: { dense: "", flat: "", icon: "close" }
+                    },
+                    [
+                      _c(
+                        "q-tooltip",
+                        { attrs: { "content-class": "bg-white text-primary" } },
+                        [_vm._v("Close")]
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
               _vm._v(" "),
               _c(
-                "div",
-                { staticClass: "flex justify-end btn-group" },
+                "q-card-section",
                 [
                   _c(
-                    "vs-button",
-                    {
-                      attrs: {
-                        icon: "icon-save",
-                        "icon-pack": "feather",
-                        type: "relief"
-                      },
-                      on: { click: _vm.storeProduct }
-                    },
-                    [_vm._v("រក្សាទុក")]
+                    "vx-card",
+                    { attrs: { "no-shadow": "" } },
+                    [
+                      _c("div", { staticClass: "vx-row" }, [
+                        _c("div", { staticClass: "vx-col md:w-1/3 w-full" }, [
+                          _c("div", { staticClass: "vx-row" }, [
+                            _c(
+                              "div",
+                              { staticClass: "vx-col w-full" },
+                              [
+                                _c("label", [_vm._v("ឈ្មោះ")]),
+                                _vm._v(" "),
+                                _c("vue-instant", {
+                                  directives: [
+                                    {
+                                      name: "validate",
+                                      rawName: "v-validate",
+                                      value: "required",
+                                      expression: "'required'"
+                                    }
+                                  ],
+                                  attrs: {
+                                    id: "styles",
+                                    "suggestion-attribute": "name",
+                                    suggestions: _vm.all_product,
+                                    type: "google",
+                                    name: "name"
+                                  },
+                                  model: {
+                                    value: _vm.product.name,
+                                    callback: function($$v) {
+                                      _vm.$set(_vm.product, "name", $$v)
+                                    },
+                                    expression: "product.name"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c(
+                                  "span",
+                                  {
+                                    directives: [
+                                      {
+                                        name: "show",
+                                        rawName: "v-show",
+                                        value: _vm.errors.has("name"),
+                                        expression: "errors.has('name')"
+                                      }
+                                    ],
+                                    staticClass: "text-danger text-sm"
+                                  },
+                                  [_vm._v(_vm._s(_vm.errors.first("name")))]
+                                )
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "vx-col w-full my-2" },
+                              [
+                                _c("label", [_vm._v("ពិពណ៌នា")]),
+                                _vm._v(" "),
+                                _c("vs-textarea", {
+                                  directives: [
+                                    {
+                                      name: "validate",
+                                      rawName: "v-validate",
+                                      value: "required",
+                                      expression: "'required'"
+                                    }
+                                  ],
+                                  staticClass: "w-full",
+                                  attrs: {
+                                    label: "ពិពណ៌នា",
+                                    name: "description"
+                                  },
+                                  model: {
+                                    value: _vm.product.description,
+                                    callback: function($$v) {
+                                      _vm.$set(_vm.product, "description", $$v)
+                                    },
+                                    expression: "product.description"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c(
+                                  "span",
+                                  {
+                                    directives: [
+                                      {
+                                        name: "show",
+                                        rawName: "v-show",
+                                        value: _vm.errors.has("description"),
+                                        expression: "errors.has('description')"
+                                      }
+                                    ],
+                                    staticClass: "text-danger text-sm"
+                                  },
+                                  [
+                                    _vm._v(
+                                      _vm._s(_vm.errors.first("description"))
+                                    )
+                                  ]
+                                )
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "vx-col w-full" },
+                              [
+                                _c("vs-input-number", {
+                                  attrs: { min: "0", label: "តម្លៃទិញ:" },
+                                  model: {
+                                    value: _vm.product.default_purchase,
+                                    callback: function($$v) {
+                                      _vm.$set(
+                                        _vm.product,
+                                        "default_purchase",
+                                        $$v
+                                      )
+                                    },
+                                    expression: "product.default_purchase"
+                                  }
+                                })
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "vx-col w-full" },
+                              [
+                                _c("vs-input-number", {
+                                  attrs: { min: "0", label: "តម្លៃទលក់:" },
+                                  model: {
+                                    value: _vm.product.default_sale,
+                                    callback: function($$v) {
+                                      _vm.$set(_vm.product, "default_sale", $$v)
+                                    },
+                                    expression: "product.default_sale"
+                                  }
+                                })
+                              ],
+                              1
+                            )
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "vx-col md:w-2/3 w-full" }, [
+                          _c("div", { staticClass: "vx-row" }, [
+                            _c(
+                              "div",
+                              { staticClass: "vx-col md:w-1/2 w-full" },
+                              [
+                                _c("label", [_vm._v("Unit")]),
+                                _vm._v(" "),
+                                _c(
+                                  "vx-input-group",
+                                  [
+                                    _c("v-select", {
+                                      directives: [
+                                        {
+                                          name: "validate",
+                                          rawName: "v-validate",
+                                          value: "required",
+                                          expression: "'required'"
+                                        }
+                                      ],
+                                      attrs: {
+                                        name: "unit",
+                                        clearable: false,
+                                        label: "name",
+                                        options: _vm.all_units
+                                      },
+                                      model: {
+                                        value: _vm.product.unit,
+                                        callback: function($$v) {
+                                          _vm.$set(_vm.product, "unit", $$v)
+                                        },
+                                        expression: "product.unit"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("template", { slot: "append" }, [
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass: "append-text btn-addon",
+                                          on: {
+                                            click: function($event) {
+                                              return _vm.$refs.addUnit.show()
+                                            }
+                                          }
+                                        },
+                                        [
+                                          _c("vs-button", {
+                                            staticClass: "rounded-none",
+                                            attrs: {
+                                              type: "filled",
+                                              "icon-pack": "feather",
+                                              icon: "icon-plus"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      )
+                                    ])
+                                  ],
+                                  2
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "span",
+                                  {
+                                    directives: [
+                                      {
+                                        name: "show",
+                                        rawName: "v-show",
+                                        value: _vm.errors.has("unit"),
+                                        expression: "errors.has('unit')"
+                                      }
+                                    ],
+                                    staticClass: "text-danger text-sm"
+                                  },
+                                  [_vm._v(_vm._s(_vm.errors.first("unit")))]
+                                )
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "vx-col md:w-1/2 w-full" },
+                              [
+                                _c("label", [_vm._v("ប្រភេទ")]),
+                                _vm._v(" "),
+                                _c(
+                                  "vx-input-group",
+                                  [
+                                    _c("v-select", {
+                                      directives: [
+                                        {
+                                          name: "validate",
+                                          rawName: "v-validate",
+                                          value: "required",
+                                          expression: "'required'"
+                                        }
+                                      ],
+                                      attrs: {
+                                        name: "category",
+                                        clearable: false,
+                                        label: "name",
+                                        options: _vm.all_categories
+                                      },
+                                      model: {
+                                        value: _vm.product.category,
+                                        callback: function($$v) {
+                                          _vm.$set(_vm.product, "category", $$v)
+                                        },
+                                        expression: "product.category"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("template", { slot: "append" }, [
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass: "append-text btn-addon",
+                                          on: {
+                                            click: function($event) {
+                                              return _vm.$refs.addCategory.show()
+                                            }
+                                          }
+                                        },
+                                        [
+                                          _c("vs-button", {
+                                            staticClass: "rounded-none",
+                                            attrs: {
+                                              type: "filled",
+                                              "icon-pack": "feather",
+                                              icon: "icon-plus"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      )
+                                    ])
+                                  ],
+                                  2
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "span",
+                                  {
+                                    directives: [
+                                      {
+                                        name: "show",
+                                        rawName: "v-show",
+                                        value: _vm.errors.has("category"),
+                                        expression: "errors.has('category')"
+                                      }
+                                    ],
+                                    staticClass: "text-danger text-sm"
+                                  },
+                                  [_vm._v(_vm._s(_vm.errors.first("category")))]
+                                )
+                              ],
+                              1
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "vx-row" }, [
+                            _c(
+                              "div",
+                              { staticClass: "vx-col md:w-1/2 w-full" },
+                              [
+                                _c("label", [_vm._v("Model")]),
+                                _vm._v(" "),
+                                _c(
+                                  "vx-input-group",
+                                  [
+                                    _c("v-select", {
+                                      directives: [
+                                        {
+                                          name: "validate",
+                                          rawName: "v-validate",
+                                          value: "required",
+                                          expression: "'required'"
+                                        }
+                                      ],
+                                      attrs: {
+                                        name: "brand",
+                                        clearable: false,
+                                        label: "name",
+                                        options: _vm.all_brands
+                                      },
+                                      model: {
+                                        value: _vm.product.brand,
+                                        callback: function($$v) {
+                                          _vm.$set(_vm.product, "brand", $$v)
+                                        },
+                                        expression: "product.brand"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("template", { slot: "append" }, [
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass: "append-text btn-addon",
+                                          on: {
+                                            click: function($event) {
+                                              return _vm.$refs.addBrand.show()
+                                            }
+                                          }
+                                        },
+                                        [
+                                          _c("vs-button", {
+                                            staticClass: "rounded-none",
+                                            attrs: {
+                                              type: "filled",
+                                              "icon-pack": "feather",
+                                              icon: "icon-plus"
+                                            }
+                                          })
+                                        ],
+                                        1
+                                      )
+                                    ])
+                                  ],
+                                  2
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "span",
+                                  {
+                                    directives: [
+                                      {
+                                        name: "show",
+                                        rawName: "v-show",
+                                        value: _vm.errors.has("brand"),
+                                        expression: "errors.has('brand')"
+                                      }
+                                    ],
+                                    staticClass: "text-danger text-sm"
+                                  },
+                                  [_vm._v(_vm._s(_vm.errors.first("brand")))]
+                                )
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "vx-col md:w-1/2 w-full" },
+                              [
+                                _c("label", [_vm._v("Inventory Type")]),
+                                _vm._v(" "),
+                                _c("v-select", {
+                                  directives: [
+                                    {
+                                      name: "validate",
+                                      rawName: "v-validate",
+                                      value: "required",
+                                      expression: "'required'"
+                                    }
+                                  ],
+                                  attrs: {
+                                    name: "inventory_type",
+                                    options: [
+                                      "inventory_part",
+                                      "service",
+                                      "sale_only",
+                                      "purchase_only"
+                                    ]
+                                  },
+                                  model: {
+                                    value: _vm.product.inventory_type,
+                                    callback: function($$v) {
+                                      _vm.$set(
+                                        _vm.product,
+                                        "inventory_type",
+                                        $$v
+                                      )
+                                    },
+                                    expression: "product.inventory_type"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c(
+                                  "span",
+                                  {
+                                    directives: [
+                                      {
+                                        name: "show",
+                                        rawName: "v-show",
+                                        value: _vm.errors.has("inventory_type"),
+                                        expression:
+                                          "errors.has('inventory_type')"
+                                      }
+                                    ],
+                                    staticClass: "text-danger text-sm"
+                                  },
+                                  [
+                                    _vm._v(
+                                      _vm._s(_vm.errors.first("inventory_type"))
+                                    )
+                                  ]
+                                )
+                              ],
+                              1
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "vx-row" }, [
+                            _c(
+                              "div",
+                              { staticClass: "vx-col md:w-1/2 my-2" },
+                              [
+                                _c("vue-dropzone", {
+                                  ref: "image",
+                                  staticClass: "max-content p-1",
+                                  attrs: {
+                                    duplicateCheck: "",
+                                    id: "dropzone",
+                                    options: _vm.dropzoneOptions
+                                  },
+                                  on: { "vdropzone-success": _vm.successUpload }
+                                })
+                              ],
+                              1
+                            )
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("vs-divider"),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "flex justify-end btn-group" },
+                        [
+                          _c(
+                            "vs-button",
+                            {
+                              attrs: {
+                                icon: "icon-save",
+                                "icon-pack": "feather",
+                                type: "relief"
+                              },
+                              on: { click: _vm.storeProduct }
+                            },
+                            [_vm._v("រក្សាទុក")]
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
                   )
                 ],
                 1

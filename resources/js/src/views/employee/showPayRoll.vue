@@ -1,85 +1,98 @@
 <template>
     <div>
-        <modal width="60%" height="auto" :scrollable="true" :pivotY="0.2" :clickToClose="false" name="show-payroll">
-            <div class="flex justify-end">
-                <i @click="$modal.hide('show-payroll')" class="vs-icon vs-popup--close material-icons text-warning"
-                   style="background: rgb(255, 255, 255);">close</i>
-            </div>
-            <vx-card no-shadow>
-                <div id="printMe">
-                    <div class="vx-row">
-                        <div class="vx-col w-full">
-                            <table>
-                                <thead>
-                                <tr>
-                                    <th>ថ្ងៃបើកប្រាក់ខែ</th>
-                                    <th>សំគាល់</th>
-                                    <th>Barcode</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>{{data.date}}</td>
-                                    <td>{{data.note}}</td>
-                                    <td>
-                                        <bar-code :value="data.id" :options="{ displayValue: true }"></bar-code>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
+        <q-dialog
+            v-model="dialog"
+            persistent
+            :maximized="true"
+            transition-show="slide-up"
+            transition-hide="slide-down"
+        >
+            <q-card>
+                <q-bar>
+                    <q-space />
+                    <q-btn dense flat icon="close" v-close-popup>
+                        <q-tooltip content-class="bg-white text-primary">Close</q-tooltip>
+                    </q-btn>
+                </q-bar>
+
+                <q-card-section>
+                    <vx-card no-shadow>
+                        <div id="printMe">
+                            <div class="vx-row">
+                                <div class="vx-col w-full">
+                                    <table>
+                                        <thead>
+                                        <tr>
+                                            <th>ថ្ងៃបើកប្រាក់ខែ</th>
+                                            <th>សំគាល់</th>
+                                            <th>Barcode</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>{{data.date}}</td>
+                                            <td>{{data.note}}</td>
+                                            <td>
+                                                <bar-code :value="data.id" :options="{ displayValue: true }"></bar-code>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="vx-row mt-2">
+                                <div class="vx-col w-full">
+                                    <table>
+                                        <thead>
+                                        <tr>
+                                            <th>ល.រ</th>
+                                            <th>ឈ្មោះ</th>
+                                            <th>ទំនាក់ទំនង</th>
+                                            <th>ទឹកប្រាក់</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr v-for="(item,index) in data.items" :key="index">
+                                            <td class="pl-3">{{index+1}}</td>
+                                            <td class="pl-3">{{item.id.name}}</td>
+                                            <td class="pl-3">{{item.id.contact}}</td>
+                                            <td class="pl-3">
+                                                <money-format
+                                                    :value="parseFloat(item.salary)"
+                                                    locale='en'
+                                                    currency-code='USD'>
+                                                </money-format>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                        <tfoot>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td class="text-right">សរុប</td>
+                                            <td class="pl-3">
+                                                <money-format
+                                                    :value="total_salary"
+                                                    locale='en'
+                                                    currency-code='USD'>
+                                                </money-format>
+                                            </td>
+                                        </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="vx-row mt-2">
-                        <div class="vx-col w-full">
-                            <table>
-                                <thead>
-                                <tr>
-                                    <th>ល.រ</th>
-                                    <th>ឈ្មោះ</th>
-                                    <th>ទំនាក់ទំនង</th>
-                                    <th>ទឹកប្រាក់</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr v-for="item,index in data.items" :key="index">
-                                    <td class="pl-3">{{index+1}}</td>
-                                    <td class="pl-3">{{item.id.name}}</td>
-                                    <td class="pl-3">{{item.id.contact}}</td>
-                                    <td class="pl-3">
-                                        <money-format
-                                                :value="parseFloat(item.salary)"
-                                                locale='en'
-                                                currency-code='USD'>
-                                        </money-format>
-                                    </td>
-                                </tr>
-                                </tbody>
-                                <tfoot>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td class="text-right">សរុប</td>
-                                    <td class="pl-3">
-                                        <money-format
-                                                :value="total_salary"
-                                                locale='en'
-                                                currency-code='USD'>
-                                        </money-format>
-                                    </td>
-                                </tr>
-                                </tfoot>
-                            </table>
+                        <vs-divider/>
+                        <!-- Save & Reset Button -->
+                        <div class="flex justify-end btn-group">
+                            <vs-button @click="printHtml" icon="icon-printer" icon-pack="feather" type="relief">បោះពុម្ភ
+                            </vs-button>
                         </div>
-                    </div>
-                </div>
-                <vs-divider/>
-                <!-- Save & Reset Button -->
-                <div class="flex justify-end btn-group">
-                    <vs-button @click="printHtml" icon="icon-printer" icon-pack="feather" type="relief">បោះពុម្ភ
-                    </vs-button>
-                </div>
-            </vx-card>
-        </modal>
+                    </vx-card>
+                </q-card-section>
+            </q-card>
+        </q-dialog>
     </div>
 </template>
 
@@ -95,6 +108,7 @@
         components: {'v-select': vSelect, flatPickr, 'money-format': MoneyFormat, 'bar-code': VueBarcode},
         data() {
             return {
+                dialog:false,
                 data: {
                     id: null,
                     date: null,
@@ -135,7 +149,7 @@
             },
             show(data) {
                 let self = this;
-                self.$modal.show('show-payroll');
+                self.dialog = true;
                 self.data.id = data.id;
                 self.data.date = data.date;
                 self.data.note = data.note;

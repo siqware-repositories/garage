@@ -1,72 +1,85 @@
 <template>
     <div>
-        <modal width="60%" height="auto" :scrollable="true" :pivotY="0.2" :clickToClose="false" name="add-payroll">
-            <div class="flex justify-end">
-                <i @click="$modal.hide('add-payroll')" class="vs-icon vs-popup--close material-icons text-warning"
-                   style="background: rgb(255, 255, 255);">close</i>
-            </div>
-            <vx-card no-shadow>
-                <div class="vx-row">
-                    <div class="vx-col md:w-1/4 w-full">
-                        <label>កាលបរិច្ឋេទ</label>
-                        <flat-pickr v-validate="'required'" name="dob" class="w-full" v-model="data.date" placeholder="ជ្រើសរើស"/>
-                        <span class="text-danger text-sm"
-                              v-show="errors.has('dob')">{{ errors.first('dob') }}</span>
-                    </div>
-                    <div class="vx-col md:w-3/4 w-full">
-                        <label>សំគាល់</label>
-                        <vs-textarea v-validate="'required'" name="note" label="សំគាល់" v-model="data.note"/>
-                        <span class="text-danger text-sm"
-                              v-show="errors.has('note')">{{ errors.first('note') }}</span>
-                    </div>
-                </div>
-                <div class="vx-row mt-2">
-                    <div class="vx-col w-full">
-                        <table>
-                            <thead>
-                            <tr>
-                                <th>ល.រ</th>
-                                <th>ឈ្មោះ</th>
-                                <th>ទំនាក់ទំនង</th>
-                                <th>ទឹកប្រាក់</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr v-for="item,index in data.items" :key="index">
-                                <td class="pl-3">{{index+1}}</td>
-                                <td class="pl-3">{{item.id.name}}</td>
-                                <td class="pl-3">{{item.id.contact}}</td>
-                                <td class="pl-3">
-                                    <vs-input-number v-validate="'required'" :min="0" :name="`${index}-salary`" color="warning" v-model="item.salary"/>
-                                    <span class="text-danger text-sm"
-                                          v-show="errors.has(`${index}-salary`)">{{ errors.first(`${index}-salary`) }}</span>
-                                </td>
-                            </tr>
-                            </tbody>
-                            <tfoot>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td class="text-right">សរុប</td>
-                                <td class="pl-3">
-                                    <money-format
-                                            :value="total_salary"
-                                            locale='en'
-                                            currency-code='USD'>
-                                    </money-format>
-                                </td>
-                            </tr>
-                            </tfoot>
-                        </table>
-                    </div>
-                </div>
-                <vs-divider/>
-                <!-- Save & Reset Button -->
-                <div class="flex justify-end btn-group">
-                    <vs-button @click="confirmStore" icon="icon-save" icon-pack="feather" type="relief">រក្សាទុក</vs-button>
-                </div>
-            </vx-card>
-        </modal>
+        <q-dialog
+            v-model="dialog"
+            persistent
+            :maximized="true"
+            transition-show="slide-up"
+            transition-hide="slide-down"
+        >
+            <q-card>
+                <q-bar>
+                    <q-space />
+                    <q-btn dense flat icon="close" v-close-popup>
+                        <q-tooltip content-class="bg-white text-primary">Close</q-tooltip>
+                    </q-btn>
+                </q-bar>
+
+                <q-card-section>
+                    <vx-card no-shadow>
+                        <div class="vx-row">
+                            <div class="vx-col md:w-1/4 w-full">
+                                <label>កាលបរិច្ឋេទ</label>
+                                <flat-pickr v-validate="'required'" name="dob" class="w-full" v-model="data.date" placeholder="ជ្រើសរើស"/>
+                                <span class="text-danger text-sm"
+                                      v-show="errors.has('dob')">{{ errors.first('dob') }}</span>
+                            </div>
+                            <div class="vx-col md:w-3/4 w-full">
+                                <label>សំគាល់</label>
+                                <vs-textarea v-validate="'required'" name="note" label="សំគាល់" v-model="data.note"/>
+                                <span class="text-danger text-sm"
+                                      v-show="errors.has('note')">{{ errors.first('note') }}</span>
+                            </div>
+                        </div>
+                        <div class="vx-row mt-2">
+                            <div class="vx-col w-full">
+                                <table>
+                                    <thead>
+                                    <tr>
+                                        <th>ល.រ</th>
+                                        <th>ឈ្មោះ</th>
+                                        <th>ទំនាក់ទំនង</th>
+                                        <th>ទឹកប្រាក់</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr v-for="(item,index) in data.items" :key="index">
+                                        <td class="pl-3">{{index+1}}</td>
+                                        <td class="pl-3">{{item.id.name}}</td>
+                                        <td class="pl-3">{{item.id.contact}}</td>
+                                        <td class="pl-3">
+                                            <vs-input-number v-validate="'required'" :min="0" :name="`${index}-salary`" color="warning" v-model="item.salary"/>
+                                            <span class="text-danger text-sm"
+                                                  v-show="errors.has(`${index}-salary`)">{{ errors.first(`${index}-salary`) }}</span>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                    <tfoot>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="text-right">សរុប</td>
+                                        <td class="pl-3">
+                                            <money-format
+                                                :value="total_salary"
+                                                locale='en'
+                                                currency-code='USD'>
+                                            </money-format>
+                                        </td>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                        <vs-divider/>
+                        <!-- Save & Reset Button -->
+                        <div class="flex justify-end btn-group">
+                            <vs-button @click="confirmStore" icon="icon-save" icon-pack="feather" type="relief">រក្សាទុក</vs-button>
+                        </div>
+                    </vx-card>
+                </q-card-section>
+            </q-card>
+        </q-dialog>
     </div>
 </template>
 
@@ -80,6 +93,7 @@
         components: {'v-select': vSelect, flatPickr,'money-format': MoneyFormat},
         data() {
             return {
+                dialog:false,
                 data: {
                     date:null,
                     note:null,
@@ -106,7 +120,7 @@
             },
             show(data) {
                 let self = this;
-                self.$modal.show('add-payroll');
+                self.dialog = true;
                 self.data.items = [];
                 data.forEach(function (item,index) {
                     self.data.items.push({id:item,salary: 0});

@@ -117,6 +117,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -128,6 +141,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
+      dialog: false,
       data: {
         date: null,
         note: null,
@@ -216,7 +230,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }(),
     show: function show(data) {
       var self = this;
-      self.$modal.show('show-income');
+      self.dialog = true;
       self.data.id = data.id;
       self.data.date = data.date;
       self.data.note = data.note;
@@ -299,214 +313,253 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "modal",
+    "q-dialog",
     {
       attrs: {
-        width: "60%",
-        height: "auto",
-        scrollable: true,
-        pivotY: 0.2,
-        clickToClose: false,
-        name: "show-income"
+        persistent: "",
+        maximized: true,
+        "transition-show": "slide-up",
+        "transition-hide": "slide-down"
+      },
+      model: {
+        value: _vm.dialog,
+        callback: function($$v) {
+          _vm.dialog = $$v
+        },
+        expression: "dialog"
       }
     },
     [
-      _c("div", { staticClass: "flex justify-end" }, [
-        _c(
-          "i",
-          {
-            staticClass: "vs-icon vs-popup--close material-icons text-warning",
-            staticStyle: { background: "rgb(255, 255, 255)" },
-            on: {
-              click: function($event) {
-                return _vm.$modal.hide("show-income")
-              }
-            }
-          },
-          [_vm._v("close")]
-        )
-      ]),
-      _vm._v(" "),
       _c(
-        "vx-card",
-        { attrs: { "no-shadow": "" } },
+        "q-card",
         [
-          _c("div", { attrs: { id: "printMe" } }, [
-            _c("div", { staticClass: "vx-row" }, [
-              _c("div", { staticClass: "vx-col w-full" }, [
-                _c("table", [
-                  _c("thead", [
-                    _c("tr", { staticClass: "font-bold text-dark" }, [
-                      _c("th", [
-                        _vm._v("កាលបរិច្ឆេទ "),
-                        _c("br"),
-                        _vm._v(
-                          "\n                                Date\n                            "
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("th", [
-                        _vm._v("សំគាល់"),
-                        _c("br"),
-                        _vm._v("\n                                Note")
-                      ]),
-                      _vm._v(" "),
-                      _c("th", [
-                        _vm._v("កូដ"),
-                        _c("br"),
-                        _vm._v("\n                                Barcode")
-                      ])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("tbody", [
-                    _c("tr", [
-                      _c("td", [_vm._v(_vm._s(_vm.data.date))]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(_vm.data.note))]),
-                      _vm._v(" "),
-                      _c(
-                        "td",
-                        [
-                          _c("bar-code", {
-                            attrs: {
-                              value: _vm.data.id,
-                              options: { displayValue: true }
-                            }
-                          })
-                        ],
-                        1
-                      )
-                    ])
-                  ])
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "vx-row mt-3" }, [
-              _c("div", { staticClass: "vx-col w-full" }, [
-                _c("table", [
-                  _c("thead", [
-                    _c("tr", { staticClass: "font-bold text-dark" }, [
-                      _c("th", [
-                        _vm._v("ល.រ"),
-                        _c("br"),
-                        _vm._v("\n                                No")
-                      ]),
-                      _vm._v(" "),
-                      _c("th", [
-                        _vm._v("ពិពណ៌នា"),
-                        _c("br"),
-                        _vm._v("\n                                Description")
-                      ]),
-                      _vm._v(" "),
-                      _c("th", [
-                        _vm._v("ប្រភេទ"),
-                        _c("br"),
-                        _vm._v("\n                                Type")
-                      ]),
-                      _vm._v(" "),
-                      _c("th", [
-                        _vm._v("ទឹកប្រាក់"),
-                        _c("br"),
-                        _vm._v("\n                                Balance")
-                      ])
-                    ])
-                  ]),
-                  _vm._v(" "),
+          _c(
+            "q-bar",
+            [
+              _c("q-space"),
+              _vm._v(" "),
+              _c(
+                "q-btn",
+                {
+                  directives: [
+                    { name: "close-popup", rawName: "v-close-popup" }
+                  ],
+                  attrs: { dense: "", flat: "", icon: "close" }
+                },
+                [
                   _c(
-                    "tbody",
-                    _vm._l(_vm.data.items, function(item, index) {
-                      return _c("tr", { key: index }, [
-                        _c("td", { staticClass: "pl-3" }, [
-                          _vm._v(_vm._s(index + 1))
-                        ]),
-                        _vm._v(" "),
-                        _c("td", { staticClass: "pl-3" }, [
-                          _vm._v(
-                            "\n                                " +
-                              _vm._s(item.description) +
-                              "\n                            "
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("td", { staticClass: "pl-3" }, [
-                          _vm._v(
-                            "\n                                " +
-                              _vm._s(item.type) +
-                              "\n                            "
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          { staticClass: "pl-3" },
-                          [
-                            _c("money-format", {
-                              attrs: {
-                                value: parseFloat(item.balance),
-                                locale: "en",
-                                "currency-code": "USD"
-                              }
-                            })
-                          ],
-                          1
-                        )
-                      ])
-                    }),
-                    0
-                  ),
-                  _vm._v(" "),
-                  _c("tfoot", [
-                    _c("tr", [
-                      _c("td"),
-                      _vm._v(" "),
-                      _c("td"),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "text-right" }, [
-                        _vm._v(
-                          "\n                                សរុប\n                            "
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "td",
-                        { staticClass: "pl-3" },
-                        [
-                          _c("money-format", {
-                            attrs: {
-                              value: _vm.total_income,
-                              locale: "en",
-                              "currency-code": "USD"
-                            }
-                          })
-                        ],
-                        1
-                      )
-                    ])
-                  ])
-                ])
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("vs-divider"),
+                    "q-tooltip",
+                    { attrs: { "content-class": "bg-white text-primary" } },
+                    [_vm._v("Close")]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
           _vm._v(" "),
           _c(
-            "div",
-            { staticClass: "flex justify-end btn-group" },
+            "q-card-section",
             [
               _c(
-                "vs-button",
-                {
-                  attrs: {
-                    icon: "icon-printer",
-                    "icon-pack": "feather",
-                    type: "relief"
-                  },
-                  on: { click: _vm.printHtml }
-                },
-                [_vm._v("បោះពុម្ភ")]
+                "vx-card",
+                { attrs: { "no-shadow": "" } },
+                [
+                  _c("div", { attrs: { id: "printMe" } }, [
+                    _c("div", { staticClass: "vx-row" }, [
+                      _c("div", { staticClass: "vx-col w-full" }, [
+                        _c("table", [
+                          _c("thead", [
+                            _c("tr", { staticClass: "font-bold text-dark" }, [
+                              _c("th", [
+                                _vm._v("កាលបរិច្ឆេទ "),
+                                _c("br"),
+                                _vm._v(
+                                  "\n                                        Date\n                                    "
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("th", [
+                                _vm._v("សំគាល់"),
+                                _c("br"),
+                                _vm._v(
+                                  "\n                                        Note"
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("th", [
+                                _vm._v("កូដ"),
+                                _c("br"),
+                                _vm._v(
+                                  "\n                                        Barcode"
+                                )
+                              ])
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("tbody", [
+                            _c("tr", [
+                              _c("td", [_vm._v(_vm._s(_vm.data.date))]),
+                              _vm._v(" "),
+                              _c("td", [_vm._v(_vm._s(_vm.data.note))]),
+                              _vm._v(" "),
+                              _c(
+                                "td",
+                                [
+                                  _c("bar-code", {
+                                    attrs: {
+                                      value: _vm.data.id,
+                                      options: { displayValue: true }
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ])
+                          ])
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "vx-row mt-3" }, [
+                      _c("div", { staticClass: "vx-col w-full" }, [
+                        _c("table", [
+                          _c("thead", [
+                            _c("tr", { staticClass: "font-bold text-dark" }, [
+                              _c("th", [
+                                _vm._v("ល.រ"),
+                                _c("br"),
+                                _vm._v(
+                                  "\n                                        No"
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("th", [
+                                _vm._v("ពិពណ៌នា"),
+                                _c("br"),
+                                _vm._v(
+                                  "\n                                        Description"
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("th", [
+                                _vm._v("ប្រភេទ"),
+                                _c("br"),
+                                _vm._v(
+                                  "\n                                        Type"
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("th", [
+                                _vm._v("ទឹកប្រាក់"),
+                                _c("br"),
+                                _vm._v(
+                                  "\n                                        Balance"
+                                )
+                              ])
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "tbody",
+                            _vm._l(_vm.data.items, function(item, index) {
+                              return _c("tr", { key: index }, [
+                                _c("td", { staticClass: "pl-3" }, [
+                                  _vm._v(_vm._s(index + 1))
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "pl-3" }, [
+                                  _vm._v(
+                                    "\n                                        " +
+                                      _vm._s(item.description) +
+                                      "\n                                    "
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "pl-3" }, [
+                                  _vm._v(
+                                    "\n                                        " +
+                                      _vm._s(item.type) +
+                                      "\n                                    "
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "td",
+                                  { staticClass: "pl-3" },
+                                  [
+                                    _c("money-format", {
+                                      attrs: {
+                                        value: parseFloat(item.balance),
+                                        locale: "en",
+                                        "currency-code": "USD"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                )
+                              ])
+                            }),
+                            0
+                          ),
+                          _vm._v(" "),
+                          _c("tfoot", [
+                            _c("tr", [
+                              _c("td"),
+                              _vm._v(" "),
+                              _c("td"),
+                              _vm._v(" "),
+                              _c("td", { staticClass: "text-right" }, [
+                                _vm._v(
+                                  "\n                                        សរុប\n                                    "
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "td",
+                                { staticClass: "pl-3" },
+                                [
+                                  _c("money-format", {
+                                    attrs: {
+                                      value: _vm.total_income,
+                                      locale: "en",
+                                      "currency-code": "USD"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ])
+                          ])
+                        ])
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("vs-divider"),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "flex justify-end btn-group" },
+                    [
+                      _c(
+                        "vs-button",
+                        {
+                          attrs: {
+                            icon: "icon-printer",
+                            "icon-pack": "feather",
+                            type: "relief"
+                          },
+                          on: { click: _vm.printHtml }
+                        },
+                        [_vm._v("បោះពុម្ភ")]
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
               )
             ],
             1

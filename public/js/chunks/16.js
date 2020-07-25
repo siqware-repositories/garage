@@ -304,6 +304,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -319,6 +333,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      dialog: false,
       data: {
         date: null,
         note: null,
@@ -342,7 +357,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     show: function show() {
-      this.$modal.show('add-expense');
+      this.dialog = true;
     },
     removeLine: function removeLine(index) {
       this.data.items.splice(index, 1);
@@ -609,6 +624,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -624,6 +653,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      dialog: false,
       data: {
         date: null,
         note: null,
@@ -648,7 +678,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     show: function show(data) {
       var self = this;
-      self.$modal.show('edit-expense');
+      self.dialog = true;
       self.data.id = data.id;
       self.data.date = data.date;
       self.data.note = data.note;
@@ -1060,434 +1090,483 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "modal",
+    "q-dialog",
     {
       attrs: {
-        width: "60%",
-        height: "auto",
-        scrollable: true,
-        pivotY: 0.2,
-        clickToClose: false,
-        name: "add-expense"
+        persistent: "",
+        maximized: true,
+        "transition-show": "slide-up",
+        "transition-hide": "slide-down"
+      },
+      model: {
+        value: _vm.dialog,
+        callback: function($$v) {
+          _vm.dialog = $$v
+        },
+        expression: "dialog"
       }
     },
     [
-      _c("div", { staticClass: "flex justify-end" }, [
-        _c(
-          "i",
-          {
-            staticClass: "vs-icon vs-popup--close material-icons text-warning",
-            staticStyle: { background: "rgb(255, 255, 255)" },
-            on: {
-              click: function($event) {
-                return _vm.$modal.hide("add-expense")
-              }
-            }
-          },
-          [_vm._v("close")]
-        )
-      ]),
-      _vm._v(" "),
       _c(
-        "vx-card",
-        { attrs: { "no-shadow": "" } },
+        "q-card",
         [
-          _c("div", { staticClass: "vx-row" }, [
-            _c(
-              "div",
-              { staticClass: "vx-col md:w-1/4 w-full" },
-              [
-                _c("label", [_vm._v("កាលបរិច្ឆេទ")]),
-                _vm._v(" "),
-                _c("flat-pickr", {
+          _c(
+            "q-bar",
+            [
+              _c("q-space"),
+              _vm._v(" "),
+              _c(
+                "q-btn",
+                {
                   directives: [
-                    {
-                      name: "validate",
-                      rawName: "v-validate",
-                      value: "required",
-                      expression: "'required'"
-                    }
+                    { name: "close-popup", rawName: "v-close-popup" }
                   ],
-                  staticClass: "w-full",
-                  attrs: { name: "date", placeholder: "ជ្រើសរើស" },
-                  model: {
-                    value: _vm.data.date,
-                    callback: function($$v) {
-                      _vm.$set(_vm.data, "date", $$v)
-                    },
-                    expression: "data.date"
-                  }
-                }),
-                _vm._v(" "),
-                _c(
-                  "span",
-                  {
-                    directives: [
-                      {
-                        name: "show",
-                        rawName: "v-show",
-                        value: _vm.errors.has("date"),
-                        expression: "errors.has('date')"
-                      }
-                    ],
-                    staticClass: "text-danger text-sm"
-                  },
-                  [_vm._v(_vm._s(_vm.errors.first("date")))]
-                )
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "vx-col md:w-3/4 w-full" },
-              [
-                _c("label", [_vm._v("សំគាល់")]),
-                _vm._v(" "),
-                _c("vs-textarea", {
-                  directives: [
-                    {
-                      name: "validate",
-                      rawName: "v-validate",
-                      value: "required",
-                      expression: "'required'"
-                    }
-                  ],
-                  staticClass: "w-full",
-                  attrs: { name: "note", label: "សំគាល់" },
-                  model: {
-                    value: _vm.data.note,
-                    callback: function($$v) {
-                      _vm.$set(_vm.data, "note", $$v)
-                    },
-                    expression: "data.note"
-                  }
-                }),
-                _vm._v(" "),
-                _c(
-                  "span",
-                  {
-                    directives: [
-                      {
-                        name: "show",
-                        rawName: "v-show",
-                        value: _vm.errors.has("note"),
-                        expression: "errors.has('note')"
-                      }
-                    ],
-                    staticClass: "text-danger text-sm"
-                  },
-                  [_vm._v(_vm._s(_vm.errors.first("note")))]
-                )
-              ],
-              1
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "vx-row" }, [
-            _c(
-              "div",
-              { staticClass: "vx-col w-full" },
-              [
-                _c("table", [
-                  _c("thead", [
-                    _c("tr", [
-                      _c("th", [_vm._v("ល.រ")]),
-                      _vm._v(" "),
-                      _c("th", [_vm._v("ពិពណ៌នា")]),
-                      _vm._v(" "),
-                      _c("th", [_vm._v("ប្រភេទ")]),
-                      _vm._v(" "),
-                      _c("th", [_vm._v("ទឹកប្រាក់")]),
-                      _vm._v(" "),
-                      _c("th")
-                    ])
-                  ]),
-                  _vm._v(" "),
+                  attrs: { dense: "", flat: "", icon: "close" }
+                },
+                [
                   _c(
-                    "tbody",
-                    _vm._l(_vm.data.items, function(item, index) {
-                      return _c("tr", { key: index }, [
-                        _c("td", { staticClass: "pl-3" }, [
-                          _vm._v(_vm._s(index + 1))
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          { staticClass: "p-1" },
-                          [
-                            _c("vs-input", {
-                              directives: [
-                                {
-                                  name: "validate",
-                                  rawName: "v-validate",
-                                  value: "required",
-                                  expression: "'required'"
-                                }
-                              ],
-                              staticClass: "w-full",
-                              attrs: { name: index + "-description" },
-                              model: {
-                                value: item.description,
-                                callback: function($$v) {
-                                  _vm.$set(item, "description", $$v)
-                                },
-                                expression: "item.description"
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c(
-                              "span",
-                              {
-                                directives: [
-                                  {
-                                    name: "show",
-                                    rawName: "v-show",
-                                    value: _vm.errors.has(
-                                      index + "-description"
-                                    ),
-                                    expression:
-                                      "errors.has(`${index}-description`)"
-                                  }
-                                ],
-                                staticClass: "text-danger text-sm"
-                              },
-                              [
-                                _vm._v(
-                                  _vm._s(
-                                    _vm.errors.first(index + "-description")
-                                  )
-                                )
-                              ]
-                            )
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          { staticClass: "p-1", attrs: { width: "300" } },
-                          [
-                            _c(
-                              "vx-input-group",
-                              [
-                                _c("v-select", {
-                                  directives: [
-                                    {
-                                      name: "validate",
-                                      rawName: "v-validate",
-                                      value: "required",
-                                      expression: "'required'"
-                                    }
-                                  ],
-                                  staticClass: "w-full",
-                                  attrs: {
-                                    name: index + "-type",
-                                    options: _vm.all_expense_types
-                                  },
-                                  model: {
-                                    value: item.type,
-                                    callback: function($$v) {
-                                      _vm.$set(item, "type", $$v)
-                                    },
-                                    expression: "item.type"
-                                  }
-                                }),
-                                _vm._v(" "),
-                                _c("template", { slot: "append" }, [
-                                  _c(
-                                    "div",
-                                    { staticClass: "append-text btn-addon" },
-                                    [
-                                      _c("vs-button", {
-                                        attrs: {
-                                          color: "dark",
-                                          radius: "",
-                                          type: "line",
-                                          "icon-pack": "feather",
-                                          icon: "icon-plus"
-                                        },
-                                        on: {
-                                          click: function($event) {
-                                            return _vm.$refs.addExpenseType.show()
-                                          }
-                                        }
-                                      })
-                                    ],
-                                    1
-                                  )
-                                ])
-                              ],
-                              2
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "span",
-                              {
-                                directives: [
-                                  {
-                                    name: "show",
-                                    rawName: "v-show",
-                                    value: _vm.errors.has(index + "-type"),
-                                    expression: "errors.has(`${index}-type`)"
-                                  }
-                                ],
-                                staticClass: "text-danger text-sm"
-                              },
-                              [
-                                _vm._v(
-                                  _vm._s(_vm.errors.first(index + "-type"))
-                                )
-                              ]
-                            )
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          { staticClass: "pl-3" },
-                          [
-                            _c("vs-input-number", {
-                              directives: [
-                                {
-                                  name: "validate",
-                                  rawName: "v-validate",
-                                  value: "required",
-                                  expression: "'required'"
-                                }
-                              ],
-                              attrs: {
-                                min: 0,
-                                name: index + "-balance",
-                                color: "warning"
-                              },
-                              model: {
-                                value: item.balance,
-                                callback: function($$v) {
-                                  _vm.$set(item, "balance", $$v)
-                                },
-                                expression: "item.balance"
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c(
-                              "span",
-                              {
-                                directives: [
-                                  {
-                                    name: "show",
-                                    rawName: "v-show",
-                                    value: _vm.errors.has(index + "-balance"),
-                                    expression: "errors.has(`${index}-balance`)"
-                                  }
-                                ],
-                                staticClass: "text-danger text-sm"
-                              },
-                              [
-                                _vm._v(
-                                  _vm._s(_vm.errors.first(index + "-balance"))
-                                )
-                              ]
-                            )
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          [
-                            _c("vs-button", {
-                              attrs: {
-                                size: "small",
-                                radius: "",
-                                color: "danger",
-                                icon: "icon-minus-square",
-                                "icon-pack": "feather",
-                                type: "flat"
-                              },
-                              on: {
-                                click: function($event) {
-                                  return _vm.removeLine(index)
-                                }
-                              }
-                            })
-                          ],
-                          1
-                        )
-                      ])
-                    }),
-                    0
-                  ),
-                  _vm._v(" "),
-                  _c("tfoot", [
-                    _c("tr", [
-                      _c("td"),
-                      _vm._v(" "),
-                      _c("td"),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "text-right" }, [
-                        _vm._v(
-                          "\n                            សរុប\n                        "
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "td",
-                        { staticClass: "pl-3" },
-                        [
-                          _c("money-format", {
-                            attrs: {
-                              value: _vm.total_income,
-                              locale: "en",
-                              "currency-code": "USD"
-                            }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c("td")
-                    ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("add-expense-type", { ref: "addExpenseType" }),
-                _vm._v(" "),
-                _c(
-                  "vs-button",
-                  {
-                    attrs: {
-                      type: "line",
-                      "icon-pack": "feather",
-                      icon: "icon-plus-circle"
-                    },
-                    on: { click: _vm.addLine }
-                  },
-                  [_vm._v("\n                    បន្ថែមជួរ\n                ")]
-                )
-              ],
-              1
-            )
-          ]),
-          _vm._v(" "),
-          _c("vs-divider"),
+                    "q-tooltip",
+                    { attrs: { "content-class": "bg-white text-primary" } },
+                    [_vm._v("Close")]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
           _vm._v(" "),
           _c(
-            "div",
-            { staticClass: "flex justify-end btn-group" },
+            "q-card-section",
             [
               _c(
-                "vs-button",
-                {
-                  attrs: {
-                    icon: "icon-save",
-                    "icon-pack": "feather",
-                    type: "relief"
-                  },
-                  on: { click: _vm.confirmStore }
-                },
-                [_vm._v("រក្សាទុក")]
+                "vx-card",
+                { attrs: { "no-shadow": "" } },
+                [
+                  _c("div", { staticClass: "vx-row" }, [
+                    _c(
+                      "div",
+                      { staticClass: "vx-col md:w-1/4 w-full" },
+                      [
+                        _c("label", [_vm._v("កាលបរិច្ឆេទ")]),
+                        _vm._v(" "),
+                        _c("flat-pickr", {
+                          directives: [
+                            {
+                              name: "validate",
+                              rawName: "v-validate",
+                              value: "required",
+                              expression: "'required'"
+                            }
+                          ],
+                          staticClass: "w-full",
+                          attrs: { name: "date", placeholder: "ជ្រើសរើស" },
+                          model: {
+                            value: _vm.data.date,
+                            callback: function($$v) {
+                              _vm.$set(_vm.data, "date", $$v)
+                            },
+                            expression: "data.date"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "span",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: _vm.errors.has("date"),
+                                expression: "errors.has('date')"
+                              }
+                            ],
+                            staticClass: "text-danger text-sm"
+                          },
+                          [_vm._v(_vm._s(_vm.errors.first("date")))]
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "vx-col md:w-3/4 w-full" },
+                      [
+                        _c("label", [_vm._v("សំគាល់")]),
+                        _vm._v(" "),
+                        _c("vs-textarea", {
+                          directives: [
+                            {
+                              name: "validate",
+                              rawName: "v-validate",
+                              value: "required",
+                              expression: "'required'"
+                            }
+                          ],
+                          staticClass: "w-full",
+                          attrs: { name: "note", label: "សំគាល់" },
+                          model: {
+                            value: _vm.data.note,
+                            callback: function($$v) {
+                              _vm.$set(_vm.data, "note", $$v)
+                            },
+                            expression: "data.note"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "span",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: _vm.errors.has("note"),
+                                expression: "errors.has('note')"
+                              }
+                            ],
+                            staticClass: "text-danger text-sm"
+                          },
+                          [_vm._v(_vm._s(_vm.errors.first("note")))]
+                        )
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "vx-row" }, [
+                    _c(
+                      "div",
+                      { staticClass: "vx-col w-full" },
+                      [
+                        _c("table", [
+                          _c("thead", [
+                            _c("tr", [
+                              _c("th", [_vm._v("ល.រ")]),
+                              _vm._v(" "),
+                              _c("th", [_vm._v("ពិពណ៌នា")]),
+                              _vm._v(" "),
+                              _c("th", [_vm._v("ប្រភេទ")]),
+                              _vm._v(" "),
+                              _c("th", [_vm._v("ទឹកប្រាក់")]),
+                              _vm._v(" "),
+                              _c("th")
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "tbody",
+                            _vm._l(_vm.data.items, function(item, index) {
+                              return _c("tr", { key: index }, [
+                                _c("td", { staticClass: "pl-3" }, [
+                                  _vm._v(_vm._s(index + 1))
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "td",
+                                  { staticClass: "p-1" },
+                                  [
+                                    _c("vs-input", {
+                                      directives: [
+                                        {
+                                          name: "validate",
+                                          rawName: "v-validate",
+                                          value: "required",
+                                          expression: "'required'"
+                                        }
+                                      ],
+                                      staticClass: "w-full",
+                                      attrs: { name: index + "-description" },
+                                      model: {
+                                        value: item.description,
+                                        callback: function($$v) {
+                                          _vm.$set(item, "description", $$v)
+                                        },
+                                        expression: "item.description"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "span",
+                                      {
+                                        directives: [
+                                          {
+                                            name: "show",
+                                            rawName: "v-show",
+                                            value: _vm.errors.has(
+                                              index + "-description"
+                                            ),
+                                            expression:
+                                              "errors.has(`${index}-description`)"
+                                          }
+                                        ],
+                                        staticClass: "text-danger text-sm"
+                                      },
+                                      [
+                                        _vm._v(
+                                          _vm._s(
+                                            _vm.errors.first(
+                                              index + "-description"
+                                            )
+                                          )
+                                        )
+                                      ]
+                                    )
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "td",
+                                  {
+                                    staticClass: "p-1",
+                                    attrs: { width: "300" }
+                                  },
+                                  [
+                                    _c(
+                                      "vx-input-group",
+                                      [
+                                        _c("v-select", {
+                                          directives: [
+                                            {
+                                              name: "validate",
+                                              rawName: "v-validate",
+                                              value: "required",
+                                              expression: "'required'"
+                                            }
+                                          ],
+                                          staticClass: "w-full",
+                                          attrs: {
+                                            name: index + "-type",
+                                            options: _vm.all_expense_types
+                                          },
+                                          model: {
+                                            value: item.type,
+                                            callback: function($$v) {
+                                              _vm.$set(item, "type", $$v)
+                                            },
+                                            expression: "item.type"
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c("template", { slot: "append" }, [
+                                          _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "append-text btn-addon"
+                                            },
+                                            [
+                                              _c("vs-button", {
+                                                attrs: {
+                                                  color: "dark",
+                                                  radius: "",
+                                                  type: "line",
+                                                  "icon-pack": "feather",
+                                                  icon: "icon-plus"
+                                                },
+                                                on: {
+                                                  click: function($event) {
+                                                    return _vm.$refs.addExpenseType.show()
+                                                  }
+                                                }
+                                              })
+                                            ],
+                                            1
+                                          )
+                                        ])
+                                      ],
+                                      2
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "span",
+                                      {
+                                        directives: [
+                                          {
+                                            name: "show",
+                                            rawName: "v-show",
+                                            value: _vm.errors.has(
+                                              index + "-type"
+                                            ),
+                                            expression:
+                                              "errors.has(`${index}-type`)"
+                                          }
+                                        ],
+                                        staticClass: "text-danger text-sm"
+                                      },
+                                      [
+                                        _vm._v(
+                                          _vm._s(
+                                            _vm.errors.first(index + "-type")
+                                          )
+                                        )
+                                      ]
+                                    )
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "td",
+                                  { staticClass: "pl-3" },
+                                  [
+                                    _c("vs-input-number", {
+                                      directives: [
+                                        {
+                                          name: "validate",
+                                          rawName: "v-validate",
+                                          value: "required",
+                                          expression: "'required'"
+                                        }
+                                      ],
+                                      attrs: {
+                                        min: 0,
+                                        name: index + "-balance",
+                                        color: "warning"
+                                      },
+                                      model: {
+                                        value: item.balance,
+                                        callback: function($$v) {
+                                          _vm.$set(item, "balance", $$v)
+                                        },
+                                        expression: "item.balance"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "span",
+                                      {
+                                        directives: [
+                                          {
+                                            name: "show",
+                                            rawName: "v-show",
+                                            value: _vm.errors.has(
+                                              index + "-balance"
+                                            ),
+                                            expression:
+                                              "errors.has(`${index}-balance`)"
+                                          }
+                                        ],
+                                        staticClass: "text-danger text-sm"
+                                      },
+                                      [
+                                        _vm._v(
+                                          _vm._s(
+                                            _vm.errors.first(index + "-balance")
+                                          )
+                                        )
+                                      ]
+                                    )
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "td",
+                                  [
+                                    _c("vs-button", {
+                                      attrs: {
+                                        size: "small",
+                                        radius: "",
+                                        color: "danger",
+                                        icon: "icon-minus-square",
+                                        "icon-pack": "feather",
+                                        type: "flat"
+                                      },
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.removeLine(index)
+                                        }
+                                      }
+                                    })
+                                  ],
+                                  1
+                                )
+                              ])
+                            }),
+                            0
+                          ),
+                          _vm._v(" "),
+                          _c("tfoot", [
+                            _c("tr", [
+                              _c("td"),
+                              _vm._v(" "),
+                              _c("td"),
+                              _vm._v(" "),
+                              _c("td", { staticClass: "text-right" }, [
+                                _vm._v(
+                                  "\n                                    សរុប\n                                "
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "td",
+                                { staticClass: "pl-3" },
+                                [
+                                  _c("money-format", {
+                                    attrs: {
+                                      value: _vm.total_income,
+                                      locale: "en",
+                                      "currency-code": "USD"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c("td")
+                            ])
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("add-expense-type", { ref: "addExpenseType" }),
+                        _vm._v(" "),
+                        _c(
+                          "vs-button",
+                          {
+                            attrs: {
+                              type: "line",
+                              "icon-pack": "feather",
+                              icon: "icon-plus-circle"
+                            },
+                            on: { click: _vm.addLine }
+                          },
+                          [
+                            _vm._v(
+                              "\n                            បន្ថែមជួរ\n                        "
+                            )
+                          ]
+                        )
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("vs-divider"),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "flex justify-end btn-group" },
+                    [
+                      _c(
+                        "vs-button",
+                        {
+                          attrs: {
+                            icon: "icon-save",
+                            "icon-pack": "feather",
+                            type: "relief"
+                          },
+                          on: { click: _vm.confirmStore }
+                        },
+                        [_vm._v("រក្សាទុក")]
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
               )
             ],
             1
@@ -1633,434 +1712,483 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "modal",
+    "q-dialog",
     {
       attrs: {
-        width: "60%",
-        height: "auto",
-        scrollable: true,
-        pivotY: 0.2,
-        clickToClose: false,
-        name: "edit-expense"
+        persistent: "",
+        maximized: true,
+        "transition-show": "slide-up",
+        "transition-hide": "slide-down"
+      },
+      model: {
+        value: _vm.dialog,
+        callback: function($$v) {
+          _vm.dialog = $$v
+        },
+        expression: "dialog"
       }
     },
     [
-      _c("div", { staticClass: "flex justify-end" }, [
-        _c(
-          "i",
-          {
-            staticClass: "vs-icon vs-popup--close material-icons text-warning",
-            staticStyle: { background: "rgb(255, 255, 255)" },
-            on: {
-              click: function($event) {
-                return _vm.$modal.hide("edit-expense")
-              }
-            }
-          },
-          [_vm._v("close")]
-        )
-      ]),
-      _vm._v(" "),
       _c(
-        "vx-card",
-        { attrs: { "no-shadow": "" } },
+        "q-card",
         [
-          _c("div", { staticClass: "vx-row" }, [
-            _c(
-              "div",
-              { staticClass: "vx-col md:w-1/4 w-full" },
-              [
-                _c("label", [_vm._v("កាលបរិច្ឆេទ")]),
-                _vm._v(" "),
-                _c("flat-pickr", {
+          _c(
+            "q-bar",
+            [
+              _c("q-space"),
+              _vm._v(" "),
+              _c(
+                "q-btn",
+                {
                   directives: [
-                    {
-                      name: "validate",
-                      rawName: "v-validate",
-                      value: "required",
-                      expression: "'required'"
-                    }
+                    { name: "close-popup", rawName: "v-close-popup" }
                   ],
-                  staticClass: "w-full",
-                  attrs: { name: "date", placeholder: "ជ្រើសរើស" },
-                  model: {
-                    value: _vm.data.date,
-                    callback: function($$v) {
-                      _vm.$set(_vm.data, "date", $$v)
-                    },
-                    expression: "data.date"
-                  }
-                }),
-                _vm._v(" "),
-                _c(
-                  "span",
-                  {
-                    directives: [
-                      {
-                        name: "show",
-                        rawName: "v-show",
-                        value: _vm.errors.has("date"),
-                        expression: "errors.has('date')"
-                      }
-                    ],
-                    staticClass: "text-danger text-sm"
-                  },
-                  [_vm._v(_vm._s(_vm.errors.first("date")))]
-                )
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "vx-col md:w-3/4 w-full" },
-              [
-                _c("label", [_vm._v("សំគាល់")]),
-                _vm._v(" "),
-                _c("vs-textarea", {
-                  directives: [
-                    {
-                      name: "validate",
-                      rawName: "v-validate",
-                      value: "required",
-                      expression: "'required'"
-                    }
-                  ],
-                  staticClass: "w-full",
-                  attrs: { name: "note", label: "សំគាល់" },
-                  model: {
-                    value: _vm.data.note,
-                    callback: function($$v) {
-                      _vm.$set(_vm.data, "note", $$v)
-                    },
-                    expression: "data.note"
-                  }
-                }),
-                _vm._v(" "),
-                _c(
-                  "span",
-                  {
-                    directives: [
-                      {
-                        name: "show",
-                        rawName: "v-show",
-                        value: _vm.errors.has("note"),
-                        expression: "errors.has('note')"
-                      }
-                    ],
-                    staticClass: "text-danger text-sm"
-                  },
-                  [_vm._v(_vm._s(_vm.errors.first("note")))]
-                )
-              ],
-              1
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "vx-row" }, [
-            _c(
-              "div",
-              { staticClass: "vx-col w-full" },
-              [
-                _c("table", [
-                  _c("thead", [
-                    _c("tr", [
-                      _c("th", [_vm._v("ល.រ")]),
-                      _vm._v(" "),
-                      _c("th", [_vm._v("ពិពណ៌នា")]),
-                      _vm._v(" "),
-                      _c("th", [_vm._v("ប្រភេទ")]),
-                      _vm._v(" "),
-                      _c("th", [_vm._v("ទឹកប្រាក់")]),
-                      _vm._v(" "),
-                      _c("th")
-                    ])
-                  ]),
-                  _vm._v(" "),
+                  attrs: { dense: "", flat: "", icon: "close" }
+                },
+                [
                   _c(
-                    "tbody",
-                    _vm._l(_vm.data.items, function(item, index) {
-                      return _c("tr", { key: index }, [
-                        _c("td", { staticClass: "pl-3" }, [
-                          _vm._v(_vm._s(index + 1))
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          { staticClass: "p-1" },
-                          [
-                            _c("vs-input", {
-                              directives: [
-                                {
-                                  name: "validate",
-                                  rawName: "v-validate",
-                                  value: "required",
-                                  expression: "'required'"
-                                }
-                              ],
-                              staticClass: "w-full",
-                              attrs: { name: index + "-description" },
-                              model: {
-                                value: item.description,
-                                callback: function($$v) {
-                                  _vm.$set(item, "description", $$v)
-                                },
-                                expression: "item.description"
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c(
-                              "span",
-                              {
-                                directives: [
-                                  {
-                                    name: "show",
-                                    rawName: "v-show",
-                                    value: _vm.errors.has(
-                                      index + "-description"
-                                    ),
-                                    expression:
-                                      "errors.has(`${index}-description`)"
-                                  }
-                                ],
-                                staticClass: "text-danger text-sm"
-                              },
-                              [
-                                _vm._v(
-                                  _vm._s(
-                                    _vm.errors.first(index + "-description")
-                                  )
-                                )
-                              ]
-                            )
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          { staticClass: "p-1", attrs: { width: "300" } },
-                          [
-                            _c(
-                              "vx-input-group",
-                              [
-                                _c("v-select", {
-                                  directives: [
-                                    {
-                                      name: "validate",
-                                      rawName: "v-validate",
-                                      value: "required",
-                                      expression: "'required'"
-                                    }
-                                  ],
-                                  staticClass: "w-full",
-                                  attrs: {
-                                    name: index + "-type",
-                                    options: _vm.all_expense_types
-                                  },
-                                  model: {
-                                    value: item.type,
-                                    callback: function($$v) {
-                                      _vm.$set(item, "type", $$v)
-                                    },
-                                    expression: "item.type"
-                                  }
-                                }),
-                                _vm._v(" "),
-                                _c("template", { slot: "append" }, [
-                                  _c(
-                                    "div",
-                                    { staticClass: "append-text btn-addon" },
-                                    [
-                                      _c("vs-button", {
-                                        attrs: {
-                                          color: "dark",
-                                          radius: "",
-                                          type: "line",
-                                          "icon-pack": "feather",
-                                          icon: "icon-plus"
-                                        },
-                                        on: {
-                                          click: function($event) {
-                                            return _vm.$refs.addExpenseType.show()
-                                          }
-                                        }
-                                      })
-                                    ],
-                                    1
-                                  )
-                                ])
-                              ],
-                              2
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "span",
-                              {
-                                directives: [
-                                  {
-                                    name: "show",
-                                    rawName: "v-show",
-                                    value: _vm.errors.has(index + "-type"),
-                                    expression: "errors.has(`${index}-type`)"
-                                  }
-                                ],
-                                staticClass: "text-danger text-sm"
-                              },
-                              [
-                                _vm._v(
-                                  _vm._s(_vm.errors.first(index + "-type"))
-                                )
-                              ]
-                            )
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          { staticClass: "pl-3" },
-                          [
-                            _c("vs-input-number", {
-                              directives: [
-                                {
-                                  name: "validate",
-                                  rawName: "v-validate",
-                                  value: "required",
-                                  expression: "'required'"
-                                }
-                              ],
-                              attrs: {
-                                min: 0,
-                                name: index + "-balance",
-                                color: "warning"
-                              },
-                              model: {
-                                value: item.balance,
-                                callback: function($$v) {
-                                  _vm.$set(item, "balance", $$v)
-                                },
-                                expression: "item.balance"
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c(
-                              "span",
-                              {
-                                directives: [
-                                  {
-                                    name: "show",
-                                    rawName: "v-show",
-                                    value: _vm.errors.has(index + "-balance"),
-                                    expression: "errors.has(`${index}-balance`)"
-                                  }
-                                ],
-                                staticClass: "text-danger text-sm"
-                              },
-                              [
-                                _vm._v(
-                                  _vm._s(_vm.errors.first(index + "-balance"))
-                                )
-                              ]
-                            )
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          [
-                            _c("vs-button", {
-                              attrs: {
-                                size: "small",
-                                radius: "",
-                                color: "danger",
-                                icon: "icon-minus-square",
-                                "icon-pack": "feather",
-                                type: "flat"
-                              },
-                              on: {
-                                click: function($event) {
-                                  return _vm.removeLine(index)
-                                }
-                              }
-                            })
-                          ],
-                          1
-                        )
-                      ])
-                    }),
-                    0
-                  ),
-                  _vm._v(" "),
-                  _c("tfoot", [
-                    _c("tr", [
-                      _c("td"),
-                      _vm._v(" "),
-                      _c("td"),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "text-right" }, [
-                        _vm._v(
-                          "\n                            សរុប\n                        "
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "td",
-                        { staticClass: "pl-3" },
-                        [
-                          _c("money-format", {
-                            attrs: {
-                              value: _vm.total_income,
-                              locale: "en",
-                              "currency-code": "USD"
-                            }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c("td")
-                    ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("add-expense-type", { ref: "addExpenseType" }),
-                _vm._v(" "),
-                _c(
-                  "vs-button",
-                  {
-                    attrs: {
-                      type: "line",
-                      "icon-pack": "feather",
-                      icon: "icon-plus-circle"
-                    },
-                    on: { click: _vm.addLine }
-                  },
-                  [_vm._v("\n                    បន្ថែមជួរ\n                ")]
-                )
-              ],
-              1
-            )
-          ]),
-          _vm._v(" "),
-          _c("vs-divider"),
+                    "q-tooltip",
+                    { attrs: { "content-class": "bg-white text-primary" } },
+                    [_vm._v("Close")]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
           _vm._v(" "),
           _c(
-            "div",
-            { staticClass: "flex justify-end btn-group" },
+            "q-card-section",
             [
               _c(
-                "vs-button",
-                {
-                  attrs: {
-                    icon: "icon-edit",
-                    "icon-pack": "feather",
-                    type: "relief"
-                  },
-                  on: { click: _vm.confirmUpdate }
-                },
-                [_vm._v("កែប្រែ")]
+                "vx-card",
+                { attrs: { "no-shadow": "" } },
+                [
+                  _c("div", { staticClass: "vx-row" }, [
+                    _c(
+                      "div",
+                      { staticClass: "vx-col md:w-1/4 w-full" },
+                      [
+                        _c("label", [_vm._v("កាលបរិច្ឆេទ")]),
+                        _vm._v(" "),
+                        _c("flat-pickr", {
+                          directives: [
+                            {
+                              name: "validate",
+                              rawName: "v-validate",
+                              value: "required",
+                              expression: "'required'"
+                            }
+                          ],
+                          staticClass: "w-full",
+                          attrs: { name: "date", placeholder: "ជ្រើសរើស" },
+                          model: {
+                            value: _vm.data.date,
+                            callback: function($$v) {
+                              _vm.$set(_vm.data, "date", $$v)
+                            },
+                            expression: "data.date"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "span",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: _vm.errors.has("date"),
+                                expression: "errors.has('date')"
+                              }
+                            ],
+                            staticClass: "text-danger text-sm"
+                          },
+                          [_vm._v(_vm._s(_vm.errors.first("date")))]
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "vx-col md:w-3/4 w-full" },
+                      [
+                        _c("label", [_vm._v("សំគាល់")]),
+                        _vm._v(" "),
+                        _c("vs-textarea", {
+                          directives: [
+                            {
+                              name: "validate",
+                              rawName: "v-validate",
+                              value: "required",
+                              expression: "'required'"
+                            }
+                          ],
+                          staticClass: "w-full",
+                          attrs: { name: "note", label: "សំគាល់" },
+                          model: {
+                            value: _vm.data.note,
+                            callback: function($$v) {
+                              _vm.$set(_vm.data, "note", $$v)
+                            },
+                            expression: "data.note"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "span",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: _vm.errors.has("note"),
+                                expression: "errors.has('note')"
+                              }
+                            ],
+                            staticClass: "text-danger text-sm"
+                          },
+                          [_vm._v(_vm._s(_vm.errors.first("note")))]
+                        )
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "vx-row" }, [
+                    _c(
+                      "div",
+                      { staticClass: "vx-col w-full" },
+                      [
+                        _c("table", [
+                          _c("thead", [
+                            _c("tr", [
+                              _c("th", [_vm._v("ល.រ")]),
+                              _vm._v(" "),
+                              _c("th", [_vm._v("ពិពណ៌នា")]),
+                              _vm._v(" "),
+                              _c("th", [_vm._v("ប្រភេទ")]),
+                              _vm._v(" "),
+                              _c("th", [_vm._v("ទឹកប្រាក់")]),
+                              _vm._v(" "),
+                              _c("th")
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "tbody",
+                            _vm._l(_vm.data.items, function(item, index) {
+                              return _c("tr", { key: index }, [
+                                _c("td", { staticClass: "pl-3" }, [
+                                  _vm._v(_vm._s(index + 1))
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "td",
+                                  { staticClass: "p-1" },
+                                  [
+                                    _c("vs-input", {
+                                      directives: [
+                                        {
+                                          name: "validate",
+                                          rawName: "v-validate",
+                                          value: "required",
+                                          expression: "'required'"
+                                        }
+                                      ],
+                                      staticClass: "w-full",
+                                      attrs: { name: index + "-description" },
+                                      model: {
+                                        value: item.description,
+                                        callback: function($$v) {
+                                          _vm.$set(item, "description", $$v)
+                                        },
+                                        expression: "item.description"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "span",
+                                      {
+                                        directives: [
+                                          {
+                                            name: "show",
+                                            rawName: "v-show",
+                                            value: _vm.errors.has(
+                                              index + "-description"
+                                            ),
+                                            expression:
+                                              "errors.has(`${index}-description`)"
+                                          }
+                                        ],
+                                        staticClass: "text-danger text-sm"
+                                      },
+                                      [
+                                        _vm._v(
+                                          _vm._s(
+                                            _vm.errors.first(
+                                              index + "-description"
+                                            )
+                                          )
+                                        )
+                                      ]
+                                    )
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "td",
+                                  {
+                                    staticClass: "p-1",
+                                    attrs: { width: "300" }
+                                  },
+                                  [
+                                    _c(
+                                      "vx-input-group",
+                                      [
+                                        _c("v-select", {
+                                          directives: [
+                                            {
+                                              name: "validate",
+                                              rawName: "v-validate",
+                                              value: "required",
+                                              expression: "'required'"
+                                            }
+                                          ],
+                                          staticClass: "w-full",
+                                          attrs: {
+                                            name: index + "-type",
+                                            options: _vm.all_expense_types
+                                          },
+                                          model: {
+                                            value: item.type,
+                                            callback: function($$v) {
+                                              _vm.$set(item, "type", $$v)
+                                            },
+                                            expression: "item.type"
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c("template", { slot: "append" }, [
+                                          _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "append-text btn-addon"
+                                            },
+                                            [
+                                              _c("vs-button", {
+                                                attrs: {
+                                                  color: "dark",
+                                                  radius: "",
+                                                  type: "line",
+                                                  "icon-pack": "feather",
+                                                  icon: "icon-plus"
+                                                },
+                                                on: {
+                                                  click: function($event) {
+                                                    return _vm.$refs.addExpenseType.show()
+                                                  }
+                                                }
+                                              })
+                                            ],
+                                            1
+                                          )
+                                        ])
+                                      ],
+                                      2
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "span",
+                                      {
+                                        directives: [
+                                          {
+                                            name: "show",
+                                            rawName: "v-show",
+                                            value: _vm.errors.has(
+                                              index + "-type"
+                                            ),
+                                            expression:
+                                              "errors.has(`${index}-type`)"
+                                          }
+                                        ],
+                                        staticClass: "text-danger text-sm"
+                                      },
+                                      [
+                                        _vm._v(
+                                          _vm._s(
+                                            _vm.errors.first(index + "-type")
+                                          )
+                                        )
+                                      ]
+                                    )
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "td",
+                                  { staticClass: "pl-3" },
+                                  [
+                                    _c("vs-input-number", {
+                                      directives: [
+                                        {
+                                          name: "validate",
+                                          rawName: "v-validate",
+                                          value: "required",
+                                          expression: "'required'"
+                                        }
+                                      ],
+                                      attrs: {
+                                        min: 0,
+                                        name: index + "-balance",
+                                        color: "warning"
+                                      },
+                                      model: {
+                                        value: item.balance,
+                                        callback: function($$v) {
+                                          _vm.$set(item, "balance", $$v)
+                                        },
+                                        expression: "item.balance"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "span",
+                                      {
+                                        directives: [
+                                          {
+                                            name: "show",
+                                            rawName: "v-show",
+                                            value: _vm.errors.has(
+                                              index + "-balance"
+                                            ),
+                                            expression:
+                                              "errors.has(`${index}-balance`)"
+                                          }
+                                        ],
+                                        staticClass: "text-danger text-sm"
+                                      },
+                                      [
+                                        _vm._v(
+                                          _vm._s(
+                                            _vm.errors.first(index + "-balance")
+                                          )
+                                        )
+                                      ]
+                                    )
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "td",
+                                  [
+                                    _c("vs-button", {
+                                      attrs: {
+                                        size: "small",
+                                        radius: "",
+                                        color: "danger",
+                                        icon: "icon-minus-square",
+                                        "icon-pack": "feather",
+                                        type: "flat"
+                                      },
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.removeLine(index)
+                                        }
+                                      }
+                                    })
+                                  ],
+                                  1
+                                )
+                              ])
+                            }),
+                            0
+                          ),
+                          _vm._v(" "),
+                          _c("tfoot", [
+                            _c("tr", [
+                              _c("td"),
+                              _vm._v(" "),
+                              _c("td"),
+                              _vm._v(" "),
+                              _c("td", { staticClass: "text-right" }, [
+                                _vm._v(
+                                  "\n                                    សរុប\n                                "
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "td",
+                                { staticClass: "pl-3" },
+                                [
+                                  _c("money-format", {
+                                    attrs: {
+                                      value: _vm.total_income,
+                                      locale: "en",
+                                      "currency-code": "USD"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c("td")
+                            ])
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("add-expense-type", { ref: "addExpenseType" }),
+                        _vm._v(" "),
+                        _c(
+                          "vs-button",
+                          {
+                            attrs: {
+                              type: "line",
+                              "icon-pack": "feather",
+                              icon: "icon-plus-circle"
+                            },
+                            on: { click: _vm.addLine }
+                          },
+                          [
+                            _vm._v(
+                              "\n                            បន្ថែមជួរ\n                        "
+                            )
+                          ]
+                        )
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("vs-divider"),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "flex justify-end btn-group" },
+                    [
+                      _c(
+                        "vs-button",
+                        {
+                          attrs: {
+                            icon: "icon-edit",
+                            "icon-pack": "feather",
+                            type: "relief"
+                          },
+                          on: { click: _vm.confirmUpdate }
+                        },
+                        [_vm._v("កែប្រែ")]
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
               )
             ],
             1

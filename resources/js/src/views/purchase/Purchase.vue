@@ -124,21 +124,20 @@
         <show-purchase ref="showPurchase"></show-purchase>
         <add-purchase ref="addPurchase"></add-purchase>
         <edit-purchase @finished="selected_pending=[]" ref="editPurchase"></edit-purchase>
-        <edit-product @finished="selected_received = []" ref="editProduct"></edit-product>
     </vx-card>
 </template>
 
 <script>
-    import EditProduct from "../product/editProduct";
     import AddPurchase from "./addPurchase";
     import AddPayment from "./addPayment";
     import EditPurchase from "./editPurchase";
     import ShowPurchase from "./showPurchase";
     export default {
         name: "Stock",
-        components: {ShowPurchase, EditPurchase, AddPayment, AddPurchase, EditProduct},
+        components: {ShowPurchase, EditPurchase, AddPayment, AddPurchase},
         data(){
             return{
+                select:null,
                 invoice_id:'',
                 selected_pending:[],
                 selected_received:[]

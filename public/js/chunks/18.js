@@ -168,6 +168,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
+      select: null,
       invoice_id: '',
       selected_pending: [],
       selected_received: []
@@ -353,11 +354,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "addPayment",
   methods: {
     show: function show(data) {
-      this.$modal.show('add-payment');
+      this.dialog = true;
       this.data.id = data.id;
       this.data.balance = data.due_balance;
       this.data.input_balance = data.due_balance;
@@ -409,6 +423,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      dialog: false,
       data: {
         id: null,
         balance: 0,
@@ -445,6 +460,41 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _addSupplier__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./addSupplier */ "./resources/js/src/views/purchase/addSupplier.vue");
 /* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vue-select */ "./node_modules/vue-select/dist/vue-select.js");
 /* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(vue_select__WEBPACK_IMPORTED_MODULE_6__);
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -622,6 +672,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+var stringOptions = ['Google', 'Facebook', 'Twitter', 'Apple', 'Oracle'];
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "addPurchase",
   components: {
@@ -634,6 +685,9 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      select: null,
+      options: [],
+      dialog: false,
       purchase: {
         user_id: this.$store.state.AppActiveUser.uid,
         supplier: null,
@@ -657,6 +711,14 @@ __webpack_require__.r(__webpack_exports__);
     all_products: function all_products() {
       return this.$store.getters.all_product.sort(function (a, b) {
         return a.id > b.id ? 1 : -1;
+      });
+    },
+    map_all_products: function map_all_products() {
+      return this.all_products.map(function (x) {
+        return _objectSpread({
+          label: "ID: ".concat(x.id, " - ").concat(x.name, " (\u178F\u1798\u17D2\u179B\u17C3\u179B\u1780\u17CB ").concat(x.default_sale, " \u178F\u1798\u17D2\u179B\u17C3\u1791\u17B7\u1789 ").concat(x.default_purchase, ")"),
+          value: x.id
+        }, x);
       });
     },
     total: function total() {
@@ -684,6 +746,23 @@ __webpack_require__.r(__webpack_exports__);
     var y = this.total;
   },
   methods: {
+    filterFn: function filterFn(val, update) {
+      var _this = this;
+
+      if (val === '') {
+        update(function () {
+          _this.options = _this.map_all_products;
+        });
+        return;
+      }
+
+      update(function () {
+        var needle = val.toLowerCase();
+        _this.options = _this.map_all_products.filter(function (v) {
+          return String(v.value).toLowerCase().indexOf(needle) > -1;
+        });
+      });
+    },
     // Create callback function to receive barcode when the scanner is already done
     onBarcodeScanned: function onBarcodeScanned(barcode) {
       this.addItemLine();
@@ -720,24 +799,29 @@ __webpack_require__.r(__webpack_exports__);
     //select product
     selectProduct: function selectProduct(id, index) {
       var self = this;
-      var selected = self.all_products.filter(function (x) {
-        return parseInt(x.id) === parseInt(id.id);
-      });
-      self.purchase.items[index].name = selected[0].name;
-      self.purchase.items[index].id = {
-        id: selected[0].id,
-        name: "ID: ".concat(selected[0].id, " - ").concat(selected[0].name)
-      };
-      self.purchase.items[index].description = selected[0].description;
-      self.purchase.items[index].inventory_type = selected[0].inventory_type;
-      /*self.purchase.items[index].sale_price = selected[0].default_sale;
-      self.purchase.items[index].purchase_price = selected[0].default_purchase;*/
 
-      self.purchase.items[index].sale_price = null;
-      self.purchase.items[index].purchase_price = null;
+      if (id) {
+        var selected = self.all_products.filter(function (x) {
+          return parseInt(x.id) === parseInt(id.id);
+        });
+        self.purchase.items[index].name = selected[0].name;
+        self.purchase.items[index].id = {
+          id: selected[0].id,
+          name: "ID: ".concat(selected[0].id, " - ").concat(selected[0].name),
+          label: id.label,
+          value: id.value
+        };
+        self.purchase.items[index].description = selected[0].description;
+        self.purchase.items[index].inventory_type = selected[0].inventory_type;
+        /*self.purchase.items[index].sale_price = selected[0].default_sale;
+        self.purchase.items[index].purchase_price = selected[0].default_purchase;*/
+
+        self.purchase.items[index].sale_price = null;
+        self.purchase.items[index].purchase_price = null;
+      }
     },
     show: function show() {
-      this.$modal.show('add');
+      this.dialog = true;
       this.$barcodeScanner.init(this.onBarcodeScanned);
       this.purchase.items = [];
     },
@@ -985,6 +1069,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -1006,6 +1103,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   data: function data() {
     return {
+      dialog: false,
       purchase: {
         user_id: this.$store.state.AppActiveUser.uid,
         id: null,
@@ -1114,7 +1212,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     show: function show(data) {
       var self = this;
-      this.$modal.show('edit-purchase');
+      this.dialog = true;
       self.purchase.items = [];
       this.$barcodeScanner.init(this.onBarcodeScanned);
       this.purchase.items = [];
@@ -2044,120 +2142,148 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "modal",
+    "q-dialog",
     {
       attrs: {
-        height: "auto",
-        scrollable: true,
-        pivotY: 0.2,
-        clickToClose: false,
-        name: "add-payment"
+        persistent: "",
+        maximized: true,
+        "transition-show": "slide-up",
+        "transition-hide": "slide-down"
+      },
+      model: {
+        value: _vm.dialog,
+        callback: function($$v) {
+          _vm.dialog = $$v
+        },
+        expression: "dialog"
       }
     },
     [
-      _c("div", { staticClass: "flex justify-end" }, [
-        _c(
-          "i",
-          {
-            staticClass: "vs-icon vs-popup--close material-icons text-warning",
-            staticStyle: { background: "rgb(255, 255, 255)" },
-            on: {
-              click: function($event) {
-                return _vm.$modal.hide("add-payment")
-              }
-            }
-          },
-          [_vm._v("close")]
-        )
-      ]),
-      _vm._v(" "),
       _c(
-        "vx-card",
-        { attrs: { "no-shadow": "" } },
+        "q-card",
         [
-          _c("div", { staticClass: "vx-row" }, [
-            _c("div", { staticClass: "vx-col md:w-1/2 w-full" }, [
-              _c("h4", [_vm._v("ទឹកប្រាក់ត្រូវសង")]),
+          _c(
+            "q-bar",
+            [
+              _c("q-space"),
               _vm._v(" "),
-              _c("span", { staticClass: "text-2xl" }, [
-                _vm._v("$" + _vm._s(_vm.data.balance))
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "vx-col md:w-1/2 w-full" }, [
-              _c("h4", [_vm._v("ទឹកប្រាក់នៅសល់")]),
-              _vm._v(" "),
-              _c("span", { staticClass: "text-2xl" }, [
-                _vm._v("$" + _vm._s(_vm.due_balance))
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("vs-divider"),
-          _vm._v(" "),
-          _c("div", { staticClass: "vx-row" }, [
-            _c(
-              "div",
-              { staticClass: "vx-col w-full" },
-              [
-                _c("vs-input-number", {
+              _c(
+                "q-btn",
+                {
                   directives: [
-                    {
-                      name: "validate",
-                      rawName: "v-validate",
-                      value: "required",
-                      expression: "'required'"
-                    }
+                    { name: "close-popup", rawName: "v-close-popup" }
                   ],
-                  attrs: {
-                    min: "0",
-                    max: _vm.data.balance,
-                    name: "input_balance"
-                  },
-                  model: {
-                    value: _vm.data.input_balance,
-                    callback: function($$v) {
-                      _vm.$set(_vm.data, "input_balance", $$v)
-                    },
-                    expression: "data.input_balance"
-                  }
-                }),
-                _vm._v(" "),
-                _c(
-                  "span",
-                  {
-                    directives: [
-                      {
-                        name: "show",
-                        rawName: "v-show",
-                        value: _vm.errors.has("input_balance"),
-                        expression: "errors.has('input_balance')"
-                      }
-                    ],
-                    staticClass: "text-danger text-sm"
-                  },
-                  [_vm._v(_vm._s(_vm.errors.first("input_balance")))]
-                )
-              ],
-              1
-            )
-          ]),
+                  attrs: { dense: "", flat: "", icon: "close" }
+                },
+                [
+                  _c(
+                    "q-tooltip",
+                    { attrs: { "content-class": "bg-white text-primary" } },
+                    [_vm._v("Close")]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
           _vm._v(" "),
           _c(
-            "div",
-            { staticClass: "flex justify-end btn-group" },
+            "q-card-section",
             [
               _c(
-                "vs-button",
-                {
-                  attrs: {
-                    icon: "icon-dollar-sign",
-                    "icon-pack": "feather",
-                    type: "relief"
-                  },
-                  on: { click: _vm.updatePurchasePayment }
-                },
-                [_vm._v("ចំណាយ")]
+                "vx-card",
+                { attrs: { "no-shadow": "" } },
+                [
+                  _c("div", { staticClass: "vx-row" }, [
+                    _c("div", { staticClass: "vx-col md:w-1/2 w-full" }, [
+                      _c("h4", [_vm._v("ទឹកប្រាក់ត្រូវសង")]),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "text-2xl" }, [
+                        _vm._v("$" + _vm._s(_vm.data.balance))
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "vx-col md:w-1/2 w-full" }, [
+                      _c("h4", [_vm._v("ទឹកប្រាក់នៅសល់")]),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "text-2xl" }, [
+                        _vm._v("$" + _vm._s(_vm.due_balance))
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("vs-divider"),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "vx-row" }, [
+                    _c(
+                      "div",
+                      { staticClass: "vx-col w-full" },
+                      [
+                        _c("vs-input-number", {
+                          directives: [
+                            {
+                              name: "validate",
+                              rawName: "v-validate",
+                              value: "required",
+                              expression: "'required'"
+                            }
+                          ],
+                          attrs: {
+                            min: "0",
+                            max: _vm.data.balance,
+                            name: "input_balance"
+                          },
+                          model: {
+                            value: _vm.data.input_balance,
+                            callback: function($$v) {
+                              _vm.$set(_vm.data, "input_balance", $$v)
+                            },
+                            expression: "data.input_balance"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "span",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: _vm.errors.has("input_balance"),
+                                expression: "errors.has('input_balance')"
+                              }
+                            ],
+                            staticClass: "text-danger text-sm"
+                          },
+                          [_vm._v(_vm._s(_vm.errors.first("input_balance")))]
+                        )
+                      ],
+                      1
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "flex justify-end btn-group" },
+                    [
+                      _c(
+                        "vs-button",
+                        {
+                          attrs: {
+                            icon: "icon-dollar-sign",
+                            "icon-pack": "feather",
+                            type: "relief"
+                          },
+                          on: { click: _vm.updatePurchasePayment }
+                        },
+                        [_vm._v("ចំណាយ")]
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
               )
             ],
             1
@@ -2195,810 +2321,889 @@ var render = function() {
     "div",
     [
       _c(
-        "modal",
+        "q-dialog",
         {
           attrs: {
-            width: "90%",
-            height: "auto",
-            scrollable: true,
-            pivotY: 0.2,
-            clickToClose: false,
-            name: "add"
+            persistent: "",
+            maximized: true,
+            "transition-show": "slide-up",
+            "transition-hide": "slide-down"
+          },
+          model: {
+            value: _vm.dialog,
+            callback: function($$v) {
+              _vm.dialog = $$v
+            },
+            expression: "dialog"
           }
         },
         [
-          _c("div", { staticClass: "flex justify-end" }, [
-            _c(
-              "i",
-              {
-                staticClass:
-                  "vs-icon vs-popup--close material-icons text-warning",
-                staticStyle: { background: "rgb(255, 255, 255)" },
-                on: {
-                  click: function($event) {
-                    _vm.$modal.hide("add")
-                    _vm.$barcodeScanner.destroy()
-                  }
-                }
-              },
-              [_vm._v("close")]
-            )
-          ]),
-          _vm._v(" "),
           _c(
-            "vx-card",
-            { attrs: { "no-shadow": "" } },
+            "q-card",
             [
-              _c("div", { staticClass: "vx-row my-3" }, [
-                _c(
-                  "div",
-                  { staticClass: "vx-col md:w-1/3 w-full" },
-                  [
-                    _c("label", [_vm._v("អ្នកផ្គត់ផ្គង់")]),
-                    _vm._v(" "),
-                    _c(
-                      "vx-input-group",
-                      [
-                        _c("v-select", {
-                          directives: [
-                            {
-                              name: "validate",
-                              rawName: "v-validate",
-                              value: "required",
-                              expression: "'required'"
-                            }
-                          ],
-                          attrs: {
-                            filterBy: _vm.searchSupplier,
-                            label: "name",
-                            name: "supplier",
-                            options: _vm.all_suppliers
-                          },
-                          scopedSlots: _vm._u([
-                            {
-                              key: "option",
-                              fn: function(option) {
-                                return [
-                                  _c("vs-list-item", {
-                                    attrs: {
-                                      title:
-                                        "ឈ្មោះ​ " +
-                                        option.name +
-                                        " ក្រុមហ៊ុន " +
-                                        option.company,
-                                      subtitle:
-                                        "ទំនាក់ទំនង " +
-                                        option.contact +
-                                        " អាស័យដ្ឋាន " +
-                                        option.address
-                                    }
-                                  })
-                                ]
-                              }
-                            }
-                          ]),
-                          model: {
-                            value: _vm.purchase.supplier,
-                            callback: function($$v) {
-                              _vm.$set(_vm.purchase, "supplier", $$v)
-                            },
-                            expression: "purchase.supplier"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("template", { slot: "append" }, [
-                          _c(
-                            "div",
-                            {
-                              staticClass: "append-text btn-addon",
-                              on: {
-                                click: function($event) {
-                                  return _vm.$refs.addSupplier.show()
-                                }
-                              }
-                            },
-                            [
-                              _c("vs-button", {
-                                staticClass: "rounded-none",
-                                attrs: {
-                                  type: "filled",
-                                  "icon-pack": "feather",
-                                  icon: "icon-plus"
-                                }
-                              })
-                            ],
-                            1
-                          )
-                        ])
-                      ],
-                      2
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "span",
-                      {
-                        directives: [
-                          {
-                            name: "show",
-                            rawName: "v-show",
-                            value: _vm.errors.has("supplier"),
-                            expression: "errors.has('supplier')"
-                          }
-                        ],
-                        staticClass: "text-danger text-sm"
-                      },
-                      [_vm._v(_vm._s(_vm.errors.first("supplier")))]
-                    )
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "vx-col md:w-1/3 w-full" },
-                  [
-                    _c("label", [_vm._v("ទីតាំង")]),
-                    _vm._v(" "),
-                    _c("v-select", {
-                      directives: [
-                        {
-                          name: "validate",
-                          rawName: "v-validate",
-                          value: "required",
-                          expression: "'required'"
-                        }
-                      ],
-                      attrs: { name: "location", options: ["Ly Put Garage"] },
-                      model: {
-                        value: _vm.purchase.location,
-                        callback: function($$v) {
-                          _vm.$set(_vm.purchase, "location", $$v)
-                        },
-                        expression: "purchase.location"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "span",
-                      {
-                        directives: [
-                          {
-                            name: "show",
-                            rawName: "v-show",
-                            value: _vm.errors.has("location"),
-                            expression: "errors.has('location')"
-                          }
-                        ],
-                        staticClass: "text-danger text-sm"
-                      },
-                      [_vm._v(_vm._s(_vm.errors.first("location")))]
-                    )
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "vx-col md:w-1/3 w-full" },
-                  [
-                    _c("label", [_vm._v("ថ្ងៃខែឆ្នាំទិញ")]),
-                    _vm._v(" "),
-                    _c("flat-pickr", {
-                      directives: [
-                        {
-                          name: "validate",
-                          rawName: "v-validate",
-                          value: "required",
-                          expression: "'required'"
-                        }
-                      ],
-                      staticClass: "w-full",
-                      attrs: { name: "date", placeholder: "Choose Date" },
-                      model: {
-                        value: _vm.purchase.purchase_date,
-                        callback: function($$v) {
-                          _vm.$set(_vm.purchase, "purchase_date", $$v)
-                        },
-                        expression: "purchase.purchase_date"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "span",
-                      {
-                        directives: [
-                          {
-                            name: "show",
-                            rawName: "v-show",
-                            value: _vm.errors.has("purchase_date"),
-                            expression: "errors.has('purchase_date')"
-                          }
-                        ],
-                        staticClass: "text-danger text-sm"
-                      },
-                      [_vm._v(_vm._s(_vm.errors.first("purchase_date")))]
-                    )
-                  ],
-                  1
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "vx-row my-3" }, [
-                _c(
-                  "div",
-                  { staticClass: "vx-col md:w-1/3 w-full" },
-                  [
-                    _c("label", [_vm._v("Purchase Status")]),
-                    _vm._v(" "),
-                    _c("v-select", {
-                      directives: [
-                        {
-                          name: "validate",
-                          rawName: "v-validate",
-                          value: "required",
-                          expression: "'required'"
-                        }
-                      ],
-                      attrs: {
-                        name: "purchase_status",
-                        options: ["received", "pending"]
-                      },
-                      model: {
-                        value: _vm.purchase.purchase_status,
-                        callback: function($$v) {
-                          _vm.$set(_vm.purchase, "purchase_status", $$v)
-                        },
-                        expression: "purchase.purchase_status"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "span",
-                      {
-                        directives: [
-                          {
-                            name: "show",
-                            rawName: "v-show",
-                            value: _vm.errors.has("status"),
-                            expression: "errors.has('status')"
-                          }
-                        ],
-                        staticClass: "text-danger text-sm"
-                      },
-                      [_vm._v(_vm._s(_vm.errors.first("status")))]
-                    )
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "vx-col md:w-1/3 w-full" },
-                  [
-                    _c("label", [_vm._v("ពិពណ៌នា")]),
-                    _vm._v(" "),
-                    _c("vs-textarea", {
-                      directives: [
-                        {
-                          name: "validate",
-                          rawName: "v-validate",
-                          value: "required",
-                          expression: "'required'"
-                        }
-                      ],
-                      staticClass: "w-full",
-                      attrs: { label: "ពិពណ៌នា", name: "description" },
-                      model: {
-                        value: _vm.purchase.description,
-                        callback: function($$v) {
-                          _vm.$set(_vm.purchase, "description", $$v)
-                        },
-                        expression: "purchase.description"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "span",
-                      {
-                        directives: [
-                          {
-                            name: "show",
-                            rawName: "v-show",
-                            value: _vm.errors.has("description"),
-                            expression: "errors.has('description')"
-                          }
-                        ],
-                        staticClass: "text-danger text-sm"
-                      },
-                      [_vm._v(_vm._s(_vm.errors.first("description")))]
-                    )
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "vx-col md:w-1/3" }, [
-                  _vm._v("\n                    Amount\n                    "),
-                  _c("span", { staticClass: "text-6xl block" }, [
-                    _vm._v("$" + _vm._s(_vm.purchase.total_balance))
-                  ])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("vs-divider", { attrs: { position: "left" } }, [
-                _vm._v("បញ្ជីទំនិញ")
-              ]),
-              _vm._v(" "),
-              _c("table", { staticClass: "vs-table vs-table--tbody-table" }, [
-                _c("thead", [
-                  _c("tr", [
-                    _c("th", [_vm._v("ល.រ")]),
-                    _vm._v(" "),
-                    _c("th", [_vm._v("ឈ្មោះ")]),
-                    _vm._v(" "),
-                    _c("th", [_vm._v("ពិពណ៌នា")]),
-                    _vm._v(" "),
-                    _c("th", [_vm._v("Inventory Type")]),
-                    _vm._v(" "),
-                    _c("th", [_vm._v("ចំនួន")]),
-                    _vm._v(" "),
-                    _c("th", [_vm._v("តម្លៃទិញ")]),
-                    _vm._v(" "),
-                    _c("th", [_vm._v("តម្លៃលក់")]),
-                    _vm._v(" "),
-                    _c("th", [_vm._v("សរុប")]),
-                    _vm._v(" "),
-                    _c("th")
-                  ])
-                ]),
-                _vm._v(" "),
-                _c(
-                  "tbody",
-                  _vm._l(_vm.purchase.items, function(tr, index) {
-                    return _c("tr", { key: index }, [
-                      _c("td", { staticClass: "py-1" }, [
-                        _vm._v(
-                          "\n                        " +
-                            _vm._s(index + 1) +
-                            "\n                    "
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "td",
-                        { attrs: { width: "400" } },
-                        [
-                          _c("v-select", {
-                            directives: [
-                              {
-                                name: "validate",
-                                rawName: "v-validate",
-                                value: "required",
-                                expression: "'required'"
-                              }
-                            ],
-                            attrs: {
-                              filterBy: _vm.searchProduct,
-                              label: "name",
-                              name: "product-" + index,
-                              options: _vm.all_products
-                            },
-                            on: {
-                              input: function($event) {
-                                return _vm.selectProduct(tr.id, index)
-                              }
-                            },
-                            scopedSlots: _vm._u(
-                              [
-                                {
-                                  key: "option",
-                                  fn: function(option) {
-                                    return [
-                                      _c("vs-list-item", {
-                                        attrs: {
-                                          title:
-                                            "ID: " +
-                                            option.id +
-                                            " ឈ្មោះ​ " +
-                                            option.name,
-                                          subtitle:
-                                            "តម្លៃលក់ " +
-                                            option.default_purchase +
-                                            " តម្លៃទិញ " +
-                                            option.default_sale
-                                        }
-                                      })
-                                    ]
-                                  }
-                                }
-                              ],
-                              null,
-                              true
-                            ),
-                            model: {
-                              value: tr.id,
-                              callback: function($$v) {
-                                _vm.$set(tr, "id", $$v)
-                              },
-                              expression: "tr.id"
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c(
-                            "span",
-                            {
-                              directives: [
-                                {
-                                  name: "show",
-                                  rawName: "v-show",
-                                  value: _vm.errors.has("product-" + index),
-                                  expression: "errors.has(`product-${index}`)"
-                                }
-                              ],
-                              staticClass: "text-danger text-sm"
-                            },
-                            [
-                              _vm._v(
-                                _vm._s(_vm.errors.first("product-" + index))
-                              )
-                            ]
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c("td", [
-                        _vm._v(
-                          "\n                        " +
-                            _vm._s(tr.description) +
-                            "\n                    "
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "td",
-                        [
-                          _c("v-select", {
-                            directives: [
-                              {
-                                name: "validate",
-                                rawName: "v-validate",
-                                value: "required",
-                                expression: "'required'"
-                              }
-                            ],
-                            attrs: {
-                              name: "inventory_type-" + index,
-                              options: [
-                                "inventory_part",
-                                "service",
-                                "sale_only",
-                                "purchase_only"
-                              ]
-                            },
-                            model: {
-                              value: tr.inventory_type,
-                              callback: function($$v) {
-                                _vm.$set(tr, "inventory_type", $$v)
-                              },
-                              expression: "tr.inventory_type"
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c(
-                            "span",
-                            {
-                              directives: [
-                                {
-                                  name: "show",
-                                  rawName: "v-show",
-                                  value: _vm.errors.has(
-                                    "inventory_type-" + index
-                                  ),
-                                  expression:
-                                    "errors.has(`inventory_type-${index}`)"
-                                }
-                              ],
-                              staticClass: "text-danger text-sm"
-                            },
-                            [
-                              _vm._v(
-                                _vm._s(
-                                  _vm.errors.first("inventory_type-" + index)
-                                )
-                              )
-                            ]
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "td",
-                        [
-                          _c("vs-input-number", {
-                            directives: [
-                              {
-                                name: "validate",
-                                rawName: "v-validate",
-                                value: "required",
-                                expression: "'required'"
-                              }
-                            ],
-                            attrs: {
-                              color: "danger",
-                              min: "0",
-                              name: "qty-" + index
-                            },
-                            model: {
-                              value: tr.qty,
-                              callback: function($$v) {
-                                _vm.$set(tr, "qty", $$v)
-                              },
-                              expression: "tr.qty"
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c(
-                            "span",
-                            {
-                              directives: [
-                                {
-                                  name: "show",
-                                  rawName: "v-show",
-                                  value: _vm.errors.has("qty-" + index),
-                                  expression: "errors.has(`qty-${index}`)"
-                                }
-                              ],
-                              staticClass: "text-danger text-sm"
-                            },
-                            [_vm._v(_vm._s(_vm.errors.first("qty-" + index)))]
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "td",
-                        [
-                          _c("vs-input-number", {
-                            directives: [
-                              {
-                                name: "validate",
-                                rawName: "v-validate",
-                                value: "required",
-                                expression: "'required'"
-                              }
-                            ],
-                            attrs: {
-                              color: "danger",
-                              min: "0",
-                              name: "purchase_price-" + index
-                            },
-                            model: {
-                              value: tr.purchase_price,
-                              callback: function($$v) {
-                                _vm.$set(tr, "purchase_price", $$v)
-                              },
-                              expression: "tr.purchase_price"
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c(
-                            "span",
-                            {
-                              directives: [
-                                {
-                                  name: "show",
-                                  rawName: "v-show",
-                                  value: _vm.errors.has(
-                                    "purchase_price-" + index
-                                  ),
-                                  expression:
-                                    "errors.has(`purchase_price-${index}`)"
-                                }
-                              ],
-                              staticClass: "text-danger text-sm"
-                            },
-                            [
-                              _vm._v(
-                                _vm._s(
-                                  _vm.errors.first("purchase_price-" + index)
-                                )
-                              )
-                            ]
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "td",
-                        [
-                          _c("vs-input-number", {
-                            directives: [
-                              {
-                                name: "validate",
-                                rawName: "v-validate",
-                                value: "required",
-                                expression: "'required'"
-                              }
-                            ],
-                            attrs: {
-                              color: "danger",
-                              min: "0",
-                              name: "sale_price-" + index
-                            },
-                            model: {
-                              value: tr.sale_price,
-                              callback: function($$v) {
-                                _vm.$set(tr, "sale_price", $$v)
-                              },
-                              expression: "tr.sale_price"
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c(
-                            "span",
-                            {
-                              directives: [
-                                {
-                                  name: "show",
-                                  rawName: "v-show",
-                                  value: _vm.errors.has("sale_price-" + index),
-                                  expression:
-                                    "errors.has(`sale_price-${index}`)"
-                                }
-                              ],
-                              staticClass: "text-danger text-sm"
-                            },
-                            [
-                              _vm._v(
-                                _vm._s(_vm.errors.first("sale_price-" + index))
-                              )
-                            ]
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c("td", [
-                        _vm._v(
-                          "\n                        " +
-                            _vm._s((tr.amount = tr.purchase_price * tr.qty)) +
-                            "\n                    "
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "td",
-                        { staticClass: "py-1" },
-                        [
-                          _c("vs-button", {
-                            attrs: {
-                              icon: "icon-trash-2",
-                              color: "warning",
-                              "icon-pack": "feather",
-                              type: "flat"
-                            },
-                            on: {
-                              click: function($event) {
-                                return _vm.removeItemLine(index)
-                              }
-                            }
-                          })
-                        ],
-                        1
-                      )
-                    ])
-                  }),
-                  0
-                )
-              ]),
-              _vm._v(" "),
               _c(
-                "vs-button",
-                {
-                  staticClass: "rounded-none my-3",
-                  attrs: {
-                    icon: "icon-plus",
-                    "icon-pack": "feather",
-                    type: "line"
-                  },
-                  on: { click: _vm.addItemLine }
-                },
-                [_vm._v("បន្ថែមទំនិញ\n            ")]
+                "q-bar",
+                [
+                  _c("q-space"),
+                  _vm._v(" "),
+                  _c(
+                    "q-btn",
+                    {
+                      directives: [
+                        { name: "close-popup", rawName: "v-close-popup" }
+                      ],
+                      attrs: { dense: "", flat: "", icon: "close" }
+                    },
+                    [
+                      _c(
+                        "q-tooltip",
+                        { attrs: { "content-class": "bg-white text-primary" } },
+                        [_vm._v("Close")]
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
               ),
               _vm._v(" "),
-              _c("div", { staticClass: "vx-row" }, [
-                _c(
-                  "div",
-                  { staticClass: "vx-col md:w-1/2 w-full" },
-                  [
-                    _c("vs-divider", { attrs: { position: "left" } }, [
-                      _vm._v("Payment")
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "vx-row" }, [
-                      _c(
-                        "div",
-                        { staticClass: "vx-col md:w-1/2 w-full" },
-                        [
-                          _c("label", [_vm._v("ប្រាក់ទិញទំនិញ")]),
-                          _vm._v(" "),
-                          _c("vs-input-number", {
-                            attrs: {
-                              color: "warning",
-                              min: "0",
-                              max: _vm.purchase.total_balance,
-                              label: "ប្រាក់ទិញទំនិញ:"
-                            },
-                            model: {
-                              value: _vm.purchase.balance,
-                              callback: function($$v) {
-                                _vm.$set(_vm.purchase, "balance", $$v)
+              _c(
+                "q-card-section",
+                [
+                  _c(
+                    "vx-card",
+                    { attrs: { "no-shadow": "" } },
+                    [
+                      _c("div", { staticClass: "vx-row my-3" }, [
+                        _c(
+                          "div",
+                          { staticClass: "vx-col md:w-1/3 w-full" },
+                          [
+                            _c("label", [_vm._v("អ្នកផ្គត់ផ្គង់")]),
+                            _vm._v(" "),
+                            _c(
+                              "vx-input-group",
+                              [
+                                _c("v-select", {
+                                  directives: [
+                                    {
+                                      name: "validate",
+                                      rawName: "v-validate",
+                                      value: "required",
+                                      expression: "'required'"
+                                    }
+                                  ],
+                                  attrs: {
+                                    filterBy: _vm.searchSupplier,
+                                    label: "name",
+                                    name: "supplier",
+                                    options: _vm.all_suppliers
+                                  },
+                                  scopedSlots: _vm._u([
+                                    {
+                                      key: "option",
+                                      fn: function(option) {
+                                        return [
+                                          _c("vs-list-item", {
+                                            attrs: {
+                                              title:
+                                                "ឈ្មោះ​ " +
+                                                option.name +
+                                                " ក្រុមហ៊ុន " +
+                                                option.company,
+                                              subtitle:
+                                                "ទំនាក់ទំនង " +
+                                                option.contact +
+                                                " អាស័យដ្ឋាន " +
+                                                option.address
+                                            }
+                                          })
+                                        ]
+                                      }
+                                    }
+                                  ]),
+                                  model: {
+                                    value: _vm.purchase.supplier,
+                                    callback: function($$v) {
+                                      _vm.$set(_vm.purchase, "supplier", $$v)
+                                    },
+                                    expression: "purchase.supplier"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("template", { slot: "append" }, [
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass: "append-text btn-addon",
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.$refs.addSupplier.show()
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _c("vs-button", {
+                                        staticClass: "rounded-none",
+                                        attrs: {
+                                          type: "filled",
+                                          "icon-pack": "feather",
+                                          icon: "icon-plus"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ])
+                              ],
+                              2
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "span",
+                              {
+                                directives: [
+                                  {
+                                    name: "show",
+                                    rawName: "v-show",
+                                    value: _vm.errors.has("supplier"),
+                                    expression: "errors.has('supplier')"
+                                  }
+                                ],
+                                staticClass: "text-danger text-sm"
                               },
-                              expression: "purchase.balance"
-                            }
-                          })
-                        ],
-                        1
+                              [_vm._v(_vm._s(_vm.errors.first("supplier")))]
+                            )
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "vx-col md:w-1/3 w-full" },
+                          [
+                            _c("label", [_vm._v("ទីតាំង")]),
+                            _vm._v(" "),
+                            _c("v-select", {
+                              directives: [
+                                {
+                                  name: "validate",
+                                  rawName: "v-validate",
+                                  value: "required",
+                                  expression: "'required'"
+                                }
+                              ],
+                              attrs: {
+                                name: "location",
+                                options: ["Ly Put Garage"]
+                              },
+                              model: {
+                                value: _vm.purchase.location,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.purchase, "location", $$v)
+                                },
+                                expression: "purchase.location"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "span",
+                              {
+                                directives: [
+                                  {
+                                    name: "show",
+                                    rawName: "v-show",
+                                    value: _vm.errors.has("location"),
+                                    expression: "errors.has('location')"
+                                  }
+                                ],
+                                staticClass: "text-danger text-sm"
+                              },
+                              [_vm._v(_vm._s(_vm.errors.first("location")))]
+                            )
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "vx-col md:w-1/3 w-full" },
+                          [
+                            _c("label", [_vm._v("ថ្ងៃខែឆ្នាំទិញ")]),
+                            _vm._v(" "),
+                            _c("flat-pickr", {
+                              directives: [
+                                {
+                                  name: "validate",
+                                  rawName: "v-validate",
+                                  value: "required",
+                                  expression: "'required'"
+                                }
+                              ],
+                              staticClass: "w-full",
+                              attrs: {
+                                name: "date",
+                                placeholder: "Choose Date"
+                              },
+                              model: {
+                                value: _vm.purchase.purchase_date,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.purchase, "purchase_date", $$v)
+                                },
+                                expression: "purchase.purchase_date"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "span",
+                              {
+                                directives: [
+                                  {
+                                    name: "show",
+                                    rawName: "v-show",
+                                    value: _vm.errors.has("purchase_date"),
+                                    expression: "errors.has('purchase_date')"
+                                  }
+                                ],
+                                staticClass: "text-danger text-sm"
+                              },
+                              [
+                                _vm._v(
+                                  _vm._s(_vm.errors.first("purchase_date"))
+                                )
+                              ]
+                            )
+                          ],
+                          1
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "vx-row my-3" }, [
+                        _c(
+                          "div",
+                          { staticClass: "vx-col md:w-1/3 w-full" },
+                          [
+                            _c("label", [_vm._v("Purchase Status")]),
+                            _vm._v(" "),
+                            _c("v-select", {
+                              directives: [
+                                {
+                                  name: "validate",
+                                  rawName: "v-validate",
+                                  value: "required",
+                                  expression: "'required'"
+                                }
+                              ],
+                              attrs: {
+                                name: "purchase_status",
+                                options: ["received", "pending"]
+                              },
+                              model: {
+                                value: _vm.purchase.purchase_status,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.purchase, "purchase_status", $$v)
+                                },
+                                expression: "purchase.purchase_status"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "span",
+                              {
+                                directives: [
+                                  {
+                                    name: "show",
+                                    rawName: "v-show",
+                                    value: _vm.errors.has("status"),
+                                    expression: "errors.has('status')"
+                                  }
+                                ],
+                                staticClass: "text-danger text-sm"
+                              },
+                              [_vm._v(_vm._s(_vm.errors.first("status")))]
+                            )
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "vx-col md:w-1/3 w-full" },
+                          [
+                            _c("label", [_vm._v("ពិពណ៌នា")]),
+                            _vm._v(" "),
+                            _c("vs-textarea", {
+                              directives: [
+                                {
+                                  name: "validate",
+                                  rawName: "v-validate",
+                                  value: "required",
+                                  expression: "'required'"
+                                }
+                              ],
+                              staticClass: "w-full",
+                              attrs: { label: "ពិពណ៌នា", name: "description" },
+                              model: {
+                                value: _vm.purchase.description,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.purchase, "description", $$v)
+                                },
+                                expression: "purchase.description"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "span",
+                              {
+                                directives: [
+                                  {
+                                    name: "show",
+                                    rawName: "v-show",
+                                    value: _vm.errors.has("description"),
+                                    expression: "errors.has('description')"
+                                  }
+                                ],
+                                staticClass: "text-danger text-sm"
+                              },
+                              [_vm._v(_vm._s(_vm.errors.first("description")))]
+                            )
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "vx-col md:w-1/3" }, [
+                          _vm._v(
+                            "\n                            Amount\n                            "
+                          ),
+                          _c("span", { staticClass: "text-6xl block" }, [
+                            _vm._v("$" + _vm._s(_vm.purchase.total_balance))
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("vs-divider", { attrs: { position: "left" } }, [
+                        _vm._v("បញ្ជីទំនិញ")
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "table",
+                        { staticClass: "vs-table vs-table--tbody-table" },
+                        [
+                          _c("thead", [
+                            _c("tr", [
+                              _c("th", [_vm._v("ល.រ")]),
+                              _vm._v(" "),
+                              _c("th", [_vm._v("ឈ្មោះ")]),
+                              _vm._v(" "),
+                              _c("th", [_vm._v("ពិពណ៌នា")]),
+                              _vm._v(" "),
+                              _c("th", [_vm._v("Inventory Type")]),
+                              _vm._v(" "),
+                              _c("th", [_vm._v("ចំនួន")]),
+                              _vm._v(" "),
+                              _c("th", [_vm._v("តម្លៃទិញ")]),
+                              _vm._v(" "),
+                              _c("th", [_vm._v("តម្លៃលក់")]),
+                              _vm._v(" "),
+                              _c("th", [_vm._v("សរុប")]),
+                              _vm._v(" "),
+                              _c("th")
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "tbody",
+                            _vm._l(_vm.purchase.items, function(tr, index) {
+                              return _c("tr", { key: index }, [
+                                _c("td", { staticClass: "py-1" }, [
+                                  _vm._v(
+                                    "\n                                " +
+                                      _vm._s(index + 1) +
+                                      "\n                            "
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "td",
+                                  { attrs: { width: "400" } },
+                                  [
+                                    _c("q-select", {
+                                      directives: [
+                                        {
+                                          name: "validate",
+                                          rawName: "v-validate",
+                                          value: "required",
+                                          expression: "'required'"
+                                        }
+                                      ],
+                                      attrs: {
+                                        outlined: "",
+                                        square: "",
+                                        dense: "",
+                                        "use-input": "",
+                                        "input-debounce": "0",
+                                        label: "ជ្រើសរើសទំនិញ",
+                                        options: Object.freeze(_vm.options),
+                                        behavior: "dialog",
+                                        name: "product-" + index,
+                                        clearable: ""
+                                      },
+                                      on: {
+                                        filter: _vm.filterFn,
+                                        input: function($event) {
+                                          return _vm.selectProduct(tr.id, index)
+                                        }
+                                      },
+                                      scopedSlots: _vm._u(
+                                        [
+                                          {
+                                            key: "no-option",
+                                            fn: function() {
+                                              return [
+                                                _c(
+                                                  "q-item",
+                                                  [
+                                                    _c(
+                                                      "q-item-section",
+                                                      {
+                                                        staticClass: "text-grey"
+                                                      },
+                                                      [
+                                                        _vm._v(
+                                                          "\n                                                No results\n                                            "
+                                                        )
+                                                      ]
+                                                    )
+                                                  ],
+                                                  1
+                                                )
+                                              ]
+                                            },
+                                            proxy: true
+                                          }
+                                        ],
+                                        null,
+                                        true
+                                      ),
+                                      model: {
+                                        value: tr.id,
+                                        callback: function($$v) {
+                                          _vm.$set(tr, "id", $$v)
+                                        },
+                                        expression: "tr.id"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "span",
+                                      {
+                                        directives: [
+                                          {
+                                            name: "show",
+                                            rawName: "v-show",
+                                            value: _vm.errors.has(
+                                              "product-" + index
+                                            ),
+                                            expression:
+                                              "errors.has(`product-${index}`)"
+                                          }
+                                        ],
+                                        staticClass: "text-danger text-sm"
+                                      },
+                                      [
+                                        _vm._v(
+                                          _vm._s(
+                                            _vm.errors.first("product-" + index)
+                                          )
+                                        )
+                                      ]
+                                    )
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _vm._v(
+                                    "\n                                " +
+                                      _vm._s(tr.description) +
+                                      "\n                            "
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "td",
+                                  [
+                                    _c("v-select", {
+                                      directives: [
+                                        {
+                                          name: "validate",
+                                          rawName: "v-validate",
+                                          value: "required",
+                                          expression: "'required'"
+                                        }
+                                      ],
+                                      attrs: {
+                                        name: "inventory_type-" + index,
+                                        options: [
+                                          "inventory_part",
+                                          "service",
+                                          "sale_only",
+                                          "purchase_only"
+                                        ]
+                                      },
+                                      model: {
+                                        value: tr.inventory_type,
+                                        callback: function($$v) {
+                                          _vm.$set(tr, "inventory_type", $$v)
+                                        },
+                                        expression: "tr.inventory_type"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "span",
+                                      {
+                                        directives: [
+                                          {
+                                            name: "show",
+                                            rawName: "v-show",
+                                            value: _vm.errors.has(
+                                              "inventory_type-" + index
+                                            ),
+                                            expression:
+                                              "errors.has(`inventory_type-${index}`)"
+                                          }
+                                        ],
+                                        staticClass: "text-danger text-sm"
+                                      },
+                                      [
+                                        _vm._v(
+                                          _vm._s(
+                                            _vm.errors.first(
+                                              "inventory_type-" + index
+                                            )
+                                          )
+                                        )
+                                      ]
+                                    )
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "td",
+                                  [
+                                    _c("vs-input-number", {
+                                      directives: [
+                                        {
+                                          name: "validate",
+                                          rawName: "v-validate",
+                                          value: "required",
+                                          expression: "'required'"
+                                        }
+                                      ],
+                                      attrs: {
+                                        color: "danger",
+                                        min: "0",
+                                        name: "qty-" + index
+                                      },
+                                      model: {
+                                        value: tr.qty,
+                                        callback: function($$v) {
+                                          _vm.$set(tr, "qty", $$v)
+                                        },
+                                        expression: "tr.qty"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "span",
+                                      {
+                                        directives: [
+                                          {
+                                            name: "show",
+                                            rawName: "v-show",
+                                            value: _vm.errors.has(
+                                              "qty-" + index
+                                            ),
+                                            expression:
+                                              "errors.has(`qty-${index}`)"
+                                          }
+                                        ],
+                                        staticClass: "text-danger text-sm"
+                                      },
+                                      [
+                                        _vm._v(
+                                          _vm._s(
+                                            _vm.errors.first("qty-" + index)
+                                          )
+                                        )
+                                      ]
+                                    )
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "td",
+                                  [
+                                    _c("vs-input-number", {
+                                      directives: [
+                                        {
+                                          name: "validate",
+                                          rawName: "v-validate",
+                                          value: "required",
+                                          expression: "'required'"
+                                        }
+                                      ],
+                                      attrs: {
+                                        color: "danger",
+                                        min: "0",
+                                        name: "purchase_price-" + index
+                                      },
+                                      model: {
+                                        value: tr.purchase_price,
+                                        callback: function($$v) {
+                                          _vm.$set(tr, "purchase_price", $$v)
+                                        },
+                                        expression: "tr.purchase_price"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "span",
+                                      {
+                                        directives: [
+                                          {
+                                            name: "show",
+                                            rawName: "v-show",
+                                            value: _vm.errors.has(
+                                              "purchase_price-" + index
+                                            ),
+                                            expression:
+                                              "errors.has(`purchase_price-${index}`)"
+                                          }
+                                        ],
+                                        staticClass: "text-danger text-sm"
+                                      },
+                                      [
+                                        _vm._v(
+                                          _vm._s(
+                                            _vm.errors.first(
+                                              "purchase_price-" + index
+                                            )
+                                          )
+                                        )
+                                      ]
+                                    )
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "td",
+                                  [
+                                    _c("vs-input-number", {
+                                      directives: [
+                                        {
+                                          name: "validate",
+                                          rawName: "v-validate",
+                                          value: "required",
+                                          expression: "'required'"
+                                        }
+                                      ],
+                                      attrs: {
+                                        color: "danger",
+                                        min: "0",
+                                        name: "sale_price-" + index
+                                      },
+                                      model: {
+                                        value: tr.sale_price,
+                                        callback: function($$v) {
+                                          _vm.$set(tr, "sale_price", $$v)
+                                        },
+                                        expression: "tr.sale_price"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "span",
+                                      {
+                                        directives: [
+                                          {
+                                            name: "show",
+                                            rawName: "v-show",
+                                            value: _vm.errors.has(
+                                              "sale_price-" + index
+                                            ),
+                                            expression:
+                                              "errors.has(`sale_price-${index}`)"
+                                          }
+                                        ],
+                                        staticClass: "text-danger text-sm"
+                                      },
+                                      [
+                                        _vm._v(
+                                          _vm._s(
+                                            _vm.errors.first(
+                                              "sale_price-" + index
+                                            )
+                                          )
+                                        )
+                                      ]
+                                    )
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _vm._v(
+                                    "\n                                " +
+                                      _vm._s(
+                                        (tr.amount = tr.purchase_price * tr.qty)
+                                      ) +
+                                      "\n                            "
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "td",
+                                  { staticClass: "py-1" },
+                                  [
+                                    _c("vs-button", {
+                                      attrs: {
+                                        icon: "icon-trash-2",
+                                        color: "warning",
+                                        "icon-pack": "feather",
+                                        type: "flat"
+                                      },
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.removeItemLine(index)
+                                        }
+                                      }
+                                    })
+                                  ],
+                                  1
+                                )
+                              ])
+                            }),
+                            0
+                          )
+                        ]
                       ),
                       _vm._v(" "),
                       _c(
+                        "vs-button",
+                        {
+                          staticClass: "rounded-none my-3",
+                          attrs: {
+                            icon: "icon-plus",
+                            "icon-pack": "feather",
+                            type: "line"
+                          },
+                          on: { click: _vm.addItemLine }
+                        },
+                        [_vm._v("បន្ថែមទំនិញ\n                    ")]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "vx-row" }, [
+                        _c(
+                          "div",
+                          { staticClass: "vx-col md:w-1/2 w-full" },
+                          [
+                            _c("vs-divider", { attrs: { position: "left" } }, [
+                              _vm._v("Payment")
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "vx-row" }, [
+                              _c(
+                                "div",
+                                { staticClass: "vx-col md:w-1/2 w-full" },
+                                [
+                                  _c("label", [_vm._v("ប្រាក់ទិញទំនិញ")]),
+                                  _vm._v(" "),
+                                  _c("vs-input-number", {
+                                    attrs: {
+                                      color: "warning",
+                                      min: "0",
+                                      max: _vm.purchase.total_balance,
+                                      label: "ប្រាក់ទិញទំនិញ:"
+                                    },
+                                    model: {
+                                      value: _vm.purchase.balance,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.purchase, "balance", $$v)
+                                      },
+                                      expression: "purchase.balance"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: "vx-col md:w-1/2 w-full" },
+                                [
+                                  _c("label", [_vm._v("ទឹកប្រាក់ជំពាក់")]),
+                                  _vm._v(" "),
+                                  _c("vs-input", {
+                                    staticClass: "w-full",
+                                    attrs: {
+                                      step: "any",
+                                      readonly: "",
+                                      type: "number"
+                                    },
+                                    model: {
+                                      value: (_vm.purchase.due_balance =
+                                        _vm.purchase.total_balance -
+                                        _vm.purchase.balance),
+                                      callback: function($$v) {
+                                        _vm.$set(
+                                          (_vm.purchase.due_balance =
+                                            _vm.purchase.total_balance -
+                                            _vm.purchase),
+                                          "balance",
+                                          $$v
+                                        )
+                                      },
+                                      expression:
+                                        "purchase.due_balance = purchase.total_balance - purchase.balance"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ])
+                          ],
+                          1
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("vs-divider"),
+                      _vm._v(" "),
+                      _c(
                         "div",
-                        { staticClass: "vx-col md:w-1/2 w-full" },
+                        { staticClass: "flex justify-end btn-group" },
                         [
-                          _c("label", [_vm._v("ទឹកប្រាក់ជំពាក់")]),
-                          _vm._v(" "),
-                          _c("vs-input", {
-                            staticClass: "w-full",
-                            attrs: {
-                              step: "any",
-                              readonly: "",
-                              type: "number"
-                            },
-                            model: {
-                              value: (_vm.purchase.due_balance =
-                                _vm.purchase.total_balance -
-                                _vm.purchase.balance),
-                              callback: function($$v) {
-                                _vm.$set(
-                                  (_vm.purchase.due_balance =
-                                    _vm.purchase.total_balance - _vm.purchase),
-                                  "balance",
-                                  $$v
-                                )
+                          _c(
+                            "vs-button",
+                            {
+                              attrs: {
+                                icon: "icon-save",
+                                "icon-pack": "feather",
+                                type: "relief"
                               },
-                              expression:
-                                "purchase.due_balance = purchase.total_balance - purchase.balance"
-                            }
-                          })
+                              on: { click: _vm.storePurchase }
+                            },
+                            [_vm._v("រក្សាទុក\n                        ")]
+                          )
                         ],
                         1
                       )
-                    ])
-                  ],
-                  1
-                )
-              ]),
-              _vm._v(" "),
-              _c("vs-divider"),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "flex justify-end btn-group" },
-                [
-                  _c(
-                    "vs-button",
-                    {
-                      attrs: {
-                        icon: "icon-save",
-                        "icon-pack": "feather",
-                        type: "relief"
-                      },
-                      on: { click: _vm.storePurchase }
-                    },
-                    [_vm._v("រក្សាទុក\n                ")]
+                    ],
+                    1
                   )
                 ],
                 1
@@ -3047,834 +3252,914 @@ var render = function() {
     "div",
     [
       _c(
-        "modal",
+        "q-dialog",
         {
           attrs: {
-            width: "90%",
-            height: "auto",
-            scrollable: true,
-            pivotY: 0.2,
-            clickToClose: false,
-            name: "edit-purchase"
+            persistent: "",
+            maximized: true,
+            "transition-show": "slide-up",
+            "transition-hide": "slide-down"
+          },
+          model: {
+            value: _vm.dialog,
+            callback: function($$v) {
+              _vm.dialog = $$v
+            },
+            expression: "dialog"
           }
         },
         [
-          _c("div", { staticClass: "flex justify-end" }, [
-            _c(
-              "i",
-              {
-                staticClass:
-                  "vs-icon vs-popup--close material-icons text-warning",
-                staticStyle: { background: "rgb(255, 255, 255)" },
-                on: {
-                  click: function($event) {
-                    _vm.$modal.hide("edit-purchase")
-                    _vm.$barcodeScanner.destroy()
-                  }
-                }
-              },
-              [_vm._v("close")]
-            )
-          ]),
-          _vm._v(" "),
           _c(
-            "vx-card",
-            { attrs: { "no-shadow": "" } },
+            "q-card",
             [
-              _c("div", { staticClass: "vx-row my-3" }, [
-                _c(
-                  "div",
-                  { staticClass: "vx-col md:w-1/3 w-full" },
-                  [
-                    _c("label", [_vm._v("អ្នកផ្គត់ផ្គង់")]),
-                    _vm._v(" "),
-                    _c(
-                      "vx-input-group",
-                      [
-                        _c("v-select", {
-                          directives: [
-                            {
-                              name: "validate",
-                              rawName: "v-validate",
-                              value: "required",
-                              expression: "'required'"
-                            }
-                          ],
-                          attrs: {
-                            filterBy: _vm.searchSupplier,
-                            label: "name",
-                            name: "supplier",
-                            options: _vm.all_suppliers
-                          },
-                          scopedSlots: _vm._u([
-                            {
-                              key: "option",
-                              fn: function(option) {
-                                return [
-                                  _c("vs-list-item", {
-                                    attrs: {
-                                      title:
-                                        "ឈ្មោះ​ " +
-                                        option.name +
-                                        " ក្រុមហ៊ុន " +
-                                        option.company,
-                                      subtitle:
-                                        "ទំនាក់ទំនង " +
-                                        option.contact +
-                                        " អាស័យដ្ឋាន " +
-                                        option.address
-                                    }
-                                  })
-                                ]
-                              }
-                            }
-                          ]),
-                          model: {
-                            value: _vm.purchase.supplier,
-                            callback: function($$v) {
-                              _vm.$set(_vm.purchase, "supplier", $$v)
-                            },
-                            expression: "purchase.supplier"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("template", { slot: "append" }, [
-                          _c(
-                            "div",
-                            {
-                              staticClass: "append-text btn-addon",
-                              on: {
-                                click: function($event) {
-                                  return _vm.$refs.addSupplier.show()
-                                }
-                              }
-                            },
-                            [
-                              _c("vs-button", {
-                                staticClass: "rounded-none",
-                                attrs: {
-                                  type: "filled",
-                                  "icon-pack": "feather",
-                                  icon: "icon-plus"
-                                }
-                              })
-                            ],
-                            1
-                          )
-                        ])
-                      ],
-                      2
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "span",
-                      {
-                        directives: [
-                          {
-                            name: "show",
-                            rawName: "v-show",
-                            value: _vm.errors.has("supplier"),
-                            expression: "errors.has('supplier')"
-                          }
-                        ],
-                        staticClass: "text-danger text-sm"
-                      },
-                      [_vm._v(_vm._s(_vm.errors.first("supplier")))]
-                    )
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "vx-col md:w-1/3 w-full" },
-                  [
-                    _c("label", [_vm._v("ទីតាំង")]),
-                    _vm._v(" "),
-                    _c("v-select", {
-                      directives: [
-                        {
-                          name: "validate",
-                          rawName: "v-validate",
-                          value: "required",
-                          expression: "'required'"
-                        }
-                      ],
-                      attrs: { name: "location", options: ["Ly Put Garage"] },
-                      model: {
-                        value: _vm.purchase.location,
-                        callback: function($$v) {
-                          _vm.$set(_vm.purchase, "location", $$v)
-                        },
-                        expression: "purchase.location"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "span",
-                      {
-                        directives: [
-                          {
-                            name: "show",
-                            rawName: "v-show",
-                            value: _vm.errors.has("location"),
-                            expression: "errors.has('location')"
-                          }
-                        ],
-                        staticClass: "text-danger text-sm"
-                      },
-                      [_vm._v(_vm._s(_vm.errors.first("location")))]
-                    )
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "vx-col md:w-1/3 w-full" },
-                  [
-                    _c("label", [_vm._v("ថ្ងៃខែឆ្នាំទិញ")]),
-                    _vm._v(" "),
-                    _c("flat-pickr", {
-                      directives: [
-                        {
-                          name: "validate",
-                          rawName: "v-validate",
-                          value: "required",
-                          expression: "'required'"
-                        }
-                      ],
-                      staticClass: "w-full",
-                      attrs: { name: "date", placeholder: "Choose Date" },
-                      model: {
-                        value: _vm.purchase.purchase_date,
-                        callback: function($$v) {
-                          _vm.$set(_vm.purchase, "purchase_date", $$v)
-                        },
-                        expression: "purchase.purchase_date"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "span",
-                      {
-                        directives: [
-                          {
-                            name: "show",
-                            rawName: "v-show",
-                            value: _vm.errors.has("purchase_date"),
-                            expression: "errors.has('purchase_date')"
-                          }
-                        ],
-                        staticClass: "text-danger text-sm"
-                      },
-                      [_vm._v(_vm._s(_vm.errors.first("purchase_date")))]
-                    )
-                  ],
-                  1
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "vx-row my-3" }, [
-                _c(
-                  "div",
-                  { staticClass: "vx-col md:w-1/3 w-full" },
-                  [
-                    _c("label", [_vm._v("Purchase Status")]),
-                    _vm._v(" "),
-                    _c("v-select", {
-                      directives: [
-                        {
-                          name: "validate",
-                          rawName: "v-validate",
-                          value: "required",
-                          expression: "'required'"
-                        }
-                      ],
-                      attrs: {
-                        name: "purchase_status",
-                        options: ["received", "pending"]
-                      },
-                      model: {
-                        value: _vm.purchase.purchase_status,
-                        callback: function($$v) {
-                          _vm.$set(_vm.purchase, "purchase_status", $$v)
-                        },
-                        expression: "purchase.purchase_status"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "span",
-                      {
-                        directives: [
-                          {
-                            name: "show",
-                            rawName: "v-show",
-                            value: _vm.errors.has("status"),
-                            expression: "errors.has('status')"
-                          }
-                        ],
-                        staticClass: "text-danger text-sm"
-                      },
-                      [_vm._v(_vm._s(_vm.errors.first("status")))]
-                    )
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "vx-col md:w-1/3 w-full" },
-                  [
-                    _c("label", [_vm._v("ពិពណ៌នា")]),
-                    _vm._v(" "),
-                    _c("vs-textarea", {
-                      directives: [
-                        {
-                          name: "validate",
-                          rawName: "v-validate",
-                          value: "required",
-                          expression: "'required'"
-                        }
-                      ],
-                      staticClass: "w-full",
-                      attrs: { label: "ពិពណ៌នា", name: "description" },
-                      model: {
-                        value: _vm.purchase.description,
-                        callback: function($$v) {
-                          _vm.$set(_vm.purchase, "description", $$v)
-                        },
-                        expression: "purchase.description"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "span",
-                      {
-                        directives: [
-                          {
-                            name: "show",
-                            rawName: "v-show",
-                            value: _vm.errors.has("description"),
-                            expression: "errors.has('description')"
-                          }
-                        ],
-                        staticClass: "text-danger text-sm"
-                      },
-                      [_vm._v(_vm._s(_vm.errors.first("description")))]
-                    )
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "vx-col md:w-1/3 shadow-md" }, [
-                  _c("div", { staticClass: "vx-row" }, [
-                    _c("div", { staticClass: "vx-col md:w-1/2 w-full" }, [
-                      _vm._v(
-                        "\n                            Amount\n                            "
-                      ),
-                      _c("span", { staticClass: "text-6xl block" }, [
-                        _vm._v("$" + _vm._s(_vm.purchase.total_balance))
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "vx-col md:w-1/2 w-full" },
-                      [
-                        _c("bar-code", {
-                          attrs: {
-                            value: _vm.purchase.id,
-                            options: { displayValue: true }
-                          }
-                        })
-                      ],
-                      1
-                    )
-                  ])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("vs-divider", { attrs: { position: "left" } }, [
-                _vm._v("បញ្ជីទំនិញ")
-              ]),
-              _vm._v(" "),
-              _c("table", { staticClass: "vs-table vs-table--tbody-table" }, [
-                _c("thead", [
-                  _c("tr", [
-                    _c("th", [_vm._v("ល.រ")]),
-                    _vm._v(" "),
-                    _c("th", [_vm._v("ឈ្មោះ")]),
-                    _vm._v(" "),
-                    _c("th", [_vm._v("ពិពណ៌នា")]),
-                    _vm._v(" "),
-                    _c("th", [_vm._v("Inventory Type")]),
-                    _vm._v(" "),
-                    _c("th", [_vm._v("ចំនួន")]),
-                    _vm._v(" "),
-                    _c("th", [_vm._v("តម្លៃទិញ")]),
-                    _vm._v(" "),
-                    _c("th", [_vm._v("តម្លៃលក់")]),
-                    _vm._v(" "),
-                    _c("th", [_vm._v("សរុប")]),
-                    _vm._v(" "),
-                    _c("th")
-                  ])
-                ]),
-                _vm._v(" "),
-                _c(
-                  "tbody",
-                  _vm._l(_vm.purchase.items, function(tr, index) {
-                    return _c("tr", { key: index }, [
-                      _c("td", { staticClass: "py-1" }, [
-                        _vm._v(
-                          "\n                        " +
-                            _vm._s(index + 1) +
-                            "\n                    "
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "td",
-                        { attrs: { width: "400" } },
-                        [
-                          _c("v-select", {
-                            directives: [
-                              {
-                                name: "validate",
-                                rawName: "v-validate",
-                                value: "required",
-                                expression: "'required'"
-                              }
-                            ],
-                            attrs: {
-                              filterBy: _vm.searchProduct,
-                              label: "name",
-                              name: "product-" + index,
-                              options: _vm.all_products
-                            },
-                            on: {
-                              input: function($event) {
-                                return _vm.selectProduct(tr.id, index)
-                              }
-                            },
-                            scopedSlots: _vm._u(
-                              [
-                                {
-                                  key: "option",
-                                  fn: function(option) {
-                                    return [
-                                      _c("vs-list-item", {
-                                        attrs: {
-                                          title:
-                                            "ID: " +
-                                            option.id +
-                                            " ឈ្មោះ​ " +
-                                            option.name,
-                                          subtitle:
-                                            "តម្លៃលក់ " +
-                                            option.default_purchase +
-                                            " តម្លៃទិញ " +
-                                            option.default_sale
-                                        }
-                                      })
-                                    ]
-                                  }
-                                }
-                              ],
-                              null,
-                              true
-                            ),
-                            model: {
-                              value: tr.id,
-                              callback: function($$v) {
-                                _vm.$set(tr, "id", $$v)
-                              },
-                              expression: "tr.id"
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c(
-                            "span",
-                            {
-                              directives: [
-                                {
-                                  name: "show",
-                                  rawName: "v-show",
-                                  value: _vm.errors.has("product-" + index),
-                                  expression: "errors.has(`product-${index}`)"
-                                }
-                              ],
-                              staticClass: "text-danger text-sm"
-                            },
-                            [
-                              _vm._v(
-                                _vm._s(_vm.errors.first("product-" + index))
-                              )
-                            ]
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c("td", [
-                        _vm._v(
-                          "\n                        " +
-                            _vm._s(tr.description) +
-                            "\n                    "
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "td",
-                        [
-                          _c("v-select", {
-                            directives: [
-                              {
-                                name: "validate",
-                                rawName: "v-validate",
-                                value: "required",
-                                expression: "'required'"
-                              }
-                            ],
-                            attrs: {
-                              name: "inventory_type-" + index,
-                              options: [
-                                "inventory_part",
-                                "service",
-                                "sale_only",
-                                "purchase_only"
-                              ]
-                            },
-                            model: {
-                              value: tr.inventory_type,
-                              callback: function($$v) {
-                                _vm.$set(tr, "inventory_type", $$v)
-                              },
-                              expression: "tr.inventory_type"
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c(
-                            "span",
-                            {
-                              directives: [
-                                {
-                                  name: "show",
-                                  rawName: "v-show",
-                                  value: _vm.errors.has(
-                                    "inventory_type-" + index
-                                  ),
-                                  expression:
-                                    "errors.has(`inventory_type-${index}`)"
-                                }
-                              ],
-                              staticClass: "text-danger text-sm"
-                            },
-                            [
-                              _vm._v(
-                                _vm._s(
-                                  _vm.errors.first("inventory_type-" + index)
-                                )
-                              )
-                            ]
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "td",
-                        [
-                          _c("vs-input-number", {
-                            directives: [
-                              {
-                                name: "validate",
-                                rawName: "v-validate",
-                                value: "required",
-                                expression: "'required'"
-                              }
-                            ],
-                            attrs: {
-                              color: "danger",
-                              min: "0",
-                              name: "qty-" + index
-                            },
-                            model: {
-                              value: tr.qty,
-                              callback: function($$v) {
-                                _vm.$set(tr, "qty", $$v)
-                              },
-                              expression: "tr.qty"
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c(
-                            "span",
-                            {
-                              directives: [
-                                {
-                                  name: "show",
-                                  rawName: "v-show",
-                                  value: _vm.errors.has("qty-" + index),
-                                  expression: "errors.has(`qty-${index}`)"
-                                }
-                              ],
-                              staticClass: "text-danger text-sm"
-                            },
-                            [_vm._v(_vm._s(_vm.errors.first("qty-" + index)))]
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "td",
-                        [
-                          _c("vs-input-number", {
-                            directives: [
-                              {
-                                name: "validate",
-                                rawName: "v-validate",
-                                value: "required",
-                                expression: "'required'"
-                              }
-                            ],
-                            attrs: {
-                              color: "danger",
-                              min: "0",
-                              name: "purchase_price-" + index
-                            },
-                            model: {
-                              value: tr.purchase_price,
-                              callback: function($$v) {
-                                _vm.$set(tr, "purchase_price", $$v)
-                              },
-                              expression: "tr.purchase_price"
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c(
-                            "span",
-                            {
-                              directives: [
-                                {
-                                  name: "show",
-                                  rawName: "v-show",
-                                  value: _vm.errors.has(
-                                    "purchase_price-" + index
-                                  ),
-                                  expression:
-                                    "errors.has(`purchase_price-${index}`)"
-                                }
-                              ],
-                              staticClass: "text-danger text-sm"
-                            },
-                            [
-                              _vm._v(
-                                _vm._s(
-                                  _vm.errors.first("purchase_price-" + index)
-                                )
-                              )
-                            ]
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "td",
-                        [
-                          _c("vs-input-number", {
-                            directives: [
-                              {
-                                name: "validate",
-                                rawName: "v-validate",
-                                value: "required",
-                                expression: "'required'"
-                              }
-                            ],
-                            attrs: {
-                              color: "danger",
-                              min: "0",
-                              name: "sale_price-" + index
-                            },
-                            model: {
-                              value: tr.sale_price,
-                              callback: function($$v) {
-                                _vm.$set(tr, "sale_price", $$v)
-                              },
-                              expression: "tr.sale_price"
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c(
-                            "span",
-                            {
-                              directives: [
-                                {
-                                  name: "show",
-                                  rawName: "v-show",
-                                  value: _vm.errors.has("sale_price-" + index),
-                                  expression:
-                                    "errors.has(`sale_price-${index}`)"
-                                }
-                              ],
-                              staticClass: "text-danger text-sm"
-                            },
-                            [
-                              _vm._v(
-                                _vm._s(_vm.errors.first("sale_price-" + index))
-                              )
-                            ]
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c("td", [
-                        _vm._v(
-                          "\n                        " +
-                            _vm._s((tr.amount = tr.purchase_price * tr.qty)) +
-                            "\n                    "
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "td",
-                        { staticClass: "py-1" },
-                        [
-                          _c("vs-button", {
-                            attrs: {
-                              icon: "icon-trash-2",
-                              color: "warning",
-                              "icon-pack": "feather",
-                              type: "flat"
-                            },
-                            on: {
-                              click: function($event) {
-                                return _vm.removeItemLine(index)
-                              }
-                            }
-                          })
-                        ],
-                        1
-                      )
-                    ])
-                  }),
-                  0
-                )
-              ]),
-              _vm._v(" "),
               _c(
-                "vs-button",
-                {
-                  staticClass: "rounded-none my-3",
-                  attrs: {
-                    icon: "icon-plus",
-                    "icon-pack": "feather",
-                    type: "line"
-                  },
-                  on: { click: _vm.addItemLine }
-                },
-                [_vm._v("បន្ថែមទំនិញ")]
+                "q-bar",
+                [
+                  _c("q-space"),
+                  _vm._v(" "),
+                  _c(
+                    "q-btn",
+                    {
+                      directives: [
+                        { name: "close-popup", rawName: "v-close-popup" }
+                      ],
+                      attrs: { dense: "", flat: "", icon: "close" }
+                    },
+                    [
+                      _c(
+                        "q-tooltip",
+                        { attrs: { "content-class": "bg-white text-primary" } },
+                        [_vm._v("Close")]
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
               ),
               _vm._v(" "),
-              _c("div", { staticClass: "vx-row" }, [
-                _c(
-                  "div",
-                  { staticClass: "vx-col md:w-1/2 w-full" },
-                  [
-                    _c("vs-divider", { attrs: { position: "left" } }, [
-                      _vm._v("Payment")
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "vx-row" }, [
-                      _c(
-                        "div",
-                        { staticClass: "vx-col md:w-1/2 w-full" },
-                        [
-                          _c("label", [_vm._v("ប្រាក់ទិញទំនិញ")]),
-                          _vm._v(" "),
-                          _c("vs-input-number", {
-                            attrs: {
-                              color: "warning",
-                              min: "0",
-                              max: _vm.purchase.total_balance,
-                              label: "ប្រាក់ទិញទំនិញ:"
-                            },
-                            model: {
-                              value: _vm.purchase.balance,
-                              callback: function($$v) {
-                                _vm.$set(_vm.purchase, "balance", $$v)
+              _c(
+                "q-card-section",
+                [
+                  _c(
+                    "vx-card",
+                    { attrs: { "no-shadow": "" } },
+                    [
+                      _c("div", { staticClass: "vx-row my-3" }, [
+                        _c(
+                          "div",
+                          { staticClass: "vx-col md:w-1/3 w-full" },
+                          [
+                            _c("label", [_vm._v("អ្នកផ្គត់ផ្គង់")]),
+                            _vm._v(" "),
+                            _c(
+                              "vx-input-group",
+                              [
+                                _c("v-select", {
+                                  directives: [
+                                    {
+                                      name: "validate",
+                                      rawName: "v-validate",
+                                      value: "required",
+                                      expression: "'required'"
+                                    }
+                                  ],
+                                  attrs: {
+                                    filterBy: _vm.searchSupplier,
+                                    label: "name",
+                                    name: "supplier",
+                                    options: _vm.all_suppliers
+                                  },
+                                  scopedSlots: _vm._u([
+                                    {
+                                      key: "option",
+                                      fn: function(option) {
+                                        return [
+                                          _c("vs-list-item", {
+                                            attrs: {
+                                              title:
+                                                "ឈ្មោះ​ " +
+                                                option.name +
+                                                " ក្រុមហ៊ុន " +
+                                                option.company,
+                                              subtitle:
+                                                "ទំនាក់ទំនង " +
+                                                option.contact +
+                                                " អាស័យដ្ឋាន " +
+                                                option.address
+                                            }
+                                          })
+                                        ]
+                                      }
+                                    }
+                                  ]),
+                                  model: {
+                                    value: _vm.purchase.supplier,
+                                    callback: function($$v) {
+                                      _vm.$set(_vm.purchase, "supplier", $$v)
+                                    },
+                                    expression: "purchase.supplier"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("template", { slot: "append" }, [
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass: "append-text btn-addon",
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.$refs.addSupplier.show()
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _c("vs-button", {
+                                        staticClass: "rounded-none",
+                                        attrs: {
+                                          type: "filled",
+                                          "icon-pack": "feather",
+                                          icon: "icon-plus"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ])
+                              ],
+                              2
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "span",
+                              {
+                                directives: [
+                                  {
+                                    name: "show",
+                                    rawName: "v-show",
+                                    value: _vm.errors.has("supplier"),
+                                    expression: "errors.has('supplier')"
+                                  }
+                                ],
+                                staticClass: "text-danger text-sm"
                               },
-                              expression: "purchase.balance"
-                            }
-                          })
-                        ],
-                        1
+                              [_vm._v(_vm._s(_vm.errors.first("supplier")))]
+                            )
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "vx-col md:w-1/3 w-full" },
+                          [
+                            _c("label", [_vm._v("ទីតាំង")]),
+                            _vm._v(" "),
+                            _c("v-select", {
+                              directives: [
+                                {
+                                  name: "validate",
+                                  rawName: "v-validate",
+                                  value: "required",
+                                  expression: "'required'"
+                                }
+                              ],
+                              attrs: {
+                                name: "location",
+                                options: ["Ly Put Garage"]
+                              },
+                              model: {
+                                value: _vm.purchase.location,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.purchase, "location", $$v)
+                                },
+                                expression: "purchase.location"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "span",
+                              {
+                                directives: [
+                                  {
+                                    name: "show",
+                                    rawName: "v-show",
+                                    value: _vm.errors.has("location"),
+                                    expression: "errors.has('location')"
+                                  }
+                                ],
+                                staticClass: "text-danger text-sm"
+                              },
+                              [_vm._v(_vm._s(_vm.errors.first("location")))]
+                            )
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "vx-col md:w-1/3 w-full" },
+                          [
+                            _c("label", [_vm._v("ថ្ងៃខែឆ្នាំទិញ")]),
+                            _vm._v(" "),
+                            _c("flat-pickr", {
+                              directives: [
+                                {
+                                  name: "validate",
+                                  rawName: "v-validate",
+                                  value: "required",
+                                  expression: "'required'"
+                                }
+                              ],
+                              staticClass: "w-full",
+                              attrs: {
+                                name: "date",
+                                placeholder: "Choose Date"
+                              },
+                              model: {
+                                value: _vm.purchase.purchase_date,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.purchase, "purchase_date", $$v)
+                                },
+                                expression: "purchase.purchase_date"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "span",
+                              {
+                                directives: [
+                                  {
+                                    name: "show",
+                                    rawName: "v-show",
+                                    value: _vm.errors.has("purchase_date"),
+                                    expression: "errors.has('purchase_date')"
+                                  }
+                                ],
+                                staticClass: "text-danger text-sm"
+                              },
+                              [
+                                _vm._v(
+                                  _vm._s(_vm.errors.first("purchase_date"))
+                                )
+                              ]
+                            )
+                          ],
+                          1
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "vx-row my-3" }, [
+                        _c(
+                          "div",
+                          { staticClass: "vx-col md:w-1/3 w-full" },
+                          [
+                            _c("label", [_vm._v("Purchase Status")]),
+                            _vm._v(" "),
+                            _c("v-select", {
+                              directives: [
+                                {
+                                  name: "validate",
+                                  rawName: "v-validate",
+                                  value: "required",
+                                  expression: "'required'"
+                                }
+                              ],
+                              attrs: {
+                                name: "purchase_status",
+                                options: ["received", "pending"]
+                              },
+                              model: {
+                                value: _vm.purchase.purchase_status,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.purchase, "purchase_status", $$v)
+                                },
+                                expression: "purchase.purchase_status"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "span",
+                              {
+                                directives: [
+                                  {
+                                    name: "show",
+                                    rawName: "v-show",
+                                    value: _vm.errors.has("status"),
+                                    expression: "errors.has('status')"
+                                  }
+                                ],
+                                staticClass: "text-danger text-sm"
+                              },
+                              [_vm._v(_vm._s(_vm.errors.first("status")))]
+                            )
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "vx-col md:w-1/3 w-full" },
+                          [
+                            _c("label", [_vm._v("ពិពណ៌នា")]),
+                            _vm._v(" "),
+                            _c("vs-textarea", {
+                              directives: [
+                                {
+                                  name: "validate",
+                                  rawName: "v-validate",
+                                  value: "required",
+                                  expression: "'required'"
+                                }
+                              ],
+                              staticClass: "w-full",
+                              attrs: { label: "ពិពណ៌នា", name: "description" },
+                              model: {
+                                value: _vm.purchase.description,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.purchase, "description", $$v)
+                                },
+                                expression: "purchase.description"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "span",
+                              {
+                                directives: [
+                                  {
+                                    name: "show",
+                                    rawName: "v-show",
+                                    value: _vm.errors.has("description"),
+                                    expression: "errors.has('description')"
+                                  }
+                                ],
+                                staticClass: "text-danger text-sm"
+                              },
+                              [_vm._v(_vm._s(_vm.errors.first("description")))]
+                            )
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "vx-col md:w-1/3 shadow-md" },
+                          [
+                            _c("div", { staticClass: "vx-row" }, [
+                              _c(
+                                "div",
+                                { staticClass: "vx-col md:w-1/2 w-full" },
+                                [
+                                  _vm._v(
+                                    "\n                                    Amount\n                                    "
+                                  ),
+                                  _c(
+                                    "span",
+                                    { staticClass: "text-6xl block" },
+                                    [
+                                      _vm._v(
+                                        "$" + _vm._s(_vm.purchase.total_balance)
+                                      )
+                                    ]
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: "vx-col md:w-1/2 w-full" },
+                                [
+                                  _c("bar-code", {
+                                    attrs: {
+                                      value: _vm.purchase.id,
+                                      options: { displayValue: true }
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ])
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("vs-divider", { attrs: { position: "left" } }, [
+                        _vm._v("បញ្ជីទំនិញ")
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "table",
+                        { staticClass: "vs-table vs-table--tbody-table" },
+                        [
+                          _c("thead", [
+                            _c("tr", [
+                              _c("th", [_vm._v("ល.រ")]),
+                              _vm._v(" "),
+                              _c("th", [_vm._v("ឈ្មោះ")]),
+                              _vm._v(" "),
+                              _c("th", [_vm._v("ពិពណ៌នា")]),
+                              _vm._v(" "),
+                              _c("th", [_vm._v("Inventory Type")]),
+                              _vm._v(" "),
+                              _c("th", [_vm._v("ចំនួន")]),
+                              _vm._v(" "),
+                              _c("th", [_vm._v("តម្លៃទិញ")]),
+                              _vm._v(" "),
+                              _c("th", [_vm._v("តម្លៃលក់")]),
+                              _vm._v(" "),
+                              _c("th", [_vm._v("សរុប")]),
+                              _vm._v(" "),
+                              _c("th")
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "tbody",
+                            _vm._l(_vm.purchase.items, function(tr, index) {
+                              return _c("tr", { key: index }, [
+                                _c("td", { staticClass: "py-1" }, [
+                                  _vm._v(
+                                    "\n                                " +
+                                      _vm._s(index + 1) +
+                                      "\n                            "
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "td",
+                                  { attrs: { width: "400" } },
+                                  [
+                                    _c("v-select", {
+                                      directives: [
+                                        {
+                                          name: "validate",
+                                          rawName: "v-validate",
+                                          value: "required",
+                                          expression: "'required'"
+                                        }
+                                      ],
+                                      attrs: {
+                                        filterBy: _vm.searchProduct,
+                                        label: "name",
+                                        name: "product-" + index,
+                                        options: _vm.all_products
+                                      },
+                                      on: {
+                                        input: function($event) {
+                                          return _vm.selectProduct(tr.id, index)
+                                        }
+                                      },
+                                      scopedSlots: _vm._u(
+                                        [
+                                          {
+                                            key: "option",
+                                            fn: function(option) {
+                                              return [
+                                                _c("vs-list-item", {
+                                                  attrs: {
+                                                    title:
+                                                      "ID: " +
+                                                      option.id +
+                                                      " ឈ្មោះ​ " +
+                                                      option.name,
+                                                    subtitle:
+                                                      "តម្លៃលក់ " +
+                                                      option.default_purchase +
+                                                      " តម្លៃទិញ " +
+                                                      option.default_sale
+                                                  }
+                                                })
+                                              ]
+                                            }
+                                          }
+                                        ],
+                                        null,
+                                        true
+                                      ),
+                                      model: {
+                                        value: tr.id,
+                                        callback: function($$v) {
+                                          _vm.$set(tr, "id", $$v)
+                                        },
+                                        expression: "tr.id"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "span",
+                                      {
+                                        directives: [
+                                          {
+                                            name: "show",
+                                            rawName: "v-show",
+                                            value: _vm.errors.has(
+                                              "product-" + index
+                                            ),
+                                            expression:
+                                              "errors.has(`product-${index}`)"
+                                          }
+                                        ],
+                                        staticClass: "text-danger text-sm"
+                                      },
+                                      [
+                                        _vm._v(
+                                          _vm._s(
+                                            _vm.errors.first("product-" + index)
+                                          )
+                                        )
+                                      ]
+                                    )
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _vm._v(
+                                    "\n                                " +
+                                      _vm._s(tr.description) +
+                                      "\n                            "
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "td",
+                                  [
+                                    _c("v-select", {
+                                      directives: [
+                                        {
+                                          name: "validate",
+                                          rawName: "v-validate",
+                                          value: "required",
+                                          expression: "'required'"
+                                        }
+                                      ],
+                                      attrs: {
+                                        name: "inventory_type-" + index,
+                                        options: [
+                                          "inventory_part",
+                                          "service",
+                                          "sale_only",
+                                          "purchase_only"
+                                        ]
+                                      },
+                                      model: {
+                                        value: tr.inventory_type,
+                                        callback: function($$v) {
+                                          _vm.$set(tr, "inventory_type", $$v)
+                                        },
+                                        expression: "tr.inventory_type"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "span",
+                                      {
+                                        directives: [
+                                          {
+                                            name: "show",
+                                            rawName: "v-show",
+                                            value: _vm.errors.has(
+                                              "inventory_type-" + index
+                                            ),
+                                            expression:
+                                              "errors.has(`inventory_type-${index}`)"
+                                          }
+                                        ],
+                                        staticClass: "text-danger text-sm"
+                                      },
+                                      [
+                                        _vm._v(
+                                          _vm._s(
+                                            _vm.errors.first(
+                                              "inventory_type-" + index
+                                            )
+                                          )
+                                        )
+                                      ]
+                                    )
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "td",
+                                  [
+                                    _c("vs-input-number", {
+                                      directives: [
+                                        {
+                                          name: "validate",
+                                          rawName: "v-validate",
+                                          value: "required",
+                                          expression: "'required'"
+                                        }
+                                      ],
+                                      attrs: {
+                                        color: "danger",
+                                        min: "0",
+                                        name: "qty-" + index
+                                      },
+                                      model: {
+                                        value: tr.qty,
+                                        callback: function($$v) {
+                                          _vm.$set(tr, "qty", $$v)
+                                        },
+                                        expression: "tr.qty"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "span",
+                                      {
+                                        directives: [
+                                          {
+                                            name: "show",
+                                            rawName: "v-show",
+                                            value: _vm.errors.has(
+                                              "qty-" + index
+                                            ),
+                                            expression:
+                                              "errors.has(`qty-${index}`)"
+                                          }
+                                        ],
+                                        staticClass: "text-danger text-sm"
+                                      },
+                                      [
+                                        _vm._v(
+                                          _vm._s(
+                                            _vm.errors.first("qty-" + index)
+                                          )
+                                        )
+                                      ]
+                                    )
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "td",
+                                  [
+                                    _c("vs-input-number", {
+                                      directives: [
+                                        {
+                                          name: "validate",
+                                          rawName: "v-validate",
+                                          value: "required",
+                                          expression: "'required'"
+                                        }
+                                      ],
+                                      attrs: {
+                                        color: "danger",
+                                        min: "0",
+                                        name: "purchase_price-" + index
+                                      },
+                                      model: {
+                                        value: tr.purchase_price,
+                                        callback: function($$v) {
+                                          _vm.$set(tr, "purchase_price", $$v)
+                                        },
+                                        expression: "tr.purchase_price"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "span",
+                                      {
+                                        directives: [
+                                          {
+                                            name: "show",
+                                            rawName: "v-show",
+                                            value: _vm.errors.has(
+                                              "purchase_price-" + index
+                                            ),
+                                            expression:
+                                              "errors.has(`purchase_price-${index}`)"
+                                          }
+                                        ],
+                                        staticClass: "text-danger text-sm"
+                                      },
+                                      [
+                                        _vm._v(
+                                          _vm._s(
+                                            _vm.errors.first(
+                                              "purchase_price-" + index
+                                            )
+                                          )
+                                        )
+                                      ]
+                                    )
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "td",
+                                  [
+                                    _c("vs-input-number", {
+                                      directives: [
+                                        {
+                                          name: "validate",
+                                          rawName: "v-validate",
+                                          value: "required",
+                                          expression: "'required'"
+                                        }
+                                      ],
+                                      attrs: {
+                                        color: "danger",
+                                        min: "0",
+                                        name: "sale_price-" + index
+                                      },
+                                      model: {
+                                        value: tr.sale_price,
+                                        callback: function($$v) {
+                                          _vm.$set(tr, "sale_price", $$v)
+                                        },
+                                        expression: "tr.sale_price"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "span",
+                                      {
+                                        directives: [
+                                          {
+                                            name: "show",
+                                            rawName: "v-show",
+                                            value: _vm.errors.has(
+                                              "sale_price-" + index
+                                            ),
+                                            expression:
+                                              "errors.has(`sale_price-${index}`)"
+                                          }
+                                        ],
+                                        staticClass: "text-danger text-sm"
+                                      },
+                                      [
+                                        _vm._v(
+                                          _vm._s(
+                                            _vm.errors.first(
+                                              "sale_price-" + index
+                                            )
+                                          )
+                                        )
+                                      ]
+                                    )
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _vm._v(
+                                    "\n                                " +
+                                      _vm._s(
+                                        (tr.amount = tr.purchase_price * tr.qty)
+                                      ) +
+                                      "\n                            "
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "td",
+                                  { staticClass: "py-1" },
+                                  [
+                                    _c("vs-button", {
+                                      attrs: {
+                                        icon: "icon-trash-2",
+                                        color: "warning",
+                                        "icon-pack": "feather",
+                                        type: "flat"
+                                      },
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.removeItemLine(index)
+                                        }
+                                      }
+                                    })
+                                  ],
+                                  1
+                                )
+                              ])
+                            }),
+                            0
+                          )
+                        ]
                       ),
                       _vm._v(" "),
                       _c(
+                        "vs-button",
+                        {
+                          staticClass: "rounded-none my-3",
+                          attrs: {
+                            icon: "icon-plus",
+                            "icon-pack": "feather",
+                            type: "line"
+                          },
+                          on: { click: _vm.addItemLine }
+                        },
+                        [_vm._v("បន្ថែមទំនិញ")]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "vx-row" }, [
+                        _c(
+                          "div",
+                          { staticClass: "vx-col md:w-1/2 w-full" },
+                          [
+                            _c("vs-divider", { attrs: { position: "left" } }, [
+                              _vm._v("Payment")
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "vx-row" }, [
+                              _c(
+                                "div",
+                                { staticClass: "vx-col md:w-1/2 w-full" },
+                                [
+                                  _c("label", [_vm._v("ប្រាក់ទិញទំនិញ")]),
+                                  _vm._v(" "),
+                                  _c("vs-input-number", {
+                                    attrs: {
+                                      color: "warning",
+                                      min: "0",
+                                      max: _vm.purchase.total_balance,
+                                      label: "ប្រាក់ទិញទំនិញ:"
+                                    },
+                                    model: {
+                                      value: _vm.purchase.balance,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.purchase, "balance", $$v)
+                                      },
+                                      expression: "purchase.balance"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: "vx-col md:w-1/2 w-full" },
+                                [
+                                  _c("label", [_vm._v("ទឹកប្រាក់ជំពាក់")]),
+                                  _vm._v(" "),
+                                  _c("vs-input", {
+                                    staticClass: "w-full",
+                                    attrs: {
+                                      step: "any",
+                                      readonly: "",
+                                      type: "number"
+                                    },
+                                    model: {
+                                      value: (_vm.purchase.due_balance =
+                                        _vm.purchase.total_balance -
+                                        _vm.purchase.balance),
+                                      callback: function($$v) {
+                                        _vm.$set(
+                                          (_vm.purchase.due_balance =
+                                            _vm.purchase.total_balance -
+                                            _vm.purchase),
+                                          "balance",
+                                          $$v
+                                        )
+                                      },
+                                      expression:
+                                        "purchase.due_balance = purchase.total_balance - purchase.balance"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ])
+                          ],
+                          1
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("vs-divider"),
+                      _vm._v(" "),
+                      _c(
                         "div",
-                        { staticClass: "vx-col md:w-1/2 w-full" },
+                        { staticClass: "flex justify-end btn-group" },
                         [
-                          _c("label", [_vm._v("ទឹកប្រាក់ជំពាក់")]),
-                          _vm._v(" "),
-                          _c("vs-input", {
-                            staticClass: "w-full",
-                            attrs: {
-                              step: "any",
-                              readonly: "",
-                              type: "number"
-                            },
-                            model: {
-                              value: (_vm.purchase.due_balance =
-                                _vm.purchase.total_balance -
-                                _vm.purchase.balance),
-                              callback: function($$v) {
-                                _vm.$set(
-                                  (_vm.purchase.due_balance =
-                                    _vm.purchase.total_balance - _vm.purchase),
-                                  "balance",
-                                  $$v
-                                )
+                          _c(
+                            "vs-button",
+                            {
+                              attrs: {
+                                icon: "icon-edit",
+                                "icon-pack": "feather",
+                                type: "relief"
                               },
-                              expression:
-                                "purchase.due_balance = purchase.total_balance - purchase.balance"
-                            }
-                          })
+                              on: {
+                                click: function($event) {
+                                  return _vm.updatePurchase()
+                                }
+                              }
+                            },
+                            [_vm._v("កែប្រែ")]
+                          )
                         ],
                         1
                       )
-                    ])
-                  ],
-                  1
-                )
-              ]),
-              _vm._v(" "),
-              _c("vs-divider"),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "flex justify-end btn-group" },
-                [
-                  _c(
-                    "vs-button",
-                    {
-                      attrs: {
-                        icon: "icon-edit",
-                        "icon-pack": "feather",
-                        type: "relief"
-                      },
-                      on: {
-                        click: function($event) {
-                          return _vm.updatePurchase()
-                        }
-                      }
-                    },
-                    [_vm._v("កែប្រែ")]
+                    ],
+                    1
                   )
                 ],
                 1

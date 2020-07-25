@@ -1,29 +1,42 @@
 <template>
     <div>
-        <modal width="30%" height="auto" :scrollable="true" :pivotY="0.2" :clickToClose="false" name="change-password">
-            <div class="flex justify-end">
-                <i @click="$modal.hide('change-password')" class="vs-icon vs-popup--close material-icons text-warning"
-                   style="background: rgb(255, 255, 255);">close</i>
-            </div>
-            <vx-card no-shadow>
-                <div class="vx-row">
-                    <div class="vx-col w-full mt-2">
-                        <vs-input type="password" ref="password" v-validate="'required|min:6|max:10'" label-placeholder="ពាក្យសម្ងាត់" name="password" v-model="data.password" class="w-full" />
-                        <span class="text-danger text-sm" v-show="errors.has('password')">{{ errors.first('password') }}</span>
-                    </div>
-                    <div class="vx-col w-full mt-2">
-                        <vs-input type="password" v-validate="'required|min:6|max:10|confirmed:password'" label-placeholder="ផ្ទៀងផ្ទាត់ ពាក្យសម្ងាត់" name="confirm_password" v-model="data.confirm_password" class="w-full"/>
-                        <span class="text-danger text-sm" v-show="errors.has('confirm_password')">{{ errors.first('confirm_password') }}</span>
-                    </div>
-                </div>
-                <vs-divider/>
-                <!-- Save & Reset Button -->
-                <div class="flex justify-end btn-group">
-                    <vs-button @click="updateUserPassword" icon="icon-edit" icon-pack="feather" type="relief">ប្តូរ
-                    </vs-button>
-                </div>
-            </vx-card>
-        </modal>
+        <q-dialog
+            v-model="dialog"
+            persistent
+            :maximized="true"
+            transition-show="slide-up"
+            transition-hide="slide-down"
+        >
+            <q-card>
+                <q-bar>
+                    <q-space />
+                    <q-btn dense flat icon="close" v-close-popup>
+                        <q-tooltip content-class="bg-white text-primary">Close</q-tooltip>
+                    </q-btn>
+                </q-bar>
+
+                <q-card-section>
+                    <vx-card no-shadow>
+                        <div class="vx-row">
+                            <div class="vx-col w-full mt-2">
+                                <vs-input type="password" ref="password" v-validate="'required|min:6|max:10'" label-placeholder="ពាក្យសម្ងាត់" name="password" v-model="data.password" class="w-full" />
+                                <span class="text-danger text-sm" v-show="errors.has('password')">{{ errors.first('password') }}</span>
+                            </div>
+                            <div class="vx-col w-full mt-2">
+                                <vs-input type="password" v-validate="'required|min:6|max:10|confirmed:password'" label-placeholder="ផ្ទៀងផ្ទាត់ ពាក្យសម្ងាត់" name="confirm_password" v-model="data.confirm_password" class="w-full"/>
+                                <span class="text-danger text-sm" v-show="errors.has('confirm_password')">{{ errors.first('confirm_password') }}</span>
+                            </div>
+                        </div>
+                        <vs-divider/>
+                        <!-- Save & Reset Button -->
+                        <div class="flex justify-end btn-group">
+                            <vs-button @click="updateUserPassword" icon="icon-edit" icon-pack="feather" type="relief">ប្តូរ
+                            </vs-button>
+                        </div>
+                    </vx-card>
+                </q-card-section>
+            </q-card>
+        </q-dialog>
     </div>
 </template>
 
@@ -32,6 +45,7 @@
         name: "changePassword",
         data() {
             return {
+                dialog:false,
                 data: {
                     id:null,
                     password: '',
@@ -41,7 +55,7 @@
         },
         methods: {
             show(data) {
-                this.$modal.show('change-password');
+                this.dialog = true;
                 this.data.id = data.id;
             },
             //store

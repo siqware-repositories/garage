@@ -341,6 +341,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -365,6 +378,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
+      dialog: false,
       data: {
         id: null,
         customer: {
@@ -452,7 +466,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }(),
     show: function show(data) {
       var self = this;
-      this.$modal.show('show-invoice');
+      this.dialog = true;
       self.data.id = data.id;
       self.data.balance = data.balance;
       self.data.due_balance = data.due_balance;
@@ -872,310 +886,364 @@ var render = function() {
     "div",
     [
       _c(
-        "modal",
+        "q-dialog",
         {
           attrs: {
-            width: "60%",
-            height: "auto",
-            scrollable: true,
-            pivotY: 0.2,
-            clickToClose: false,
-            name: "show-invoice"
+            persistent: "",
+            maximized: true,
+            "transition-show": "slide-up",
+            "transition-hide": "slide-down"
+          },
+          model: {
+            value: _vm.dialog,
+            callback: function($$v) {
+              _vm.dialog = $$v
+            },
+            expression: "dialog"
           }
         },
         [
-          _c("div", { staticClass: "flex justify-end" }, [
-            _c(
-              "i",
-              {
-                staticClass:
-                  "vs-icon vs-popup--close material-icons text-warning",
-                staticStyle: { background: "rgb(255, 255, 255)" },
-                on: {
-                  click: function($event) {
-                    return _vm.$modal.hide("show-invoice")
-                  }
-                }
-              },
-              [_vm._v("close")]
-            )
-          ]),
-          _vm._v(" "),
-          _c("vx-card", { attrs: { "no-shadow": "" } }, [
-            _c(
-              "div",
-              { attrs: { id: "printMe" } },
-              [
-                _c("table", [
-                  _c("tr", [
-                    _c("td", [
-                      _vm._v("អតិថិជន "),
-                      _c("br"),
-                      _vm._v("Customer")
-                    ]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Invoice Status")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("លក់ពី "), _c("br"), _vm._v("Sold from")]),
-                    _vm._v(" "),
-                    _c("td", [
-                      _vm._v("ពិពណ៌នា"),
-                      _c("br"),
-                      _vm._v("Description")
-                    ]),
-                    _vm._v(" "),
-                    _c("td", [
-                      _vm._v("ថ្ងៃខែឆ្នាំលក់​ "),
-                      _c("br"),
-                      _vm._v("Sold from")
-                    ]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Barcode")])
-                  ]),
+          _c(
+            "q-card",
+            [
+              _c(
+                "q-bar",
+                [
+                  _c("q-space"),
                   _vm._v(" "),
-                  _c("tr", [
-                    _c("td", [
-                      _vm._v(
-                        "\n                            ឈ្មោះ: " +
-                          _vm._s(_vm.data.customer.name)
-                      ),
-                      _c("br"),
-                      _vm._v(
-                        "\n                            ទំនាក់ទំនង: " +
-                          _vm._s(_vm.data.customer.contact)
-                      ),
-                      _c("br")
-                    ]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(_vm.data.invoice_status))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("Ly put")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(_vm.data.description))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(_vm.data.invoice_date))]),
+                  _c(
+                    "q-btn",
+                    {
+                      directives: [
+                        { name: "close-popup", rawName: "v-close-popup" }
+                      ],
+                      attrs: { dense: "", flat: "", icon: "close" }
+                    },
+                    [
+                      _c(
+                        "q-tooltip",
+                        { attrs: { "content-class": "bg-white text-primary" } },
+                        [_vm._v("Close")]
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "q-card-section",
+                [
+                  _c("vx-card", { attrs: { "no-shadow": "" } }, [
+                    _c(
+                      "div",
+                      { attrs: { id: "printMe" } },
+                      [
+                        _c("table", [
+                          _c("tr", [
+                            _c("td", [
+                              _vm._v("អតិថិជន "),
+                              _c("br"),
+                              _vm._v("Customer")
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v("Invoice Status")]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _vm._v("លក់ពី "),
+                              _c("br"),
+                              _vm._v("Sold from")
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _vm._v("ពិពណ៌នា"),
+                              _c("br"),
+                              _vm._v("Description")
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _vm._v("ថ្ងៃខែឆ្នាំលក់​ "),
+                              _c("br"),
+                              _vm._v("Sold from")
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v("Barcode")])
+                          ]),
+                          _vm._v(" "),
+                          _c("tr", [
+                            _c("td", [
+                              _vm._v(
+                                "\n                                    ឈ្មោះ: " +
+                                  _vm._s(_vm.data.customer.name)
+                              ),
+                              _c("br"),
+                              _vm._v(
+                                "\n                                    ទំនាក់ទំនង: " +
+                                  _vm._s(_vm.data.customer.contact)
+                              ),
+                              _c("br")
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(_vm.data.invoice_status))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v("Ly put")]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(_vm.data.description))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(_vm.data.invoice_date))]),
+                            _vm._v(" "),
+                            _c(
+                              "td",
+                              { staticClass: "p-2" },
+                              [
+                                _c("bar-code", {
+                                  attrs: {
+                                    value: "000" + _vm.data.id,
+                                    options: { displayValue: true, height: 30 }
+                                  }
+                                })
+                              ],
+                              1
+                            )
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("vs-divider"),
+                        _vm._v(" "),
+                        _c("table", [
+                          _c("thead", [
+                            _c("tr", [
+                              _c("th", [
+                                _vm._v("ល.រ "),
+                                _c("br"),
+                                _vm._v("No")
+                              ]),
+                              _vm._v(" "),
+                              _c("th", [
+                                _vm._v("ឈ្មោះ"),
+                                _c("br"),
+                                _vm._v("Name")
+                              ]),
+                              _vm._v(" "),
+                              _c("th", [
+                                _vm._v("ពិពណ៌នា"),
+                                _c("br"),
+                                _vm._v("Description")
+                              ]),
+                              _vm._v(" "),
+                              _c("th", [
+                                _vm._v("ចំនួន"),
+                                _c("br"),
+                                _vm._v("Qty")
+                              ]),
+                              _vm._v(" "),
+                              _c("th", [
+                                _vm._v("តម្លៃលក់"),
+                                _c("br"),
+                                _vm._v("Unit Price")
+                              ]),
+                              _vm._v(" "),
+                              _c("th", [
+                                _vm._v("សរុប"),
+                                _c("br"),
+                                _vm._v("Amount")
+                              ])
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "tbody",
+                            _vm._l(_vm.data.items, function(tr, indextr) {
+                              return _c("tr", { key: indextr }, [
+                                _c("td", { staticClass: "pl-2 print:pl-2" }, [
+                                  _vm._v(
+                                    "\n                                    " +
+                                      _vm._s(indextr + 1) +
+                                      "\n                                "
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "pl-2 print:pl-2" }, [
+                                  _vm._v(
+                                    "\n                                    " +
+                                      _vm._s(tr.name) +
+                                      "\n                                "
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "pl-2 print:pl-2" }, [
+                                  _vm._v(
+                                    "\n                                    " +
+                                      _vm._s(tr.description) +
+                                      "\n                                "
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("td", { staticClass: "pl-2 print:pl-2" }, [
+                                  _vm._v(
+                                    "\n                                    " +
+                                      _vm._s(tr.qty) +
+                                      "\n                                "
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "td",
+                                  { staticClass: "pl-2 print:pl-2" },
+                                  [
+                                    _c("money-format", {
+                                      attrs: {
+                                        value: parseFloat(tr.sale_price),
+                                        locale: "en",
+                                        "currency-code": "USD"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "td",
+                                  { staticClass: "pl-2 print:pl-2" },
+                                  [
+                                    _c("money-format", {
+                                      attrs: {
+                                        value: parseFloat(
+                                          (tr.amount = tr.sale_price * tr.qty)
+                                        ),
+                                        locale: "en",
+                                        "currency-code": "USD"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                )
+                              ])
+                            }),
+                            0
+                          ),
+                          _vm._v(" "),
+                          _c("tfoot", [
+                            _c("tr", [
+                              _c("td"),
+                              _vm._v(" "),
+                              _c("td"),
+                              _vm._v(" "),
+                              _c("td"),
+                              _vm._v(" "),
+                              _c("td"),
+                              _vm._v(" "),
+                              _c("td", { staticClass: "md:text-right" }, [
+                                _vm._v(
+                                  "\n                                    សរុប\n                                "
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "td",
+                                { staticClass: "pl-2 print:pl-2" },
+                                [
+                                  _c("money-format", {
+                                    attrs: {
+                                      value: _vm.total_amount,
+                                      locale: "en",
+                                      "currency-code": "USD"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ])
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "vx-row" }, [
+                          _c(
+                            "div",
+                            { staticClass: "vx-col md:w-1/2 w-full" },
+                            [
+                              _c(
+                                "vs-divider",
+                                { attrs: { position: "left" } },
+                                [_vm._v("Payment")]
+                              ),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "vx-row" }, [
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "vx-col md:w-1/2 print:w-1/2 w-full"
+                                  },
+                                  [
+                                    _c("label", [_vm._v("ប្រាក់ទិញទំនិញ")]),
+                                    _vm._v(" "),
+                                    _c("money-format", {
+                                      attrs: {
+                                        value: parseFloat(_vm.data.balance),
+                                        locale: "en",
+                                        "currency-code": "USD"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "vx-col md:w-1/2 print:w-1/2 w-full"
+                                  },
+                                  [
+                                    _c("label", [_vm._v("ទឹកប្រាក់ជំពាក់")]),
+                                    _vm._v(" "),
+                                    _c("money-format", {
+                                      attrs: {
+                                        value: parseFloat(_vm.data.due_balance),
+                                        locale: "en",
+                                        "currency-code": "USD"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                )
+                              ])
+                            ],
+                            1
+                          )
+                        ])
+                      ],
+                      1
+                    ),
                     _vm._v(" "),
                     _c(
-                      "td",
-                      { staticClass: "p-2" },
+                      "div",
+                      { staticClass: "flex justify-end btn-group" },
                       [
-                        _c("bar-code", {
-                          attrs: {
-                            value: "000" + _vm.data.id,
-                            options: { displayValue: true, height: 30 }
-                          }
-                        })
+                        _c(
+                          "vs-button",
+                          {
+                            attrs: {
+                              icon: "icon-printer",
+                              "icon-pack": "feather",
+                              type: "relief"
+                            },
+                            on: { click: _vm.printHtml }
+                          },
+                          [_vm._v("បោះពុម្ភ\n                        ")]
+                        )
                       ],
                       1
                     )
                   ])
-                ]),
-                _vm._v(" "),
-                _c("vs-divider"),
-                _vm._v(" "),
-                _c("table", [
-                  _c("thead", [
-                    _c("tr", [
-                      _c("th", [_vm._v("ល.រ "), _c("br"), _vm._v("No")]),
-                      _vm._v(" "),
-                      _c("th", [_vm._v("ឈ្មោះ"), _c("br"), _vm._v("Name")]),
-                      _vm._v(" "),
-                      _c("th", [
-                        _vm._v("ពិពណ៌នា"),
-                        _c("br"),
-                        _vm._v("Description")
-                      ]),
-                      _vm._v(" "),
-                      _c("th", [_vm._v("ចំនួន"), _c("br"), _vm._v("Qty")]),
-                      _vm._v(" "),
-                      _c("th", [
-                        _vm._v("តម្លៃលក់"),
-                        _c("br"),
-                        _vm._v("Unit Price")
-                      ]),
-                      _vm._v(" "),
-                      _c("th", [_vm._v("សរុប"), _c("br"), _vm._v("Amount")])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "tbody",
-                    _vm._l(_vm.data.items, function(tr, indextr) {
-                      return _c("tr", { key: indextr }, [
-                        _c("td", { staticClass: "pl-2 print:pl-2" }, [
-                          _vm._v(
-                            "\n                            " +
-                              _vm._s(indextr + 1) +
-                              "\n                        "
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("td", { staticClass: "pl-2 print:pl-2" }, [
-                          _vm._v(
-                            "\n                            " +
-                              _vm._s(tr.name) +
-                              "\n                        "
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("td", { staticClass: "pl-2 print:pl-2" }, [
-                          _vm._v(
-                            "\n                            " +
-                              _vm._s(tr.description) +
-                              "\n                        "
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("td", { staticClass: "pl-2 print:pl-2" }, [
-                          _vm._v(
-                            "\n                            " +
-                              _vm._s(tr.qty) +
-                              "\n                        "
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          { staticClass: "pl-2 print:pl-2" },
-                          [
-                            _c("money-format", {
-                              attrs: {
-                                value: parseFloat(tr.sale_price),
-                                locale: "en",
-                                "currency-code": "USD"
-                              }
-                            })
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          { staticClass: "pl-2 print:pl-2" },
-                          [
-                            _c("money-format", {
-                              attrs: {
-                                value: parseFloat(
-                                  (tr.amount = tr.sale_price * tr.qty)
-                                ),
-                                locale: "en",
-                                "currency-code": "USD"
-                              }
-                            })
-                          ],
-                          1
-                        )
-                      ])
-                    }),
-                    0
-                  ),
-                  _vm._v(" "),
-                  _c("tfoot", [
-                    _c("tr", [
-                      _c("td"),
-                      _vm._v(" "),
-                      _c("td"),
-                      _vm._v(" "),
-                      _c("td"),
-                      _vm._v(" "),
-                      _c("td"),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "md:text-right" }, [
-                        _vm._v(
-                          "\n                            សរុប\n                        "
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "td",
-                        { staticClass: "pl-2 print:pl-2" },
-                        [
-                          _c("money-format", {
-                            attrs: {
-                              value: _vm.total_amount,
-                              locale: "en",
-                              "currency-code": "USD"
-                            }
-                          })
-                        ],
-                        1
-                      )
-                    ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "vx-row" }, [
-                  _c(
-                    "div",
-                    { staticClass: "vx-col md:w-1/2 w-full" },
-                    [
-                      _c("vs-divider", { attrs: { position: "left" } }, [
-                        _vm._v("Payment")
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "vx-row" }, [
-                        _c(
-                          "div",
-                          { staticClass: "vx-col md:w-1/2 print:w-1/2 w-full" },
-                          [
-                            _c("label", [_vm._v("ប្រាក់ទិញទំនិញ")]),
-                            _vm._v(" "),
-                            _c("money-format", {
-                              attrs: {
-                                value: parseFloat(_vm.data.balance),
-                                locale: "en",
-                                "currency-code": "USD"
-                              }
-                            })
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          { staticClass: "vx-col md:w-1/2 print:w-1/2 w-full" },
-                          [
-                            _c("label", [_vm._v("ទឹកប្រាក់ជំពាក់")]),
-                            _vm._v(" "),
-                            _c("money-format", {
-                              attrs: {
-                                value: parseFloat(_vm.data.due_balance),
-                                locale: "en",
-                                "currency-code": "USD"
-                              }
-                            })
-                          ],
-                          1
-                        )
-                      ])
-                    ],
-                    1
-                  )
-                ])
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "flex justify-end btn-group" },
-              [
-                _c(
-                  "vs-button",
-                  {
-                    attrs: {
-                      icon: "icon-printer",
-                      "icon-pack": "feather",
-                      type: "relief"
-                    },
-                    on: { click: _vm.printHtml }
-                  },
-                  [_vm._v("បោះពុម្ភ\n                ")]
-                )
-              ],
-              1
-            )
-          ])
+                ],
+                1
+              )
+            ],
+            1
+          )
         ],
         1
       ),

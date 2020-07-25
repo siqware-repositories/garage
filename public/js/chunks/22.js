@@ -78,32 +78,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
-      selected: [],
-      users: [{
-        "id": 1,
-        "name": "Leanne Graham",
-        "username": "Bret",
-        "email": "Sincere@april.biz",
-        "website": "hildegard.org"
-      }, {
-        "id": 2,
-        "name": "Ervin Howell",
-        "username": "Antonette",
-        "email": "Shanna@melissa.tv",
-        "website": "anastasia.net"
-      }, {
-        "id": 3,
-        "name": "Clementine Bauch",
-        "username": "Samantha",
-        "email": "Nathan@yesenia.net",
-        "website": "ramiro.info"
-      }, {
-        "id": 4,
-        "name": "Patricia Lebsack",
-        "username": "Karianne",
-        "email": "Julianne.OConner@kory.org",
-        "website": "kale.biz"
-      }]
+      selected: []
     };
   },
   computed: {
@@ -262,6 +237,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -276,6 +264,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      dialog: false,
       data: {
         name: '',
         email: '',
@@ -297,7 +286,7 @@ __webpack_require__.r(__webpack_exports__);
   computed: {},
   methods: {
     show: function show() {
-      this.$modal.show('add-user');
+      this.dialog = true;
     },
     //store
     storeUser: function storeUser() {
@@ -398,10 +387,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "changePassword",
   data: function data() {
     return {
+      dialog: false,
       data: {
         id: null,
         password: '',
@@ -411,7 +414,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     show: function show(data) {
-      this.$modal.show('change-password');
+      this.dialog = true;
       this.data.id = data.id;
     },
     //store
@@ -524,6 +527,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -538,6 +554,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      dialog: false,
       data: {
         id: null,
         name: '',
@@ -563,7 +580,7 @@ __webpack_require__.r(__webpack_exports__);
       }, this.data.profile);
     },
     show: function show(data) {
-      this.$modal.show('edit-user');
+      this.dialog = true;
       this.data.id = data.id;
       this.data.name = data.name;
       this.data.email = data.email;
@@ -852,266 +869,310 @@ var render = function() {
     "div",
     [
       _c(
-        "modal",
+        "q-dialog",
         {
           attrs: {
-            width: "50%",
-            height: "auto",
-            scrollable: true,
-            pivotY: 0.2,
-            clickToClose: false,
-            name: "add-user"
+            persistent: "",
+            maximized: true,
+            "transition-show": "slide-up",
+            "transition-hide": "slide-down"
+          },
+          model: {
+            value: _vm.dialog,
+            callback: function($$v) {
+              _vm.dialog = $$v
+            },
+            expression: "dialog"
           }
         },
         [
-          _c("div", { staticClass: "flex justify-end" }, [
-            _c(
-              "i",
-              {
-                staticClass:
-                  "vs-icon vs-popup--close material-icons text-warning",
-                staticStyle: { background: "rgb(255, 255, 255)" },
-                on: {
-                  click: function($event) {
-                    return _vm.$modal.hide("add-user")
-                  }
-                }
-              },
-              [_vm._v("close")]
-            )
-          ]),
-          _vm._v(" "),
           _c(
-            "vx-card",
-            { attrs: { "no-shadow": "" } },
+            "q-card",
             [
-              _c("div", { staticClass: "vx-row" }, [
-                _c("div", { staticClass: "vx-col md:w-3/4" }, [
-                  _c("div", { staticClass: "vx-row" }, [
-                    _c(
-                      "div",
-                      { staticClass: "vx-col w-full" },
-                      [
-                        _c("vs-input", {
-                          directives: [
-                            {
-                              name: "validate",
-                              rawName: "v-validate",
-                              value: "required",
-                              expression: "'required'"
-                            }
-                          ],
-                          staticClass: "w-full",
-                          attrs: { "label-placeholder": "ឈ្មោះ", name: "name" },
-                          model: {
-                            value: _vm.data.name,
-                            callback: function($$v) {
-                              _vm.$set(_vm.data, "name", $$v)
-                            },
-                            expression: "data.name"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c(
-                          "span",
-                          {
-                            directives: [
-                              {
-                                name: "show",
-                                rawName: "v-show",
-                                value: _vm.errors.has("name"),
-                                expression: "errors.has('name')"
-                              }
-                            ],
-                            staticClass: "text-danger text-sm"
-                          },
-                          [_vm._v(_vm._s(_vm.errors.first("name")))]
-                        )
+              _c(
+                "q-bar",
+                [
+                  _c("q-space"),
+                  _vm._v(" "),
+                  _c(
+                    "q-btn",
+                    {
+                      directives: [
+                        { name: "close-popup", rawName: "v-close-popup" }
                       ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "vx-col w-full mt-2" },
-                      [
-                        _c("vs-input", {
-                          directives: [
-                            {
-                              name: "validate",
-                              rawName: "v-validate",
-                              value: "required|email",
-                              expression: "'required|email'"
-                            }
-                          ],
-                          staticClass: "w-full",
-                          attrs: {
-                            "label-placeholder": "អ៊ីម៉ែល",
-                            name: "email"
-                          },
-                          model: {
-                            value: _vm.data.email,
-                            callback: function($$v) {
-                              _vm.$set(_vm.data, "email", $$v)
-                            },
-                            expression: "data.email"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c(
-                          "span",
-                          {
-                            directives: [
-                              {
-                                name: "show",
-                                rawName: "v-show",
-                                value: _vm.errors.has("email"),
-                                expression: "errors.has('email')"
-                              }
-                            ],
-                            staticClass: "text-danger text-sm"
-                          },
-                          [_vm._v(_vm._s(_vm.errors.first("email")))]
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "vx-col w-full mt-2" },
-                      [
-                        _c("vs-input", {
-                          directives: [
-                            {
-                              name: "validate",
-                              rawName: "v-validate",
-                              value: "min:6|max:10",
-                              expression: "'min:6|max:10'"
-                            }
-                          ],
-                          ref: "password",
-                          staticClass: "w-full",
-                          attrs: {
-                            type: "password",
-                            "label-placeholder": "ពាក្យសម្ងាត់",
-                            name: "password"
-                          },
-                          model: {
-                            value: _vm.data.password,
-                            callback: function($$v) {
-                              _vm.$set(_vm.data, "password", $$v)
-                            },
-                            expression: "data.password"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c(
-                          "span",
-                          {
-                            directives: [
-                              {
-                                name: "show",
-                                rawName: "v-show",
-                                value: _vm.errors.has("password"),
-                                expression: "errors.has('password')"
-                              }
-                            ],
-                            staticClass: "text-danger text-sm"
-                          },
-                          [_vm._v(_vm._s(_vm.errors.first("password")))]
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "vx-col w-full mt-2" },
-                      [
-                        _c("vs-input", {
-                          directives: [
-                            {
-                              name: "validate",
-                              rawName: "v-validate",
-                              value: "min:6|max:10|confirmed:password",
-                              expression: "'min:6|max:10|confirmed:password'"
-                            }
-                          ],
-                          staticClass: "w-full",
-                          attrs: {
-                            type: "password",
-                            "label-placeholder": "ផ្ទៀងផ្ទាត់ ពាក្យសម្ងាត់",
-                            name: "confirm_password"
-                          },
-                          model: {
-                            value: _vm.data.confirm_password,
-                            callback: function($$v) {
-                              _vm.$set(_vm.data, "confirm_password", $$v)
-                            },
-                            expression: "data.confirm_password"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c(
-                          "span",
-                          {
-                            directives: [
-                              {
-                                name: "show",
-                                rawName: "v-show",
-                                value: _vm.errors.has("confirm_password"),
-                                expression: "errors.has('confirm_password')"
-                              }
-                            ],
-                            staticClass: "text-danger text-sm"
-                          },
-                          [_vm._v(_vm._s(_vm.errors.first("confirm_password")))]
-                        )
-                      ],
-                      1
-                    )
-                  ])
-                ]),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "vx-col md:w-1/4" },
-                  [
-                    _c("label", [_vm._v("ប្រូហ្វាល")]),
-                    _vm._v(" "),
-                    _c("vue-dropzone", {
-                      ref: "image",
-                      staticClass: "max-content p-1",
-                      attrs: {
-                        duplicateCheck: "",
-                        id: "dropzone",
-                        options: _vm.dropzoneOptions
-                      },
-                      on: { "vdropzone-success": _vm.successUpload }
-                    })
-                  ],
-                  1
-                )
-              ]),
-              _vm._v(" "),
-              _c("vs-divider"),
+                      attrs: { dense: "", flat: "", icon: "close" }
+                    },
+                    [
+                      _c(
+                        "q-tooltip",
+                        { attrs: { "content-class": "bg-white text-primary" } },
+                        [_vm._v("Close")]
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
               _vm._v(" "),
               _c(
-                "div",
-                { staticClass: "flex justify-end btn-group" },
+                "q-card-section",
                 [
                   _c(
-                    "vs-button",
-                    {
-                      attrs: {
-                        icon: "icon-save",
-                        "icon-pack": "feather",
-                        type: "relief"
-                      },
-                      on: { click: _vm.storeUser }
-                    },
-                    [_vm._v("រក្សាទុក\n                ")]
+                    "vx-card",
+                    { attrs: { "no-shadow": "" } },
+                    [
+                      _c("div", { staticClass: "vx-row" }, [
+                        _c("div", { staticClass: "vx-col md:w-3/4" }, [
+                          _c("div", { staticClass: "vx-row" }, [
+                            _c(
+                              "div",
+                              { staticClass: "vx-col w-full" },
+                              [
+                                _c("vs-input", {
+                                  directives: [
+                                    {
+                                      name: "validate",
+                                      rawName: "v-validate",
+                                      value: "required",
+                                      expression: "'required'"
+                                    }
+                                  ],
+                                  staticClass: "w-full",
+                                  attrs: {
+                                    "label-placeholder": "ឈ្មោះ",
+                                    name: "name"
+                                  },
+                                  model: {
+                                    value: _vm.data.name,
+                                    callback: function($$v) {
+                                      _vm.$set(_vm.data, "name", $$v)
+                                    },
+                                    expression: "data.name"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c(
+                                  "span",
+                                  {
+                                    directives: [
+                                      {
+                                        name: "show",
+                                        rawName: "v-show",
+                                        value: _vm.errors.has("name"),
+                                        expression: "errors.has('name')"
+                                      }
+                                    ],
+                                    staticClass: "text-danger text-sm"
+                                  },
+                                  [_vm._v(_vm._s(_vm.errors.first("name")))]
+                                )
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "vx-col w-full mt-2" },
+                              [
+                                _c("vs-input", {
+                                  directives: [
+                                    {
+                                      name: "validate",
+                                      rawName: "v-validate",
+                                      value: "required|email",
+                                      expression: "'required|email'"
+                                    }
+                                  ],
+                                  staticClass: "w-full",
+                                  attrs: {
+                                    "label-placeholder": "អ៊ីម៉ែល",
+                                    name: "email"
+                                  },
+                                  model: {
+                                    value: _vm.data.email,
+                                    callback: function($$v) {
+                                      _vm.$set(_vm.data, "email", $$v)
+                                    },
+                                    expression: "data.email"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c(
+                                  "span",
+                                  {
+                                    directives: [
+                                      {
+                                        name: "show",
+                                        rawName: "v-show",
+                                        value: _vm.errors.has("email"),
+                                        expression: "errors.has('email')"
+                                      }
+                                    ],
+                                    staticClass: "text-danger text-sm"
+                                  },
+                                  [_vm._v(_vm._s(_vm.errors.first("email")))]
+                                )
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "vx-col w-full mt-2" },
+                              [
+                                _c("vs-input", {
+                                  directives: [
+                                    {
+                                      name: "validate",
+                                      rawName: "v-validate",
+                                      value: "min:6|max:10",
+                                      expression: "'min:6|max:10'"
+                                    }
+                                  ],
+                                  ref: "password",
+                                  staticClass: "w-full",
+                                  attrs: {
+                                    type: "password",
+                                    "label-placeholder": "ពាក្យសម្ងាត់",
+                                    name: "password"
+                                  },
+                                  model: {
+                                    value: _vm.data.password,
+                                    callback: function($$v) {
+                                      _vm.$set(_vm.data, "password", $$v)
+                                    },
+                                    expression: "data.password"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c(
+                                  "span",
+                                  {
+                                    directives: [
+                                      {
+                                        name: "show",
+                                        rawName: "v-show",
+                                        value: _vm.errors.has("password"),
+                                        expression: "errors.has('password')"
+                                      }
+                                    ],
+                                    staticClass: "text-danger text-sm"
+                                  },
+                                  [_vm._v(_vm._s(_vm.errors.first("password")))]
+                                )
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "vx-col w-full mt-2" },
+                              [
+                                _c("vs-input", {
+                                  directives: [
+                                    {
+                                      name: "validate",
+                                      rawName: "v-validate",
+                                      value: "min:6|max:10|confirmed:password",
+                                      expression:
+                                        "'min:6|max:10|confirmed:password'"
+                                    }
+                                  ],
+                                  staticClass: "w-full",
+                                  attrs: {
+                                    type: "password",
+                                    "label-placeholder":
+                                      "ផ្ទៀងផ្ទាត់ ពាក្យសម្ងាត់",
+                                    name: "confirm_password"
+                                  },
+                                  model: {
+                                    value: _vm.data.confirm_password,
+                                    callback: function($$v) {
+                                      _vm.$set(
+                                        _vm.data,
+                                        "confirm_password",
+                                        $$v
+                                      )
+                                    },
+                                    expression: "data.confirm_password"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c(
+                                  "span",
+                                  {
+                                    directives: [
+                                      {
+                                        name: "show",
+                                        rawName: "v-show",
+                                        value: _vm.errors.has(
+                                          "confirm_password"
+                                        ),
+                                        expression:
+                                          "errors.has('confirm_password')"
+                                      }
+                                    ],
+                                    staticClass: "text-danger text-sm"
+                                  },
+                                  [
+                                    _vm._v(
+                                      _vm._s(
+                                        _vm.errors.first("confirm_password")
+                                      )
+                                    )
+                                  ]
+                                )
+                              ],
+                              1
+                            )
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "vx-col md:w-1/4" },
+                          [
+                            _c("label", [_vm._v("ប្រូហ្វាល")]),
+                            _vm._v(" "),
+                            _c("vue-dropzone", {
+                              ref: "image",
+                              staticClass: "max-content p-1",
+                              attrs: {
+                                duplicateCheck: "",
+                                id: "dropzone",
+                                options: _vm.dropzoneOptions
+                              },
+                              on: { "vdropzone-success": _vm.successUpload }
+                            })
+                          ],
+                          1
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("vs-divider"),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "flex justify-end btn-group" },
+                        [
+                          _c(
+                            "vs-button",
+                            {
+                              attrs: {
+                                icon: "icon-save",
+                                "icon-pack": "feather",
+                                type: "relief"
+                              },
+                              on: { click: _vm.storeUser }
+                            },
+                            [_vm._v("រក្សាទុក\n                        ")]
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
                   )
                 ],
                 1
@@ -1152,154 +1213,185 @@ var render = function() {
     "div",
     [
       _c(
-        "modal",
+        "q-dialog",
         {
           attrs: {
-            width: "30%",
-            height: "auto",
-            scrollable: true,
-            pivotY: 0.2,
-            clickToClose: false,
-            name: "change-password"
+            persistent: "",
+            maximized: true,
+            "transition-show": "slide-up",
+            "transition-hide": "slide-down"
+          },
+          model: {
+            value: _vm.dialog,
+            callback: function($$v) {
+              _vm.dialog = $$v
+            },
+            expression: "dialog"
           }
         },
         [
-          _c("div", { staticClass: "flex justify-end" }, [
-            _c(
-              "i",
-              {
-                staticClass:
-                  "vs-icon vs-popup--close material-icons text-warning",
-                staticStyle: { background: "rgb(255, 255, 255)" },
-                on: {
-                  click: function($event) {
-                    return _vm.$modal.hide("change-password")
-                  }
-                }
-              },
-              [_vm._v("close")]
-            )
-          ]),
-          _vm._v(" "),
           _c(
-            "vx-card",
-            { attrs: { "no-shadow": "" } },
+            "q-card",
             [
-              _c("div", { staticClass: "vx-row" }, [
-                _c(
-                  "div",
-                  { staticClass: "vx-col w-full mt-2" },
-                  [
-                    _c("vs-input", {
+              _c(
+                "q-bar",
+                [
+                  _c("q-space"),
+                  _vm._v(" "),
+                  _c(
+                    "q-btn",
+                    {
                       directives: [
-                        {
-                          name: "validate",
-                          rawName: "v-validate",
-                          value: "required|min:6|max:10",
-                          expression: "'required|min:6|max:10'"
-                        }
+                        { name: "close-popup", rawName: "v-close-popup" }
                       ],
-                      ref: "password",
-                      staticClass: "w-full",
-                      attrs: {
-                        type: "password",
-                        "label-placeholder": "ពាក្យសម្ងាត់",
-                        name: "password"
-                      },
-                      model: {
-                        value: _vm.data.password,
-                        callback: function($$v) {
-                          _vm.$set(_vm.data, "password", $$v)
-                        },
-                        expression: "data.password"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "span",
-                      {
-                        directives: [
-                          {
-                            name: "show",
-                            rawName: "v-show",
-                            value: _vm.errors.has("password"),
-                            expression: "errors.has('password')"
-                          }
-                        ],
-                        staticClass: "text-danger text-sm"
-                      },
-                      [_vm._v(_vm._s(_vm.errors.first("password")))]
-                    )
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "vx-col w-full mt-2" },
-                  [
-                    _c("vs-input", {
-                      directives: [
-                        {
-                          name: "validate",
-                          rawName: "v-validate",
-                          value: "required|min:6|max:10|confirmed:password",
-                          expression:
-                            "'required|min:6|max:10|confirmed:password'"
-                        }
-                      ],
-                      staticClass: "w-full",
-                      attrs: {
-                        type: "password",
-                        "label-placeholder": "ផ្ទៀងផ្ទាត់ ពាក្យសម្ងាត់",
-                        name: "confirm_password"
-                      },
-                      model: {
-                        value: _vm.data.confirm_password,
-                        callback: function($$v) {
-                          _vm.$set(_vm.data, "confirm_password", $$v)
-                        },
-                        expression: "data.confirm_password"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "span",
-                      {
-                        directives: [
-                          {
-                            name: "show",
-                            rawName: "v-show",
-                            value: _vm.errors.has("confirm_password"),
-                            expression: "errors.has('confirm_password')"
-                          }
-                        ],
-                        staticClass: "text-danger text-sm"
-                      },
-                      [_vm._v(_vm._s(_vm.errors.first("confirm_password")))]
-                    )
-                  ],
-                  1
-                )
-              ]),
-              _vm._v(" "),
-              _c("vs-divider"),
+                      attrs: { dense: "", flat: "", icon: "close" }
+                    },
+                    [
+                      _c(
+                        "q-tooltip",
+                        { attrs: { "content-class": "bg-white text-primary" } },
+                        [_vm._v("Close")]
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
               _vm._v(" "),
               _c(
-                "div",
-                { staticClass: "flex justify-end btn-group" },
+                "q-card-section",
                 [
                   _c(
-                    "vs-button",
-                    {
-                      attrs: {
-                        icon: "icon-edit",
-                        "icon-pack": "feather",
-                        type: "relief"
-                      },
-                      on: { click: _vm.updateUserPassword }
-                    },
-                    [_vm._v("ប្តូរ\n                ")]
+                    "vx-card",
+                    { attrs: { "no-shadow": "" } },
+                    [
+                      _c("div", { staticClass: "vx-row" }, [
+                        _c(
+                          "div",
+                          { staticClass: "vx-col w-full mt-2" },
+                          [
+                            _c("vs-input", {
+                              directives: [
+                                {
+                                  name: "validate",
+                                  rawName: "v-validate",
+                                  value: "required|min:6|max:10",
+                                  expression: "'required|min:6|max:10'"
+                                }
+                              ],
+                              ref: "password",
+                              staticClass: "w-full",
+                              attrs: {
+                                type: "password",
+                                "label-placeholder": "ពាក្យសម្ងាត់",
+                                name: "password"
+                              },
+                              model: {
+                                value: _vm.data.password,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.data, "password", $$v)
+                                },
+                                expression: "data.password"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "span",
+                              {
+                                directives: [
+                                  {
+                                    name: "show",
+                                    rawName: "v-show",
+                                    value: _vm.errors.has("password"),
+                                    expression: "errors.has('password')"
+                                  }
+                                ],
+                                staticClass: "text-danger text-sm"
+                              },
+                              [_vm._v(_vm._s(_vm.errors.first("password")))]
+                            )
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "vx-col w-full mt-2" },
+                          [
+                            _c("vs-input", {
+                              directives: [
+                                {
+                                  name: "validate",
+                                  rawName: "v-validate",
+                                  value:
+                                    "required|min:6|max:10|confirmed:password",
+                                  expression:
+                                    "'required|min:6|max:10|confirmed:password'"
+                                }
+                              ],
+                              staticClass: "w-full",
+                              attrs: {
+                                type: "password",
+                                "label-placeholder": "ផ្ទៀងផ្ទាត់ ពាក្យសម្ងាត់",
+                                name: "confirm_password"
+                              },
+                              model: {
+                                value: _vm.data.confirm_password,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.data, "confirm_password", $$v)
+                                },
+                                expression: "data.confirm_password"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "span",
+                              {
+                                directives: [
+                                  {
+                                    name: "show",
+                                    rawName: "v-show",
+                                    value: _vm.errors.has("confirm_password"),
+                                    expression: "errors.has('confirm_password')"
+                                  }
+                                ],
+                                staticClass: "text-danger text-sm"
+                              },
+                              [
+                                _vm._v(
+                                  _vm._s(_vm.errors.first("confirm_password"))
+                                )
+                              ]
+                            )
+                          ],
+                          1
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("vs-divider"),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "flex justify-end btn-group" },
+                        [
+                          _c(
+                            "vs-button",
+                            {
+                              attrs: {
+                                icon: "icon-edit",
+                                "icon-pack": "feather",
+                                type: "relief"
+                              },
+                              on: { click: _vm.updateUserPassword }
+                            },
+                            [_vm._v("ប្តូរ\n                        ")]
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
                   )
                 ],
                 1
@@ -1340,174 +1432,203 @@ var render = function() {
     "div",
     [
       _c(
-        "modal",
+        "q-dialog",
         {
           attrs: {
-            width: "50%",
-            height: "auto",
-            scrollable: true,
-            pivotY: 0.2,
-            clickToClose: false,
-            name: "edit-user"
+            persistent: "",
+            maximized: true,
+            "transition-show": "slide-up",
+            "transition-hide": "slide-down"
+          },
+          model: {
+            value: _vm.dialog,
+            callback: function($$v) {
+              _vm.dialog = $$v
+            },
+            expression: "dialog"
           }
         },
         [
-          _c("div", { staticClass: "flex justify-end" }, [
-            _c(
-              "i",
-              {
-                staticClass:
-                  "vs-icon vs-popup--close material-icons text-warning",
-                staticStyle: { background: "rgb(255, 255, 255)" },
-                on: {
-                  click: function($event) {
-                    return _vm.$modal.hide("edit-user")
-                  }
-                }
-              },
-              [_vm._v("close")]
-            )
-          ]),
-          _vm._v(" "),
           _c(
-            "vx-card",
-            { attrs: { "no-shadow": "" } },
+            "q-card",
             [
-              _c("div", { staticClass: "vx-row" }, [
-                _c("div", { staticClass: "vx-col md:w-3/4" }, [
-                  _c("div", { staticClass: "vx-row" }, [
-                    _c(
-                      "div",
-                      { staticClass: "vx-col w-full" },
-                      [
-                        _c("vs-input", {
-                          directives: [
-                            {
-                              name: "validate",
-                              rawName: "v-validate",
-                              value: "required",
-                              expression: "'required'"
-                            }
-                          ],
-                          staticClass: "w-full",
-                          attrs: { "label-placeholder": "ឈ្មោះ", name: "name" },
-                          model: {
-                            value: _vm.data.name,
-                            callback: function($$v) {
-                              _vm.$set(_vm.data, "name", $$v)
-                            },
-                            expression: "data.name"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c(
-                          "span",
-                          {
-                            directives: [
-                              {
-                                name: "show",
-                                rawName: "v-show",
-                                value: _vm.errors.has("name"),
-                                expression: "errors.has('name')"
-                              }
-                            ],
-                            staticClass: "text-danger text-sm"
-                          },
-                          [_vm._v(_vm._s(_vm.errors.first("name")))]
-                        )
+              _c(
+                "q-bar",
+                [
+                  _c("q-space"),
+                  _vm._v(" "),
+                  _c(
+                    "q-btn",
+                    {
+                      directives: [
+                        { name: "close-popup", rawName: "v-close-popup" }
                       ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "vx-col w-full mt-2" },
-                      [
-                        _c("vs-input", {
-                          directives: [
-                            {
-                              name: "validate",
-                              rawName: "v-validate",
-                              value: "required|email",
-                              expression: "'required|email'"
-                            }
-                          ],
-                          staticClass: "w-full",
-                          attrs: {
-                            "label-placeholder": "អ៊ីម៉ែល",
-                            name: "email"
-                          },
-                          model: {
-                            value: _vm.data.email,
-                            callback: function($$v) {
-                              _vm.$set(_vm.data, "email", $$v)
-                            },
-                            expression: "data.email"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c(
-                          "span",
-                          {
-                            directives: [
-                              {
-                                name: "show",
-                                rawName: "v-show",
-                                value: _vm.errors.has("email"),
-                                expression: "errors.has('email')"
-                              }
-                            ],
-                            staticClass: "text-danger text-sm"
-                          },
-                          [_vm._v(_vm._s(_vm.errors.first("email")))]
-                        )
-                      ],
-                      1
-                    )
-                  ])
-                ]),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "vx-col md:w-1/4" },
-                  [
-                    _c("label", [_vm._v("ប្រូហ្វាល")]),
-                    _vm._v(" "),
-                    _c("vue-dropzone", {
-                      ref: "profile",
-                      staticClass: "max-content p-1",
-                      attrs: {
-                        duplicateCheck: "",
-                        id: "profile",
-                        options: _vm.dropzoneOptions
-                      },
-                      on: {
-                        "vdropzone-mounted": _vm.loadProfile,
-                        "vdropzone-success": _vm.successUpload
-                      }
-                    })
-                  ],
-                  1
-                )
-              ]),
-              _vm._v(" "),
-              _c("vs-divider"),
+                      attrs: { dense: "", flat: "", icon: "close" }
+                    },
+                    [
+                      _c(
+                        "q-tooltip",
+                        { attrs: { "content-class": "bg-white text-primary" } },
+                        [_vm._v("Close")]
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
               _vm._v(" "),
               _c(
-                "div",
-                { staticClass: "flex justify-end btn-group" },
+                "q-card-section",
                 [
                   _c(
-                    "vs-button",
-                    {
-                      attrs: {
-                        icon: "icon-edit",
-                        "icon-pack": "feather",
-                        type: "relief"
-                      },
-                      on: { click: _vm.updateUser }
-                    },
-                    [_vm._v("កែប្រែ\n                ")]
+                    "vx-card",
+                    { attrs: { "no-shadow": "" } },
+                    [
+                      _c("div", { staticClass: "vx-row" }, [
+                        _c("div", { staticClass: "vx-col md:w-3/4" }, [
+                          _c("div", { staticClass: "vx-row" }, [
+                            _c(
+                              "div",
+                              { staticClass: "vx-col w-full" },
+                              [
+                                _c("vs-input", {
+                                  directives: [
+                                    {
+                                      name: "validate",
+                                      rawName: "v-validate",
+                                      value: "required",
+                                      expression: "'required'"
+                                    }
+                                  ],
+                                  staticClass: "w-full",
+                                  attrs: {
+                                    "label-placeholder": "ឈ្មោះ",
+                                    name: "name"
+                                  },
+                                  model: {
+                                    value: _vm.data.name,
+                                    callback: function($$v) {
+                                      _vm.$set(_vm.data, "name", $$v)
+                                    },
+                                    expression: "data.name"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c(
+                                  "span",
+                                  {
+                                    directives: [
+                                      {
+                                        name: "show",
+                                        rawName: "v-show",
+                                        value: _vm.errors.has("name"),
+                                        expression: "errors.has('name')"
+                                      }
+                                    ],
+                                    staticClass: "text-danger text-sm"
+                                  },
+                                  [_vm._v(_vm._s(_vm.errors.first("name")))]
+                                )
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "vx-col w-full mt-2" },
+                              [
+                                _c("vs-input", {
+                                  directives: [
+                                    {
+                                      name: "validate",
+                                      rawName: "v-validate",
+                                      value: "required|email",
+                                      expression: "'required|email'"
+                                    }
+                                  ],
+                                  staticClass: "w-full",
+                                  attrs: {
+                                    "label-placeholder": "អ៊ីម៉ែល",
+                                    name: "email"
+                                  },
+                                  model: {
+                                    value: _vm.data.email,
+                                    callback: function($$v) {
+                                      _vm.$set(_vm.data, "email", $$v)
+                                    },
+                                    expression: "data.email"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c(
+                                  "span",
+                                  {
+                                    directives: [
+                                      {
+                                        name: "show",
+                                        rawName: "v-show",
+                                        value: _vm.errors.has("email"),
+                                        expression: "errors.has('email')"
+                                      }
+                                    ],
+                                    staticClass: "text-danger text-sm"
+                                  },
+                                  [_vm._v(_vm._s(_vm.errors.first("email")))]
+                                )
+                              ],
+                              1
+                            )
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "vx-col md:w-1/4" },
+                          [
+                            _c("label", [_vm._v("ប្រូហ្វាល")]),
+                            _vm._v(" "),
+                            _c("vue-dropzone", {
+                              ref: "profile",
+                              staticClass: "max-content p-1",
+                              attrs: {
+                                duplicateCheck: "",
+                                id: "profile",
+                                options: _vm.dropzoneOptions
+                              },
+                              on: {
+                                "vdropzone-mounted": _vm.loadProfile,
+                                "vdropzone-success": _vm.successUpload
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("vs-divider"),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "flex justify-end btn-group" },
+                        [
+                          _c(
+                            "vs-button",
+                            {
+                              attrs: {
+                                icon: "icon-edit",
+                                "icon-pack": "feather",
+                                type: "relief"
+                              },
+                              on: { click: _vm.updateUser }
+                            },
+                            [_vm._v("កែប្រែ\n                        ")]
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
                   )
                 ],
                 1

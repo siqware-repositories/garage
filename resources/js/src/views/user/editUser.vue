@@ -1,43 +1,56 @@
 <template>
     <div>
-        <modal width="50%" height="auto" :scrollable="true" :pivotY="0.2" :clickToClose="false" name="edit-user">
-            <div class="flex justify-end">
-                <i @click="$modal.hide('edit-user')" class="vs-icon vs-popup--close material-icons text-warning"
-                   style="background: rgb(255, 255, 255);">close</i>
-            </div>
-            <vx-card no-shadow>
-                <div class="vx-row">
-                    <div class="vx-col md:w-3/4">
+        <q-dialog
+            v-model="dialog"
+            persistent
+            :maximized="true"
+            transition-show="slide-up"
+            transition-hide="slide-down"
+        >
+            <q-card>
+                <q-bar>
+                    <q-space />
+                    <q-btn dense flat icon="close" v-close-popup>
+                        <q-tooltip content-class="bg-white text-primary">Close</q-tooltip>
+                    </q-btn>
+                </q-bar>
+
+                <q-card-section>
+                    <vx-card no-shadow>
                         <div class="vx-row">
-                            <div class="vx-col w-full">
-                                <vs-input v-validate="'required'" label-placeholder="ឈ្មោះ" name="name"
-                                          v-model="data.name" class="w-full"/>
-                                <span class="text-danger text-sm"
-                                      v-show="errors.has('name')">{{ errors.first('name') }}</span>
+                            <div class="vx-col md:w-3/4">
+                                <div class="vx-row">
+                                    <div class="vx-col w-full">
+                                        <vs-input v-validate="'required'" label-placeholder="ឈ្មោះ" name="name"
+                                                  v-model="data.name" class="w-full"/>
+                                        <span class="text-danger text-sm"
+                                              v-show="errors.has('name')">{{ errors.first('name') }}</span>
+                                    </div>
+                                    <div class="vx-col w-full mt-2">
+                                        <vs-input v-validate="'required|email'" label-placeholder="អ៊ីម៉ែល" name="email"
+                                                  v-model="data.email" class="w-full"/>
+                                        <span class="text-danger text-sm"
+                                              v-show="errors.has('email')">{{ errors.first('email') }}</span>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="vx-col w-full mt-2">
-                                <vs-input v-validate="'required|email'" label-placeholder="អ៊ីម៉ែល" name="email"
-                                          v-model="data.email" class="w-full"/>
-                                <span class="text-danger text-sm"
-                                      v-show="errors.has('email')">{{ errors.first('email') }}</span>
+                            <div class="vx-col md:w-1/4">
+                                <label>ប្រូហ្វាល</label>
+                                <vue-dropzone @vdropzone-mounted="loadProfile" class="max-content p-1" duplicateCheck ref="profile"
+                                              @vdropzone-success="successUpload" id="profile"
+                                              :options="dropzoneOptions"></vue-dropzone>
                             </div>
                         </div>
-                    </div>
-                    <div class="vx-col md:w-1/4">
-                        <label>ប្រូហ្វាល</label>
-                        <vue-dropzone @vdropzone-mounted="loadProfile" class="max-content p-1" duplicateCheck ref="profile"
-                                      @vdropzone-success="successUpload" id="profile"
-                                      :options="dropzoneOptions"></vue-dropzone>
-                    </div>
-                </div>
-                <vs-divider/>
-                <!-- Save & Reset Button -->
-                <div class="flex justify-end btn-group">
-                    <vs-button @click="updateUser" icon="icon-edit" icon-pack="feather" type="relief">កែប្រែ
-                    </vs-button>
-                </div>
-            </vx-card>
-        </modal>
+                        <vs-divider/>
+                        <!-- Save & Reset Button -->
+                        <div class="flex justify-end btn-group">
+                            <vs-button @click="updateUser" icon="icon-edit" icon-pack="feather" type="relief">កែប្រែ
+                            </vs-button>
+                        </div>
+                    </vx-card>
+                </q-card-section>
+            </q-card>
+        </q-dialog>
     </div>
 </template>
 
@@ -52,6 +65,7 @@
         components: {vueDropzone: vue2Dropzone, 'v-select': vSelect, flatPickr},
         data() {
             return {
+                dialog:false,
                 data: {
                     id: null,
                     name: '',
@@ -75,7 +89,7 @@
                 this.$refs.profile.manuallyAddFile({ size: 123}, this.data.profile);
             },
             show(data) {
-                this.$modal.show('edit-user');
+                this.dialog = true;
                 this.data.id = data.id;
                 this.data.name = data.name;
                 this.data.email = data.email;

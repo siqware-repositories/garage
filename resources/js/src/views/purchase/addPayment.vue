@@ -1,34 +1,47 @@
 <template>
-    <modal height="auto" :scrollable="true" :pivotY="0.2" :clickToClose="false" name="add-payment">
-        <div class="flex justify-end">
-            <i @click="$modal.hide('add-payment')" class="vs-icon vs-popup--close material-icons text-warning"
-               style="background: rgb(255, 255, 255);">close</i>
-        </div>
-        <vx-card no-shadow>
-            <div class="vx-row">
-                <div class="vx-col md:w-1/2 w-full">
-                    <h4>ទឹកប្រាក់ត្រូវសង</h4>
-                    <span class="text-2xl">${{data.balance}}</span>
-                </div>
-                <div class="vx-col md:w-1/2 w-full">
-                    <h4>ទឹកប្រាក់នៅសល់</h4>
-                    <span class="text-2xl">${{due_balance}}</span>
-                </div>
-            </div>
-            <vs-divider></vs-divider>
-            <div class="vx-row">
-                <div class="vx-col w-full">
-                    <vs-input-number v-model="data.input_balance" min="0" :max="data.balance" name="input_balance" v-validate="'required'"/>
-                    <span class="text-danger text-sm"
-                          v-show="errors.has('input_balance')">{{ errors.first('input_balance') }}</span>
-                </div>
-            </div>
-            <!-- Save & Reset Button -->
-            <div class="flex justify-end btn-group">
-                <vs-button @click="updatePurchasePayment" icon="icon-dollar-sign" icon-pack="feather" type="relief">ចំណាយ</vs-button>
-            </div>
-        </vx-card>
-    </modal>
+    <q-dialog
+        v-model="dialog"
+        persistent
+        :maximized="true"
+        transition-show="slide-up"
+        transition-hide="slide-down"
+    >
+        <q-card>
+            <q-bar>
+                <q-space />
+                <q-btn dense flat icon="close" v-close-popup>
+                    <q-tooltip content-class="bg-white text-primary">Close</q-tooltip>
+                </q-btn>
+            </q-bar>
+
+            <q-card-section>
+                <vx-card no-shadow>
+                    <div class="vx-row">
+                        <div class="vx-col md:w-1/2 w-full">
+                            <h4>ទឹកប្រាក់ត្រូវសង</h4>
+                            <span class="text-2xl">${{data.balance}}</span>
+                        </div>
+                        <div class="vx-col md:w-1/2 w-full">
+                            <h4>ទឹកប្រាក់នៅសល់</h4>
+                            <span class="text-2xl">${{due_balance}}</span>
+                        </div>
+                    </div>
+                    <vs-divider></vs-divider>
+                    <div class="vx-row">
+                        <div class="vx-col w-full">
+                            <vs-input-number v-model="data.input_balance" min="0" :max="data.balance" name="input_balance" v-validate="'required'"/>
+                            <span class="text-danger text-sm"
+                                  v-show="errors.has('input_balance')">{{ errors.first('input_balance') }}</span>
+                        </div>
+                    </div>
+                    <!-- Save & Reset Button -->
+                    <div class="flex justify-end btn-group">
+                        <vs-button @click="updatePurchasePayment" icon="icon-dollar-sign" icon-pack="feather" type="relief">ចំណាយ</vs-button>
+                    </div>
+                </vx-card>
+            </q-card-section>
+        </q-card>
+    </q-dialog>
 </template>
 
 <script>
@@ -36,7 +49,7 @@
         name: "addPayment",
         methods:{
             show(data){
-                this.$modal.show('add-payment');
+                this.dialog = true;
                 this.data.id = data.id;
                 this.data.balance = data.due_balance;
                 this.data.input_balance = data.due_balance;
@@ -87,6 +100,7 @@
         },
         data(){
             return{
+                dialog:false,
                 data:{
                     id:null,
                     balance:0,
