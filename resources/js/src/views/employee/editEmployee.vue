@@ -36,7 +36,29 @@
                                 <div class="vx-row mt-2">
                                     <div class="vx-col md:w-1/2 w-full">
                                         <label>ថ្ងៃខែឆ្នាំកំណើត</label>
-                                        <flat-pickr v-validate="'required'" name="dob" class="w-full" v-model="data.dob" placeholder="ជ្រើសរើស"/>
+                                        <q-input
+                                                dense
+                                                v-validate="'required'"
+                                                class="full-width"
+                                                outlined
+                                                v-model="data.dob"
+                                                square
+                                                name="dob"
+                                        >
+                                            <template
+                                                    v-slot:append>
+                                                <q-icon name="event"
+                                                        class="cursor-pointer">
+                                                    <q-popup-proxy
+                                                            ref="datePurchase"
+                                                            transition-show="scale"
+                                                            transition-hide="scale">
+                                                        <q-date v-model="data.dob"
+                                                                @input="() => $refs.datePurchase.hide()"/>
+                                                    </q-popup-proxy>
+                                                </q-icon>
+                                            </template>
+                                        </q-input>
                                         <span class="text-danger text-sm"
                                               v-show="errors.has('dob')">{{ errors.first('dob') }}</span>
                                     </div>

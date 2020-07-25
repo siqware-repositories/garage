@@ -23,8 +23,6 @@ Route::post('/user-register', 'UserController@register')->name('user.register');
 Route::post('/user-login', 'UserController@login')->name('user.login');
 Route::group(['middleware' => ['auth:api']], function () {
     //end user
-    Route::post('/file-upload','FileUploadController@upload')->name('file.upload');
-    Route::post('/file-upload-thumb','FileUploadController@upload_thumb')->name('file.upload.thumb');
     Route::resource('/product','ProductController');
     Route::resource('/unit','UnitController');
     Route::resource('/category','CategoryController');
@@ -57,6 +55,8 @@ Route::group(['middleware' => ['auth:api']], function () {
 //report mobile api
     Route::post('/check-stock','ReportController@check_stock');
 });
+Route::post('/file-upload','FileUploadController@upload')->name('file.upload');
+Route::post('/file-upload-thumb','FileUploadController@upload_thumb')->name('file.upload.thumb');
 Route::post('/check-stock-id','ReportController@check_stock');
 Route::post('/product-api','ReportController@product_api');
 Route::post('/product-count-api','ReportController@product_count_api');

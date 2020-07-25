@@ -40,8 +40,29 @@
                             </div>
                             <div class="vx-col md:w-1/3 w-full">
                                 <label>ថ្ងៃខែឆ្នាំទិញ</label>
-                                <flat-pickr name="invoice_date" v-validate="'required'" class="w-full"
-                                            v-model="invoice.invoice_date" placeholder="Choose Date"/>
+                                <q-input
+                                        dense
+                                        v-validate="'required'"
+                                        class="full-width"
+                                        outlined
+                                        v-model="invoice.invoice_date"
+                                        square
+                                        name="invoice_date"
+                                >
+                                    <template
+                                            v-slot:append>
+                                        <q-icon name="event"
+                                                class="cursor-pointer">
+                                            <q-popup-proxy
+                                                    ref="datePurchase"
+                                                    transition-show="scale"
+                                                    transition-hide="scale">
+                                                <q-date v-model="invoice.invoice_date"
+                                                        @input="() => $refs.datePurchase.hide()"/>
+                                            </q-popup-proxy>
+                                        </q-icon>
+                                    </template>
+                                </q-input>
                                 <span class="text-danger text-sm"
                                       v-show="errors.has('invoice_date')">{{ errors.first('invoice_date') }}</span>
                             </div>

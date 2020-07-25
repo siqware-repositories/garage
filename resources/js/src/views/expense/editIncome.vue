@@ -19,7 +19,29 @@
                     <div class="vx-row">
                         <div class="vx-col md:w-1/4 w-full">
                             <label>កាលបរិច្ឆេទ</label>
-                            <flat-pickr v-validate="'required'" name="date" class="w-full" v-model="data.date" placeholder="ជ្រើសរើស" />
+                            <q-input
+                                    dense
+                                    v-validate="'required'"
+                                    class="full-width"
+                                    outlined
+                                    v-model="data.date"
+                                    square
+                                    name="date"
+                            >
+                                <template
+                                        v-slot:append>
+                                    <q-icon name="event"
+                                            class="cursor-pointer">
+                                        <q-popup-proxy
+                                                ref="datePurchase"
+                                                transition-show="scale"
+                                                transition-hide="scale">
+                                            <q-date v-model="data.date"
+                                                    @input="() => $refs.datePurchase.hide()"/>
+                                        </q-popup-proxy>
+                                    </q-icon>
+                                </template>
+                            </q-input>
                             <span class="text-danger text-sm" v-show="errors.has('date')">{{ errors.first('date') }}</span>
                         </div>
                         <div class="vx-col md:w-3/4 w-full">
