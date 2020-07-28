@@ -1815,6 +1815,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 position: 'top-center'
               });
               self.$emit('finished');
+
+              if (self.invoice.invoice_status === 'received') {
+                self.dialog = false;
+              }
             } else {
               self.$vs.notify({
                 title: 'ប្រតិបត្តិការបរាជ័យ',

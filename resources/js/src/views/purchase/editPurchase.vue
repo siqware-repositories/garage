@@ -589,6 +589,9 @@
                                     position: 'top-center'
                                 });
                                 self.$emit('finished');
+                                if (self.purchase.purchase_status==='received'){
+                                    self.dialog = false;
+                                }
                             } else {
                                 self.$vs.notify({
                                     title: 'ប្រតិបត្តិការបរាជ័យ',
