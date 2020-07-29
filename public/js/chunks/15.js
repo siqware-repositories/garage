@@ -1336,7 +1336,7 @@ var render = function() {
                       "div",
                       { staticClass: "vx-col w-full" },
                       [
-                        _c("table", [
+                        _c("table", { staticStyle: { "min-width": "700px" } }, [
                           _c("thead", [
                             _c("tr", [
                               _c("th", [_vm._v("ល.រ")]),
@@ -1415,10 +1415,7 @@ var render = function() {
                                 _vm._v(" "),
                                 _c(
                                   "td",
-                                  {
-                                    staticClass: "p-1",
-                                    attrs: { width: "300" }
-                                  },
+                                  { staticClass: "p-1" },
                                   [
                                     _c(
                                       "vx-input-group",
@@ -2010,7 +2007,7 @@ var render = function() {
                       "div",
                       { staticClass: "vx-col w-full" },
                       [
-                        _c("table", [
+                        _c("table", { staticStyle: { "min-width": "700px" } }, [
                           _c("thead", [
                             _c("tr", [
                               _c("th", [_vm._v("ល.រ")]),
@@ -2089,10 +2086,7 @@ var render = function() {
                                 _vm._v(" "),
                                 _c(
                                   "td",
-                                  {
-                                    staticClass: "p-1",
-                                    attrs: { width: "300" }
-                                  },
+                                  { staticClass: "p-1" },
                                   [
                                     _c(
                                       "vx-input-group",

@@ -52,7 +52,7 @@
                     </div>
                     <div class="vx-row">
                         <div class="vx-col w-full">
-                            <table>
+                            <table style="min-width: 700px">
                                 <thead>
                                 <tr>
                                     <th>ល.រ</th>
@@ -69,7 +69,7 @@
                                         <vs-input v-validate="'required'" :name="`${index}-description`" v-model="item.description" class="w-full" />
                                         <span class="text-danger text-sm" v-show="errors.has(`${index}-description`)">{{ errors.first(`${index}-description`) }}</span>
                                     </td>
-                                    <td class="p-1" width="300">
+                                    <td class="p-1">
                                         <vx-input-group>
                                             <v-select v-validate="'required'" v-model="item.type" :name="`${index}-type`" class="w-full" :options="all_expense_types"/>
                                             <template slot="append">
