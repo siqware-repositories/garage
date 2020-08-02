@@ -485,7 +485,7 @@
                                 });
                             }
                             self.$vs.loading.close();
-                            self.$modal.hide('edit-invoice');
+                            self.dialog = false;
                         });
                     } else {
                         self.$vs.notify({

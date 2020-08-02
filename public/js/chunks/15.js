@@ -417,7 +417,7 @@ __webpack_require__.r(__webpack_exports__);
                 icon: 'icon-check',
                 position: 'top-center'
               });
-              self.$modal.hide('add-expense');
+              self.dialog = false;
             } else {
               self.$vs.notify({
                 title: 'ប្រតិបត្តិការបរាជ័យ',
@@ -790,7 +790,7 @@ __webpack_require__.r(__webpack_exports__);
                 position: 'top-center'
               });
               self.$emit('finished');
-              self.$modal.hide('edit-expense');
+              self.dialog = false;
             } else {
               self.$vs.notify({
                 title: 'ប្រតិបត្តិការបរាជ័យ',

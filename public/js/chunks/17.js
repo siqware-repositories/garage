@@ -390,7 +390,7 @@ __webpack_require__.r(__webpack_exports__);
                 position: 'top-center'
               });
               self.$emit('finished');
-              self.$modal.hide('add-payment');
+              self.dialog = false;
             } else {
               self.$vs.notify({
                 title: 'ប្រតិបត្តិការបរាជ័យ',
@@ -996,7 +996,7 @@ var stringOptions = ['Google', 'Facebook', 'Twitter', 'Apple', 'Oracle'];
       this.purchase.purchase_date = null;
       this.purchase.purchase_status = 'pending';
       this.purchase.description = '';
-      this.$modal.hide('add');
+      this.dialog = false;
     },
     //image upload
     successUpload: function successUpload(file, res) {
@@ -1633,7 +1633,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             }
 
             self.$vs.loading.close();
-            self.$modal.hide('edit-purchase');
+            self.dialog = false;
           });
         } else {
           self.$vs.notify({

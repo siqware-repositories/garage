@@ -538,7 +538,7 @@
                 this.purchase.purchase_date = null;
                 this.purchase.purchase_status = 'pending';
                 this.purchase.description = '';
-                this.$modal.hide('add');
+                this.dialog = false;
             },
             //image upload
             successUpload(file, res) {

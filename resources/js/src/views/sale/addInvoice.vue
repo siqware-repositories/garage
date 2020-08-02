@@ -609,7 +609,7 @@
                         remain_qty: ''
                     }]
                 };
-                this.$modal.hide('add-invoice');
+                this.dialog = false;
             },
             //image upload
             successUpload(file, res) {

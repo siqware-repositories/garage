@@ -196,7 +196,7 @@
                                     icon: 'icon-check',
                                     position: 'top-center'
                                 });
-                                self.$modal.hide('add-income');
+                                self.dialog = false;
                             } else {
                                 self.$vs.notify({
                                     title: 'ប្រតិបត្តិការបរាជ័យ',

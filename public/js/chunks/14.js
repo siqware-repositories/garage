@@ -1109,7 +1109,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           remain_qty: ''
         }]
       };
-      this.$modal.hide('add-invoice');
+      this.dialog = false;
     },
     //image upload
     successUpload: function successUpload(file, res) {
@@ -1254,7 +1254,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                     case 4:
                       self.$emit('finished');
-                      self.$modal.hide('add-payment');
+                      self.dialog = false;
                       _context.next = 9;
                       break;
 
@@ -1849,7 +1849,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             }
 
             self.$vs.loading.close();
-            self.$modal.hide('edit-invoice');
+            self.dialog = false;
           });
         } else {
           self.$vs.notify({
