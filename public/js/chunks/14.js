@@ -377,10 +377,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "addCustomer",
   data: function data() {
     return {
+      dialog: false,
       data: {
         name: null,
         contact: null,
@@ -391,7 +409,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     show: function show() {
-      this.$modal.show('add-customer');
+      this.dialog = true;
     },
     //store
     storeCustomer: function storeCustomer() {
@@ -2944,47 +2962,210 @@ var render = function() {
     "div",
     [
       _c(
-        "modal",
+        "q-dialog",
         {
           attrs: {
-            width: "60%",
-            height: "auto",
-            scrollable: true,
-            pivotY: 0.2,
-            clickToClose: false,
-            name: "add-customer"
+            persistent: "",
+            maximized: true,
+            "transition-show": "slide-up",
+            "transition-hide": "slide-down"
+          },
+          model: {
+            value: _vm.dialog,
+            callback: function($$v) {
+              _vm.dialog = $$v
+            },
+            expression: "dialog"
           }
         },
         [
-          _c("div", { staticClass: "flex justify-end" }, [
-            _c(
-              "i",
-              {
-                staticClass:
-                  "vs-icon vs-popup--close material-icons text-warning",
-                staticStyle: { background: "rgb(255, 255, 255)" },
-                on: {
-                  click: function($event) {
-                    return _vm.$modal.hide("add-customer")
-                  }
-                }
-              },
-              [_vm._v("close")]
-            )
-          ]),
-          _vm._v(" "),
           _c(
-            "vx-card",
-            { attrs: { "no-shadow": "" } },
+            "q-card",
             [
-              _c("div", { staticClass: "vx-row" }, [
-                _c("div", { staticClass: "vx-col md:w-2/3 w-full" }, [
+              _c(
+                "q-bar",
+                [
+                  _c("q-space"),
+                  _vm._v(" "),
+                  _c(
+                    "q-btn",
+                    {
+                      directives: [
+                        { name: "close-popup", rawName: "v-close-popup" }
+                      ],
+                      attrs: { dense: "", flat: "", icon: "close" }
+                    },
+                    [
+                      _c(
+                        "q-tooltip",
+                        { attrs: { "content-class": "bg-white text-primary" } },
+                        [
+                          _vm._v(
+                            "\n                        Close\n                    "
+                          )
+                        ]
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "q-card-section",
+                { staticClass: "q-pt-none q-px-lg" },
+                [
                   _c("div", { staticClass: "vx-row" }, [
+                    _c("div", { staticClass: "vx-col md:w-2/3 w-full" }, [
+                      _c("div", { staticClass: "vx-row" }, [
+                        _c(
+                          "div",
+                          { staticClass: "vx-col w-full" },
+                          [
+                            _c("vs-input", {
+                              directives: [
+                                {
+                                  name: "validate",
+                                  rawName: "v-validate",
+                                  value: "required",
+                                  expression: "'required'"
+                                }
+                              ],
+                              staticClass: "w-full",
+                              attrs: {
+                                "label-placeholder": "ឈ្មោះ",
+                                name: "name"
+                              },
+                              model: {
+                                value: _vm.data.name,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.data, "name", $$v)
+                                },
+                                expression: "data.name"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "span",
+                              {
+                                directives: [
+                                  {
+                                    name: "show",
+                                    rawName: "v-show",
+                                    value: _vm.errors.has("name"),
+                                    expression: "errors.has('name')"
+                                  }
+                                ],
+                                staticClass: "text-danger text-sm"
+                              },
+                              [_vm._v(_vm._s(_vm.errors.first("name")))]
+                            )
+                          ],
+                          1
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "vx-row" }, [
+                        _c(
+                          "div",
+                          { staticClass: "vx-col w-full" },
+                          [
+                            _c("label", [_vm._v("ទំនាក់ទំនង")]),
+                            _vm._v(" "),
+                            _c("vs-textarea", {
+                              directives: [
+                                {
+                                  name: "validate",
+                                  rawName: "v-validate",
+                                  value: "required",
+                                  expression: "'required'"
+                                }
+                              ],
+                              staticClass: "w-full",
+                              attrs: { label: "ទំនាក់ទំនង", name: "contact" },
+                              model: {
+                                value: _vm.data.contact,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.data, "contact", $$v)
+                                },
+                                expression: "data.contact"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "span",
+                              {
+                                directives: [
+                                  {
+                                    name: "show",
+                                    rawName: "v-show",
+                                    value: _vm.errors.has("contact"),
+                                    expression: "errors.has('contact')"
+                                  }
+                                ],
+                                staticClass: "text-danger text-sm"
+                              },
+                              [_vm._v(_vm._s(_vm.errors.first("contact")))]
+                            )
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "vx-col w-full" },
+                          [
+                            _c("label", [_vm._v("សំគាល់")]),
+                            _vm._v(" "),
+                            _c("vs-textarea", {
+                              directives: [
+                                {
+                                  name: "validate",
+                                  rawName: "v-validate",
+                                  value: "required",
+                                  expression: "'required'"
+                                }
+                              ],
+                              staticClass: "w-full",
+                              attrs: { label: "សំគាល់", name: "note" },
+                              model: {
+                                value: _vm.data.note,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.data, "note", $$v)
+                                },
+                                expression: "data.note"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "span",
+                              {
+                                directives: [
+                                  {
+                                    name: "show",
+                                    rawName: "v-show",
+                                    value: _vm.errors.has("note"),
+                                    expression: "errors.has('note')"
+                                  }
+                                ],
+                                staticClass: "text-danger text-sm"
+                              },
+                              [_vm._v(_vm._s(_vm.errors.first("note")))]
+                            )
+                          ],
+                          1
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
                     _c(
                       "div",
-                      { staticClass: "vx-col w-full" },
+                      { staticClass: "vx-col md:w-1/3 w-full" },
                       [
-                        _c("vs-input", {
+                        _c("label", [_vm._v("អាស័យដ្ឋាន")]),
+                        _vm._v(" "),
+                        _c("vs-textarea", {
                           directives: [
                             {
                               name: "validate",
@@ -2994,13 +3175,13 @@ var render = function() {
                             }
                           ],
                           staticClass: "w-full",
-                          attrs: { "label-placeholder": "ឈ្មោះ", name: "name" },
+                          attrs: { label: "អាស័យដ្ឋាន", name: "address" },
                           model: {
-                            value: _vm.data.name,
+                            value: _vm.data.address,
                             callback: function($$v) {
-                              _vm.$set(_vm.data, "name", $$v)
+                              _vm.$set(_vm.data, "address", $$v)
                             },
-                            expression: "data.name"
+                            expression: "data.address"
                           }
                         }),
                         _vm._v(" "),
@@ -3011,175 +3192,39 @@ var render = function() {
                               {
                                 name: "show",
                                 rawName: "v-show",
-                                value: _vm.errors.has("name"),
-                                expression: "errors.has('name')"
+                                value: _vm.errors.has("address"),
+                                expression: "errors.has('address')"
                               }
                             ],
                             staticClass: "text-danger text-sm"
                           },
-                          [_vm._v(_vm._s(_vm.errors.first("name")))]
+                          [_vm._v(_vm._s(_vm.errors.first("address")))]
                         )
                       ],
                       1
                     )
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "vx-row" }, [
-                    _c(
-                      "div",
-                      { staticClass: "vx-col w-full" },
-                      [
-                        _c("label", [_vm._v("ទំនាក់ទំនង")]),
-                        _vm._v(" "),
-                        _c("vs-textarea", {
-                          directives: [
-                            {
-                              name: "validate",
-                              rawName: "v-validate",
-                              value: "required",
-                              expression: "'required'"
-                            }
-                          ],
-                          staticClass: "w-full",
-                          attrs: { label: "ទំនាក់ទំនង", name: "contact" },
-                          model: {
-                            value: _vm.data.contact,
-                            callback: function($$v) {
-                              _vm.$set(_vm.data, "contact", $$v)
-                            },
-                            expression: "data.contact"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c(
-                          "span",
-                          {
-                            directives: [
-                              {
-                                name: "show",
-                                rawName: "v-show",
-                                value: _vm.errors.has("contact"),
-                                expression: "errors.has('contact')"
-                              }
-                            ],
-                            staticClass: "text-danger text-sm"
-                          },
-                          [_vm._v(_vm._s(_vm.errors.first("contact")))]
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "vx-col w-full" },
-                      [
-                        _c("label", [_vm._v("សំគាល់")]),
-                        _vm._v(" "),
-                        _c("vs-textarea", {
-                          directives: [
-                            {
-                              name: "validate",
-                              rawName: "v-validate",
-                              value: "required",
-                              expression: "'required'"
-                            }
-                          ],
-                          staticClass: "w-full",
-                          attrs: { label: "សំគាល់", name: "note" },
-                          model: {
-                            value: _vm.data.note,
-                            callback: function($$v) {
-                              _vm.$set(_vm.data, "note", $$v)
-                            },
-                            expression: "data.note"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c(
-                          "span",
-                          {
-                            directives: [
-                              {
-                                name: "show",
-                                rawName: "v-show",
-                                value: _vm.errors.has("note"),
-                                expression: "errors.has('note')"
-                              }
-                            ],
-                            staticClass: "text-danger text-sm"
-                          },
-                          [_vm._v(_vm._s(_vm.errors.first("note")))]
-                        )
-                      ],
-                      1
-                    )
-                  ])
-                ]),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "vx-col md:w-1/3 w-full" },
-                  [
-                    _c("label", [_vm._v("អាស័យដ្ឋាន")]),
-                    _vm._v(" "),
-                    _c("vs-textarea", {
-                      directives: [
-                        {
-                          name: "validate",
-                          rawName: "v-validate",
-                          value: "required",
-                          expression: "'required'"
-                        }
-                      ],
-                      staticClass: "w-full",
-                      attrs: { label: "អាស័យដ្ឋាន", name: "address" },
-                      model: {
-                        value: _vm.data.address,
-                        callback: function($$v) {
-                          _vm.$set(_vm.data, "address", $$v)
-                        },
-                        expression: "data.address"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "span",
-                      {
-                        directives: [
-                          {
-                            name: "show",
-                            rawName: "v-show",
-                            value: _vm.errors.has("address"),
-                            expression: "errors.has('address')"
-                          }
-                        ],
-                        staticClass: "text-danger text-sm"
-                      },
-                      [_vm._v(_vm._s(_vm.errors.first("address")))]
-                    )
-                  ],
-                  1
-                )
-              ]),
-              _vm._v(" "),
-              _c("vs-divider"),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "flex justify-end btn-group" },
-                [
+                  _c("vs-divider"),
+                  _vm._v(" "),
                   _c(
-                    "vs-button",
-                    {
-                      attrs: {
-                        icon: "icon-save",
-                        "icon-pack": "feather",
-                        type: "relief"
-                      },
-                      on: { click: _vm.storeCustomer }
-                    },
-                    [_vm._v("រក្សាទុក")]
+                    "div",
+                    { staticClass: "flex justify-end btn-group" },
+                    [
+                      _c(
+                        "vs-button",
+                        {
+                          attrs: {
+                            icon: "icon-save",
+                            "icon-pack": "feather",
+                            type: "relief"
+                          },
+                          on: { click: _vm.storeCustomer }
+                        },
+                        [_vm._v("រក្សាទុក")]
+                      )
+                    ],
+                    1
                   )
                 ],
                 1

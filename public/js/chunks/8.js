@@ -839,6 +839,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "printLabel",
@@ -847,6 +871,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      dialog: false,
       data: {
         products: [{
           name: 'name',
@@ -858,7 +883,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     show: function show(data) {
       var self = this;
-      self.$refs.printLabel.open();
+      self.dialog = true;
       self.data.products = data;
     },
     printHtml: function printHtml() {
@@ -2477,60 +2502,104 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "sweet-modal",
+    "q-dialog",
     {
-      ref: "printLabel",
       attrs: {
-        title: "Print Label",
-        blocking: true,
-        width: !_vm.mobilecheck() ? "60%" : ""
+        persistent: "",
+        maximized: true,
+        "transition-show": "slide-up",
+        "transition-hide": "slide-down"
+      },
+      model: {
+        value: _vm.dialog,
+        callback: function($$v) {
+          _vm.dialog = $$v
+        },
+        expression: "dialog"
       }
     },
     [
-      _c("div", { staticClass: "px-3", attrs: { id: "printMe" } }, [
-        _c(
-          "div",
-          { staticClass: "vx-row" },
-          _vm._l(_vm.data.products, function(item, index) {
-            return _c(
-              "div",
-              {
-                key: index,
-                staticClass:
-                  "vx-col md:w-1/4 w-full bordered print:w-1/4 text-left"
-              },
-              [
-                _c("div", { staticClass: "label-text" }, [
-                  _vm._v(
-                    "\n                    " +
-                      _vm._s(item.name) +
-                      "\n                "
-                  )
-                ]),
-                _vm._v(" "),
-                _c("bar-code", {
-                  attrs: {
-                    value: "000" + item.id,
-                    tag: "img",
-                    options: { displayValue: true, width: 1, height: 30 }
-                  }
-                })
-              ],
-              1
-            )
-          }),
-          0
-        )
-      ]),
-      _vm._v(" "),
       _c(
-        "vs-button",
-        {
-          attrs: { slot: "button" },
-          on: { click: _vm.printHtml },
-          slot: "button"
-        },
-        [_vm._v("Print")]
+        "q-card",
+        [
+          _c(
+            "q-bar",
+            [
+              _c("q-space"),
+              _vm._v(" "),
+              _c(
+                "q-btn",
+                {
+                  directives: [
+                    { name: "close-popup", rawName: "v-close-popup" }
+                  ],
+                  attrs: { dense: "", flat: "", icon: "close" }
+                },
+                [
+                  _c(
+                    "q-tooltip",
+                    { attrs: { "content-class": "bg-white text-primary" } },
+                    [_vm._v("\n                    Close\n                ")]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "q-card-section",
+            { staticClass: "q-px-lg" },
+            [
+              _c("div", { staticClass: "px-3", attrs: { id: "printMe" } }, [
+                _c(
+                  "div",
+                  { staticClass: "vx-row" },
+                  _vm._l(_vm.data.products, function(item, index) {
+                    return _c(
+                      "div",
+                      {
+                        key: index,
+                        staticClass:
+                          "vx-col md:w-1/4 w-full bordered print:w-1/4 text-left"
+                      },
+                      [
+                        _c("div", { staticClass: "label-text" }, [
+                          _vm._v(
+                            "\n                            " +
+                              _vm._s(item.name) +
+                              "\n                        "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("bar-code", {
+                          attrs: {
+                            value: "000" + item.id,
+                            tag: "img",
+                            options: {
+                              displayValue: true,
+                              width: 1,
+                              height: 30
+                            }
+                          }
+                        })
+                      ],
+                      1
+                    )
+                  }),
+                  0
+                )
+              ]),
+              _vm._v(" "),
+              _c("q-space"),
+              _vm._v(" "),
+              _c("q-btn", { on: { click: _vm.printHtml } }, [_vm._v("Print")])
+            ],
+            1
+          )
+        ],
+        1
       )
     ],
     1

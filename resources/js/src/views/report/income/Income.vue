@@ -8,17 +8,35 @@
                         placeholder="ជ្រើសរើស"
                         v-model="date_range"
                         class="is-label-placeholder w-full mb-base"
-                        @click="$modal.show('show-date-range')" />
-                <modal height="auto" :scrollable="true" :pivotY="0.2" :clickToClose="false" name="show-date-range">
-                    <div class="flex justify-end">
-                        <i @click="$modal.hide('show-date-range')" class="vs-icon vs-popup--close material-icons text-warning" style="background: rgb(255, 255, 255);">close</i>
-                    </div>
-                    <vx-card no-shadow>
-                        <date-range-picker
-                                :theme="{primary: '#28C76F',secondary: '#2D3E50',ternary: '#93A0BD',border: '#e6e6e6',light: '#ffffff',dark: '#000000',hovers: {day: '#CCC',range: '#e6e6e6'}}"
-                                @update="dateRange"/>
-                    </vx-card>
-                </modal>
+                        @click="dialog = true" />
+                <q-dialog
+                        v-model="dialog"
+                        persistent
+                        :maximized="true"
+                        transition-show="slide-up"
+                        transition-hide="slide-down"
+                >
+                    <q-card>
+                        <q-bar>
+                            <q-space/>
+                            <q-btn dense
+                                   flat
+                                   icon="close"
+                                   v-close-popup>
+                                <q-tooltip
+                                        content-class="bg-white text-primary">
+                                    Close
+                                </q-tooltip>
+                            </q-btn>
+                        </q-bar>
+
+                        <q-card-section class="q-px-lg">
+                            <date-range-picker
+                                    :theme="{primary: '#28C76F',secondary: '#2D3E50',ternary: '#93A0BD',border: '#e6e6e6',light: '#ffffff',dark: '#000000',hovers: {day: '#CCC',range: '#e6e6e6'}}"
+                                    @update="dateRange"/>
+                        </q-card-section>
+                    </q-card>
+                </q-dialog>
             </div>
         </div>
         <div class="vx-row mb-base">
@@ -82,6 +100,7 @@
         },
         data() {
             return {
+                dialog:false,
                 date_range:`${this.$moment().startOf('month').format('YYYY-MM-DD')} ~ ${this.$moment().endOf('month').format('YYYY-MM-DD')}`,
                 date_picker:{
                   start:this.$moment().startOf('month').format('YYYY-MM-DD'),
@@ -140,7 +159,7 @@
             //date range
             dateRange(value) {
                 this.date_range = `${this.$moment(value.from).format('YYYY-MM-DD')} ~ ${this.$moment(value.to).format('YYYY-MM-DD')}`;
-                this.$modal.hide('show-date-range');
+                this.dialog = false;
                 this.date_picker.start = this.$moment(value.from).format('YYYY-MM-DD');
                 this.date_picker.end = this.$moment(value.to).format('YYYY-MM-DD');
             }

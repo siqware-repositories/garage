@@ -1,17 +1,34 @@
 <template>
-    <modal height="auto" :scrollable="true" :pivotY="0.2" :clickToClose="false" name="add-expense-type">
-        <div class="flex justify-end">
-            <i @click="$modal.hide('add-expense-type')" class="vs-icon vs-popup--close material-icons text-warning" style="background: rgb(255, 255, 255);">close</i>
-        </div>
-        <vx-card no-shadow>
-            <div class="vx-row">
-                <div class="vx-col w-full">
-                    <vs-input v-validate="'required'" @keyup.enter="storeExpenseType" name="type" v-model="data.type" class="w-full" />
-                    <span class="text-danger text-sm" v-show="errors.has('type')">{{ errors.first('type') }}</span>
+    <q-dialog
+            v-model="dialog"
+            persistent
+            transition-show="slide-up"
+            transition-hide="slide-down"
+    >
+        <q-card>
+            <q-bar>
+                <q-space/>
+                <q-btn dense
+                       flat
+                       icon="close"
+                       v-close-popup>
+                    <q-tooltip
+                            content-class="bg-white text-primary">
+                        Close
+                    </q-tooltip>
+                </q-btn>
+            </q-bar>
+
+            <q-card-section class="q-px-lg">
+                <div class="vx-row">
+                    <div class="vx-col w-full">
+                        <vs-input v-validate="'required'" @keyup.enter="storeExpenseType" name="type" v-model="data.type" class="w-full" />
+                        <span class="text-danger text-sm" v-show="errors.has('type')">{{ errors.first('type') }}</span>
+                    </div>
                 </div>
-            </div>
-        </vx-card>
-    </modal>
+            </q-card-section>
+        </q-card>
+    </q-dialog>
 </template>
 
 <script>
@@ -19,6 +36,7 @@
         name: "addExpenseType",
         data(){
             return{
+                dialog:false,
                 data:{
                     type:''
                 }
@@ -26,7 +44,7 @@
         },
         methods:{
             show(){
-                this.$modal.show('add-expense-type')
+                this.dialog = true
             },
             //store
             storeExpenseType() {

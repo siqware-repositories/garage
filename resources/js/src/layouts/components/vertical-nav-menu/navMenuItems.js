@@ -148,10 +148,10 @@ export default [
             }
             ]
     },
-    {
+    /*{
         url: "/import",
         name: "Import Data",
         slug: "import",
         icon: "FilePlusIcon",
-    },
+    },*/
 ]

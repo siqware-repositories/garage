@@ -471,10 +471,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "addIncomeType",
   data: function data() {
     return {
+      dialog: false,
       data: {
         type: ''
       }
@@ -482,7 +500,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     show: function show() {
-      this.$modal.show('add-income-type');
+      this.dialog = true;
     },
     //store
     storeIncomeType: function storeIncomeType() {
@@ -1692,90 +1710,117 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "modal",
+    "q-dialog",
     {
       attrs: {
-        height: "auto",
-        scrollable: true,
-        pivotY: 0.2,
-        clickToClose: false,
-        name: "add-income-type"
+        persistent: "",
+        "transition-show": "slide-up",
+        "transition-hide": "slide-down"
+      },
+      model: {
+        value: _vm.dialog,
+        callback: function($$v) {
+          _vm.dialog = $$v
+        },
+        expression: "dialog"
       }
     },
     [
-      _c("div", { staticClass: "flex justify-end" }, [
-        _c(
-          "i",
-          {
-            staticClass: "vs-icon vs-popup--close material-icons text-warning",
-            staticStyle: { background: "rgb(255, 255, 255)" },
-            on: {
-              click: function($event) {
-                return _vm.$modal.hide("add-income-type")
-              }
-            }
-          },
-          [_vm._v("close")]
-        )
-      ]),
-      _vm._v(" "),
-      _c("vx-card", { attrs: { "no-shadow": "" } }, [
-        _c("div", { staticClass: "vx-row" }, [
+      _c(
+        "q-card",
+        [
           _c(
-            "div",
-            { staticClass: "vx-col w-full" },
+            "q-bar",
             [
-              _c("vs-input", {
-                directives: [
-                  {
-                    name: "validate",
-                    rawName: "v-validate",
-                    value: "required",
-                    expression: "'required'"
-                  }
-                ],
-                staticClass: "w-full",
-                attrs: { name: "type" },
-                on: {
-                  keyup: function($event) {
-                    if (
-                      !$event.type.indexOf("key") &&
-                      _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
-                    ) {
-                      return null
-                    }
-                    return _vm.storeIncomeType($event)
-                  }
-                },
-                model: {
-                  value: _vm.data.type,
-                  callback: function($$v) {
-                    _vm.$set(_vm.data, "type", $$v)
-                  },
-                  expression: "data.type"
-                }
-              }),
+              _c("q-space"),
               _vm._v(" "),
               _c(
-                "span",
+                "q-btn",
                 {
                   directives: [
-                    {
-                      name: "show",
-                      rawName: "v-show",
-                      value: _vm.errors.has("type"),
-                      expression: "errors.has('type')"
-                    }
+                    { name: "close-popup", rawName: "v-close-popup" }
                   ],
-                  staticClass: "text-danger text-sm"
+                  attrs: { dense: "", flat: "", icon: "close" }
                 },
-                [_vm._v(_vm._s(_vm.errors.first("type")))]
+                [
+                  _c(
+                    "q-tooltip",
+                    { attrs: { "content-class": "bg-white text-primary" } },
+                    [_vm._v("\n                    Close\n                ")]
+                  )
+                ],
+                1
               )
             ],
             1
-          )
-        ])
-      ])
+          ),
+          _vm._v(" "),
+          _c("q-card-section", { staticClass: "q-px-lg" }, [
+            _c("div", { staticClass: "vx-row" }, [
+              _c(
+                "div",
+                { staticClass: "vx-col w-full" },
+                [
+                  _c("vs-input", {
+                    directives: [
+                      {
+                        name: "validate",
+                        rawName: "v-validate",
+                        value: "required",
+                        expression: "'required'"
+                      }
+                    ],
+                    staticClass: "w-full",
+                    attrs: { name: "type" },
+                    on: {
+                      keyup: function($event) {
+                        if (
+                          !$event.type.indexOf("key") &&
+                          _vm._k(
+                            $event.keyCode,
+                            "enter",
+                            13,
+                            $event.key,
+                            "Enter"
+                          )
+                        ) {
+                          return null
+                        }
+                        return _vm.storeIncomeType($event)
+                      }
+                    },
+                    model: {
+                      value: _vm.data.type,
+                      callback: function($$v) {
+                        _vm.$set(_vm.data, "type", $$v)
+                      },
+                      expression: "data.type"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "span",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: _vm.errors.has("type"),
+                          expression: "errors.has('type')"
+                        }
+                      ],
+                      staticClass: "text-danger text-sm"
+                    },
+                    [_vm._v(_vm._s(_vm.errors.first("type")))]
+                  )
+                ],
+                1
+              )
+            ])
+          ])
+        ],
+        1
+      )
     ],
     1
   )

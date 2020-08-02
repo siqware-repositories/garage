@@ -13,14 +13,7 @@ import Vuesax from 'vuesax'
 
 Vue.use(Vuesax)
 //Quasar
-/*import "quasar-extras/material-icons"
-import "quasar-extras/fontawesome"
-import "quasar-extras/mdi"
-import "quasar-extras/ionicons"
-import "quasar-extras/roboto-font"
-import "quasar-extras/animate"*/
 import Quasar, * as All from 'quasar/dist/quasar.umd'
-
 require('quasar/dist/quasar.css');
 
 Vue.use(Quasar, {
@@ -61,21 +54,9 @@ Vue.use(VueHammer);
 import 'prismjs'
 import 'prismjs/themes/prism-tomorrow.css'
 
-// Vue select css
-// Note: In latest version you have to add it separately
-// import 'vue-select/dist/vue-select.css';
-
 // VeeValidate
 import VeeValidate from 'vee-validate'
 Vue.use(VeeValidate);
-//Tinymce Editor
-/*import tinymce from 'vue-tinymce-editor'
-Vue.component('tinymce', tinymce);*/
-//modal
-import VModal from 'vue-js-modal'
-Vue.use(VModal);
-import SweetModal from 'sweet-modal-vue/src/plugin.js'
-Vue.use(SweetModal);
 //mobile check
 Vue.prototype.mobilecheck = function() {
     let check = false;

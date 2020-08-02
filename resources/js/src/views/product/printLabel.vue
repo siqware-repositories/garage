@@ -1,17 +1,41 @@
 <template>
-        <sweet-modal ref="printLabel" title="Print Label" :blocking="true" :width="!mobilecheck()?'60%':''">
-            <div id="printMe" class="px-3">
-                <div class="vx-row">
-                    <div v-for="(item,index) in data.products" :key="index" class="vx-col md:w-1/4 w-full bordered print:w-1/4 text-left">
-                        <div class="label-text">
-                            {{item.name}}
+    <q-dialog
+            v-model="dialog"
+            persistent
+            :maximized="true"
+            transition-show="slide-up"
+            transition-hide="slide-down"
+    >
+        <q-card>
+            <q-bar>
+                <q-space/>
+                <q-btn dense
+                       flat
+                       icon="close"
+                       v-close-popup>
+                    <q-tooltip
+                            content-class="bg-white text-primary">
+                        Close
+                    </q-tooltip>
+                </q-btn>
+            </q-bar>
+
+            <q-card-section class="q-px-lg">
+                <div id="printMe" class="px-3">
+                    <div class="vx-row">
+                        <div v-for="(item,index) in data.products" :key="index" class="vx-col md:w-1/4 w-full bordered print:w-1/4 text-left">
+                            <div class="label-text">
+                                {{item.name}}
+                            </div>
+                            <bar-code :value="`000${item.id}`" tag="img" :options="{ displayValue: true, width: 1,height:30}"></bar-code>
                         </div>
-                        <bar-code :value="`000${item.id}`" tag="img" :options="{ displayValue: true, width: 1,height:30}"></bar-code>
                     </div>
                 </div>
-            </div>
-            <vs-button @click="printHtml" slot="button">Print</vs-button>
-        </sweet-modal>
+                <q-space/>
+                <q-btn @click="printHtml">Print</q-btn>
+            </q-card-section>
+        </q-card>
+    </q-dialog>
 </template>
 
 <script>
@@ -23,6 +47,7 @@
         },
         data(){
             return{
+                dialog:false,
                 data:{
                     products:[{name:'name',id:1}]
                 }
@@ -31,7 +56,7 @@
         methods:{
             show(data){
                 let self = this;
-                self.$refs.printLabel.open();
+                self.dialog = true;
                 self.data.products = data;
             },
             printHtml(){

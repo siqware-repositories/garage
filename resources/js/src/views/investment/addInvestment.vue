@@ -1,36 +1,53 @@
 <template>
-    <modal height="auto" :scrollable="true" :pivotY="0.2" :clickToClose="false" name="add-investment">
-        <div class="flex justify-end">
-            <i @click="$modal.hide('add-investment')" class="vs-icon vs-popup--close material-icons text-warning" style="background: rgb(255, 255, 255);">close</i>
-        </div>
-        <vx-card no-shadow>
-            <div class="vx-row">
-                <div class="vx-col w-full">
-                    <label>ពិពណ៌នា</label>
-                    <vs-textarea v-validate="'required'" label="ពិពណ៌នា" name="description" v-model="data.description" />
-                    <span class="text-danger text-sm"
-                          v-show="errors.has('description')">{{ errors.first('description') }}</span>
+    <q-dialog
+            v-model="dialog"
+            persistent
+            transition-show="slide-up"
+            transition-hide="slide-down"
+    >
+        <q-card>
+            <q-bar>
+                <q-space/>
+                <q-btn dense
+                       flat
+                       icon="close"
+                       v-close-popup>
+                    <q-tooltip
+                            content-class="bg-white text-primary">
+                        Close
+                    </q-tooltip>
+                </q-btn>
+            </q-bar>
+
+            <q-card-section class="q-px-lg">
+                <div class="vx-row">
+                    <div class="vx-col w-full">
+                        <label>ពិពណ៌នា</label>
+                        <vs-textarea v-validate="'required'" label="ពិពណ៌នា" name="description" v-model="data.description" />
+                        <span class="text-danger text-sm"
+                              v-show="errors.has('description')">{{ errors.first('description') }}</span>
+                    </div>
+                    <div class="vx-col w-full">
+                        <label>កាលបរិច្ឆេទ</label>
+                        <flat-pickr class="w-full" v-model="data.date" placeholder="ជ្រើសរើស" v-validate="'required'" name="date"/>
+                        <span class="text-danger text-sm"
+                              v-show="errors.has('date')">{{ errors.first('date') }}</span>
+                    </div>
+                    <div class="vx-col w-full mt-2">
+                        <label>ប្រាក់វិនិយោគ</label>
+                        <vs-input-number v-validate="'required'" name="balance" v-model="data.balance" label="ប្រាក់វិនិយោគ:"/>
+                        <span class="text-danger text-sm"
+                              v-show="errors.has('balance')">{{ errors.first('balance') }}</span>
+                    </div>
                 </div>
-                <div class="vx-col w-full">
-                    <label>កាលបរិច្ឆេទ</label>
-                    <flat-pickr class="w-full" v-model="data.date" placeholder="ជ្រើសរើស" v-validate="'required'" name="date"/>
-                    <span class="text-danger text-sm"
-                          v-show="errors.has('date')">{{ errors.first('date') }}</span>
+                <vs-divider/>
+                <!-- Save & Reset Button -->
+                <div class="flex justify-end btn-group">
+                    <vs-button @click="storeInvestment" icon="icon-save" icon-pack="feather" type="relief">រក្សាទុក</vs-button>
                 </div>
-                <div class="vx-col w-full mt-2">
-                    <label>ប្រាក់វិនិយោគ</label>
-                    <vs-input-number v-validate="'required'" name="balance" v-model="data.balance" label="ប្រាក់វិនិយោគ:"/>
-                    <span class="text-danger text-sm"
-                          v-show="errors.has('balance')">{{ errors.first('balance') }}</span>
-                </div>
-            </div>
-            <vs-divider/>
-            <!-- Save & Reset Button -->
-            <div class="flex justify-end btn-group">
-                <vs-button @click="storeInvestment" icon="icon-save" icon-pack="feather" type="relief">រក្សាទុក</vs-button>
-            </div>
-        </vx-card>
-    </modal>
+            </q-card-section>
+        </q-card>
+    </q-dialog>
 </template>
 
 <script>
@@ -43,6 +60,7 @@
         },
         data(){
             return{
+                dialog:false,
                 data:{
                     description:'',
                     balance:0,
@@ -52,7 +70,7 @@
         },
         methods:{
             show(){
-                this.$modal.show('add-investment')
+                this.dialog = true;
             },
             //store
             storeInvestment(){

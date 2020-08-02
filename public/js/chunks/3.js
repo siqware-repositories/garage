@@ -26,16 +26,38 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "addBrand",
   data: function data() {
     return {
+      dialog: false,
       brand: ''
     };
   },
   methods: {
     show: function show() {
-      this.$modal.show('add-brand');
+      this.dialog = true;
     },
     //store
     storeBrand: function storeBrand() {
@@ -116,16 +138,33 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "addCategory",
   data: function data() {
     return {
+      dialog: false,
       category: ''
     };
   },
   methods: {
     show: function show() {
-      this.$modal.show('add-category');
+      this.dialog = true;
     },
     //store
     storeCategory: function storeCategory() {
@@ -206,16 +245,33 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "addUnit",
   data: function data() {
     return {
+      dialog: false,
       unit: ''
     };
   },
   methods: {
     show: function show() {
-      this.$modal.show('add-unit');
+      this.dialog = true;
     },
     //store
     storeUnit: function storeUnit() {
@@ -286,88 +342,109 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "modal",
+    "q-dialog",
     {
       attrs: {
-        height: "auto",
-        scrollable: true,
-        pivotY: 0.2,
-        clickToClose: false,
-        name: "add-brand"
+        persistent: "",
+        "transition-show": "slide-up",
+        "transition-hide": "slide-down"
+      },
+      model: {
+        value: _vm.dialog,
+        callback: function($$v) {
+          _vm.dialog = $$v
+        },
+        expression: "dialog"
       }
     },
     [
-      _c("div", { staticClass: "flex justify-end" }, [
-        _c(
-          "i",
-          {
-            staticClass: "vs-icon vs-popup--close material-icons text-warning",
-            staticStyle: { background: "rgb(255, 255, 255)" },
-            on: {
-              click: function($event) {
-                return _vm.$modal.hide("add-brand")
-              }
-            }
-          },
-          [_vm._v("close")]
-        )
-      ]),
-      _vm._v(" "),
-      _c("vx-card", { attrs: { "no-shadow": "" } }, [
-        _c(
-          "div",
-          { staticClass: "vx-row mb-10" },
-          [
-            _c("vs-input", {
-              directives: [
+      _c(
+        "q-card",
+        [
+          _c(
+            "q-bar",
+            [
+              _c("q-space"),
+              _vm._v(" "),
+              _c(
+                "q-btn",
                 {
-                  name: "validate",
-                  rawName: "v-validate",
-                  value: "required",
-                  expression: "'required'"
-                }
-              ],
-              staticClass: "w-full",
-              attrs: { "label-placeholder": "ឈ្មោះ", name: "brand" },
-              on: {
-                keyup: function($event) {
-                  if (
-                    !$event.type.indexOf("key") &&
-                    _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
-                  ) {
-                    return null
-                  }
-                  return _vm.storeBrand($event)
-                }
-              },
-              model: {
-                value: _vm.brand,
-                callback: function($$v) {
-                  _vm.brand = $$v
+                  directives: [
+                    { name: "close-popup", rawName: "v-close-popup" }
+                  ],
+                  attrs: { dense: "", flat: "", icon: "close" }
                 },
-                expression: "brand"
-              }
-            }),
-            _vm._v(" "),
-            _c(
-              "span",
-              {
-                directives: [
-                  {
-                    name: "show",
-                    rawName: "v-show",
-                    value: _vm.errors.has("brand"),
-                    expression: "errors.has('brand')"
-                  }
+                [
+                  _c(
+                    "q-tooltip",
+                    { attrs: { "content-class": "bg-white text-primary" } },
+                    [_vm._v("\n                    Close\n                ")]
+                  )
                 ],
-                staticClass: "text-danger text-sm"
-              },
-              [_vm._v(_vm._s(_vm.errors.first("brand")))]
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c("q-card-section", { staticClass: "q-pt-none q-px-lg" }, [
+            _c(
+              "div",
+              { staticClass: "vx-row" },
+              [
+                _c("vs-input", {
+                  directives: [
+                    {
+                      name: "validate",
+                      rawName: "v-validate",
+                      value: "required",
+                      expression: "'required'"
+                    }
+                  ],
+                  staticClass: "w-full",
+                  attrs: { "label-placeholder": "ឈ្មោះ", name: "brand" },
+                  on: {
+                    keyup: function($event) {
+                      if (
+                        !$event.type.indexOf("key") &&
+                        _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                      ) {
+                        return null
+                      }
+                      return _vm.storeBrand($event)
+                    }
+                  },
+                  model: {
+                    value: _vm.brand,
+                    callback: function($$v) {
+                      _vm.brand = $$v
+                    },
+                    expression: "brand"
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "span",
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.errors.has("brand"),
+                        expression: "errors.has('brand')"
+                      }
+                    ],
+                    staticClass: "text-danger text-sm"
+                  },
+                  [_vm._v(_vm._s(_vm.errors.first("brand")))]
+                )
+              ],
+              1
             )
-          ],
-          1
-        )
-      ])
+          ])
+        ],
+        1
+      )
     ],
     1
   )
@@ -395,88 +472,109 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "modal",
+    "q-dialog",
     {
       attrs: {
-        height: "auto",
-        scrollable: true,
-        pivotY: 0.2,
-        clickToClose: false,
-        name: "add-category"
+        persistent: "",
+        "transition-show": "slide-up",
+        "transition-hide": "slide-down"
+      },
+      model: {
+        value: _vm.dialog,
+        callback: function($$v) {
+          _vm.dialog = $$v
+        },
+        expression: "dialog"
       }
     },
     [
-      _c("div", { staticClass: "flex justify-end" }, [
-        _c(
-          "i",
-          {
-            staticClass: "vs-icon vs-popup--close material-icons text-warning",
-            staticStyle: { background: "rgb(255, 255, 255)" },
-            on: {
-              click: function($event) {
-                return _vm.$modal.hide("add-category")
-              }
-            }
-          },
-          [_vm._v("close")]
-        )
-      ]),
-      _vm._v(" "),
-      _c("vx-card", { attrs: { "no-shadow": "" } }, [
-        _c(
-          "div",
-          { staticClass: "vx-row mb-10" },
-          [
-            _c("vs-input", {
-              directives: [
+      _c(
+        "q-card",
+        [
+          _c(
+            "q-bar",
+            [
+              _c("q-space"),
+              _vm._v(" "),
+              _c(
+                "q-btn",
                 {
-                  name: "validate",
-                  rawName: "v-validate",
-                  value: "required",
-                  expression: "'required'"
-                }
-              ],
-              staticClass: "w-full",
-              attrs: { "label-placeholder": "ឈ្មោះ", name: "category" },
-              on: {
-                keyup: function($event) {
-                  if (
-                    !$event.type.indexOf("key") &&
-                    _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
-                  ) {
-                    return null
-                  }
-                  return _vm.storeCategory($event)
-                }
-              },
-              model: {
-                value: _vm.category,
-                callback: function($$v) {
-                  _vm.category = $$v
+                  directives: [
+                    { name: "close-popup", rawName: "v-close-popup" }
+                  ],
+                  attrs: { dense: "", flat: "", icon: "close" }
                 },
-                expression: "category"
-              }
-            }),
-            _vm._v(" "),
-            _c(
-              "span",
-              {
-                directives: [
-                  {
-                    name: "show",
-                    rawName: "v-show",
-                    value: _vm.errors.has("category"),
-                    expression: "errors.has('category')"
-                  }
+                [
+                  _c(
+                    "q-tooltip",
+                    { attrs: { "content-class": "bg-white text-primary" } },
+                    [_vm._v("\n                    Close\n                ")]
+                  )
                 ],
-                staticClass: "text-danger text-sm"
-              },
-              [_vm._v(_vm._s(_vm.errors.first("category")))]
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c("q-card-section", { staticClass: "q-pt-none q-px-lg" }, [
+            _c(
+              "div",
+              { staticClass: "vx-row" },
+              [
+                _c("vs-input", {
+                  directives: [
+                    {
+                      name: "validate",
+                      rawName: "v-validate",
+                      value: "required",
+                      expression: "'required'"
+                    }
+                  ],
+                  staticClass: "w-full",
+                  attrs: { "label-placeholder": "ឈ្មោះ", name: "category" },
+                  on: {
+                    keyup: function($event) {
+                      if (
+                        !$event.type.indexOf("key") &&
+                        _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                      ) {
+                        return null
+                      }
+                      return _vm.storeCategory($event)
+                    }
+                  },
+                  model: {
+                    value: _vm.category,
+                    callback: function($$v) {
+                      _vm.category = $$v
+                    },
+                    expression: "category"
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "span",
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.errors.has("category"),
+                        expression: "errors.has('category')"
+                      }
+                    ],
+                    staticClass: "text-danger text-sm"
+                  },
+                  [_vm._v(_vm._s(_vm.errors.first("category")))]
+                )
+              ],
+              1
             )
-          ],
-          1
-        )
-      ])
+          ])
+        ],
+        1
+      )
     ],
     1
   )
@@ -504,88 +602,109 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "modal",
+    "q-dialog",
     {
       attrs: {
-        height: "auto",
-        scrollable: true,
-        pivotY: 0.2,
-        clickToClose: false,
-        name: "add-unit"
+        persistent: "",
+        "transition-show": "slide-up",
+        "transition-hide": "slide-down"
+      },
+      model: {
+        value: _vm.dialog,
+        callback: function($$v) {
+          _vm.dialog = $$v
+        },
+        expression: "dialog"
       }
     },
     [
-      _c("div", { staticClass: "flex justify-end" }, [
-        _c(
-          "i",
-          {
-            staticClass: "vs-icon vs-popup--close material-icons text-warning",
-            staticStyle: { background: "rgb(255, 255, 255)" },
-            on: {
-              click: function($event) {
-                return _vm.$modal.hide("add-unit")
-              }
-            }
-          },
-          [_vm._v("close")]
-        )
-      ]),
-      _vm._v(" "),
-      _c("vx-card", { attrs: { "no-shadow": "" } }, [
-        _c(
-          "div",
-          { staticClass: "vx-row mb-10" },
-          [
-            _c("vs-input", {
-              directives: [
+      _c(
+        "q-card",
+        [
+          _c(
+            "q-bar",
+            [
+              _c("q-space"),
+              _vm._v(" "),
+              _c(
+                "q-btn",
                 {
-                  name: "validate",
-                  rawName: "v-validate",
-                  value: "required",
-                  expression: "'required'"
-                }
-              ],
-              staticClass: "w-full",
-              attrs: { "label-placeholder": "ឈ្មោះ", name: "unit" },
-              on: {
-                keyup: function($event) {
-                  if (
-                    !$event.type.indexOf("key") &&
-                    _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
-                  ) {
-                    return null
-                  }
-                  return _vm.storeUnit($event)
-                }
-              },
-              model: {
-                value: _vm.unit,
-                callback: function($$v) {
-                  _vm.unit = $$v
+                  directives: [
+                    { name: "close-popup", rawName: "v-close-popup" }
+                  ],
+                  attrs: { dense: "", flat: "", icon: "close" }
                 },
-                expression: "unit"
-              }
-            }),
-            _vm._v(" "),
-            _c(
-              "span",
-              {
-                directives: [
-                  {
-                    name: "show",
-                    rawName: "v-show",
-                    value: _vm.errors.has("unit"),
-                    expression: "errors.has('unit')"
-                  }
+                [
+                  _c(
+                    "q-tooltip",
+                    { attrs: { "content-class": "bg-white text-primary" } },
+                    [_vm._v("\n                    Close\n                ")]
+                  )
                 ],
-                staticClass: "text-danger text-sm"
-              },
-              [_vm._v(_vm._s(_vm.errors.first("unit")))]
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c("q-card-section", { staticClass: "q-pt-none q-px-lg" }, [
+            _c(
+              "div",
+              { staticClass: "vx-row" },
+              [
+                _c("vs-input", {
+                  directives: [
+                    {
+                      name: "validate",
+                      rawName: "v-validate",
+                      value: "required",
+                      expression: "'required'"
+                    }
+                  ],
+                  staticClass: "w-full",
+                  attrs: { "label-placeholder": "ឈ្មោះ", name: "unit" },
+                  on: {
+                    keyup: function($event) {
+                      if (
+                        !$event.type.indexOf("key") &&
+                        _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                      ) {
+                        return null
+                      }
+                      return _vm.storeUnit($event)
+                    }
+                  },
+                  model: {
+                    value: _vm.unit,
+                    callback: function($$v) {
+                      _vm.unit = $$v
+                    },
+                    expression: "unit"
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "span",
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.errors.has("unit"),
+                        expression: "errors.has('unit')"
+                      }
+                    ],
+                    staticClass: "text-danger text-sm"
+                  },
+                  [_vm._v(_vm._s(_vm.errors.first("unit")))]
+                )
+              ],
+              1
             )
-          ],
-          1
-        )
-      ])
+          ])
+        ],
+        1
+      )
     ],
     1
   )

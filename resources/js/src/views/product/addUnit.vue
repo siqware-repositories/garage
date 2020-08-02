@@ -1,18 +1,34 @@
 <template>
-    <modal height="auto" :scrollable="true" :pivotY="0.2" :clickToClose="false" name="add-unit">
-        <div class="flex justify-end">
-            <i @click="$modal.hide('add-unit')" class="vs-icon vs-popup--close material-icons text-warning"
-               style="background: rgb(255, 255, 255);">close</i>
-        </div>
-        <vx-card no-shadow>
-            <div class="vx-row mb-10">
-                <vs-input class="w-full" label-placeholder="ឈ្មោះ" name="unit" v-model="unit" @keyup.enter="storeUnit"
-                          v-validate="'required'"/>
-                <span class="text-danger text-sm"
-                      v-show="errors.has('unit')">{{ errors.first('unit') }}</span>
-            </div>
-        </vx-card>
-    </modal>
+    <q-dialog
+            v-model="dialog"
+            persistent
+            transition-show="slide-up"
+            transition-hide="slide-down"
+    >
+        <q-card>
+            <q-bar>
+                <q-space/>
+                <q-btn dense
+                       flat
+                       icon="close"
+                       v-close-popup>
+                    <q-tooltip
+                            content-class="bg-white text-primary">
+                        Close
+                    </q-tooltip>
+                </q-btn>
+            </q-bar>
+
+            <q-card-section class="q-pt-none q-px-lg">
+                <div class="vx-row">
+                    <vs-input class="w-full" label-placeholder="ឈ្មោះ" name="unit" v-model="unit" @keyup.enter="storeUnit"
+                              v-validate="'required'"/>
+                    <span class="text-danger text-sm"
+                          v-show="errors.has('unit')">{{ errors.first('unit') }}</span>
+                </div>
+            </q-card-section>
+        </q-card>
+    </q-dialog>
 </template>
 
 <script>
@@ -20,12 +36,13 @@
         name: "addUnit",
         data() {
             return {
+                dialog:false,
                 unit:'',
             }
         },
         methods: {
             show() {
-                this.$modal.show('add-unit');
+                this.dialog = true
             },
             //store
             storeUnit() {

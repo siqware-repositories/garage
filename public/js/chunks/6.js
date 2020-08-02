@@ -78,6 +78,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -93,6 +110,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      dialog: false,
       //supplier
       supplier: {
         name: null,
@@ -116,7 +134,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     show: function show() {
-      this.$modal.show('add-supplier');
+      this.dialog = true;
     },
     //store
     storeSupplier: function storeSupplier() {
@@ -345,6 +363,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -368,6 +403,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
+      dialog: false,
       output: null,
       purchase: {
         id: null,
@@ -436,7 +472,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }(),
     show: function show(data) {
       var self = this;
-      this.$modal.show('show-purchase');
+      this.dialog = true;
       this.purchase.id = data.id;
       this.purchase.supplier = data.supplier;
       this.purchase.location = data.location;
@@ -483,90 +519,256 @@ var render = function() {
     "div",
     [
       _c(
-        "modal",
+        "q-dialog",
         {
           attrs: {
-            width: "60%",
-            height: "auto",
-            scrollable: true,
-            pivotY: 0.2,
-            clickToClose: false,
-            name: "add-supplier"
+            persistent: "",
+            maximized: true,
+            "transition-show": "slide-up",
+            "transition-hide": "slide-down"
+          },
+          model: {
+            value: _vm.dialog,
+            callback: function($$v) {
+              _vm.dialog = $$v
+            },
+            expression: "dialog"
           }
         },
         [
-          _c("div", { staticClass: "flex justify-end" }, [
-            _c(
-              "i",
-              {
-                staticClass:
-                  "vs-icon vs-popup--close material-icons text-warning",
-                staticStyle: { background: "rgb(255, 255, 255)" },
-                on: {
-                  click: function($event) {
-                    return _vm.$modal.hide("add-supplier")
-                  }
-                }
-              },
-              [_vm._v("close")]
-            )
-          ]),
-          _vm._v(" "),
           _c(
-            "vx-card",
-            { attrs: { "no-shadow": "" } },
+            "q-card",
             [
-              _c("div", { staticClass: "vx-row" }, [
-                _c("div", { staticClass: "vx-col md:w-2/3 w-full" }, [
+              _c(
+                "q-bar",
+                [
+                  _c("q-space"),
+                  _vm._v(" "),
+                  _c(
+                    "q-btn",
+                    {
+                      directives: [
+                        { name: "close-popup", rawName: "v-close-popup" }
+                      ],
+                      attrs: { dense: "", flat: "", icon: "close" }
+                    },
+                    [
+                      _c(
+                        "q-tooltip",
+                        { attrs: { "content-class": "bg-white text-primary" } },
+                        [
+                          _vm._v(
+                            "\n                        Close\n                    "
+                          )
+                        ]
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "q-card-section",
+                { staticClass: "q-pt-none q-px-lg" },
+                [
                   _c("div", { staticClass: "vx-row" }, [
-                    _c(
-                      "div",
-                      { staticClass: "vx-col md:w-1/2 w-full" },
-                      [
-                        _c("vs-input", {
-                          directives: [
-                            {
-                              name: "validate",
-                              rawName: "v-validate",
-                              value: "required",
-                              expression: "'required'"
-                            }
+                    _c("div", { staticClass: "vx-col md:w-2/3 w-full" }, [
+                      _c("div", { staticClass: "vx-row" }, [
+                        _c(
+                          "div",
+                          { staticClass: "vx-col md:w-1/2 w-full" },
+                          [
+                            _c("vs-input", {
+                              directives: [
+                                {
+                                  name: "validate",
+                                  rawName: "v-validate",
+                                  value: "required",
+                                  expression: "'required'"
+                                }
+                              ],
+                              staticClass: "w-full",
+                              attrs: {
+                                "label-placeholder": "ឈ្មោះ",
+                                name: "name"
+                              },
+                              model: {
+                                value: _vm.supplier.name,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.supplier, "name", $$v)
+                                },
+                                expression: "supplier.name"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "span",
+                              {
+                                directives: [
+                                  {
+                                    name: "show",
+                                    rawName: "v-show",
+                                    value: _vm.errors.has("name"),
+                                    expression: "errors.has('name')"
+                                  }
+                                ],
+                                staticClass: "text-danger text-sm"
+                              },
+                              [_vm._v(_vm._s(_vm.errors.first("name")))]
+                            )
                           ],
-                          staticClass: "w-full",
-                          attrs: { "label-placeholder": "ឈ្មោះ", name: "name" },
-                          model: {
-                            value: _vm.supplier.name,
-                            callback: function($$v) {
-                              _vm.$set(_vm.supplier, "name", $$v)
-                            },
-                            expression: "supplier.name"
-                          }
-                        }),
+                          1
+                        ),
                         _vm._v(" "),
                         _c(
-                          "span",
-                          {
-                            directives: [
-                              {
-                                name: "show",
-                                rawName: "v-show",
-                                value: _vm.errors.has("name"),
-                                expression: "errors.has('name')"
+                          "div",
+                          { staticClass: "vx-col md:w-1/2 w-full" },
+                          [
+                            _c("vs-input", {
+                              directives: [
+                                {
+                                  name: "validate",
+                                  rawName: "v-validate",
+                                  value: "required",
+                                  expression: "'required'"
+                                }
+                              ],
+                              staticClass: "w-full",
+                              attrs: {
+                                "label-placeholder": "ឈ្មោះក្រុមហ៊ុន",
+                                name: "company"
+                              },
+                              model: {
+                                value: _vm.supplier.company,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.supplier, "company", $$v)
+                                },
+                                expression: "supplier.company"
                               }
-                            ],
-                            staticClass: "text-danger text-sm"
-                          },
-                          [_vm._v(_vm._s(_vm.errors.first("name")))]
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "span",
+                              {
+                                directives: [
+                                  {
+                                    name: "show",
+                                    rawName: "v-show",
+                                    value: _vm.errors.has("company"),
+                                    expression: "errors.has('company')"
+                                  }
+                                ],
+                                staticClass: "text-danger text-sm"
+                              },
+                              [_vm._v(_vm._s(_vm.errors.first("company")))]
+                            )
+                          ],
+                          1
                         )
-                      ],
-                      1
-                    ),
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "vx-row" }, [
+                        _c(
+                          "div",
+                          { staticClass: "vx-col w-full" },
+                          [
+                            _c("label", [_vm._v("ទំនាក់ទំនង")]),
+                            _vm._v(" "),
+                            _c("vs-textarea", {
+                              directives: [
+                                {
+                                  name: "validate",
+                                  rawName: "v-validate",
+                                  value: "required",
+                                  expression: "'required'"
+                                }
+                              ],
+                              staticClass: "w-full",
+                              attrs: { label: "ទំនាក់ទំនង", name: "contact" },
+                              model: {
+                                value: _vm.supplier.contact,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.supplier, "contact", $$v)
+                                },
+                                expression: "supplier.contact"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "span",
+                              {
+                                directives: [
+                                  {
+                                    name: "show",
+                                    rawName: "v-show",
+                                    value: _vm.errors.has("contact"),
+                                    expression: "errors.has('contact')"
+                                  }
+                                ],
+                                staticClass: "text-danger text-sm"
+                              },
+                              [_vm._v(_vm._s(_vm.errors.first("contact")))]
+                            )
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "vx-col w-full" },
+                          [
+                            _c("label", [_vm._v("សំគាល់")]),
+                            _vm._v(" "),
+                            _c("vs-textarea", {
+                              directives: [
+                                {
+                                  name: "validate",
+                                  rawName: "v-validate",
+                                  value: "required",
+                                  expression: "'required'"
+                                }
+                              ],
+                              staticClass: "w-full",
+                              attrs: { label: "សំគាល់", name: "note" },
+                              model: {
+                                value: _vm.supplier.note,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.supplier, "note", $$v)
+                                },
+                                expression: "supplier.note"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "span",
+                              {
+                                directives: [
+                                  {
+                                    name: "show",
+                                    rawName: "v-show",
+                                    value: _vm.errors.has("note"),
+                                    expression: "errors.has('note')"
+                                  }
+                                ],
+                                staticClass: "text-danger text-sm"
+                              },
+                              [_vm._v(_vm._s(_vm.errors.first("note")))]
+                            )
+                          ],
+                          1
+                        )
+                      ])
+                    ]),
                     _vm._v(" "),
                     _c(
                       "div",
-                      { staticClass: "vx-col md:w-1/2 w-full" },
+                      { staticClass: "vx-col md:w-1/3 w-full" },
                       [
-                        _c("vs-input", {
+                        _c("label", [_vm._v("អាស័យដ្ឋាន")]),
+                        _vm._v(" "),
+                        _c("vs-textarea", {
                           directives: [
                             {
                               name: "validate",
@@ -576,16 +778,13 @@ var render = function() {
                             }
                           ],
                           staticClass: "w-full",
-                          attrs: {
-                            "label-placeholder": "ឈ្មោះក្រុមហ៊ុន",
-                            name: "company"
-                          },
+                          attrs: { label: "អាស័យដ្ឋាន", name: "address" },
                           model: {
-                            value: _vm.supplier.company,
+                            value: _vm.supplier.address,
                             callback: function($$v) {
-                              _vm.$set(_vm.supplier, "company", $$v)
+                              _vm.$set(_vm.supplier, "address", $$v)
                             },
-                            expression: "supplier.company"
+                            expression: "supplier.address"
                           }
                         }),
                         _vm._v(" "),
@@ -596,175 +795,39 @@ var render = function() {
                               {
                                 name: "show",
                                 rawName: "v-show",
-                                value: _vm.errors.has("company"),
-                                expression: "errors.has('company')"
+                                value: _vm.errors.has("address"),
+                                expression: "errors.has('address')"
                               }
                             ],
                             staticClass: "text-danger text-sm"
                           },
-                          [_vm._v(_vm._s(_vm.errors.first("company")))]
+                          [_vm._v(_vm._s(_vm.errors.first("address")))]
                         )
                       ],
                       1
                     )
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "vx-row" }, [
-                    _c(
-                      "div",
-                      { staticClass: "vx-col w-full" },
-                      [
-                        _c("label", [_vm._v("ទំនាក់ទំនង")]),
-                        _vm._v(" "),
-                        _c("vs-textarea", {
-                          directives: [
-                            {
-                              name: "validate",
-                              rawName: "v-validate",
-                              value: "required",
-                              expression: "'required'"
-                            }
-                          ],
-                          staticClass: "w-full",
-                          attrs: { label: "ទំនាក់ទំនង", name: "contact" },
-                          model: {
-                            value: _vm.supplier.contact,
-                            callback: function($$v) {
-                              _vm.$set(_vm.supplier, "contact", $$v)
-                            },
-                            expression: "supplier.contact"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c(
-                          "span",
-                          {
-                            directives: [
-                              {
-                                name: "show",
-                                rawName: "v-show",
-                                value: _vm.errors.has("contact"),
-                                expression: "errors.has('contact')"
-                              }
-                            ],
-                            staticClass: "text-danger text-sm"
-                          },
-                          [_vm._v(_vm._s(_vm.errors.first("contact")))]
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "vx-col w-full" },
-                      [
-                        _c("label", [_vm._v("សំគាល់")]),
-                        _vm._v(" "),
-                        _c("vs-textarea", {
-                          directives: [
-                            {
-                              name: "validate",
-                              rawName: "v-validate",
-                              value: "required",
-                              expression: "'required'"
-                            }
-                          ],
-                          staticClass: "w-full",
-                          attrs: { label: "សំគាល់", name: "note" },
-                          model: {
-                            value: _vm.supplier.note,
-                            callback: function($$v) {
-                              _vm.$set(_vm.supplier, "note", $$v)
-                            },
-                            expression: "supplier.note"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c(
-                          "span",
-                          {
-                            directives: [
-                              {
-                                name: "show",
-                                rawName: "v-show",
-                                value: _vm.errors.has("note"),
-                                expression: "errors.has('note')"
-                              }
-                            ],
-                            staticClass: "text-danger text-sm"
-                          },
-                          [_vm._v(_vm._s(_vm.errors.first("note")))]
-                        )
-                      ],
-                      1
-                    )
-                  ])
-                ]),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "vx-col md:w-1/3 w-full" },
-                  [
-                    _c("label", [_vm._v("អាស័យដ្ឋាន")]),
-                    _vm._v(" "),
-                    _c("vs-textarea", {
-                      directives: [
-                        {
-                          name: "validate",
-                          rawName: "v-validate",
-                          value: "required",
-                          expression: "'required'"
-                        }
-                      ],
-                      staticClass: "w-full",
-                      attrs: { label: "អាស័យដ្ឋាន", name: "address" },
-                      model: {
-                        value: _vm.supplier.address,
-                        callback: function($$v) {
-                          _vm.$set(_vm.supplier, "address", $$v)
-                        },
-                        expression: "supplier.address"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "span",
-                      {
-                        directives: [
-                          {
-                            name: "show",
-                            rawName: "v-show",
-                            value: _vm.errors.has("address"),
-                            expression: "errors.has('address')"
-                          }
-                        ],
-                        staticClass: "text-danger text-sm"
-                      },
-                      [_vm._v(_vm._s(_vm.errors.first("address")))]
-                    )
-                  ],
-                  1
-                )
-              ]),
-              _vm._v(" "),
-              _c("vs-divider"),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "flex justify-end btn-group" },
-                [
+                  _c("vs-divider"),
+                  _vm._v(" "),
                   _c(
-                    "vs-button",
-                    {
-                      attrs: {
-                        icon: "icon-save",
-                        "icon-pack": "feather",
-                        type: "relief"
-                      },
-                      on: { click: _vm.storeSupplier }
-                    },
-                    [_vm._v("រក្សាទុក")]
+                    "div",
+                    { staticClass: "flex justify-end btn-group" },
+                    [
+                      _c(
+                        "vs-button",
+                        {
+                          attrs: {
+                            icon: "icon-save",
+                            "icon-pack": "feather",
+                            type: "relief"
+                          },
+                          on: { click: _vm.storeSupplier }
+                        },
+                        [_vm._v("រក្សាទុក")]
+                      )
+                    ],
+                    1
                   )
                 ],
                 1
@@ -811,325 +874,372 @@ var render = function() {
     "div",
     [
       _c(
-        "modal",
+        "q-dialog",
         {
           attrs: {
-            width: "60%",
-            height: "auto",
-            scrollable: true,
-            pivotY: 0.2,
-            clickToClose: false,
-            name: "show-purchase"
+            persistent: "",
+            maximized: true,
+            "transition-show": "slide-up",
+            "transition-hide": "slide-down"
+          },
+          model: {
+            value: _vm.dialog,
+            callback: function($$v) {
+              _vm.dialog = $$v
+            },
+            expression: "dialog"
           }
         },
         [
-          _c("div", { staticClass: "flex justify-end" }, [
-            _c(
-              "i",
-              {
-                staticClass:
-                  "vs-icon vs-popup--close material-icons text-warning",
-                staticStyle: { background: "rgb(255, 255, 255)" },
-                on: {
-                  click: function($event) {
-                    return _vm.$modal.hide("show-purchase")
-                  }
-                }
-              },
-              [_vm._v("close")]
-            )
-          ]),
-          _vm._v(" "),
-          _c("vx-card", { attrs: { "no-shadow": "" } }, [
-            _c(
-              "div",
-              { attrs: { id: "printMe" } },
-              [
-                _c("table", { staticClass: "custom" }, [
-                  _c("tr", [
-                    _c("td", { staticClass: "custom" }, [
-                      _vm._v("អ្នកផ្គត់ផ្គង់")
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "custom" }, [
-                      _vm._v("Purchase Status")
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "custom" }, [
-                      _vm._v("ទីតាំងទិញចូល")
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "custom" }, [_vm._v("ពិពណ៌នា")]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "custom" }, [
-                      _vm._v("ថ្ងៃខែឆ្នាំទិញចូល")
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "custom" }, [_vm._v("Barcode")])
-                  ]),
+          _c(
+            "q-card",
+            [
+              _c(
+                "q-bar",
+                [
+                  _c("q-space"),
                   _vm._v(" "),
-                  _c("tr", [
-                    _c("td", { staticClass: "custom" }, [
-                      _vm._v(
-                        "\n                            ឈ្មោះ: " +
-                          _vm._s(_vm.purchase.supplier.name)
-                      ),
-                      _c("br"),
-                      _vm._v(
-                        "\n                            ក្រុមហ៊ុន: " +
-                          _vm._s(_vm.purchase.supplier.company)
-                      ),
-                      _c("br"),
-                      _vm._v(
-                        "\n                            ទំនាក់ទំនង: " +
-                          _vm._s(_vm.purchase.supplier.contact)
-                      ),
-                      _c("br")
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "custom" }, [
-                      _vm._v(_vm._s(_vm.purchase.purchase_status))
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "custom" }, [
-                      _vm._v(_vm._s(_vm.purchase.location))
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "custom" }, [
-                      _vm._v(_vm._s(_vm.purchase.description))
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "custom" }, [
-                      _vm._v(_vm._s(_vm.purchase.purchase_date))
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "td",
-                      { staticClass: "p-2" },
-                      [
-                        _c("bar-code", {
-                          attrs: {
-                            value: _vm.purchase.id,
-                            tag: "img",
-                            options: { displayValue: true }
-                          }
-                        })
+                  _c(
+                    "q-btn",
+                    {
+                      directives: [
+                        { name: "close-popup", rawName: "v-close-popup" }
                       ],
-                      1
-                    )
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("vs-divider"),
-                _vm._v(" "),
-                _c("table", { staticClass: "custom" }, [
-                  _c("thead", [
-                    _c("tr", [
-                      _c("th", { staticClass: "custom" }, [_vm._v("ល.រ")]),
-                      _vm._v(" "),
-                      _c("th", { staticClass: "custom" }, [_vm._v("ឈ្មោះ")]),
-                      _vm._v(" "),
-                      _c("th", { staticClass: "custom" }, [_vm._v("ពិពណ៌នា")]),
-                      _vm._v(" "),
-                      _c("th", { staticClass: "custom" }, [_vm._v("ចំនួន")]),
-                      _vm._v(" "),
-                      _c("th", { staticClass: "custom" }, [_vm._v("តម្លៃទិញ")]),
-                      _vm._v(" "),
-                      _c("th", { staticClass: "custom" }, [_vm._v("តម្លៃលក់")]),
-                      _vm._v(" "),
-                      _c("th", { staticClass: "custom" }, [_vm._v("សរុប")])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "tbody",
-                    _vm._l(_vm.purchase.items, function(tr, indextr) {
-                      return _c("tr", { key: indextr }, [
-                        _c("td", { staticClass: "pl-2 custom" }, [
-                          _vm._v(
-                            "\n                            " +
-                              _vm._s(indextr + 1) +
-                              "\n                        "
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("td", { staticClass: "pl-2 custom" }, [
-                          _vm._v(
-                            "\n                            " +
-                              _vm._s(tr.name) +
-                              "\n                        "
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("td", { staticClass: "pl-2 custom" }, [
-                          _vm._v(
-                            "\n                            " +
-                              _vm._s(tr.description) +
-                              "\n                        "
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("td", { staticClass: "pl-2 custom" }, [
-                          _vm._v(
-                            "\n                            " +
-                              _vm._s(tr.qty) +
-                              "\n                        "
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          { staticClass: "pl-2 custom" },
-                          [
-                            _c("money-format", {
-                              attrs: {
-                                value: parseFloat(tr.purchase_price),
-                                locale: "en",
-                                "currency-code": "USD"
-                              }
-                            })
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          { staticClass: "pl-2 custom" },
-                          [
-                            _c("money-format", {
-                              attrs: {
-                                value: parseFloat(tr.sale_price),
-                                locale: "en",
-                                "currency-code": "USD"
-                              }
-                            })
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          { staticClass: "pl-2 custom" },
-                          [
-                            _c("money-format", {
-                              attrs: {
-                                value: (tr.amount = tr.purchase_price * tr.qty),
-                                locale: "en",
-                                "currency-code": "USD"
-                              }
-                            })
-                          ],
-                          1
-                        )
-                      ])
-                    }),
-                    0
-                  ),
-                  _vm._v(" "),
-                  _c("tfoot", [
-                    _c("tr", [
-                      _c("td", { staticClass: "custom" }),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "custom" }),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "custom" }),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "custom" }),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "custom" }),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "md:text-right" }, [
-                        _vm._v(
-                          "\n                            សរុប\n                        "
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "pl-2 custom" }, [
-                        _vm._v(
-                          "\n                            " +
-                            _vm._s(_vm.$formatter.format(_vm.purchase.amount)) +
-                            "\n                        "
-                        )
-                      ])
-                    ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "vx-row" }, [
-                  _c(
-                    "div",
-                    { staticClass: "vx-col md:w-1/2 w-full" },
+                      attrs: { dense: "", flat: "", icon: "close" }
+                    },
                     [
-                      _c("vs-divider", { attrs: { position: "left" } }, [
-                        _vm._v("Payment")
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "vx-row" }, [
-                        _c(
-                          "div",
-                          { staticClass: "vx-col md:w-1/2 print:w-1/2 w-full" },
-                          [
-                            _c("label", [_vm._v("ប្រាក់ទិញទំនិញ")]),
-                            _vm._v(" "),
-                            _c("div", [
-                              _vm._v(
-                                "\n                                    " +
-                                  _vm._s(
-                                    _vm.$formatter.format(_vm.purchase.balance)
-                                  ) +
-                                  "\n                                "
-                              )
-                            ])
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          { staticClass: "vx-col md:w-1/2 print:w-1/2 w-full" },
-                          [
-                            _c("label", [_vm._v("ទឹកប្រាក់ជំពាក់")]),
-                            _vm._v(" "),
-                            _c("money-format", {
-                              attrs: {
-                                value: parseFloat(_vm.purchase.due_balance),
-                                locale: "en",
-                                "currency-code": "USD"
-                              }
-                            })
-                          ],
-                          1
-                        )
-                      ])
+                      _c(
+                        "q-tooltip",
+                        { attrs: { "content-class": "bg-white text-primary" } },
+                        [
+                          _vm._v(
+                            "\n                        Close\n                    "
+                          )
+                        ]
+                      )
                     ],
                     1
                   )
-                ])
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c("img", { attrs: { src: _vm.output, alt: "" } }),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "flex justify-end btn-group" },
-              [
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("q-card-section", { staticClass: "q-pt-none q-px-lg" }, [
                 _c(
-                  "vs-button",
-                  {
-                    attrs: {
-                      icon: "icon-printer",
-                      "icon-pack": "feather",
-                      type: "relief"
-                    },
-                    on: { click: _vm.printHtml }
-                  },
-                  [_vm._v("បោះពុម្ភ\n                ")]
+                  "div",
+                  { attrs: { id: "printMe" } },
+                  [
+                    _c("table", { staticClass: "custom" }, [
+                      _c("tr", [
+                        _c("td", { staticClass: "custom" }, [
+                          _vm._v("អ្នកផ្គត់ផ្គង់")
+                        ]),
+                        _vm._v(" "),
+                        _c("td", { staticClass: "custom" }, [
+                          _vm._v("Purchase Status")
+                        ]),
+                        _vm._v(" "),
+                        _c("td", { staticClass: "custom" }, [
+                          _vm._v("ទីតាំងទិញចូល")
+                        ]),
+                        _vm._v(" "),
+                        _c("td", { staticClass: "custom" }, [
+                          _vm._v("ពិពណ៌នា")
+                        ]),
+                        _vm._v(" "),
+                        _c("td", { staticClass: "custom" }, [
+                          _vm._v("ថ្ងៃខែឆ្នាំទិញចូល")
+                        ]),
+                        _vm._v(" "),
+                        _c("td", { staticClass: "custom" }, [_vm._v("Barcode")])
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c("td", { staticClass: "custom" }, [
+                          _vm._v(
+                            "\n                                ឈ្មោះ: " +
+                              _vm._s(_vm.purchase.supplier.name)
+                          ),
+                          _c("br"),
+                          _vm._v(
+                            "\n                                ក្រុមហ៊ុន: " +
+                              _vm._s(_vm.purchase.supplier.company)
+                          ),
+                          _c("br"),
+                          _vm._v(
+                            "\n                                ទំនាក់ទំនង: " +
+                              _vm._s(_vm.purchase.supplier.contact)
+                          ),
+                          _c("br")
+                        ]),
+                        _vm._v(" "),
+                        _c("td", { staticClass: "custom" }, [
+                          _vm._v(_vm._s(_vm.purchase.purchase_status))
+                        ]),
+                        _vm._v(" "),
+                        _c("td", { staticClass: "custom" }, [
+                          _vm._v(_vm._s(_vm.purchase.location))
+                        ]),
+                        _vm._v(" "),
+                        _c("td", { staticClass: "custom" }, [
+                          _vm._v(_vm._s(_vm.purchase.description))
+                        ]),
+                        _vm._v(" "),
+                        _c("td", { staticClass: "custom" }, [
+                          _vm._v(_vm._s(_vm.purchase.purchase_date))
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          { staticClass: "p-2" },
+                          [
+                            _c("bar-code", {
+                              attrs: {
+                                value: _vm.purchase.id,
+                                tag: "img",
+                                options: { displayValue: true }
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("vs-divider"),
+                    _vm._v(" "),
+                    _c("table", { staticClass: "custom" }, [
+                      _c("thead", [
+                        _c("tr", [
+                          _c("th", { staticClass: "custom" }, [_vm._v("ល.រ")]),
+                          _vm._v(" "),
+                          _c("th", { staticClass: "custom" }, [
+                            _vm._v("ឈ្មោះ")
+                          ]),
+                          _vm._v(" "),
+                          _c("th", { staticClass: "custom" }, [
+                            _vm._v("ពិពណ៌នា")
+                          ]),
+                          _vm._v(" "),
+                          _c("th", { staticClass: "custom" }, [
+                            _vm._v("ចំនួន")
+                          ]),
+                          _vm._v(" "),
+                          _c("th", { staticClass: "custom" }, [
+                            _vm._v("តម្លៃទិញ")
+                          ]),
+                          _vm._v(" "),
+                          _c("th", { staticClass: "custom" }, [
+                            _vm._v("តម្លៃលក់")
+                          ]),
+                          _vm._v(" "),
+                          _c("th", { staticClass: "custom" }, [_vm._v("សរុប")])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "tbody",
+                        _vm._l(_vm.purchase.items, function(tr, indextr) {
+                          return _c("tr", { key: indextr }, [
+                            _c("td", { staticClass: "pl-2 custom" }, [
+                              _vm._v(
+                                "\n                                " +
+                                  _vm._s(indextr + 1) +
+                                  "\n                            "
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("td", { staticClass: "pl-2 custom" }, [
+                              _vm._v(
+                                "\n                                " +
+                                  _vm._s(tr.name) +
+                                  "\n                            "
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("td", { staticClass: "pl-2 custom" }, [
+                              _vm._v(
+                                "\n                                " +
+                                  _vm._s(tr.description) +
+                                  "\n                            "
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("td", { staticClass: "pl-2 custom" }, [
+                              _vm._v(
+                                "\n                                " +
+                                  _vm._s(tr.qty) +
+                                  "\n                            "
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "td",
+                              { staticClass: "pl-2 custom" },
+                              [
+                                _c("money-format", {
+                                  attrs: {
+                                    value: parseFloat(tr.purchase_price),
+                                    locale: "en",
+                                    "currency-code": "USD"
+                                  }
+                                })
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "td",
+                              { staticClass: "pl-2 custom" },
+                              [
+                                _c("money-format", {
+                                  attrs: {
+                                    value: parseFloat(tr.sale_price),
+                                    locale: "en",
+                                    "currency-code": "USD"
+                                  }
+                                })
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "td",
+                              { staticClass: "pl-2 custom" },
+                              [
+                                _c("money-format", {
+                                  attrs: {
+                                    value: (tr.amount =
+                                      tr.purchase_price * tr.qty),
+                                    locale: "en",
+                                    "currency-code": "USD"
+                                  }
+                                })
+                              ],
+                              1
+                            )
+                          ])
+                        }),
+                        0
+                      ),
+                      _vm._v(" "),
+                      _c("tfoot", [
+                        _c("tr", [
+                          _c("td", { staticClass: "custom" }),
+                          _vm._v(" "),
+                          _c("td", { staticClass: "custom" }),
+                          _vm._v(" "),
+                          _c("td", { staticClass: "custom" }),
+                          _vm._v(" "),
+                          _c("td", { staticClass: "custom" }),
+                          _vm._v(" "),
+                          _c("td", { staticClass: "custom" }),
+                          _vm._v(" "),
+                          _c("td", { staticClass: "md:text-right" }, [
+                            _vm._v(
+                              "\n                                សរុប\n                            "
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("td", { staticClass: "pl-2 custom" }, [
+                            _vm._v(
+                              "\n                                " +
+                                _vm._s(
+                                  _vm.$formatter.format(_vm.purchase.amount)
+                                ) +
+                                "\n                            "
+                            )
+                          ])
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "vx-row" }, [
+                      _c(
+                        "div",
+                        { staticClass: "vx-col md:w-1/2 w-full" },
+                        [
+                          _c("vs-divider", { attrs: { position: "left" } }, [
+                            _vm._v("Payment")
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "vx-row" }, [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "vx-col md:w-1/2 print:w-1/2 w-full"
+                              },
+                              [
+                                _c("label", [_vm._v("ប្រាក់ទិញទំនិញ")]),
+                                _vm._v(" "),
+                                _c("div", [
+                                  _vm._v(
+                                    "\n                                        " +
+                                      _vm._s(
+                                        _vm.$formatter.format(
+                                          _vm.purchase.balance
+                                        )
+                                      ) +
+                                      "\n                                    "
+                                  )
+                                ])
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "vx-col md:w-1/2 print:w-1/2 w-full"
+                              },
+                              [
+                                _c("label", [_vm._v("ទឹកប្រាក់ជំពាក់")]),
+                                _vm._v(" "),
+                                _c("money-format", {
+                                  attrs: {
+                                    value: parseFloat(_vm.purchase.due_balance),
+                                    locale: "en",
+                                    "currency-code": "USD"
+                                  }
+                                })
+                              ],
+                              1
+                            )
+                          ])
+                        ],
+                        1
+                      )
+                    ])
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c("img", { attrs: { src: _vm.output, alt: "" } }),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "flex justify-end btn-group" },
+                  [
+                    _c(
+                      "vs-button",
+                      {
+                        attrs: {
+                          icon: "icon-printer",
+                          "icon-pack": "feather",
+                          type: "relief"
+                        },
+                        on: { click: _vm.printHtml }
+                      },
+                      [_vm._v("បោះពុម្ភ\n                    ")]
+                    )
+                  ],
+                  1
                 )
-              ],
-              1
-            )
-          ])
+              ])
+            ],
+            1
+          )
         ],
         1
       ),

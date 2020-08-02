@@ -1,129 +1,146 @@
 <template>
     <div>
-        <modal width="60%" height="auto" :scrollable="true" :pivotY="0.2" :clickToClose="false" name="show-purchase">
-            <div class="flex justify-end">
-                <i @click="$modal.hide('show-purchase')" class="vs-icon vs-popup--close material-icons text-warning"
-                   style="background: rgb(255, 255, 255);">close</i>
-            </div>
-            <vx-card no-shadow>
-                <div id="printMe">
-                    <table class="custom">
-                        <tr>
-                            <td class="custom">អ្នកផ្គត់ផ្គង់</td>
-                            <td class="custom">Purchase Status</td>
-                            <td class="custom">ទីតាំងទិញចូល</td>
-                            <td class="custom">ពិពណ៌នា</td>
-                            <td class="custom">ថ្ងៃខែឆ្នាំទិញចូល</td>
-                            <td class="custom">Barcode</td>
-                        </tr>
-                        <tr>
-                            <td class="custom">
-                                ឈ្មោះ: {{purchase.supplier.name}}<br>
-                                ក្រុមហ៊ុន: {{purchase.supplier.company}}<br>
-                                ទំនាក់ទំនង: {{purchase.supplier.contact}}<br>
-                            </td>
-                            <td class="custom">{{purchase.purchase_status}}</td>
-                            <td class="custom">{{purchase.location}}</td>
-                            <td class="custom">{{purchase.description}}</td>
-                            <td class="custom">{{purchase.purchase_date}}</td>
-                            <td class="p-2">
-                                <bar-code :value="purchase.id" tag="img" :options="{ displayValue: true }"></bar-code>
-                            </td>
-                        </tr>
-                    </table>
-                    <vs-divider/>
-                    <table class="custom">
-                        <thead>
-                        <tr>
-                            <th class="custom">ល.រ</th>
-                            <th class="custom">ឈ្មោះ</th>
-                            <th class="custom">ពិពណ៌នា</th>
-                            <th class="custom">ចំនួន</th>
-                            <th class="custom">តម្លៃទិញ</th>
-                            <th class="custom">តម្លៃលក់</th>
-                            <th class="custom">សរុប</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr :key="indextr" v-for="(tr, indextr) in purchase.items">
-                            <td class="pl-2 custom">
-                                {{indextr+1}}
-                            </td>
-                            <td class="pl-2 custom">
-                                {{tr.name}}
-                            </td>
-                            <td class="pl-2 custom">
-                                {{ tr.description }}
-                            </td>
-                            <td class="pl-2 custom">
-                                {{tr.qty}}
-                            </td>
-                            <td class="pl-2 custom">
-                                <money-format :value="parseFloat(tr.purchase_price)"
-                                              locale='en'
-                                              currency-code='USD'>
-                                </money-format>
-                            </td>
-                            <td class="pl-2 custom">
-                                <money-format :value="parseFloat(tr.sale_price)"
-                                              locale='en'
-                                              currency-code='USD'>
-                                </money-format>
-                            </td>
-                            <td class="pl-2 custom">
-                                <money-format :value="tr.amount = tr.purchase_price*tr.qty"
-                                              locale='en'
-                                              currency-code='USD'>
-                                </money-format>
-                            </td>
-                        </tr>
-                        </tbody>
-                        <tfoot>
-                        <tr>
-                            <td class="custom"></td>
-                            <td class="custom"></td>
-                            <td class="custom"></td>
-                            <td class="custom"></td>
-                            <td class="custom"></td>
-                            <td class="md:text-right">
-                                សរុប
-                            </td>
-                            <td class="pl-2 custom">
-                                {{$formatter.format(purchase.amount)}}
-                            </td>
-                        </tr>
-                        </tfoot>
-                    </table>
-                    <div class="vx-row">
-                        <div class="vx-col md:w-1/2 w-full">
-                            <vs-divider position="left">Payment</vs-divider>
-                            <div class="vx-row">
-                                <div class="vx-col md:w-1/2 print:w-1/2 w-full">
-                                    <label>ប្រាក់ទិញទំនិញ</label>
-                                    <div>
-                                        {{$formatter.format(purchase.balance)}}
-                                    </div>
-                                </div>
-                                <div class="vx-col md:w-1/2 print:w-1/2 w-full">
-                                    <label>ទឹកប្រាក់ជំពាក់</label>
-                                    <money-format
-                                            :value="parseFloat(purchase.due_balance)"
-                                            locale='en'
-                                            currency-code='USD'>
+        <q-dialog
+                v-model="dialog"
+                persistent
+                :maximized="true"
+                transition-show="slide-up"
+                transition-hide="slide-down"
+        >
+            <q-card>
+                <q-bar>
+                    <q-space/>
+                    <q-btn dense
+                           flat
+                           icon="close"
+                           v-close-popup>
+                        <q-tooltip
+                                content-class="bg-white text-primary">
+                            Close
+                        </q-tooltip>
+                    </q-btn>
+                </q-bar>
+
+                <q-card-section class="q-pt-none q-px-lg">
+                    <div id="printMe">
+                        <table class="custom">
+                            <tr>
+                                <td class="custom">អ្នកផ្គត់ផ្គង់</td>
+                                <td class="custom">Purchase Status</td>
+                                <td class="custom">ទីតាំងទិញចូល</td>
+                                <td class="custom">ពិពណ៌នា</td>
+                                <td class="custom">ថ្ងៃខែឆ្នាំទិញចូល</td>
+                                <td class="custom">Barcode</td>
+                            </tr>
+                            <tr>
+                                <td class="custom">
+                                    ឈ្មោះ: {{purchase.supplier.name}}<br>
+                                    ក្រុមហ៊ុន: {{purchase.supplier.company}}<br>
+                                    ទំនាក់ទំនង: {{purchase.supplier.contact}}<br>
+                                </td>
+                                <td class="custom">{{purchase.purchase_status}}</td>
+                                <td class="custom">{{purchase.location}}</td>
+                                <td class="custom">{{purchase.description}}</td>
+                                <td class="custom">{{purchase.purchase_date}}</td>
+                                <td class="p-2">
+                                    <bar-code :value="purchase.id" tag="img" :options="{ displayValue: true }"></bar-code>
+                                </td>
+                            </tr>
+                        </table>
+                        <vs-divider/>
+                        <table class="custom">
+                            <thead>
+                            <tr>
+                                <th class="custom">ល.រ</th>
+                                <th class="custom">ឈ្មោះ</th>
+                                <th class="custom">ពិពណ៌នា</th>
+                                <th class="custom">ចំនួន</th>
+                                <th class="custom">តម្លៃទិញ</th>
+                                <th class="custom">តម្លៃលក់</th>
+                                <th class="custom">សរុប</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr :key="indextr" v-for="(tr, indextr) in purchase.items">
+                                <td class="pl-2 custom">
+                                    {{indextr+1}}
+                                </td>
+                                <td class="pl-2 custom">
+                                    {{tr.name}}
+                                </td>
+                                <td class="pl-2 custom">
+                                    {{ tr.description }}
+                                </td>
+                                <td class="pl-2 custom">
+                                    {{tr.qty}}
+                                </td>
+                                <td class="pl-2 custom">
+                                    <money-format :value="parseFloat(tr.purchase_price)"
+                                                  locale='en'
+                                                  currency-code='USD'>
                                     </money-format>
+                                </td>
+                                <td class="pl-2 custom">
+                                    <money-format :value="parseFloat(tr.sale_price)"
+                                                  locale='en'
+                                                  currency-code='USD'>
+                                    </money-format>
+                                </td>
+                                <td class="pl-2 custom">
+                                    <money-format :value="tr.amount = tr.purchase_price*tr.qty"
+                                                  locale='en'
+                                                  currency-code='USD'>
+                                    </money-format>
+                                </td>
+                            </tr>
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <td class="custom"></td>
+                                <td class="custom"></td>
+                                <td class="custom"></td>
+                                <td class="custom"></td>
+                                <td class="custom"></td>
+                                <td class="md:text-right">
+                                    សរុប
+                                </td>
+                                <td class="pl-2 custom">
+                                    {{$formatter.format(purchase.amount)}}
+                                </td>
+                            </tr>
+                            </tfoot>
+                        </table>
+                        <div class="vx-row">
+                            <div class="vx-col md:w-1/2 w-full">
+                                <vs-divider position="left">Payment</vs-divider>
+                                <div class="vx-row">
+                                    <div class="vx-col md:w-1/2 print:w-1/2 w-full">
+                                        <label>ប្រាក់ទិញទំនិញ</label>
+                                        <div>
+                                            {{$formatter.format(purchase.balance)}}
+                                        </div>
+                                    </div>
+                                    <div class="vx-col md:w-1/2 print:w-1/2 w-full">
+                                        <label>ទឹកប្រាក់ជំពាក់</label>
+                                        <money-format
+                                                :value="parseFloat(purchase.due_balance)"
+                                                locale='en'
+                                                currency-code='USD'>
+                                        </money-format>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <img :src="output" alt="">
-                <!-- Save & Reset Button -->
-                <div class="flex justify-end btn-group">
-                    <vs-button @click="printHtml" icon="icon-printer" icon-pack="feather" type="relief">បោះពុម្ភ
-                    </vs-button>
-                </div>
-            </vx-card>
-        </modal>
+                    <img :src="output" alt="">
+                    <!-- Save & Reset Button -->
+                    <div class="flex justify-end btn-group">
+                        <vs-button @click="printHtml" icon="icon-printer" icon-pack="feather" type="relief">បោះពុម្ភ
+                        </vs-button>
+                    </div>
+                </q-card-section>
+            </q-card>
+        </q-dialog>
         <add-supplier ref="addSupplier"></add-supplier>
         <add-unit ref="addUnit"></add-unit>
         <add-category ref="addCategory"></add-category>
@@ -155,6 +172,7 @@
         },
         data() {
             return {
+                dialog:false,
                 output: null,
                 purchase: {
                     id: null,
@@ -197,7 +215,7 @@
             },
             show(data) {
                 let self = this;
-                this.$modal.show('show-purchase');
+                this.dialog = true;
                 this.purchase.id = data.id;
                 this.purchase.supplier = data.supplier;
                 this.purchase.location = data.location;

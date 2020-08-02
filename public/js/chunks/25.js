@@ -211,6 +211,24 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -225,6 +243,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
   },
   data: function data() {
     return {
+      dialog: false,
       date_range: "".concat(this.$moment().startOf('month').format('YYYY-MM-DD'), " ~ ").concat(this.$moment().endOf('month').format('YYYY-MM-DD')),
       date_picker: {
         start: this.$moment().startOf('month').format('YYYY-MM-DD'),
@@ -319,7 +338,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     //date range
     dateRange: function dateRange(value) {
       this.date_range = "".concat(this.$moment(value.from).format('YYYY-MM-DD'), " ~ ").concat(this.$moment(value.to).format('YYYY-MM-DD'));
-      this.$modal.hide('show-date-range');
+      this.dialog = false;
       this.date_picker.start = this.$moment(value.from).format('YYYY-MM-DD');
       this.date_picker.end = this.$moment(value.to).format('YYYY-MM-DD');
     }
@@ -482,7 +501,7 @@ var render = function() {
             },
             on: {
               click: function($event) {
-                return _vm.$modal.show("show-date-range")
+                _vm.dialog = true
               }
             },
             model: {
@@ -495,52 +514,81 @@ var render = function() {
           }),
           _vm._v(" "),
           _c(
-            "modal",
+            "q-dialog",
             {
               attrs: {
-                height: "auto",
-                scrollable: true,
-                pivotY: 0.2,
-                clickToClose: false,
-                name: "show-date-range"
+                persistent: "",
+                maximized: true,
+                "transition-show": "slide-up",
+                "transition-hide": "slide-down"
+              },
+              model: {
+                value: _vm.dialog,
+                callback: function($$v) {
+                  _vm.dialog = $$v
+                },
+                expression: "dialog"
               }
             },
             [
-              _c("div", { staticClass: "flex justify-end" }, [
-                _c(
-                  "i",
-                  {
-                    staticClass:
-                      "vs-icon vs-popup--close material-icons text-warning",
-                    staticStyle: { background: "rgb(255, 255, 255)" },
-                    on: {
-                      click: function($event) {
-                        return _vm.$modal.hide("show-date-range")
-                      }
-                    }
-                  },
-                  [_vm._v("close")]
-                )
-              ]),
-              _vm._v(" "),
               _c(
-                "vx-card",
-                { attrs: { "no-shadow": "" } },
+                "q-card",
                 [
-                  _c("date-range-picker", {
-                    attrs: {
-                      theme: {
-                        primary: "#28C76F",
-                        secondary: "#2D3E50",
-                        ternary: "#93A0BD",
-                        border: "#e6e6e6",
-                        light: "#ffffff",
-                        dark: "#000000",
-                        hovers: { day: "#CCC", range: "#e6e6e6" }
-                      }
-                    },
-                    on: { update: _vm.dateRange }
-                  })
+                  _c(
+                    "q-bar",
+                    [
+                      _c("q-space"),
+                      _vm._v(" "),
+                      _c(
+                        "q-btn",
+                        {
+                          directives: [
+                            { name: "close-popup", rawName: "v-close-popup" }
+                          ],
+                          attrs: { dense: "", flat: "", icon: "close" }
+                        },
+                        [
+                          _c(
+                            "q-tooltip",
+                            {
+                              attrs: {
+                                "content-class": "bg-white text-primary"
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n                                Close\n                            "
+                              )
+                            ]
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "q-card-section",
+                    { staticClass: "q-px-lg" },
+                    [
+                      _c("date-range-picker", {
+                        attrs: {
+                          theme: {
+                            primary: "#28C76F",
+                            secondary: "#2D3E50",
+                            ternary: "#93A0BD",
+                            border: "#e6e6e6",
+                            light: "#ffffff",
+                            dark: "#000000",
+                            hovers: { day: "#CCC", range: "#e6e6e6" }
+                          }
+                        },
+                        on: { update: _vm.dateRange }
+                      })
+                    ],
+                    1
+                  )
                 ],
                 1
               )

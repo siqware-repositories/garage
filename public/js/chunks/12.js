@@ -2780,6 +2780,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2789,6 +2806,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      dialog: false,
       data: {
         description: '',
         balance: 0,
@@ -2798,7 +2816,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     show: function show() {
-      this.$modal.show('add-investment');
+      this.dialog = true;
     },
     //store
     storeInvestment: function storeInvestment() {
@@ -5611,189 +5629,210 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "modal",
+    "q-dialog",
     {
       attrs: {
-        height: "auto",
-        scrollable: true,
-        pivotY: 0.2,
-        clickToClose: false,
-        name: "add-investment"
+        persistent: "",
+        "transition-show": "slide-up",
+        "transition-hide": "slide-down"
+      },
+      model: {
+        value: _vm.dialog,
+        callback: function($$v) {
+          _vm.dialog = $$v
+        },
+        expression: "dialog"
       }
     },
     [
-      _c("div", { staticClass: "flex justify-end" }, [
-        _c(
-          "i",
-          {
-            staticClass: "vs-icon vs-popup--close material-icons text-warning",
-            staticStyle: { background: "rgb(255, 255, 255)" },
-            on: {
-              click: function($event) {
-                return _vm.$modal.hide("add-investment")
-              }
-            }
-          },
-          [_vm._v("close")]
-        )
-      ]),
-      _vm._v(" "),
       _c(
-        "vx-card",
-        { attrs: { "no-shadow": "" } },
+        "q-card",
         [
-          _c("div", { staticClass: "vx-row" }, [
-            _c(
-              "div",
-              { staticClass: "vx-col w-full" },
-              [
-                _c("label", [_vm._v("ពិពណ៌នា")]),
-                _vm._v(" "),
-                _c("vs-textarea", {
+          _c(
+            "q-bar",
+            [
+              _c("q-space"),
+              _vm._v(" "),
+              _c(
+                "q-btn",
+                {
                   directives: [
-                    {
-                      name: "validate",
-                      rawName: "v-validate",
-                      value: "required",
-                      expression: "'required'"
-                    }
+                    { name: "close-popup", rawName: "v-close-popup" }
                   ],
-                  attrs: { label: "ពិពណ៌នា", name: "description" },
-                  model: {
-                    value: _vm.data.description,
-                    callback: function($$v) {
-                      _vm.$set(_vm.data, "description", $$v)
-                    },
-                    expression: "data.description"
-                  }
-                }),
-                _vm._v(" "),
-                _c(
-                  "span",
-                  {
-                    directives: [
-                      {
-                        name: "show",
-                        rawName: "v-show",
-                        value: _vm.errors.has("description"),
-                        expression: "errors.has('description')"
-                      }
-                    ],
-                    staticClass: "text-danger text-sm"
-                  },
-                  [_vm._v(_vm._s(_vm.errors.first("description")))]
-                )
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "vx-col w-full" },
-              [
-                _c("label", [_vm._v("កាលបរិច្ឆេទ")]),
-                _vm._v(" "),
-                _c("flat-pickr", {
-                  directives: [
-                    {
-                      name: "validate",
-                      rawName: "v-validate",
-                      value: "required",
-                      expression: "'required'"
-                    }
-                  ],
-                  staticClass: "w-full",
-                  attrs: { placeholder: "ជ្រើសរើស", name: "date" },
-                  model: {
-                    value: _vm.data.date,
-                    callback: function($$v) {
-                      _vm.$set(_vm.data, "date", $$v)
-                    },
-                    expression: "data.date"
-                  }
-                }),
-                _vm._v(" "),
-                _c(
-                  "span",
-                  {
-                    directives: [
-                      {
-                        name: "show",
-                        rawName: "v-show",
-                        value: _vm.errors.has("date"),
-                        expression: "errors.has('date')"
-                      }
-                    ],
-                    staticClass: "text-danger text-sm"
-                  },
-                  [_vm._v(_vm._s(_vm.errors.first("date")))]
-                )
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "vx-col w-full mt-2" },
-              [
-                _c("label", [_vm._v("ប្រាក់វិនិយោគ")]),
-                _vm._v(" "),
-                _c("vs-input-number", {
-                  directives: [
-                    {
-                      name: "validate",
-                      rawName: "v-validate",
-                      value: "required",
-                      expression: "'required'"
-                    }
-                  ],
-                  attrs: { name: "balance", label: "ប្រាក់វិនិយោគ:" },
-                  model: {
-                    value: _vm.data.balance,
-                    callback: function($$v) {
-                      _vm.$set(_vm.data, "balance", $$v)
-                    },
-                    expression: "data.balance"
-                  }
-                }),
-                _vm._v(" "),
-                _c(
-                  "span",
-                  {
-                    directives: [
-                      {
-                        name: "show",
-                        rawName: "v-show",
-                        value: _vm.errors.has("balance"),
-                        expression: "errors.has('balance')"
-                      }
-                    ],
-                    staticClass: "text-danger text-sm"
-                  },
-                  [_vm._v(_vm._s(_vm.errors.first("balance")))]
-                )
-              ],
-              1
-            )
-          ]),
-          _vm._v(" "),
-          _c("vs-divider"),
+                  attrs: { dense: "", flat: "", icon: "close" }
+                },
+                [
+                  _c(
+                    "q-tooltip",
+                    { attrs: { "content-class": "bg-white text-primary" } },
+                    [_vm._v("\n                    Close\n                ")]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
           _vm._v(" "),
           _c(
-            "div",
-            { staticClass: "flex justify-end btn-group" },
+            "q-card-section",
+            { staticClass: "q-px-lg" },
             [
+              _c("div", { staticClass: "vx-row" }, [
+                _c(
+                  "div",
+                  { staticClass: "vx-col w-full" },
+                  [
+                    _c("label", [_vm._v("ពិពណ៌នា")]),
+                    _vm._v(" "),
+                    _c("vs-textarea", {
+                      directives: [
+                        {
+                          name: "validate",
+                          rawName: "v-validate",
+                          value: "required",
+                          expression: "'required'"
+                        }
+                      ],
+                      attrs: { label: "ពិពណ៌នា", name: "description" },
+                      model: {
+                        value: _vm.data.description,
+                        callback: function($$v) {
+                          _vm.$set(_vm.data, "description", $$v)
+                        },
+                        expression: "data.description"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "span",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.errors.has("description"),
+                            expression: "errors.has('description')"
+                          }
+                        ],
+                        staticClass: "text-danger text-sm"
+                      },
+                      [_vm._v(_vm._s(_vm.errors.first("description")))]
+                    )
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "vx-col w-full" },
+                  [
+                    _c("label", [_vm._v("កាលបរិច្ឆេទ")]),
+                    _vm._v(" "),
+                    _c("flat-pickr", {
+                      directives: [
+                        {
+                          name: "validate",
+                          rawName: "v-validate",
+                          value: "required",
+                          expression: "'required'"
+                        }
+                      ],
+                      staticClass: "w-full",
+                      attrs: { placeholder: "ជ្រើសរើស", name: "date" },
+                      model: {
+                        value: _vm.data.date,
+                        callback: function($$v) {
+                          _vm.$set(_vm.data, "date", $$v)
+                        },
+                        expression: "data.date"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "span",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.errors.has("date"),
+                            expression: "errors.has('date')"
+                          }
+                        ],
+                        staticClass: "text-danger text-sm"
+                      },
+                      [_vm._v(_vm._s(_vm.errors.first("date")))]
+                    )
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "vx-col w-full mt-2" },
+                  [
+                    _c("label", [_vm._v("ប្រាក់វិនិយោគ")]),
+                    _vm._v(" "),
+                    _c("vs-input-number", {
+                      directives: [
+                        {
+                          name: "validate",
+                          rawName: "v-validate",
+                          value: "required",
+                          expression: "'required'"
+                        }
+                      ],
+                      attrs: { name: "balance", label: "ប្រាក់វិនិយោគ:" },
+                      model: {
+                        value: _vm.data.balance,
+                        callback: function($$v) {
+                          _vm.$set(_vm.data, "balance", $$v)
+                        },
+                        expression: "data.balance"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "span",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.errors.has("balance"),
+                            expression: "errors.has('balance')"
+                          }
+                        ],
+                        staticClass: "text-danger text-sm"
+                      },
+                      [_vm._v(_vm._s(_vm.errors.first("balance")))]
+                    )
+                  ],
+                  1
+                )
+              ]),
+              _vm._v(" "),
+              _c("vs-divider"),
+              _vm._v(" "),
               _c(
-                "vs-button",
-                {
-                  attrs: {
-                    icon: "icon-save",
-                    "icon-pack": "feather",
-                    type: "relief"
-                  },
-                  on: { click: _vm.storeInvestment }
-                },
-                [_vm._v("រក្សាទុក")]
+                "div",
+                { staticClass: "flex justify-end btn-group" },
+                [
+                  _c(
+                    "vs-button",
+                    {
+                      attrs: {
+                        icon: "icon-save",
+                        "icon-pack": "feather",
+                        type: "relief"
+                      },
+                      on: { click: _vm.storeInvestment }
+                    },
+                    [_vm._v("រក្សាទុក")]
+                  )
+                ],
+                1
               )
             ],
             1
@@ -7158,12 +7197,14 @@ __webpack_require__.r(__webpack_exports__);
     slug: "user",
     icon: "UserIcon"
   }]
-}, {
-  url: "/import",
-  name: "Import Data",
-  slug: "import",
-  icon: "FilePlusIcon"
-}]);
+}
+/*{
+    url: "/import",
+    name: "Import Data",
+    slug: "import",
+    icon: "FilePlusIcon",
+},*/
+]);
 
 /***/ }),
 

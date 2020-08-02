@@ -1,59 +1,76 @@
 <template>
     <div>
-        <modal width="60%" height="auto" :scrollable="true" :pivotY="0.2" :clickToClose="false" name="add-supplier">
-            <div class="flex justify-end">
-                <i @click="$modal.hide('add-supplier')" class="vs-icon vs-popup--close material-icons text-warning"
-                   style="background: rgb(255, 255, 255);">close</i>
-            </div>
-            <vx-card no-shadow>
-                <div class="vx-row">
-                    <div class="vx-col md:w-2/3 w-full">
-                        <div class="vx-row">
-                            <div class="vx-col md:w-1/2 w-full">
-                                <vs-input class="w-full" label-placeholder="ឈ្មោះ" name="name" v-model="supplier.name"
-                                          v-validate="'required'"/>
-                                <span class="text-danger text-sm"
-                                      v-show="errors.has('name')">{{ errors.first('name') }}</span>
+        <q-dialog
+                v-model="dialog"
+                persistent
+                :maximized="true"
+                transition-show="slide-up"
+                transition-hide="slide-down"
+        >
+            <q-card>
+                <q-bar>
+                    <q-space/>
+                    <q-btn dense
+                           flat
+                           icon="close"
+                           v-close-popup>
+                        <q-tooltip
+                                content-class="bg-white text-primary">
+                            Close
+                        </q-tooltip>
+                    </q-btn>
+                </q-bar>
+
+                <q-card-section class="q-pt-none q-px-lg">
+                    <div class="vx-row">
+                        <div class="vx-col md:w-2/3 w-full">
+                            <div class="vx-row">
+                                <div class="vx-col md:w-1/2 w-full">
+                                    <vs-input class="w-full" label-placeholder="ឈ្មោះ" name="name" v-model="supplier.name"
+                                              v-validate="'required'"/>
+                                    <span class="text-danger text-sm"
+                                          v-show="errors.has('name')">{{ errors.first('name') }}</span>
+                                </div>
+                                <div class="vx-col md:w-1/2 w-full">
+                                    <vs-input class="w-full" label-placeholder="ឈ្មោះក្រុមហ៊ុន" name="company" v-model="supplier.company"
+                                              v-validate="'required'"/>
+                                    <span class="text-danger text-sm"
+                                          v-show="errors.has('company')">{{ errors.first('company') }}</span>
+                                </div>
                             </div>
-                            <div class="vx-col md:w-1/2 w-full">
-                                <vs-input class="w-full" label-placeholder="ឈ្មោះក្រុមហ៊ុន" name="company" v-model="supplier.company"
-                                          v-validate="'required'"/>
-                                <span class="text-danger text-sm"
-                                      v-show="errors.has('company')">{{ errors.first('company') }}</span>
+                            <div class="vx-row">
+                                <div class="vx-col w-full">
+                                    <label>ទំនាក់ទំនង</label>
+                                    <vs-textarea class="w-full" label="ទំនាក់ទំនង" v-model="supplier.contact" name="contact"
+                                                 v-validate="'required'"/>
+                                    <span class="text-danger text-sm"
+                                          v-show="errors.has('contact')">{{ errors.first('contact') }}</span>
+                                </div>
+                                <div class="vx-col w-full">
+                                    <label>សំគាល់</label>
+                                    <vs-textarea class="w-full" label="សំគាល់" v-model="supplier.note" name="note"
+                                                 v-validate="'required'"/>
+                                    <span class="text-danger text-sm"
+                                          v-show="errors.has('note')">{{ errors.first('note') }}</span>
+                                </div>
                             </div>
                         </div>
-                        <div class="vx-row">
-                            <div class="vx-col w-full">
-                                <label>ទំនាក់ទំនង</label>
-                                <vs-textarea class="w-full" label="ទំនាក់ទំនង" v-model="supplier.contact" name="contact"
-                                             v-validate="'required'"/>
-                                <span class="text-danger text-sm"
-                                      v-show="errors.has('contact')">{{ errors.first('contact') }}</span>
-                            </div>
-                            <div class="vx-col w-full">
-                                <label>សំគាល់</label>
-                                <vs-textarea class="w-full" label="សំគាល់" v-model="supplier.note" name="note"
-                                             v-validate="'required'"/>
-                                <span class="text-danger text-sm"
-                                      v-show="errors.has('note')">{{ errors.first('note') }}</span>
-                            </div>
+                        <div class="vx-col md:w-1/3 w-full">
+                            <label>អាស័យដ្ឋាន</label>
+                            <vs-textarea class="w-full" label="អាស័យដ្ឋាន" v-model="supplier.address" name="address"
+                                         v-validate="'required'"/>
+                            <span class="text-danger text-sm"
+                                  v-show="errors.has('address')">{{ errors.first('address') }}</span>
                         </div>
                     </div>
-                    <div class="vx-col md:w-1/3 w-full">
-                        <label>អាស័យដ្ឋាន</label>
-                        <vs-textarea class="w-full" label="អាស័យដ្ឋាន" v-model="supplier.address" name="address"
-                                     v-validate="'required'"/>
-                        <span class="text-danger text-sm"
-                              v-show="errors.has('address')">{{ errors.first('address') }}</span>
+                    <vs-divider/>
+                    <!-- Save & Reset Button -->
+                    <div class="flex justify-end btn-group">
+                        <vs-button @click="storeSupplier" icon="icon-save" icon-pack="feather" type="relief">រក្សាទុក</vs-button>
                     </div>
-                </div>
-                <vs-divider/>
-                <!-- Save & Reset Button -->
-                <div class="flex justify-end btn-group">
-                    <vs-button @click="storeSupplier" icon="icon-save" icon-pack="feather" type="relief">រក្សាទុក</vs-button>
-                </div>
-            </vx-card>
-        </modal>
+                </q-card-section>
+            </q-card>
+        </q-dialog>
         <add-unit ref="addUnit"></add-unit>
         <add-category ref="addCategory"></add-category>
         <add-brand ref="addBrand"></add-brand>
@@ -72,6 +89,7 @@
         components: {AddBrand, AddCategory, AddUnit, vueDropzone: vue2Dropzone},
         data() {
             return {
+                dialog:false,
                 //supplier
                 supplier:{
                     name:null,
@@ -95,7 +113,7 @@
         },
         methods: {
             show() {
-                this.$modal.show('add-supplier');
+                this.dialog = true;
             },
             //store
             storeSupplier() {
