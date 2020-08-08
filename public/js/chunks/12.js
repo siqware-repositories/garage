@@ -2569,6 +2569,35 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2590,6 +2619,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
+      alert: true,
       footerType: _themeConfig_js__WEBPACK_IMPORTED_MODULE_7__["default"].footerType || 'static',
       hideScrollToTop: _themeConfig_js__WEBPACK_IMPORTED_MODULE_7__["default"].hideScrollToTop,
       isNavbarDark: false,
@@ -5547,6 +5577,91 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("add-investment", { ref: "addInvestment" }),
+                  _vm._v(" "),
+                  _c(
+                    "q-dialog",
+                    {
+                      model: {
+                        value: _vm.alert,
+                        callback: function($$v) {
+                          _vm.alert = $$v
+                        },
+                        expression: "alert"
+                      }
+                    },
+                    [
+                      _c(
+                        "q-card",
+                        [
+                          _c("q-card-section", [
+                            _c("div", { staticClass: "text-h4 text-primary" }, [
+                              _vm._v("ជូនដំណឹង")
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "q-card-section",
+                            { staticClass: "q-pt-none" },
+                            [
+                              _c("q-banner", { staticClass: "bg-grey-3" }, [
+                                _c("div", { staticClass: "text-h6" }, [
+                                  _vm._v(
+                                    "\n                                        សូមបង់ថវិការទៅលើការប្រើប្រាស់កម្មវិធីអោយបានមុនថ្ងៃទី ១៥\n                                    "
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticClass: "text-h6 text-danger" },
+                                  [
+                                    _vm._v(
+                                      "\n                                        ទឹកប្រាក់ត្រូវបង់ : 15$/ខែ\n                                    "
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "text-h6" }, [
+                                  _vm._v(
+                                    "\n                                        លេខ ABA : 002131353\n                                    "
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "text-h6" }, [
+                                  _vm._v(
+                                    "\n                                        ឈ្មោះ ABA : KUN RATTANA, TUN CHAM ROEUN, NAK VANNA\n                                    "
+                                  )
+                                ])
+                              ])
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "q-card-actions",
+                            { attrs: { align: "right" } },
+                            [
+                              _c("q-btn", {
+                                directives: [
+                                  {
+                                    name: "close-popup",
+                                    rawName: "v-close-popup"
+                                  }
+                                ],
+                                attrs: {
+                                  flat: "",
+                                  label: "បិទ",
+                                  color: "primary"
+                                }
+                              })
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  ),
                   _vm._v(" "),
                   _c(
                     "div",

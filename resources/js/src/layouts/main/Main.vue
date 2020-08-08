@@ -75,6 +75,35 @@
                         </transition>
                         <!--Add investment-->
                         <add-investment ref="addInvestment"/>
+                        <!--Alert-->
+                        <q-dialog v-model="alert">
+                            <q-card>
+                                <q-card-section>
+                                    <div class="text-h4 text-primary">ជូនដំណឹង</div>
+                                </q-card-section>
+
+                                <q-card-section class="q-pt-none">
+                                    <q-banner class="bg-grey-3">
+                                        <div class="text-h6">
+                                            សូមបង់ថវិការទៅលើការប្រើប្រាស់កម្មវិធីអោយបានមុនថ្ងៃទី ១៥
+                                        </div>
+                                        <div class="text-h6 text-danger">
+                                            ទឹកប្រាក់ត្រូវបង់ : 15$/ខែ
+                                        </div>
+                                        <div class="text-h6">
+                                            លេខ ABA : 002131353
+                                        </div>
+                                        <div class="text-h6">
+                                            ឈ្មោះ ABA : KUN RATTANA, TUN CHAM ROEUN, NAK VANNA
+                                        </div>
+                                    </q-banner>
+                                </q-card-section>
+
+                                <q-card-actions align="right">
+                                    <q-btn flat label="បិទ" color="primary" v-close-popup />
+                                </q-card-actions>
+                            </q-card>
+                        </q-dialog>
                         <div class="content-area__content">
 
                             <back-to-top bottom="5%" :right="$vs.rtl ? 'calc(100% - 2.2rem - 38px)' : '30px'"
@@ -121,6 +150,7 @@
         },
         data() {
             return {
+                alert:true,
                 footerType: themeConfig.footerType || 'static',
                 hideScrollToTop: themeConfig.hideScrollToTop,
                 isNavbarDark: false,
