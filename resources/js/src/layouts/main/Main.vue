@@ -150,7 +150,7 @@
         },
         data() {
             return {
-                alert:true,
+                alert:false,
                 footerType: themeConfig.footerType || 'static',
                 hideScrollToTop: themeConfig.hideScrollToTop,
                 isNavbarDark: false,

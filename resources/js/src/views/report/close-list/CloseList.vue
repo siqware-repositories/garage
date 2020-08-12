@@ -213,7 +213,7 @@
                             total += parseFloat(item.amount);
                             break;
                         }
-                        if (el.inventory_type !=='purchase_only') {
+                        if (el.inventory_type !=='purchase_only' && el.inventory_type !=='service') {
                             total += parseFloat(el.amount)
                         }
                     }
